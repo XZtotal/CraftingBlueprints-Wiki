@@ -108,16 +108,20 @@ Look at your hotbar. You will receive a high-resolution in-game map (`Material.F
 
 ## 5. Unlock and Craft in Survival
 
-1. **Memorize the Blueprint**: Place the map in your main hand and **Right-Click**. A sound effect plays and chat confirms:
-   ```text
-   [CraftingBlueprints] You have unlocked the blueprint for Obsidian Blade Blueprint!
-   ```
-   The physical map is consumed from your hand.
-2. **Open a Crafting Table**: Place two diamonds and a stick into the 3x3 crafting matrix. The Diamond Sword appears in the result slot and crafts normally.
-3. **Test Whitelist Protection**:
-   * Open `plugins/CraftingBlueprints/config.yml` and ensure `restrictions.mode: "restricted-only"` with `diamond_.*` included in `restricted-items`.
-   * Either temporarily deop yourself (`/deop <your_name>`) or set `op-bypass: false` in `config.yml`.
-   * Have an unauthorized player (or test account) place the same ingredients into the crafting table: the recipe will be locked, and the player will be notified that they lack the required blueprint!
+### Step A: Memorize the Blueprint
+Place the map in your main hand and **Right-Click**. A chime sound plays and chat confirms:
+```text
+[CraftingBlueprints] You have unlocked the blueprint for Obsidian Blade Blueprint!
+```
+The physical map item is consumed from your hand.
+
+### Step B: Open a Crafting Table
+Place two diamonds and a stick into the 3x3 crafting matrix. The Diamond Sword appears in the result slot and crafts normally.
+
+### Step C: Test Whitelist Protection
+1. Open `plugins/CraftingBlueprints/config.yml` and ensure `restrictions.mode: "restricted-only"` with `diamond_.*` included in `restricted-items`.
+2. Either temporarily deop yourself (`/deop <your_name>`) or set `op-bypass: false` in `config.yml`.
+3. Have an unauthorized player (or test account) place the same ingredients into the crafting table: the recipe will be locked, and the player will be notified that they lack the required blueprint.
 
 ---
 

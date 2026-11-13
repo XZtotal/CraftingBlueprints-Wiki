@@ -165,4 +165,4 @@ The validator performs comprehensive linting:
 * Verifies Bukkit material, potion, and enchantment identifiers against the active server version.
 * Validates hex colors and named color palette references.
 * Detects circular dependencies and unresolved template references.
-* Emits Levenshtein distance "Did you mean?" suggestions for minor typos (e.g., `roseta` $\rightarrow$ `rosette`).
+* Emits helpful "Did you mean?" suggestions for minor typos (e.g. `roseta` -> `rosette`).

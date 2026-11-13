@@ -130,14 +130,14 @@ The `frame:` property controls the geometric corner architecture of the map:
 
 ## The 6 Masterpiece Canvases
 
-CraftingBlueprints provides 6 canonical Masterpiece Canvases combining generative mathematics, harmonic lighting, and fine-art craftsmanship:
+CraftingBlueprints provides 6 canonical Masterpiece Canvases combining harmonic lighting and fine-art craftsmanship:
 
 1. **Canvas I: Technical Slate (`technical_slate`)**: Dual-frequency micrometer grid, vernier registration ticks, and subtle paper grain.
-2. **Canvas II: Botanical Verdigris (`verdigris_botanical`)**: Logarithmic spiral vines ($r = ae^{b\theta}$), delicate acanthus corner curls, and oxidized bronze inlays.
-3. **Canvas III: Nautical Astrolabe (`nautical_astrolabe`)**: 16-point compass rose, trigonometric orbital rings, and latitude meridian arcs.
-4. **Canvas IV: Arcane Grimoire (`void_grimoire`)**: Zero synthetic circles; intricate gothic runic filigree with Algiz and Sowilo cartouches.
-5. **Canvas V: Imperial Gold Guilloché (`imperial_gold`)**: Epitrochoid Guilloché banknote rosettes with a 32-ray radiant sunburst backlighting halo.
-6. **Canvas VI: Rainbow Gradient Mesh (`rainbow`)**: 16-node 2D Continuous Gradient Mesh emitting a full spectral rainbow into a velvety obsidian item sanctuary ($r \le 22$).
+2. **Canvas II: Botanical Verdigris (`verdigris_botanical`)**: Organic spiral vines, delicate acanthus corner curls, and oxidized bronze inlays.
+3. **Canvas III: Nautical Astrolabe (`nautical_astrolabe`)**: 16-point compass rose, nautical navigation arcs, and latitude star charts.
+4. **Canvas IV: Arcane Grimoire (`void_grimoire`)**: Intricate gothic runic filigree with runic cartouches and amethyst backlighting.
+5. **Canvas V: Imperial Gold Guilloché (`imperial_gold`)**: Banknote-style Guilloché rosettes with a radiant sunburst backlighting halo.
+6. **Canvas VI: Rainbow Gradient Mesh (`rainbow`)**: Continuous gradient mesh emitting a full spectral rainbow with a velvety obsidian focal socket.
 
 ---
 
@@ -145,10 +145,10 @@ CraftingBlueprints provides 6 canonical Masterpiece Canvases combining generativ
 
 When `images-on-maps` is enabled, CraftingBlueprints protects your server performance and disk space through its **Flyweight Map Registry**:
 
-1. **Zero World Save Bloat**: In vanilla Minecraft, creating maps allocates a new Map ID for every item, creating thousands of duplicate `map_<id>.dat` files in `world/data/`. CraftingBlueprints computes a deterministic `VisualKey` for each visual configuration and assigns **exactly one MapView per distinct visual render**, regardless of whether 10 or 10,000 players own that blueprint.
-2. **Cross-Server Map Virtualization**: In multi-server networks (Bungee/Velocity), Map ID `104` on Server A might be an Excalibur sword, while on Server B it is the spawn hub map. The physical item's PDC stores the normalized `visual_key`. When a player transfers between servers, the plugin's `MapRelinkListener` dynamically re-links the item to the local canonical Map ID in-place, guaranteeing blueprints never turn blank or corrupt local maps.
+1. **Zero World Save Bloat**: In vanilla Minecraft, creating maps allocates a new Map ID for every item, creating thousands of duplicate `map_<id>.dat` files in `world/data/`. CraftingBlueprints assigns **exactly one Map ID per distinct visual render**, regardless of whether 10 or 10,000 players own that blueprint.
+2. **Cross-Server Map Virtualization**: In multi-server networks (BungeeCord/Velocity), Map ID `104` on Server A might be an Excalibur sword, while on Server B it is the spawn hub map. The physical item's persistent data stores the visual key. When a player transfers between servers, the plugin automatically re-links the item to the local canonical Map ID in-place, guaranteeing blueprints never turn blank or overwrite local maps.
 3. **Container & Item Frame Persistence**: Blueprints stored in chests, shulker boxes, or displayed in Item Frames retain their renderers across server restarts without reverting to vanilla terrain maps.
-4. **Sub-Tick Rendering Performance**: All image quantization executes on asynchronous background threads, pre-quantizing images into native `byte[16384]` palette buffers. Blitting on the server tick loop executes in **< 0.02 milliseconds**, maintaining buttery-smooth 20.0 TPS.
+4. **Optimized Rendering**: Heavy image processing runs asynchronously in the background. Updating map data on the main server thread takes less than 0.02 milliseconds, ensuring no TPS drops or lag spikes.
 
 ---
 

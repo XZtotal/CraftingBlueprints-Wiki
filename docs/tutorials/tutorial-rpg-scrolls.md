@@ -84,7 +84,7 @@ Hot-reload the blueprints:
 ### 2. Binding the Knowledge:
 The player places the scroll into their main hand and **Right-Clicks**. A sound effect plays, and the player unlocks 3 crafting uses.
 
-### 3. First Craft (Counter: 3 $\rightarrow$ 2):
+### 3. First Craft (Counter: 3 -> 2):
 The player crafts their first sword. Chat and action bar notify the player:
 ```text
 [CraftingBlueprints] Recipe crafted! Remaining uses: 2
@@ -92,7 +92,7 @@ The player crafts their first sword. Chat and action bar notify the player:
 
 ### 4. Shift-Click Bulk Crafting Test:
 * If the player places materials for 5 swords into the crafting matrix and **Shift-Clicks**:
-* The engine evaluates: $\min(\text{MatrixCrafts: 5}, \; \text{InventorySpace: 36}, \; \text{RemainingUses: 2}) = \mathbf{2}$.
+* The engine evaluates the smallest constraint: materials for 5 swords, 36 free inventory slots, but **only 2 remaining uses**.
 * Exactly 2 swords are crafted into their inventory.
 * Remaining uses decrement from 2 to 0.
-* The recipe immediately locks, and the remaining materials for 3 swords remain safely untouched inside the crafting table!
+* The recipe immediately locks, and the remaining materials for 3 swords remain safely untouched inside the crafting table.

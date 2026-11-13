@@ -8,28 +8,14 @@ This guide provides structured, step-by-step diagnostic workflows for resolving 
 
 If blueprint items given to players appear as blank gray maps or show vanilla terrain maps instead of custom schematics:
 
-### Diagnostic Checklist:
-1. **Verify Master Config**:
-   Open `plugins/CraftingBlueprints/config.yml` and verify:
-   ```yaml
-   images-on-maps: true
-   ```
-   If set to `false`, maps will not render custom graphics.
-2. **Verify Custom PNG Dimensions & Format**:
-   If using custom images:
-   * The file must reside in `plugins/CraftingBlueprints/images/backgrounds/`.
-   * The image **must be exactly 128 x 128 pixels**. Any other dimensions will fail to load or be rejected.
-   * The file must be **32-bit RGBA PNG** format. Progressive JPEGs, animated GIFs, and WebP formats are not supported.
-3. **Verify Cross-Server Map Re-Linking**:
-   If this occurs when players transfer from another server on a BungeeCord/Velocity network:
-   * Verify that the Primary Node has `sync-from-files: true` and all Worker Nodes have `sync-from-files: false`.
-   * Ensure that all sub-servers are connected to the exact same MySQL database.
-   * CraftingBlueprints' `MapRelinkListener` will automatically intercept the item and bind it to the local server's canonical Map ID in-place upon inventory open.
-4. **Reload Map System**:
-   Execute:
-   ```text
-   /cb reload all
-   ```
+### Diagnostic Steps:
+* **Verify Master Config**: Ensure `images-on-maps: true` is enabled in `plugins/CraftingBlueprints/config.yml`. If false, maps will not render custom graphics.
+* **Verify Custom PNG Dimensions & Format**:
+    * Custom background images must be placed in `plugins/CraftingBlueprints/images/backgrounds/`.
+    * The image **must be exactly 128 x 128 pixels**.
+    * The image must be in **32-bit RGBA PNG** format.
+* **Verify Cross-Server Map Re-Linking**: On BungeeCord/Velocity networks, verify that the Primary Node has `sync-from-files: true` and all Worker Nodes have `sync-from-files: false`. When players switch servers, the plugin automatically re-links items to the local server's canonical Map ID upon inventory open.
+* **Reload Map System**: Run `/cb reload all` to refresh the map buffer cache.
 
 ---
 
@@ -37,17 +23,10 @@ If blueprint items given to players appear as blank gray maps or show vanilla te
 
 If players are able to craft recipes that you intended to lock:
 
-### Diagnostic Checklist:
-1. **Check for Operator Bypass (`op-bypass`)**:
-   Are you testing with a player account that has `/op` status?
-   By default, `op-bypass: true` in `config.yml` allows all server operators to craft, brew, and enchant restricted recipes freely.
-   * **Fix**: Temporarily deop your account: `/deop <your_player_name>` or set `op-bypass: false` in `config.yml` and run `/cb reload config`.
-2. **Check your Restriction Mode**:
-   In `plugins/CraftingBlueprints/config.yml`:
-   * If `restrictions.mode: "restricted-only"`, recipes are **only locked if they match an entry in `restricted-items`**. Unlisted recipes are completely free for all players by default!
-   * Verify that your target item pattern (e.g. `diamond_.*`, `netherite_.*`, `beacon`) is explicitly listed under `restricted-items`.
-3. **Check Permission Group Grants**:
-   Run `/lp user <player> permission check craftingblueprints.group.<id>` to ensure the player has not been granted a permission group that already unlocks that recipe category.
+### Diagnostic Steps:
+* **Check for Operator Bypass (`op-bypass`)**: Are you testing with a player account that has `/op`? By default, `op-bypass: true` in `config.yml` allows operators to craft freely. Run `/deop <your_player_name>` or set `op-bypass: false` in `config.yml` and run `/cb reload config`.
+* **Check your Restriction Mode**: In `config.yml`, verify `restrictions.mode: "restricted-only"`. Unlisted recipes are completely free for all players by default. Ensure your target item pattern (e.g. `diamond_.*`, `netherite_.*`, `beacon`) is explicitly listed under `restricted-items`.
+* **Check Permission Group Grants**: Run `/lp user <player> permission check craftingblueprints.group.<id>` to verify the player has not inherited a permission group unlocking that category.
 
 ---
 
@@ -55,19 +34,10 @@ If players are able to craft recipes that you intended to lock:
 
 If the server console reports an error when loading blueprint files:
 
-### Diagnostic Checklist:
-1. **Run Dry-Run Validation**:
-   In console or in-game, execute:
-   ```text
-   /cb validate
-   ```
-2. **Review the Diagnostic Output**:
-   The validator reports:
-   * The exact file path and line number of the error.
-   * Indentation errors (remember: YAML strictly prohibits tab characters; always use standard spaces).
-   * Typo suggestions via Levenshtein distance (e.g. `roseta` $\rightarrow$ `rosette`).
-3. **Rest Assured with Atomic Fail-Safe**:
-   If a YAML file has a syntax error, CraftingBlueprints triggers an **atomic abort**. Zero database records are modified, zero blueprints are pruned, and your live server continues running with the previous valid configuration until you fix the typo!
+### Diagnostic Steps:
+* **Run Dry-Run Validation**: In console or in-game, execute `/cb validate`. The validator reports the exact file path, line number, and column.
+* **Check Indentation**: YAML strictly prohibits tab characters. Always use standard spaces for indentation.
+* **Atomic Fail-Safe Protection**: If a YAML file contains syntax errors, CraftingBlueprints triggers an **atomic abort**. Zero database records are modified, zero blueprints are pruned, and your live server continues running with the previous valid configuration until you fix the typo.
 
 ---
 

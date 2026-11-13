@@ -142,15 +142,19 @@ The player unlocks the recipe for a temporary duration measured from the exact m
           - "<gray>Craft Count:</gray> <green>Unlimited</green>"
     ```
 
-#### Supported Duration Units
-The duration parser accepts human strings or raw integer seconds:
-* `45s` $\rightarrow$ 45 seconds
-* `30m` $\rightarrow$ 30 minutes (1,800 seconds)
-* `12h` $\rightarrow$ 12 hours (43,200 seconds)
-* `86400` or `24h` $\rightarrow$ 24 hours (86,400 seconds)
-* `7d`  $\rightarrow$ 7 days (604,800 seconds)
-* `30d` $\rightarrow$ 30 days (2,592,000 seconds)
-* `0`   $\rightarrow$ No temporal expiration.
+### Supported Duration Formats
+
+The `time:` field accepts either human-readable duration strings or raw integer seconds:
+
+| Input Format | Unit / Duration | Evaluated Seconds |
+| :--- | :--- | :--- |
+| `45s` | 45 seconds | 45 |
+| `30m` | 30 minutes | 1,800 |
+| `12h` | 12 hours | 43,200 |
+| `24h` or `86400` | 24 hours (1 day) | 86,400 |
+| `7d` | 7 days (1 week) | 604,800 |
+| `30d` | 30 days (1 month) | 2,592,000 |
+| `0` | Unlimited | No time expiration |
 
 ---
 
@@ -165,7 +169,7 @@ singles:
     blueprint: SHIELD
     name: "<gradient:#00AAFF:#00FFAA><bold>Seasonal Aegis Shield</bold></gradient>"
 
-    # Expires in 7 days OR after 5 crafts, whichever happens first
+    # Expires in 7 days OR after 5 crafts, whichever occurs first
     permanent: false
     time: 7d
     uses: 5
@@ -189,34 +193,40 @@ singles:
 
 ---
 
-## Shift-Craft Capacity & Anti-Exploit Math
+## Shift-Craft Bulk Crafting Protection
 
-In standard Minecraft plugins, shift-clicking crafting recipes can cause severe desynchronization, allowing players to duplicate items or craft 64 items while only deducting 1 use from their counter.
+In standard Minecraft plugins, shift-clicking crafting recipes can cause severe desynchronization, allowing players to duplicate items or craft a full stack of 64 items while only deducting 1 use from their counter.
 
-CraftingBlueprints eliminates this exploit via an atomic **Shift-Craft Rule Engine** (`ShiftCraftMath.kt`):
+CraftingBlueprints eliminates this exploit via an atomic calculation on every shift-click:
 
-1. **Matrix Ingredient Capacity**: Evaluates the minimum ingredient count across all matrix slots to calculate maximum possible crafts:
-   $$\text{MaxMatrixCrafts} = \min_{s \in \text{slots}}(\text{amount}_s)$$
-2. **Inventory Destination Capacity**: Evaluates the player's empty inventory slots and partial stacks to determine the exact number of crafted items that can fit safely without overflowing:
-   $$\text{MaxSpaceCrafts} = \left\lfloor \frac{\text{FreeSpace}}{\text{RecipeYield}} \right\rfloor$$
-3. **Usage Bound**: Evaluates the remaining uses on the player's active blueprint:
-   $$\text{CraftCount} = \min(\text{MaxMatrixCrafts}, \text{MaxSpaceCrafts}, \text{RemainingUses})$$
-4. **Atomic Execution**: If a player with **2 remaining uses** shift-clicks a recipe with 64 iron ingots in the matrix, the engine crafts **exactly 2 items**, deducts **exactly 2 uses**, locks the recipe, and leaves the remaining 62 iron ingots untouched in the crafting table.
+1. **Ingredient Check**: Evaluates how many items can be created with the materials currently in the 3x3 crafting grid.
+2. **Inventory Space Check**: Evaluates open inventory slots to determine how many items the player can safely hold without items dropping to the ground.
+3. **Remaining Uses Bound**: Restricts the craft to the exact number of uses remaining on the player's blueprint.
+
+**Example**:
+* A player with **2 remaining uses** places materials for 8 Netherite Swords into the crafting grid and shift-clicks.
+* The plugin crafts **exactly 2 swords** and deducts **exactly 2 uses**, immediately locking the recipe.
+* The remaining ingredients for 6 swords remain completely safe in the crafting grid. Over-crafting is impossible.
 
 ---
 
-## How Players Track Active Uses & Timers
+## Tracking Active Uses & Timers
 
-Players have multiple real-time tools to monitor their active blueprints:
+Players and administrators have multiple tools to monitor active blueprints:
 
-1. **Personal Dashboard (`/cb menu`)**:
-   Shows all active recipes, remaining craft counts, and live countdown timers (e.g. `Expires in 3d 14h`).
-2. **Catalog Inspection (`/cb item list`)**:
-   Hovering over any blueprint displays dynamic status badges:
-   * :white_check_mark: **Unlocked** (Permanent)
-   * :hourglass: **Active: 3/5 Uses** (Limited)
-   * :lock: **Locked**
-3. **PlaceholderAPI Variables**:
-   * `%craftingblueprints_uses_<id>%`: Returns remaining uses (or `unlimited`).
-   * `%craftingblueprints_time_<id>%`: Formatted remaining time (e.g. `23h 12m`).
-   * `%craftingblueprints_is_unlocked_<id>%`: Returns `true` or `false`.
+### Personal Menu (`/cb menu`)
+Running `/cb menu` displays a live dashboard showing all active recipes, remaining craft counts, and live countdown timers (e.g. `Expires in 3d 14h`).
+
+### Server Catalog (`/cb item list`)
+Hovering over any blueprint in the catalog displays its live status badge:
+
+* :white_check_mark: **Unlocked**: Permanent access.
+* :hourglass: **Active**: Finite crafts or time remaining (e.g. `3/5 uses`).
+* :lock: **Locked**: Blueprint has not been memorized.
+
+### PlaceholderAPI Integration
+Use these placeholders in scoreboards, tablists, or custom menus:
+
+* `%craftingblueprints_uses_<id>%`: Returns remaining crafts (or `unlimited`).
+* `%craftingblueprints_time_<id>%`: Formatted remaining time (e.g. `23h 12m`).
+* `%craftingblueprints_is_unlocked_<id>%`: Returns `true` or `false`.

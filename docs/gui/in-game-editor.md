@@ -21,13 +21,13 @@ To open the interactive editor for a specific blueprint:
 To prevent accidental configuration desynchronization on servers using Git workflows and declarative YAML files:
 
 * **File-Managed Blueprints (`is_file_managed: true`)**:
-  * Blueprints loaded from `.yml` files in `blueprints/` display a prominent `[⚡ Archivo]` badge in the interface.
-  * These blueprints are **read-only and immutable** from in-game commands and menus.
-  * If an operator attempts to modify a file-managed blueprint in-game, the interface notifies them to edit the source `.yml` file directly on disk, preserving Git version control integrity.
+    * Blueprints loaded from `.yml` files in `blueprints/` display a prominent `[⚡ Archivo]` badge in the interface.
+    * These blueprints are **read-only and immutable** from in-game commands and menus.
+    * If an operator attempts to modify a file-managed blueprint in-game, the interface notifies them to edit the source `.yml` file directly on disk, preserving Git version control integrity.
 
 * **In-Game Manual Blueprints (`is_file_managed: false`)**:
-  * Blueprints created in-game via commands or modifier menus are fully editable.
-  * All adjustments are persisted directly to the database and automatically exported to `exports/manual_blueprints.yml`.
+    * Blueprints created in-game via commands or modifier menus are fully editable.
+    * All adjustments are persisted directly to the database and automatically exported to `exports/manual_blueprints.yml`.
 
 ---
 

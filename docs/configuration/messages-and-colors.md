@@ -1,6 +1,6 @@
 # Messages, Colors & MiniMessage Localization
 
-CraftingBlueprints features a modern **Kyori MiniMessage** localization engine (`me.xztotal.plugins.craftingblueprints.i18n`), replacing legacy section sign (`§`) color codes with rich, component-based formatting, true 24-bit RGB hex colors, multi-stop gradients, and dynamic context placeholders.
+CraftingBlueprints uses **Kyori MiniMessage** for all messages and item lore, replacing legacy section sign (`§`) color codes with modern component formatting, true 24-bit RGB hex colors, multi-stop gradients, and dynamic context placeholders.
 
 ---
 

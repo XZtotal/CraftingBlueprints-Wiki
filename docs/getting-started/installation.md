@@ -48,16 +48,16 @@ CraftingBlueprints is engineered specifically for modern Paper-based server soft
     1. **Install on Every Server**: Copy `CraftingBlueprints-x.x.x.jar` into the `plugins/` directory of each sub-server (Hub, Survival, Skyblock, etc.).
     2. **Configure Central MySQL**: On every server, open `plugins/CraftingBlueprints/config.yml` and set `database-type: mysql` with your shared database credentials.
     3. **Enforce the Golden Rule**:
-       * Designate **one Primary Management Server** (e.g., Hub/Admin) with:
-         ```yaml
-         file-management:
-           sync-from-files: true
-         ```
-       * Configure **all Worker Servers** (Survival, Skyblock, etc.) with:
-         ```yaml
-         file-management:
-           sync-from-files: false
-         ```
+        * Designate **one Primary Management Server** (e.g., Hub/Admin) with:
+          ```yaml
+          file-management:
+            sync-from-files: true
+          ```
+        * Configure **all Worker Servers** (Survival, Skyblock, etc.) with:
+          ```yaml
+          file-management:
+            sync-from-files: false
+          ```
     4. **Start Servers & Confirm Sync**: Start the primary server first, then the worker nodes. Review our [Multi-Server Setup Guide](../storage/mysql-multiserver.md) for network-specific connection pooling advice.
 
 ---
@@ -76,7 +76,7 @@ This diagnostic report provides immediate insight into your deployment:
 * **Database Backend**: Displays active connection status (`SQLite (Connected)` or `MySQL (HikariCP Active)`), active connection pool statistics, and round-trip query latency.
 * **Blueprint Counts**: Reports the total number of blueprints registered across all categories (`singles`, `packages`, `mysteries`).
 * **File Management Mode**: Shows whether the node is running as a **Master Node** (`sync-from-files: true`) or a **Worker Node** (`sync-from-files: false`).
-* **Memory & Buffer Cache**: Displays active memory consumption for player profiles, blueprint definitions, and pre-quantized map byte buffers.
+* **Map Cache & Resources**: Displays loaded player profiles, blueprint definitions, and cached map images.
 
 ---
 

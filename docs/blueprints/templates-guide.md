@@ -86,9 +86,11 @@ singles:
 
 ## 3. Mixin Inheritance Precedence Rules
 
-When a blueprint inherits multiple templates, CraftingBlueprints resolves configurations using strict left-to-right cascading precedence:
+When a blueprint inherits multiple templates, CraftingBlueprints resolves configurations using strict cascading precedence:
 
-$$\text{Parent Folders } \texttt{default:} \;\longrightarrow\; \text{Folder } \texttt{default:} \;\longrightarrow\; \text{File } \texttt{file_default:} \;\longrightarrow\; \text{Template 1} \;\longrightarrow\; \text{Template 2} \;\longrightarrow\; \text{Blueprint Local Config}$$
+```text
+Parent Defaults -> Folder Defaults -> File Defaults -> Template 1 -> Template 2 -> Blueprint Local Config
+```
 
 ```
                 ┌──────────────────────────────────────────────┐
@@ -126,7 +128,7 @@ $$\text{Parent Folders } \texttt{default:} \;\longrightarrow\; \text{Folder } \t
 ### Precedence Invariants:
 1. **Blueprint Local Wins**: Any property defined explicitly on the blueprint itself (e.g. `uses: 5`, `price: 25000.0`, or local `name:`) **always takes absolute precedence** over all templates and defaults.
 2. **Template Order (Right Overrides Left)**: If `Template 1` defines `price: 10000.0` and `Template 2` defines `price: 15000.0`, `Template 2` wins because it is evaluated later in the list:
-   $$\text{Blueprint} > \text{Template 2} > \text{Template 1}$$
+   `Blueprint Local > Template 2 > Template 1`.
 3. **Dictionaries & Maps (`item:`, `map:`, `extra:`)**: Deep-merged recursively. If `Template 1` sets `item.material: FILLED_MAP` and `Template 2` sets `item.glowing: true`, the resulting item will have **both** `material: FILLED_MAP` and `glowing: true`.
 4. **Lists (`lore:`, `blueprints:`, `pool:`)**: Replaced entirely by the latest non-empty list declared in the cascade.
 5. **Scalars (`name:`, `price:`, `permanent:`, `uses:`, `time:`)**: Overwritten by the latest declared non-null scalar.

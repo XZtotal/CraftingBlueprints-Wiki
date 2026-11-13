@@ -21,9 +21,9 @@ plugins/CraftingBlueprints/presets/<preset_id>/
 ### The Inactive Repository vs Deployed Targets
 * **Inactive Repository (`plugins/CraftingBlueprints/presets/`)**: You can store, download, and organize preset `.zip` bundles or folders here without triggering live server imports or altering your database.
 * **Active Deployment Targets**: Presets only become active in-game when deployed via `/cb preset apply <id> --confirm`:
-  * Blueprints deploy to: `plugins/CraftingBlueprints/blueprints/presets/<id>/...`
-  * Images deploy to: `plugins/CraftingBlueprints/images/presets/<id>/...`
-  * Configurations deploy to: `plugins/CraftingBlueprints/configs/presets/<id>/...`
+    * Blueprints deploy to: `plugins/CraftingBlueprints/blueprints/presets/<id>/...`
+    * Images deploy to: `plugins/CraftingBlueprints/images/presets/<id>/...`
+    * Configurations deploy to: `plugins/CraftingBlueprints/configs/presets/<id>/...`
 
 ---
 
@@ -34,9 +34,9 @@ CraftingBlueprints ships with 4 built-in, production-balanced presets:
 | Preset ID | Display Title | Templates | Blueprints Breakdown | Progression & Gameplay Model |
 | :--- | :--- | :--- | :--- | :--- |
 | `hardcore_smp` | Hardcore SMP Survival | `4` | `42` total (`36` singles, `4` packages, `2` mysteries) | `restricted-only`: Basic wood/stone free; iron unlocked via default group; Diamond, Netherite, Mending, and high-tier potions require blueprints with `forge` and `royal` map themes. |
-| `rpg_tiers` | RPG Progression Tiers (T1–T5) | `5` | `34` total (`28` singles, `4` packages, `2` mysteries) | `restricted-only`: T1 apprentice through T5 mythic weapons, armors, runes, and class kits unlocking via tiered blueprints (`bracket` $\rightarrow$ `rosette`). |
+| `rpg_tiers` | RPG Progression Tiers (T1–T5) | `5` | `34` total (`28` singles, `4` packages, `2` mysteries) | `restricted-only`: T1 apprentice through T5 mythic weapons, armors, runes, and class kits unlocking via tiered blueprints (`bracket` -> `rosette`). |
 | `skyblock_coop` | Skyblock Co-op & Automation | `4` | `28` total (`22` singles, `4` packages, `2` mysteries) | `restricted-only`: Island basics and farming free; diamond/netherite tools, beacons, shulker boxes, and silk touch require blueprints. |
-| `prison_ranks` | OP Prison Ranks & Pickaxes | `4` | `26` total (`22` singles, `2` packages, `2` mysteries) | `restricted-only`: Progressive ranks (`default` $\rightarrow$ `rank_b` $\rightarrow$ `rank_c` $\rightarrow$ `rank_prestigious`) unlock tiered drills, efficiency, and fortune pickaxes. |
+| `prison_ranks` | OP Prison Ranks & Pickaxes | `4` | `26` total (`22` singles, `2` packages, `2` mysteries) | `restricted-only`: Progressive ranks (`default` -> `rank_b` -> `rank_c` -> `rank_prestigious`) unlock tiered drills, efficiency, and fortune pickaxes. |
 
 ---
 

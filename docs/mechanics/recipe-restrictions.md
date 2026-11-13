@@ -1,6 +1,6 @@
 # Recipe Restrictions (Whitelist Mode vs Universal Gating)
 
-CraftingBlueprints features an intelligent restriction engine (`RestrictionEngine.kt`) allowing server administrators to choose between **Selective Whitelist Mode** (recommended for Survival SMP) and **Universal Progression Mode** (recommended for Hardcore RPG).
+CraftingBlueprints allows server administrators to choose between **Selective Whitelist Mode** (recommended for Survival SMP) and **Universal Progression Mode** (recommended for Hardcore RPG).
 
 ---
 
@@ -56,7 +56,7 @@ The `restricted-items:` list supports exact identifiers, wildcard globs, regular
 | `potion:speed.*` | Alchemy / Brewing | Speed I, Speed II, Splash Speed | Locks brewing of all Speed potion variants. |
 | `enchantment:mending` | Anvil / Enchanting | Mending books and items in anvils | Locks combining or applying Mending enchantments. |
 | `enchantment:sharpness.*`| Anvil / Enchanting | Sharpness I through Sharpness V | Locks applying Sharpness enchantments. |
-| `smelt:iron_ingot` | Furnace / Smelting | Raw iron $\rightarrow$ Iron ingot | Locks smelting iron ingots in furnaces and blast furnaces. |
+| `smelt:iron_ingot` | Furnace / Smelting | Raw iron -> Iron ingot | Locks smelting iron ingots in furnaces and blast furnaces. |
 | `stonecut:.*stairs` | Stonecutter | All stairs cut via stonecutter | Locks stonecutter recipes matching the pattern. |
 
 ---
@@ -103,5 +103,5 @@ When you install pre-built gameplay presets using `/cb preset apply` (e.g. Hardc
 Instead:
 1. `config.yml` remains the sole authority for global operational mode (`restrictions.mode: "restricted-only"`).
 2. Presets deploy their required restricted items to `configs/presets/<preset_id>/restrictions.yml`.
-3. When the server boots or executes `/cb reload`, the engine performs a mathematical **Set Union** ($A \cup B$) between `config.yml` and all active preset restriction files.
+3. When the server boots or executes `/cb reload`, the engine automatically combines the restrictions from `config.yml` with all active preset restriction files.
 4. When you uninstall a preset (`/cb preset remove <preset_id>`), its restrictions are cleanly purged from memory upon reload with zero leftovers.

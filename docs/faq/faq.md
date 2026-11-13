@@ -13,9 +13,7 @@ Direct, authoritative answers to the most common questions asked by server admin
 ---
 
 ### Can players exploit Shift-Clicking to bypass limited-use blueprints?
-**No.** CraftingBlueprints features an atomic Capacity Math Engine (`ShiftCraftMath.kt`). When a player shift-clicks a crafting table, the engine calculates the minimum between available ingredients, empty inventory space, and remaining blueprint uses:
-$$\text{CraftCount} = \min(\text{MatrixCapacity}, \text{InventorySpace}, \text{RemainingUses})$$
-A player with 2 uses remaining who shift-clicks a full stack of materials will craft **exactly 2 items**, decrement exactly 2 uses, and leave the remaining materials untouched in the crafting grid.
+**No.** CraftingBlueprints calculates the smallest constraint between available ingredients, free inventory space, and remaining blueprint uses. For example, a player with 2 uses remaining who shift-clicks a full stack of materials will craft **exactly 2 items**, decrement exactly 2 uses, and leave the remaining materials untouched in the crafting grid. Over-crafting is strictly prevented.
 
 ---
 

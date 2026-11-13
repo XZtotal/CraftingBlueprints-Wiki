@@ -40,7 +40,7 @@ The scaffolder can target specific categories, namespaces, or external plugins:
 
 | Flag | Parameter Type | Description |
 | :--- | :--- | :--- |
-| `--mode` | `single` \| `package` | Generates individual blueprints (`single`, default) or bundles items into packaged sets (`package`, chunked at $\le 24$ items per pack). |
+| `--mode` | `single` \| `package` | Generates individual blueprints (`single`, default) or bundles items into packaged sets (`package`, chunked at up to 24 items per pack). |
 | `--price-scale` | Decimal factor | Multiplies base heuristic prices (Common: 250, Uncommon: 800, Rare: 2500, Legendary: 15000). Default: `1.0`. |
 | `--filter` | Regex pattern | Selectively includes only recipes matching the regex (e.g. `.*_sword$`). |
 | `--template` | Template ID | Applies a reusable template mixin to all generated blueprints without hardcoding repeated fields. |

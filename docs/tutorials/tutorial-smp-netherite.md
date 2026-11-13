@@ -126,12 +126,21 @@ In your server datapack (e.g. `data/minecraft/loot_tables/chests/bastion_treasur
 
 ## Step 4: Verification & Testing in Survival
 
-1. **Test Failure as Unauthorized Player**:
-   * Temporarily deop yourself: `/deop <your_player_name>`
-   * Place a Diamond Chestplate, a Netherite Upgrade Smithing Template, and a Netherite Ingot into a Smithing Table.
-   * The output slot remains locked! Clicking the result warns that you lack the required blueprint.
-2. **Grant & Memorize**:
-   * Grant yourself the blueprint map: `/cb give <your_player_name> ancient_netherite_smithing 1`
-   * Hold the high-resolution map in hand and **Right-Click**. A chime sound plays and chat confirms you have memorized the recipe.
-3. **Test Successful Forging**:
-   * Return to the Smithing Table. The Netherite Chestplate is now unlocked and crafts successfully!
+### 1. Test Failure as an Unauthorized Player
+1. Temporarily remove your operator status to test as a normal player:
+   ```text
+   /deop <your_player_name>
+   ```
+2. Place a Diamond Chestplate, a Netherite Upgrade Smithing Template, and a Netherite Ingot into a Smithing Table.
+3. The output slot remains locked. Clicking the result warns that you lack the required blueprint.
+
+### 2. Grant and Memorize the Blueprint
+1. Grant yourself the blueprint map via console or as an operator:
+   ```text
+   /cb give <your_player_name> ancient_netherite_smithing 1
+   ```
+2. Hold the high-resolution map in your main hand and **Right-Click**. A chime sound plays and chat confirms you have memorized the recipe.
+
+### 3. Verify Successful Forging
+1. Return to the Smithing Table with the same materials.
+2. The Netherite Chestplate is now unlocked and crafts successfully.

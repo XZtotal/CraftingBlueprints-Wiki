@@ -96,12 +96,12 @@ Reload the blueprints to update the catalog:
    ```
 2. The player browses through the pages. Blueprints with a configured `price:` display their cost and a :lock: locked indicator.
 3. The player **Left-Clicks** the `Industrial Diamond Drill Blueprint`:
-   * A confirmation menu opens displaying the `$35,000` purchase price and the player's current balance.
+    * A confirmation menu opens displaying the `$35,000` purchase price and the player's current balance.
 4. Upon clicking **Confirm Purchase**:
-   * Vault checks the player's account balance.
-   * If funds are sufficient, Vault deducts `$35,000`.
-   * The blueprint is unlocked immediately on the player's account.
-   * A chime sound plays, and the status icon switches to :white_check_mark: **Unlocked**!
+    * Vault checks the player's account balance.
+    * If funds are sufficient, Vault deducts `$35,000`.
+    * The blueprint is unlocked immediately on the player's account.
+    * A chime sound plays, and the status icon switches to :white_check_mark: **Unlocked**!
 
 ---
 

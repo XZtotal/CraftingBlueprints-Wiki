@@ -48,22 +48,22 @@ If Vault is installed and the blueprint declares a `price:` field:
 * The item lore displays: `<yellow>Catalog Price:</yellow> <green>${price}</green>`.
 * **Left-Clicking** a locked blueprint prompts a purchase confirmation dialogue.
 * If the player has sufficient balance:
-  1. Vault deducts the cost from the player's account.
-  2. The blueprint is unlocked immediately.
-  3. A celebration sound plays, and the status icon transitions from :lock: to :white_check_mark:.
+    1. Vault deducts the cost from the player's account.
+    2. The blueprint is unlocked immediately.
+    3. A celebration sound plays, and the status icon transitions from :lock: to :white_check_mark:.
 
 ### 4. Interactive 3x3 Recipe Inspector
 * **Right-Clicking** any blueprint in the catalog opens an expanded inspection card:
-  * Renders the exact 3x3 crafting matrix, smithing template arrangement, or brewing stand ingredients.
-  * Displays required materials, output item yields, and lore descriptions.
+    * Renders the exact 3x3 crafting matrix, smithing template arrangement, or brewing stand ingredients.
+    * Displays required materials, output item yields, and lore descriptions.
 
 ---
 
 ## The Return Navigation Stack (`/cb return`)
 
-CraftingBlueprints maintains an in-memory LIFO (Last-In, First-Out) navigation stack per player session via `MenuSessionManager`:
+CraftingBlueprints maintains an intelligent navigation history per player session:
 
 * When a player navigates from the personal dashboard (`/cb menu`) into the catalog (`/cb item list`), and then into a detailed recipe inspection view:
-  * Clicking the **Back** button or typing `/cb return` pops the last menu and re-opens the catalog on the exact page they were browsing.
-  * Typing `/cb return` again returns them to their personal dashboard.
-* **ESC Exit Context Preservation**: If a player accidentally closes a menu by pressing the ESC key, `lastClosedMenu` remembers their active context. Running `/cb return` instantly restores the interface right where they left off.
+    * Clicking the **Back** button or typing `/cb return` re-opens the catalog on the exact page they were browsing.
+    * Typing `/cb return` again returns them to their personal dashboard.
+* **ESC Exit Context Preservation**: If a player accidentally closes a menu by pressing the ESC key, the plugin remembers their last active interface. Running `/cb return` instantly restores the interface right where they left off.

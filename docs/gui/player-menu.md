@@ -34,9 +34,9 @@ The player menu features an intuitive layout designed with custom Kyori Adventur
 ### 1. Player Profile Head
 * **Display Name**: The player's custom textured skin skull.
 * **Progression Lore**:
-  * Total blueprints unlocked on this server.
-  * Server completion percentage (e.g. `14 / 42 Blueprints Unlocked (33.3%)`).
-  * Lifetime crafts completed using blueprints.
+    * Total blueprints unlocked on this server.
+    * Server completion percentage (e.g. `14 / 42 Blueprints Unlocked (33.3%)`).
+    * Lifetime crafts completed using blueprints.
 
 ### 2. Active Expirations & Timer Monitoring
 * Displays all blueprints that have active temporal countdowns (e.g., 24-hour licenses, weekly guild permits).
@@ -53,9 +53,9 @@ The player menu features an intuitive layout designed with custom Kyori Adventur
 
 ## Anti-Steal Item Protection & Inventory Security
 
-All menus in CraftingBlueprints inherit from `BaseMenu.kt` and are protected by an automated, low-level anti-steal security engine:
+All menus in CraftingBlueprints are protected by built-in inventory security features:
 
-* **Slot Locking**: Non-input menu slots are locked. Shift-clicking, dragging, hotkey swapping, and dropping items out of the interface are intercepted and cancelled immediately.
-* **PDC Menu Tagging**: All visual icons placed inside menus are tagged with a Persistent Data Container marker (`ItemPDT(ItemManager.MENU_TYPE)`).
-* **Purge Engine**: If a player attempts to exploit client-side glitches, disconnect macros, or death drops to extract GUI items, the `ItemInteractListener` intercepts the item on cursor, hotbar, pickup, block placement, or death, and **instantly purges** the phantom item.
-* Zero menu items can ever leak into the server's survival economy.
+* **Slot Locking**: Non-input menu slots are locked. Shift-clicking, dragging, hotkey number swapping, and dropping items out of the interface are intercepted and cancelled immediately.
+* **Persistent Tagging**: All visual icons placed inside menus carry an internal security tag.
+* **Automatic Purge**: If a player attempts to use client-side glitches, disconnect macros, or inventory desync to pull items out of a menu, the plugin instantly deletes the item the moment it enters their cursor, hotbar, or inventory.
+* **Economy Protection**: Menu display items and decorative buttons can never leak into survival gameplay or player inventories.

@@ -12,13 +12,13 @@ CraftingBlueprints features native, low-level interception to protect your econo
 
 When a redstone pulse activates a Crafter block:
 
-1. **Recipe Inspection**: The plugin intercepts the pending craft before items are produced, resolving the output item and recipe key.
-2. **Restriction Engine Consultation**: The plugin queries `RestrictionEngine.isBlueprintRequired(name, type)`:
-   * **Unrestricted Recipes**: If the recipe does not require a blueprint (e.g. iron ingots into blocks, bread, paper, or torches in Whitelist Mode), the craft executes normally with zero interference.
-   * **Restricted Recipes**: If the item requires a blueprint, the Crafter evaluates the active configuration policy.
+1. **Recipe Inspection**: The plugin intercepts the craft before items are produced, identifying the output item and recipe.
+2. **Restriction Check**: The plugin checks if the target recipe requires a blueprint:
+    * **Unrestricted Recipes**: If the recipe does not require a blueprint (e.g. iron blocks, bread, torches in Whitelist Mode), the craft executes normally.
+    * **Restricted Recipes**: If the item requires a blueprint, the Crafter evaluates the server policy (`block-restricted`).
 3. **Execution Policy Enforcement**:
-   * **Blocked**: The craft is cancelled. The Crafter block emits fail particles and sounds, and all ingredient items remain safely inside the Crafter's grid without duplication or item loss.
-   * **Bypassed**: If configured by the administrator, the Crafter is allowed to produce the locked recipe autonomously.
+    * **Blocked**: The craft is cancelled. The Crafter block emits fail particles and sounds, leaving ingredients safely inside the Crafter's grid without duplication or item loss.
+    * **Bypassed**: If configured by the administrator, the Crafter produces the recipe autonomously.
 
 ---
 
@@ -62,6 +62,6 @@ crafter:
 
 ## Multi-Version Compatibility
 
-Because `CrafterCraftEvent` only exists in Bukkit/Paper API 1.21+:
-* On servers running **Paper 1.18.2 or 1.20.4**, this module loads as a lightweight no-op adapter (`NoOpCrafterAdapter`). It introduces zero performance overhead, executes zero listeners, and causes zero `ClassNotFoundException` errors.
-* On servers running **Paper 1.21.1+**, the dedicated implementation (`CrafterAdapterImpl`) activates automatically without configuration changes.
+Because the Crafter block only exists in Minecraft 1.21+:
+* On servers running **Paper 1.18.2 or 1.20.4**, this module is inactive. It introduces zero overhead, registers no listeners, and runs cleanly without errors.
+* On servers running **Paper 1.21+**, Crafter interception activates automatically with no extra setup required.

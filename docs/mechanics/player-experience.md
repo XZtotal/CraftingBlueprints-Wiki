@@ -24,14 +24,13 @@ When a player receives a blueprint map (`Material.FILLED_MAP`):
 
 1. **Visual Drafting Inspection**: Holding the map in either hand renders a photorealistic 128x128 pixel drafting schematic featuring the workstation badge, the central item sprite, corner Guilloché rosettes, and remaining craft counts.
 2. **Right-Click Memorization**: The player holds the blueprint in their main hand and **Right-Clicks**:
-   * A clean chime sound effect plays (`Sound.ENTITY_PLAYER_LEVELUP` or configured sound).
-   * Swirling enchanting particles appear at the player's eye level.
-   * A localized chat notification confirms the unlock:
-     ```text
-     [CraftingBlueprints] You have unlocked the blueprint for Obsidian Blade Blueprint!
-     ```
-   * The physical map item is consumed from the player's hand (unless configured otherwise).
-   * The recipe is registered permanently or temporally into the player's account database profile.
+    * A chime sound plays (`Sound.ENTITY_PLAYER_LEVELUP`) and enchanting particles appear.
+    * A localized chat notification confirms the unlock:
+      ```text
+      [CraftingBlueprints] You have unlocked the blueprint for Obsidian Blade Blueprint!
+      ```
+    * The physical map item is consumed from the player's hand (unless configured otherwise).
+    * The recipe is registered permanently or temporally into the player's account database profile.
 
 ---
 
@@ -47,16 +46,16 @@ Once a blueprint is unlocked, the player approaches any standard 3x3 Crafting Ta
 ### Scenario B: The Recipe is Restricted & Locked
 If the player arranges ingredients for a locked recipe without owning the blueprint:
 * **Result Slot Preview**: Governed by `ux.prepare-preview` in `config.yml`:
-  * `HIDE_RESULT`: The crafting table output slot remains completely empty.
-  * `LOCKED_OVERLAY`: Keeps the output item icon, but appends red warning lore: `<red><bold>Recipe Locked</bold></red>`.
-  * `CUSTOM_ITEM`: Renders a custom indicator (e.g. a red Barrier icon).
+    * `HIDE_RESULT`: The crafting table output slot remains completely empty.
+    * `LOCKED_OVERLAY`: Keeps the output item icon, but appends red warning lore: `<red><bold>Recipe Locked</bold></red>`.
+    * `CUSTOM_ITEM`: Renders a custom indicator (e.g. a red Barrier icon).
 * **Click Interception**: If the player attempts to click the locked output slot:
-  * The craft is instantly cancelled.
-  * An informative message is sent to chat explaining which blueprint is missing:
-    ```text
-    [CraftingBlueprints] You must unlock the Ancient Netherite Battleaxe blueprint before crafting this item!
-    ```
-  * Ingredients remain completely safe inside the 3x3 grid without duplication, corruption, or loss.
+    * The craft is instantly cancelled.
+    * An informative message is sent to chat explaining which blueprint is missing:
+      ```text
+      [CraftingBlueprints] You must unlock the Ancient Netherite Battleaxe blueprint before crafting this item!
+      ```
+    * Ingredients remain completely safe inside the 3x3 grid without duplication, corruption, or loss.
 
 ---
 
@@ -82,19 +81,19 @@ ux:
 
 A frequent vulnerability in Minecraft progression plugins is shift-crafting: players place 64 stacks of ingredients into the matrix, shift-click once, and produce 64 items while the plugin only deducts 1 use from their counter.
 
-CraftingBlueprints prevents this exploit via an atomic **Capacity Math Engine** (`ShiftCraftMath.kt`):
+CraftingBlueprints prevents this exploit by evaluating three bounds on every shift-click:
 
-$$\text{ActualCrafts} = \min\left( \text{MatrixCapacity}, \; \text{InventorySpaceCapacity}, \; \text{RemainingUses} \right)$$
+1. **Ingredient Bounds**: How many items the materials in the crafting matrix can produce.
+2. **Inventory Space Bounds**: How many items the player's inventory can receive without dropping items to the ground.
+3. **Blueprint Usage Bounds**: The exact number of craft uses remaining on the player's active blueprint.
 
-1. **Matrix Capacity**: Determines how many items the ingredients can produce.
-2. **Inventory Space Capacity**: Evaluates the player's open inventory slots and partial stacks to determine how many items can be received without dropping onto the ground.
-3. **Usage Capacity**: Evaluates the remaining uses on the player's active blueprint.
+The engine crafts only the amount allowed by the smallest of these three limits.
 
 ### Real-World Example:
 * A player with **2 remaining uses** on a Netherite Sword scroll places materials for 8 swords into the table and shift-clicks.
 * The engine crafts **exactly 2 swords**.
 * Exactly 2 uses are consumed, locking the blueprint.
-* The remaining materials for 6 swords remain completely safe in the crafting matrix. Zero over-crafting is permitted.
+* The remaining materials for 6 swords remain completely safe in the crafting matrix. Over-crafting is strictly prevented.
 
 ---
 

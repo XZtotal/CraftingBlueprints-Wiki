@@ -113,16 +113,15 @@ In cross-server networks, Minecraft map IDs frequently clash:
 * Map ID `104` on the Survival server might be a Diamond Sword blueprint.
 * Map ID `104` on the Lobby server might be the server spawn hub map.
 
-CraftingBlueprints solves this using **PDC Visual Key Virtualization**:
-* The physical map item stores the normalized `visual_key` in its PersistentDataContainer (`cb_map:single:diamond_sword:...`).
-* When a player switches from Survival to Lobby via Bungee/Velocity, the `MapRelinkListener` intercepts the item upon player join or inventory open.
-* It queries the local server's `BlueprintMapRegistry` and re-links the item's `MapView` to the local canonical Map ID in-place.
-* **Guaranteed Outcome**: The physical map always renders the correct blueprint graphic on the local server without ever overwriting or corrupting world maps on that server.
+CraftingBlueprints solves this using **Visual Key Re-Linking**:
+* The physical map item stores the visual identity of the blueprint in its persistent data.
+* When a player switches between servers via BungeeCord or Velocity, the plugin automatically re-links the item to the local server's canonical Map ID as soon as the player joins or opens their inventory.
+* **Guaranteed Outcome**: The physical map always renders the correct blueprint artwork on every server without corrupting local maps or world files.
 
 ---
 
-## 6. Player Lifecycle & Quick-Relog Protection
+## 6. Player Lifecycle & Quick-Switch Protection
 
-When players switch rapidly between servers (e.g. clicking a portal or executing `/server survival`):
-* `WaitingManager` and `cb_reservations` prevent race conditions where Server B attempts to load player data before Server A has finished flushing recent crafts to MySQL.
-* If a player rejoins within milliseconds, active memory state is preserved with atomic monitor locks, eliminating lost updates and rollback glitches.
+When players switch rapidly between servers (e.g. entering portals or typing `/server survival`):
+* The plugin uses an atomic handoff reservation system that prevents Server B from loading player data before Server A finishes saving recent crafts to MySQL.
+* If a player rejoins within milliseconds, their active craft counts and timers sync cleanly, eliminating data rollbacks, item duplication, and lost progress.
