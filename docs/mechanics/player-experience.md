@@ -8,7 +8,7 @@ This guide explores the complete in-game player journey: how players acquire blu
 
 Players encounter blueprints through multiple gameplay avenues:
 
-* **In-Game Economy Catalog**: Purchasing blueprints for server currency via `/cb item list` or `/cb buy`.
+* **Server Economy**: Purchasing blueprints for server currency via `/cb buy <blueprint_id>`.
 * **Dungeon & World Loot**: Discovered inside Bastion Remnants, End Cities, Nether Fortresses, and Ancient Cities.
 * **Crate & Quest Rewards**: Rewarded by quest plugins or loot crate keys.
 * **Direct Administrative Grants**: Granted by server operators or automated scripts via `/cb give <player> <id> [amount]`.

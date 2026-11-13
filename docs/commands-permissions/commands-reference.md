@@ -6,23 +6,56 @@ All CraftingBlueprints commands originate from the master `/cb` command (alias: 
 
 ## Master Command Reference Table
 
-| Command Syntax | Arguments & Parameters | Required Permission | Allowed Senders | Operational Description |
-| :--- | :--- | :--- | :--- | :--- |
-| `/cb menu` | None | `craftingblueprints.menu` | Players | Opens your personal blueprint progression dashboard. |
-| `/cb return` | None | `craftingblueprints.return` | Players | Re-opens the previous menu in the navigation history stack. |
-| `/cb item list` | None | `craftingblueprints.item.list` | Players | Opens the paginated server blueprint catalog and economy shop. |
-| `/cb item edit` | `<blueprint_id>` | `craftingblueprints.item.edit` | Operators | Opens the visual in-game GUI modifier for a blueprint. |
-| `/cb info` | `[blueprint_id]` | `craftingblueprints.info` | Players / Console | Opens the detailed 3x3 recipe inspector and durability stats. |
-| `/cb give` | `<player> <id> [amount]` | `craftingblueprints.give` | Operators / Console | Gives physical blueprint items to a player with overflow protection. |
-| `/cb reload` | `[all\|blueprints\|config\|lang]` | `craftingblueprints.reload` | Operators / Console | Hot-reloads configuration files, language strings, or YAML blueprints. |
-| `/cb validate` | None | `craftingblueprints.admin` | Operators / Console | Executes a dry-run linting pass over all blueprint files in `blueprints/`. |
-| `/cb status` | None | `craftingblueprints.status` | Operators / Console | Displays system diagnostics, database latency, and health metrics. |
-| `/cb preset` | `<list\|apply\|remove\|export\|download>` | `craftingblueprints.admin.preset`| Operators / Console | Manages pre-built modality packs in the `presets/` repository. |
-| `/cb generate` | `<source> [flags]` | `craftingblueprints.admin.generate`| Operators / Console | Scans Bukkit recipes or plugins and auto-scaffolds YAML blueprints. |
+| Command Syntax | Arguments & Parameters | Required Permission | Default | Allowed Senders | Operational Description |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| `/cb menu` | None | `craftingblueprints.menu` | `true` | Players | Opens your personal unlocked blueprints dashboard (`PlayerInfoMenu`). |
+| `/cb buy` | `<id> [--item]` | `craftingblueprints.buy` | `true` | Players | Purchases a blueprint using Vault economy (direct unlock or physical item). |
+| `/cb sell` | None | `craftingblueprints.sell` | `true` | Players | Sells the physical blueprint held in the main hand via Vault economy. |
+| `/cb cani` | `<item>` | `craftingblueprints.cani` | `true` | Players | Checks if you have the blueprint needed to craft an item. |
+| `/cb info` | `[blueprint_id]` | `craftingblueprints.info` | `true` | Players / Console | Opens technical blueprint details and durability inspector. |
+| `/cb owner` | None | `craftingblueprints.owner` | `true` | Players | Displays the player who unlocked or owns the held blueprint item. |
+| `/cb return` | None | `craftingblueprints.return` | `false` | Players | Re-opens the previous menu in the navigation history stack. |
+| `/cb item list` | None | `craftingblueprints.item.list` | `false` | Operators / Staff | Opens the paginated blueprint catalog and item management GUI. |
+| `/cb item edit` | `<blueprint_id>` | `craftingblueprints.item.edit` | `false` | Operators | Opens the visual in-game GUI modifier for a blueprint. |
+| `/cb give` | `<player> <id> [amount]` | `craftingblueprints.give` | `op` | Operators / Console | Gives physical blueprint items to a player with overflow protection. |
+| `/cb reload` | `[all\|blueprints\|config\|lang]` | `craftingblueprints.reload` | `false` | Operators / Console | Hot-reloads configuration files, language strings, or YAML blueprints. |
+| `/cb validate` | None | `craftingblueprints.admin` | `op` | Operators / Console | Executes a dry-run linting pass over all blueprint files in `blueprints/`. |
+| `/cb status` | None | `craftingblueprints.status` | `op` | Operators / Console | Displays system diagnostics, database latency, and health metrics. |
+| `/cb preset` | `<list\|apply\|remove\|export\|download>` | `craftingblueprints.admin.preset`| `op` | Operators / Console | Manages pre-built modality packs in the `presets/` repository. |
+| `/cb generate` | `<source> [flags]` | `craftingblueprints.admin.generate`| `op` | Operators / Console | Scans Bukkit recipes or plugins and auto-scaffolds YAML blueprints. |
 
 ---
 
 ## Detailed Command Explanations & Operational Safety
+
+### `/cb buy <blueprint_id> [--item]`
+Purchases a blueprint recipe using the server's Vault economy:
+
+* **Direct Profile Unlock (Default)**: Deducts the configured `price:` from the player's balance and unlocks the recipe directly in their profile. The player can immediately craft the recipe.
+* **Physical Item Delivery (`--item`)**: When the `--item` flag is specified, the player receives a physical blueprint item in their inventory. Leftover items drop safely at their feet if inventory space is full.
+
+```text
+# Unlock directly to player profile
+/cb buy ancient_netherite_axe
+
+# Purchase as a tradeable physical item
+/cb buy ancient_netherite_axe --item
+```
+
+---
+
+### `/cb sell`
+Sells the physical blueprint currently held in the player's main hand:
+
+* **Authenticity Check**: The plugin validates the item's internal persistent data container (PDC). Forged or non-blueprint items cannot be sold.
+* **Vault Deposit**: Deducts 1 item from the main hand and deposits the configured `sell_price` into the player's Vault account balance.
+
+```text
+# Sell held blueprint
+/cb sell
+```
+
+---
 
 ### `/cb give <player> <blueprint_id> [amount]`
 Grants physical blueprint items directly to a target player:

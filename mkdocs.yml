@@ -90,7 +90,7 @@ nav:
   - Tutorials & Cookbook:
       - Gating Netherite Gear (SMP): tutorials/tutorial-smp-netherite.md
       - Magic 3-Use Scrolls (RPG): tutorials/tutorial-rpg-scrolls.md
-      - Blueprint Economy Shop (Vault): tutorials/tutorial-vault-shop.md
+      - Blueprint Economy (Vault): tutorials/tutorial-vault-shop.md
       - Crates & Quest Rewards: tutorials/tutorial-crates-and-quests.md
   - FAQ & Support:
       - Frequently Asked Questions: faq/faq.md

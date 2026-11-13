@@ -71,7 +71,7 @@ packages:
 ```
 
 ### In-Game Player Experience:
-1. **Granting or Buying**: Distributed via `/cb give <player> netherite_vanguard_pack 1` or purchased in `/cb item list`.
+1. **Granting or Buying**: Distributed via `/cb give <player> netherite_vanguard_pack 1` or purchased via `/cb buy netherite_vanguard_pack --item`.
 2. **Unlocking**: The player holds the book and **Right-Clicks**.
 3. **Instant Set Access**: All 4 pieces (Helmet, Chestplate, Leggings, Boots) unlock simultaneously with a single fanfare sound.
 

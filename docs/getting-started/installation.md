@@ -88,7 +88,7 @@ This diagnostic report provides immediate insight into your deployment:
 
 While CraftingBlueprints works completely standalone with vanilla Minecraft economies, it integrates seamlessly with industry-standard server plugins:
 
-* **[Vault](https://www.spigotmc.org/resources/vault.34315/)** + Economy Provider (EssentialsX, Economy): Enables buying and selling blueprints directly through the `/cb item list` catalog GUI.
+* **[Vault](https://www.spigotmc.org/resources/vault.34315/)** + Economy Provider (EssentialsX, Economy): Enables buying and selling blueprints using server currency via `/cb buy` and `/cb sell`.
 * **[LuckPerms](https://luckperms.net/)**: The recommended permissions plugin for managing player progression tiers and recipe groups (`craftingblueprints.group.<id>`). See our [LuckPerms Guide](../commands-permissions/luckperms-guide.md).
 * **[PlaceholderAPI](https://www.spigotmc.org/resources/placeholderapi.6245/)**: Allows surfacing remaining blueprint uses, active unlock counts, and expiration timers in scoreboards, tablists, and chat formats.
 * **Custom Item Plugins**: Full support for custom weapons, tools, and armor from [ItemsAdder](../blueprints/custom-items.md), [Oraxen](../blueprints/custom-items.md), [Nexo](../blueprints/custom-items.md), [MMOItems](../blueprints/custom-items.md), [EcoItems](../blueprints/custom-items.md), and [MythicMobs](../blueprints/custom-items.md).

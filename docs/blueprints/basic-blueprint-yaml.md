@@ -39,8 +39,8 @@ singles:
     uses: 10              # Maximum craft count before the blueprint expires. 0 = unlimited
 
     # 4. Vault Economy Integration
-    price: 15000.0        # Purchase price in catalog (/cb item list) and /cb buy
-    sell_price: 3750.0    # Refund value when selling back to the catalog
+    price: 15000.0        # Purchase price via /cb buy <blueprint_id>
+    sell_price: 3750.0    # Refund value when selling held blueprint via /cb sell
 
     # 5. In-Game Physical Item Representation
     item:
@@ -91,8 +91,8 @@ singles:
 | `permanent` | Boolean | No | `true` | If `true`, the blueprint remains unlocked indefinitely. |
 | `time` | Integer / String | No | `0` | Expiration countdown. Accepts raw seconds (`86400`) or human durations (`45s`, `30m`, `12h`, `7d`). `0` = no time expiration. |
 | `uses` | Integer | No | `0` | Maximum craft count allowed before the blueprint expires. `0` = unlimited crafts. |
-| `price` | Double | No | `0.0` | Vault purchase price when bought from `/cb item list` catalog. |
-| `sell_price` | Double | No | `0.0` | Vault currency refunded when selling back via the catalog. |
+| `price` | Double | No | `0.0` | Vault purchase price when bought via `/cb buy <blueprint_id>`. |
+| `sell_price` | Double | No | `0.0` | Vault currency refunded when selling held blueprint via `/cb sell`. |
 | `templates` / `template` | List / String | No | `[]` | List of reusable template mixin IDs inherited by this blueprint. |
 | `item.material` | String | No | `FILLED_MAP` | Bukkit Material used when giving the physical blueprint item to a player. |
 | `item.custom_model_data` | Integer | No | `0` | CustomModelData integer tag for resource pack model overrides. |

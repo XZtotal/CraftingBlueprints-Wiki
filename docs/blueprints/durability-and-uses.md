@@ -216,14 +216,13 @@ CraftingBlueprints eliminates this exploit via an atomic calculation on every sh
 Players and administrators have multiple tools to monitor active blueprints:
 
 ### Personal Menu (`/cb menu`)
-Running `/cb menu` displays a live dashboard showing all active recipes, remaining craft counts, and live countdown timers (e.g. `Expires in 3d 14h`).
+Running `/cb menu` displays a live dashboard of recipes unlocked by the player, showing remaining craft counts and live countdown timers (e.g. `Expires in 3d 14h`).
 
-### Server Catalog (`/cb item list`)
-Hovering over any blueprint in the catalog displays its live status badge:
+### Blueprint Inspection (`/cb info <blueprint_id>`)
+Running `/cb info <id>` opens an inspection card displaying the recipe's durability mode, allowed crafts, expiration duration, and item details.
 
-* :white_check_mark: **Unlocked**: Permanent access.
-* :hourglass: **Active**: Finite crafts or time remaining (e.g. `3/5 uses`).
-* :lock: **Locked**: Blueprint has not been memorized.
+### Catalog Management (`/cb item list`)
+Staff members with `craftingblueprints.item.list` can right-click any blueprint in the catalog to open its technical status preview (`SingleInfoMenu`), displaying permanence (Emerald/Redstone block), uses (Anvil), and remaining time (Clock).
 
 ### PlaceholderAPI Integration
 Use these placeholders in scoreboards, tablists, or custom menus:
