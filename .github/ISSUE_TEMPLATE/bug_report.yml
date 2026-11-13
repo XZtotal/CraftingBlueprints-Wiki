@@ -1,0 +1,68 @@
+name: "🐛 Bug Report"
+description: "Report a bug or unexpected behavior in CraftingBlueprints."
+title: "[Bug]: "
+labels: ["bug", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for reporting an issue! Please check existing issues before submitting to avoid duplicates.
+  - type: input
+    id: server_version
+    attributes:
+      label: "Minecraft & Server Version"
+      description: "What server software and exact version are you running? (e.g., Paper 1.20.4 build 498, Purpur 1.21.1)."
+      placeholder: "e.g., Paper 1.20.4-R0.1-SNAPSHOT"
+    validations:
+      required: true
+  - type: input
+    id: plugin_version
+    attributes:
+      label: "CraftingBlueprints Version"
+      description: "Exact plugin version (run `/cb status` or `/version CraftingBlueprints`)."
+      placeholder: "e.g., 2.0.0"
+    validations:
+      required: true
+  - type: dropdown
+    id: storage_type
+    attributes:
+      label: "Database Storage Engine"
+      description: "Which storage engine is configured in your config.yml?"
+      options:
+        - "SQLite (Default)"
+        - "MySQL / MariaDB"
+    validations:
+      required: true
+  - type: textarea
+    id: bug_description
+    attributes:
+      label: "Bug Description"
+      description: "A clear and concise description of what the bug is."
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction_steps
+    attributes:
+      label: "Steps to Reproduce"
+      description: "Step-by-step instructions to reproduce the problem."
+      placeholder: |
+        1. Create blueprint 'custom_sword'
+        2. Give blueprint to player using `/cb give ...`
+        3. Attempt to craft in crafting table...
+    validations:
+      required: true
+  - type: textarea
+    id: console_logs
+    attributes:
+      label: "Console Logs / Stacktrace"
+      description: "Paste relevant error logs from your server console, or provide a paste link (mclo.gs, hastebin)."
+      render: shell
+  - type: checkboxes
+    id: validation_checks
+    attributes:
+      label: "Checklist"
+      options:
+        - label: "I have verified this issue occurs on the latest version of CraftingBlueprints."
+          required: true
+        - label: "I ran `/cb validate` and ensured my blueprint YAML files are error-free."
+          required: false

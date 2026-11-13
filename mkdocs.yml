@@ -1,0 +1,71 @@
+site_name: CraftingBlueprints Wiki
+site_description: "Official Documentation, Configuration Guides, and Administration Manual for CraftingBlueprints."
+site_author: "XZtotal"
+site_url: "https://xztotal.github.io/CraftingBlueprints-Wiki/"
+repo_url: "https://github.com/XZtotal/CraftingBlueprints-Wiki"
+repo_name: "XZtotal/CraftingBlueprints-Wiki"
+
+theme:
+  name: material
+  language: en
+  palette:
+    # Light mode
+    - scheme: default
+      primary: indigo
+      accent: cyan
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    # Dark mode
+    - scheme: slate
+      primary: indigo
+      accent: cyan
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - navigation.instant
+    - navigation.tracking
+    - navigation.tabs
+    - navigation.sections
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+    - content.tabs.link
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.snippets
+  - tables
+  - attr_list
+  - md_in_html
+  - def_list
+
+nav:
+  - Home: index.md
+  - Getting Started:
+      - Installation & Requirements: getting-started/installation.md
+      - Quickstart Guide: getting-started/quickstart.md
+  - Blueprints & Creation:
+      - Blueprint YAML Schema: blueprints/configuration.md
+      - Templates & Inheritance: blueprints/templates.md
+      - Map Rendering & Aesthetics: blueprints/visuals.md
+  - Features & Configuration:
+      - Commands & Permissions: features/commands-permissions.md
+      - Whitelist & Recipe Restrictions: features/whitelist-mode.md
+      - Crafter Auto-Crafting (1.21): features/crafter.md
+      - Storage & Multi-Server Sync: features/storage.md
+  - Developer API:
+      - Integration & Events: developer/api.md
+  - FAQ & Support:
+      - Troubleshooting: faq/troubleshooting.md

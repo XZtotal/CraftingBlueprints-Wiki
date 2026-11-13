@@ -1,0 +1,28 @@
+name: "💡 Feature Request"
+description: "Suggest a new feature, improvement, or mechanic for CraftingBlueprints."
+title: "[Feature]: "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        We appreciate feedback and ideas from the community! Describe your suggestion in detail below.
+  - type: textarea
+    id: problem_statement
+    attributes:
+      label: "Is your feature request related to a problem?"
+      description: "A clear description of what the current problem or limitation is (e.g., 'I want to restrict blueprints by player level...')."
+    validations:
+      required: true
+  - type: textarea
+    id: proposed_solution
+    attributes:
+      label: "Proposed Solution & Behavior"
+      description: "Describe how you envision the feature working, including possible commands, YAML configuration, or player interactions."
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives_considered
+    attributes:
+      label: "Alternatives Considered"
+      description: "Any alternative solutions or workarounds you have considered."
