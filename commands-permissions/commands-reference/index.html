@@ -1209,6 +1209,28 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#cb-buy-blueprint_id-item" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        /cb buy &lt;blueprint_id&gt; [--item]
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cb-sell" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        /cb sell
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#cb-give-player-blueprint_id-amount" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1659,7 +1681,7 @@
   <span class="md-ellipsis">
     
   
-    Blueprint Economy Shop (Vault)
+    Blueprint Economy (Vault)
   
 
     
@@ -1903,6 +1925,28 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#cb-buy-blueprint_id-item" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        /cb buy &lt;blueprint_id&gt; [--item]
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cb-sell" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        /cb sell
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#cb-give-player-blueprint_id-amount" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1981,6 +2025,7 @@
 <th style="text-align: left;">Command Syntax</th>
 <th style="text-align: left;">Arguments &amp; Parameters</th>
 <th style="text-align: left;">Required Permission</th>
+<th style="text-align: left;">Default</th>
 <th style="text-align: left;">Allowed Senders</th>
 <th style="text-align: left;">Operational Description</th>
 </tr>
@@ -1990,13 +2035,55 @@
 <td style="text-align: left;"><code>/cb menu</code></td>
 <td style="text-align: left;">None</td>
 <td style="text-align: left;"><code>craftingblueprints.menu</code></td>
+<td style="text-align: left;"><code>true</code></td>
 <td style="text-align: left;">Players</td>
-<td style="text-align: left;">Opens your personal blueprint progression dashboard.</td>
+<td style="text-align: left;">Opens your personal unlocked blueprints dashboard (<code>PlayerInfoMenu</code>).</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>/cb buy</code></td>
+<td style="text-align: left;"><code>&lt;id&gt; [--item]</code></td>
+<td style="text-align: left;"><code>craftingblueprints.buy</code></td>
+<td style="text-align: left;"><code>true</code></td>
+<td style="text-align: left;">Players</td>
+<td style="text-align: left;">Purchases a blueprint using Vault economy (direct unlock or physical item).</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>/cb sell</code></td>
+<td style="text-align: left;">None</td>
+<td style="text-align: left;"><code>craftingblueprints.sell</code></td>
+<td style="text-align: left;"><code>true</code></td>
+<td style="text-align: left;">Players</td>
+<td style="text-align: left;">Sells the physical blueprint held in the main hand via Vault economy.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>/cb cani</code></td>
+<td style="text-align: left;"><code>&lt;item&gt;</code></td>
+<td style="text-align: left;"><code>craftingblueprints.cani</code></td>
+<td style="text-align: left;"><code>true</code></td>
+<td style="text-align: left;">Players</td>
+<td style="text-align: left;">Checks if you have the blueprint needed to craft an item.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>/cb info</code></td>
+<td style="text-align: left;"><code>[blueprint_id]</code></td>
+<td style="text-align: left;"><code>craftingblueprints.info</code></td>
+<td style="text-align: left;"><code>true</code></td>
+<td style="text-align: left;">Players / Console</td>
+<td style="text-align: left;">Opens technical blueprint details and durability inspector.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>/cb owner</code></td>
+<td style="text-align: left;">None</td>
+<td style="text-align: left;"><code>craftingblueprints.owner</code></td>
+<td style="text-align: left;"><code>true</code></td>
+<td style="text-align: left;">Players</td>
+<td style="text-align: left;">Displays the player who unlocked or owns the held blueprint item.</td>
 </tr>
 <tr>
 <td style="text-align: left;"><code>/cb return</code></td>
 <td style="text-align: left;">None</td>
 <td style="text-align: left;"><code>craftingblueprints.return</code></td>
+<td style="text-align: left;"><code>false</code></td>
 <td style="text-align: left;">Players</td>
 <td style="text-align: left;">Re-opens the previous menu in the navigation history stack.</td>
 </tr>
@@ -2004,27 +2091,23 @@
 <td style="text-align: left;"><code>/cb item list</code></td>
 <td style="text-align: left;">None</td>
 <td style="text-align: left;"><code>craftingblueprints.item.list</code></td>
-<td style="text-align: left;">Players</td>
-<td style="text-align: left;">Opens the paginated server blueprint catalog and economy shop.</td>
+<td style="text-align: left;"><code>false</code></td>
+<td style="text-align: left;">Operators / Staff</td>
+<td style="text-align: left;">Opens the paginated blueprint catalog and item management GUI.</td>
 </tr>
 <tr>
 <td style="text-align: left;"><code>/cb item edit</code></td>
 <td style="text-align: left;"><code>&lt;blueprint_id&gt;</code></td>
 <td style="text-align: left;"><code>craftingblueprints.item.edit</code></td>
+<td style="text-align: left;"><code>false</code></td>
 <td style="text-align: left;">Operators</td>
 <td style="text-align: left;">Opens the visual in-game GUI modifier for a blueprint.</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>/cb info</code></td>
-<td style="text-align: left;"><code>[blueprint_id]</code></td>
-<td style="text-align: left;"><code>craftingblueprints.info</code></td>
-<td style="text-align: left;">Players / Console</td>
-<td style="text-align: left;">Opens the detailed 3x3 recipe inspector and durability stats.</td>
 </tr>
 <tr>
 <td style="text-align: left;"><code>/cb give</code></td>
 <td style="text-align: left;"><code>&lt;player&gt; &lt;id&gt; [amount]</code></td>
 <td style="text-align: left;"><code>craftingblueprints.give</code></td>
+<td style="text-align: left;"><code>op</code></td>
 <td style="text-align: left;">Operators / Console</td>
 <td style="text-align: left;">Gives physical blueprint items to a player with overflow protection.</td>
 </tr>
@@ -2032,6 +2115,7 @@
 <td style="text-align: left;"><code>/cb reload</code></td>
 <td style="text-align: left;"><code>[all\|blueprints\|config\|lang]</code></td>
 <td style="text-align: left;"><code>craftingblueprints.reload</code></td>
+<td style="text-align: left;"><code>false</code></td>
 <td style="text-align: left;">Operators / Console</td>
 <td style="text-align: left;">Hot-reloads configuration files, language strings, or YAML blueprints.</td>
 </tr>
@@ -2039,6 +2123,7 @@
 <td style="text-align: left;"><code>/cb validate</code></td>
 <td style="text-align: left;">None</td>
 <td style="text-align: left;"><code>craftingblueprints.admin</code></td>
+<td style="text-align: left;"><code>op</code></td>
 <td style="text-align: left;">Operators / Console</td>
 <td style="text-align: left;">Executes a dry-run linting pass over all blueprint files in <code>blueprints/</code>.</td>
 </tr>
@@ -2046,6 +2131,7 @@
 <td style="text-align: left;"><code>/cb status</code></td>
 <td style="text-align: left;">None</td>
 <td style="text-align: left;"><code>craftingblueprints.status</code></td>
+<td style="text-align: left;"><code>op</code></td>
 <td style="text-align: left;">Operators / Console</td>
 <td style="text-align: left;">Displays system diagnostics, database latency, and health metrics.</td>
 </tr>
@@ -2053,6 +2139,7 @@
 <td style="text-align: left;"><code>/cb preset</code></td>
 <td style="text-align: left;"><code>&lt;list\|apply\|remove\|export\|download&gt;</code></td>
 <td style="text-align: left;"><code>craftingblueprints.admin.preset</code></td>
+<td style="text-align: left;"><code>op</code></td>
 <td style="text-align: left;">Operators / Console</td>
 <td style="text-align: left;">Manages pre-built modality packs in the <code>presets/</code> repository.</td>
 </tr>
@@ -2060,6 +2147,7 @@
 <td style="text-align: left;"><code>/cb generate</code></td>
 <td style="text-align: left;"><code>&lt;source&gt; [flags]</code></td>
 <td style="text-align: left;"><code>craftingblueprints.admin.generate</code></td>
+<td style="text-align: left;"><code>op</code></td>
 <td style="text-align: left;">Operators / Console</td>
 <td style="text-align: left;">Scans Bukkit recipes or plugins and auto-scaffolds YAML blueprints.</td>
 </tr>
@@ -2067,17 +2155,40 @@
 </table>
 <hr />
 <h2 id="detailed-command-explanations-operational-safety">Detailed Command Explanations &amp; Operational Safety</h2>
+<h3 id="cb-buy-blueprint_id-item"><code>/cb buy &lt;blueprint_id&gt; [--item]</code></h3>
+<p>Purchases a blueprint recipe using the server's Vault economy:</p>
+<ul>
+<li><strong>Direct Profile Unlock (Default)</strong>: Deducts the configured <code>price:</code> from the player's balance and unlocks the recipe directly in their profile. The player can immediately craft the recipe.</li>
+<li><strong>Physical Item Delivery (<code>--item</code>)</strong>: When the <code>--item</code> flag is specified, the player receives a physical blueprint item in their inventory. Leftover items drop safely at their feet if inventory space is full.</li>
+</ul>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a># Unlock directly to player profile
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>/cb buy ancient_netherite_axe
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a># Purchase as a tradeable physical item
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>/cb buy ancient_netherite_axe --item
+</span></code></pre></div>
+<hr />
+<h3 id="cb-sell"><code>/cb sell</code></h3>
+<p>Sells the physical blueprint currently held in the player's main hand:</p>
+<ul>
+<li><strong>Authenticity Check</strong>: The plugin validates the item's internal persistent data container (PDC). Forged or non-blueprint items cannot be sold.</li>
+<li><strong>Vault Deposit</strong>: Deducts 1 item from the main hand and deposits the configured <code>sell_price</code> into the player's Vault account balance.</li>
+</ul>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a># Sell held blueprint
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>/cb sell
+</span></code></pre></div>
+<hr />
 <h3 id="cb-give-player-blueprint_id-amount"><code>/cb give &lt;player&gt; &lt;blueprint_id&gt; [amount]</code></h3>
 <p>Grants physical blueprint items directly to a target player:</p>
 <ul>
 <li><strong>Quantity Bounds</strong>: The <code>amount</code> parameter strictly requires a positive integer between <code>1</code> and <code>2304</code> (the maximum physical capacity of a player inventory: 36 slots x 64 items). Negative numbers, <code>0</code>, non-numeric strings, or exorbitant numbers are rejected immediately with localized error feedback.</li>
 <li><strong>Physical Overflow Safety</strong>: When giving items to a player whose inventory is full, CraftingBlueprints uses an atomic safe-drop protocol. Instead of dropping items into the void or deleting them, leftover items are dropped safely into the world directly at the player's location (<code>world.dropItem(...)</code>).</li>
 </ul>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a># Give Steve 1 Ancient Netherite Battleaxe blueprint
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>/cb give Steve ancient_netherite_axe 1
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a># Give Alex 5 3-use magic scrolls via console
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>/cb give Alex astral_blade_scroll 5
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a># Give Steve 1 Ancient Netherite Battleaxe blueprint
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>/cb give Steve ancient_netherite_axe 1
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a># Give Alex 5 3-use magic scrolls via console
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>/cb give Alex astral_blade_scroll 5
 </span></code></pre></div>
 <hr />
 <h3 id="cb-reload-allblueprintsconfiglang"><code>/cb reload [all|blueprints|config|lang]</code></h3>
@@ -2101,16 +2212,16 @@
 <hr />
 <h3 id="cb-status"><code>/cb status</code></h3>
 <p>Displays comprehensive system diagnostics:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>[CraftingBlueprints] ========== System Status ==========
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>[CraftingBlueprints] Version: 4.1.0 | Engine: Paper 1.20.4
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>[CraftingBlueprints] Active Adapter: Adapter_v1_20_R3 (VAL Native)
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>[CraftingBlueprints] Storage Backend: MySQL (HikariCP Active)
-</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>[CraftingBlueprints] Database Latency: 1.42 ms | Pool: 10 total (8 idle, 2 active)
-</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>[CraftingBlueprints] Blueprints Registered: 42 (36 singles, 4 packages, 2 mysteries)
-</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>[CraftingBlueprints] Node Role: Primary Master Node (sync-from-files: true)
-</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>[CraftingBlueprints] Active Profiles: 14 loaded
-</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>[CraftingBlueprints] Cached Maps: 42 renders cached
-</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>[CraftingBlueprints] ======================================
+<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>[CraftingBlueprints] ========== System Status ==========
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>[CraftingBlueprints] Version: 4.1.0 | Engine: Paper 1.20.4
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>[CraftingBlueprints] Active Adapter: Adapter_v1_20_R3 (VAL Native)
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>[CraftingBlueprints] Storage Backend: MySQL (HikariCP Active)
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>[CraftingBlueprints] Database Latency: 1.42 ms | Pool: 10 total (8 idle, 2 active)
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>[CraftingBlueprints] Blueprints Registered: 42 (36 singles, 4 packages, 2 mysteries)
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>[CraftingBlueprints] Node Role: Primary Master Node (sync-from-files: true)
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>[CraftingBlueprints] Active Profiles: 14 loaded
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>[CraftingBlueprints] Cached Maps: 42 renders cached
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>[CraftingBlueprints] ======================================
 </span></code></pre></div>
 
 

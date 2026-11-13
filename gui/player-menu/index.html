@@ -80,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#player-progression-dashboard-cb-menu" class="md-skip">
+        <a href="#player-unlocked-blueprints-menu-cb-menu" class="md-skip">
           Skip to content
         </a>
       
@@ -1052,22 +1052,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#interface-layout-key-components" class="md-nav__link">
+  <a href="#interface-layout-navigation" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Interface Layout &amp; Key Components
+        Interface Layout &amp; Navigation
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Interface Layout &amp; Key Components">
+    <nav class="md-nav" aria-label="Interface Layout &amp; Navigation">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#1-player-profile-head" class="md-nav__link">
+  <a href="#1-control-bar-top-row" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Player Profile Head
+        1. Control Bar (Top Row)
       
     </span>
   </a>
@@ -1075,32 +1075,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#2-active-expirations-timer-monitoring" class="md-nav__link">
+  <a href="#2-unlocked-recipes-grid-slots-9-53" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Active Expirations &amp; Timer Monitoring
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3-one-click-catalog-shortcut" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3. One-Click Catalog Shortcut
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#4-navigation-stack-return-button-cb-return" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4. Navigation Stack &amp; Return Button (/cb return)
+        2. Unlocked Recipes Grid (Slots 9 – 53)
       
     </span>
   </a>
@@ -1670,7 +1648,7 @@
   <span class="md-ellipsis">
     
   
-    Blueprint Economy Shop (Vault)
+    Blueprint Economy (Vault)
   
 
     
@@ -1902,22 +1880,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#interface-layout-key-components" class="md-nav__link">
+  <a href="#interface-layout-navigation" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Interface Layout &amp; Key Components
+        Interface Layout &amp; Navigation
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Interface Layout &amp; Key Components">
+    <nav class="md-nav" aria-label="Interface Layout &amp; Navigation">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#1-player-profile-head" class="md-nav__link">
+  <a href="#1-control-bar-top-row" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Player Profile Head
+        1. Control Bar (Top Row)
       
     </span>
   </a>
@@ -1925,32 +1903,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#2-active-expirations-timer-monitoring" class="md-nav__link">
+  <a href="#2-unlocked-recipes-grid-slots-9-53" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Active Expirations &amp; Timer Monitoring
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3-one-click-catalog-shortcut" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3. One-Click Catalog Shortcut
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#4-navigation-stack-return-button-cb-return" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4. Navigation Stack &amp; Return Button (/cb return)
+        2. Unlocked Recipes Grid (Slots 9 – 53)
       
     </span>
   </a>
@@ -1993,57 +1949,56 @@
   
 
 
-<h1 id="player-progression-dashboard-cb-menu">Player Progression Dashboard (/cb menu)</h1>
-<p>The personal player progression dashboard (<code>/cb menu</code>) provides players with an interactive graphical interface to track their unlocked blueprints, monitor active countdown timers, check remaining craft uses, and navigate the server's crafting encyclopedia.</p>
+<h1 id="player-unlocked-blueprints-menu-cb-menu">Player Unlocked Blueprints Menu (/cb menu)</h1>
+<p>The personal player menu (<code>/cb menu</code>) provides players with an interactive graphical interface to view all crafting, enchantment, and potion blueprints they have unlocked on the server.</p>
 <hr />
 <h2 id="opening-the-menu">Opening the Menu</h2>
-<p>Any player with the <code>craftingblueprints.menu</code> permission (granted by default to all players) can open their dashboard at any time:</p>
+<p>Any player with the <code>craftingblueprints.menu</code> permission (granted by default to all players) can open their unlocked blueprints list at any time:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>/cb menu
 </span></code></pre></div>
-<hr />
-<h2 id="interface-layout-key-components">Interface Layout &amp; Key Components</h2>
-<p>The player menu features an intuitive layout designed with custom Kyori Adventure component titles:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>┌─────────────────────────────────────────────────────────────┐
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>│                   [CraftingBlueprints]                      │
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>├─────────────────────────────────────────────────────────────┤
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>│  [Player Head]      [Active Timers]     [Expiring Uses]     │
-</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>│   Progression        3 Licensings        2 Limited Crafts   │
-</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>│                                                             │
-</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>│                                                             │
-</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>│  [Catalog Button]                      [Close / Return]     │
-</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>│   Browse All (/cb item list)            Back to Previous    │
-</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>└─────────────────────────────────────────────────────────────┘
+<p>Staff and administrators can inspect another player's unlocked blueprints by specifying their username (requires <code>craftingblueprints.menu.others</code>):</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>/cb menu &lt;player_name&gt;
 </span></code></pre></div>
-<h3 id="1-player-profile-head">1. Player Profile Head</h3>
+<hr />
+<h2 id="interface-layout-navigation">Interface Layout &amp; Navigation</h2>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>┌─────────────────────────────────────────────────────────────┐
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>│              Unlocked Blueprints (Page 1 / 2)               │
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>├─────────────────────────────────────────────────────────────┤
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>│  [Close]  [ ]  [◄ Prev]  [ ]  [ ]  [ ]  [Next ►]  [ ] [Filter]│
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>├─────────────────────────────────────────────────────────────┤
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>│  [Sword]   [Pickaxe]   [Armor]    [Potion]   [Enchant] ...  │
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>│  Unlocked  Unlocked    Unlocked   3/5 Uses   24h Left       │
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>│                                                             │
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>│                                                             │
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>└─────────────────────────────────────────────────────────────┘
+</span></code></pre></div>
+<h3 id="1-control-bar-top-row">1. Control Bar (Top Row)</h3>
 <ul>
-<li><strong>Display Name</strong>: The player's custom textured skin skull.</li>
-<li><strong>Progression Lore</strong>:<ul>
-<li>Total blueprints unlocked on this server.</li>
-<li>Server completion percentage (e.g. <code>14 / 42 Blueprints Unlocked (33.3%)</code>).</li>
-<li>Lifetime crafts completed using blueprints.</li>
+<li><strong>Slot 0: Close / Back (<code>Barrier</code>)</strong>: Closes the interface, or returns to the previous menu in the navigation stack if opened from another menu (<code>/cb return</code>).</li>
+<li><strong>Slot 2: Previous Page (<code>Arrow</code>)</strong>: Navigates to the preceding page of unlocked recipes.</li>
+<li><strong>Slot 6: Next Page (<code>Arrow</code>)</strong>: Advances to the subsequent page of unlocked recipes.</li>
+<li><strong>Slot 8: Sorter &amp; Filter (<code>Hopper</code>)</strong>: Cycles between 3 display sort orders:<ul>
+<li><strong>By Category &amp; Type</strong>: Groups recipes logically by item family and crafting station.</li>
+<li><strong>Alphabetical (A -&gt; Z)</strong>: Orders blueprints alphabetically by display name.</li>
+<li><strong>Alphabetical (Z -&gt; A)</strong>: Orders blueprints in reverse alphabetical order.</li>
 </ul>
 </li>
 </ul>
-<h3 id="2-active-expirations-timer-monitoring">2. Active Expirations &amp; Timer Monitoring</h3>
+<h3 id="2-unlocked-recipes-grid-slots-9-53">2. Unlocked Recipes Grid (Slots 9 – 53)</h3>
+<p>The lower 5 rows provide 45 slots per page displaying all recipes the player has unlocked:</p>
 <ul>
-<li>Displays all blueprints that have active temporal countdowns (e.g., 24-hour licenses, weekly guild permits).</li>
-<li>Shows exact real-time remaining duration (e.g. <code>Expires in: 3d 14h 22m</code>).</li>
-<li>Displays blueprints with finite craft counters (e.g. <code>Remaining Forges: 2 / 5 crafts</code>).</li>
+<li><strong>Crafting Recipes</strong>: Unlocked crafting table and furnace items.</li>
+<li><strong>Smithing Upgrades</strong>: Unlocked Netherite and equipment modifications.</li>
+<li><strong>Alchemy &amp; Potions</strong>: Unlocked brewing stand formulas.</li>
+<li><strong>Enchantments</strong>: Unlocked enchanting table upgrades.</li>
 </ul>
-<h3 id="3-one-click-catalog-shortcut">3. One-Click Catalog Shortcut</h3>
-<ul>
-<li>Clicking the centered book icon jumps directly to the server's public blueprint catalog (<code>/cb item list</code>), allowing players to browse locked schematics or purchase missing recipes.</li>
-</ul>
-<h3 id="4-navigation-stack-return-button-cb-return">4. Navigation Stack &amp; Return Button (<code>/cb return</code>)</h3>
-<ul>
-<li>If opened from another interface, clicking the return button smoothly re-opens the parent menu without losing context or page position.</li>
-</ul>
+<p>Each displayed icon presents the recipe's active durability parameters, showing remaining craft counts (for finite blueprints) or real-time expiration countdowns (for timed licenses).</p>
 <hr />
 <h2 id="anti-steal-item-protection-inventory-security">Anti-Steal Item Protection &amp; Inventory Security</h2>
 <p>All menus in CraftingBlueprints are protected by built-in inventory security features:</p>
 <ul>
 <li><strong>Slot Locking</strong>: Non-input menu slots are locked. Shift-clicking, dragging, hotkey number swapping, and dropping items out of the interface are intercepted and cancelled immediately.</li>
-<li><strong>Persistent Tagging</strong>: All visual icons placed inside menus carry an internal security tag.</li>
+<li><strong>Persistent Tagging</strong>: All visual icons placed inside menus carry an internal security tag (<code>MENU_TYPE</code>).</li>
 <li><strong>Automatic Purge</strong>: If a player attempts to use client-side glitches, disconnect macros, or inventory desync to pull items out of a menu, the plugin instantly deletes the item the moment it enters their cursor, hotbar, or inventory.</li>
 <li><strong>Economy Protection</strong>: Menu display items and decorative buttons can never leak into survival gameplay or player inventories.</li>
 </ul>

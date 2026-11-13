@@ -1681,7 +1681,7 @@
   <span class="md-ellipsis">
     
   
-    Blueprint Economy Shop (Vault)
+    Blueprint Economy (Vault)
   
 
     
@@ -2044,8 +2044,8 @@
 </span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="w">    </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10</span><span class="w">              </span><span class="c1"># Maximum craft count before the blueprint expires. 0 = unlimited</span>
 </span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>
 </span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="w">    </span><span class="c1"># 4. Vault Economy Integration</span>
-</span><span id="__span-1-19"><a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a><span class="w">    </span><span class="nt">price</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">15000.0</span><span class="w">        </span><span class="c1"># Purchase price in catalog (/cb item list) and /cb buy</span>
-</span><span id="__span-1-20"><a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a><span class="w">    </span><span class="nt">sell_price</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3750.0</span><span class="w">    </span><span class="c1"># Refund value when selling back to the catalog</span>
+</span><span id="__span-1-19"><a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a><span class="w">    </span><span class="nt">price</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">15000.0</span><span class="w">        </span><span class="c1"># Purchase price via /cb buy &lt;blueprint_id&gt;</span>
+</span><span id="__span-1-20"><a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a><span class="w">    </span><span class="nt">sell_price</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3750.0</span><span class="w">    </span><span class="c1"># Refund value when selling held blueprint via /cb sell</span>
 </span><span id="__span-1-21"><a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a>
 </span><span id="__span-1-22"><a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a><span class="w">    </span><span class="c1"># 5. In-Game Physical Item Representation</span>
 </span><span id="__span-1-23"><a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a><span class="w">    </span><span class="nt">item</span><span class="p">:</span>
@@ -2137,14 +2137,14 @@
 <td style="text-align: left;">Double</td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;"><code>0.0</code></td>
-<td style="text-align: left;">Vault purchase price when bought from <code>/cb item list</code> catalog.</td>
+<td style="text-align: left;">Vault purchase price when bought via <code>/cb buy &lt;blueprint_id&gt;</code>.</td>
 </tr>
 <tr>
 <td style="text-align: left;"><code>sell_price</code></td>
 <td style="text-align: left;">Double</td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;"><code>0.0</code></td>
-<td style="text-align: left;">Vault currency refunded when selling back via the catalog.</td>
+<td style="text-align: left;">Vault currency refunded when selling held blueprint via <code>/cb sell</code>.</td>
 </tr>
 <tr>
 <td style="text-align: left;"><code>templates</code> / <code>template</code></td>
