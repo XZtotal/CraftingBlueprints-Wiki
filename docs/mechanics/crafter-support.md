@@ -35,5 +35,5 @@ crafter:
   policy: "block"
 ```
 
-> [!NOTE]
-> On servers running Minecraft 1.18.2 or 1.20.4, this module automatically loads in a dormant state with zero performance overhead and no compatibility errors.
+!!! note
+    On servers running Minecraft 1.18.2 or 1.20.4, this module automatically loads in a dormant state with zero performance overhead and no compatibility errors.

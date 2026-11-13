@@ -12,8 +12,8 @@ Whenever a third-party plugin executes a console command to reward a player, use
 cb give %player% <blueprint_id> [amount]
 ```
 
-> [!NOTE]
-> `/cb give` features **Physical Preservation**. If the player's inventory is full when opening a crate or completing a quest, remaining blueprint maps will safely drop to their feet on the ground rather than vanishing into thin air.
+!!! note
+    `/cb give` features **Physical Preservation**. If the player's inventory is full when opening a crate or completing a quest, remaining blueprint maps will safely drop to their feet on the ground rather than vanishing into thin air.
 
 ---
 

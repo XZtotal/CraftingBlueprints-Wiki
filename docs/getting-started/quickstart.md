@@ -57,8 +57,8 @@ Back in your server console or in-game as an operator, execute:
 
 You will see confirmation that `test_sword.yml` was parsed and registered without needing a server restart.
 
-> [!TIP]
-> Before deploying complex YAML files on a live server, run `/cb validate` to check for typos or invalid material names.
+!!! tip
+    Before deploying complex YAML files on a live server, run `/cb validate` to check for typos or invalid material names.
 
 ---
 

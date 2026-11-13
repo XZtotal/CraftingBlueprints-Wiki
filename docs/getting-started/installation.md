@@ -12,8 +12,8 @@ This guide outlines the system prerequisites and step-by-step setup procedure fo
 | **Java Runtime** | **Java 17** or **Java 21+** | Minecraft 1.20.5+ requires Java 21 minimum. |
 | **Database** | SQLite (Embedded) or **MySQL 8.0+ / MariaDB 10.5+** | SQLite is enabled by default with zero configuration required. |
 
-> [!NOTE]
-> CraftingBlueprints features automated multi-version adapters. You do not need different builds for 1.18.2, 1.20.4, or 1.21.x; a single `.jar` works across all supported versions out of the box.
+!!! note
+    CraftingBlueprints features automated multi-version adapters. You do not need different builds for 1.18.2, 1.20.4, or 1.21.x; a single `.jar` works across all supported versions out of the box.
 
 ---
 
@@ -22,8 +22,8 @@ This guide outlines the system prerequisites and step-by-step setup procedure fo
 1. **Download the Jar**: Obtain the latest official `CraftingBlueprints-x.x.x.jar`.
 2. **Copy to Plugins**: Place the downloaded `.jar` file directly into your server's `plugins/` directory.
 3. **Start or Restart Server**: Start your server.
-   > [!WARNING]
-   > Do not use the `/reload` or `/reload confirm` command when installing or updating plugins. A clean restart ensures that database drivers and NMS adapters initialize safely.
+   !!! warning
+       Do not use the `/reload` or `/reload confirm` command when installing or updating plugins. A clean restart ensures that database drivers and NMS adapters initialize safely.
 4. **Verify Console Boot**: Check your server console for the startup banner:
    ```text
    [CraftingBlueprints] Enabling CraftingBlueprints vX.X.X...

@@ -140,5 +140,5 @@ crafter:
 * **Gotcha**: If you are testing whether recipe restrictions work while having `/op`, you will still be able to craft the item! To test as a normal player, either deop yourself (`/deop <player>`) or set `op-bypass: false` temporarily.
 
 ### `file-management.sync-from-files`
-> [!CAUTION]
-> If connecting multiple servers to a shared MySQL database, set `sync-from-files: true` **only on one primary server** (e.g., Lobby). All other sub-servers must set this to `false`. See the [Multi-Server Setup Guide](../storage/mysql-multiserver.md).
+!!! caution
+    If connecting multiple servers to a shared MySQL database, set `sync-from-files: true` **only on one primary server** (e.g., Lobby). All other sub-servers must set this to `false`. See the [Multi-Server Setup Guide](../storage/mysql-multiserver.md).

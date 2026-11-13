@@ -27,8 +27,8 @@ This guarantees that when a player unlocks a blueprint on one server, the recipe
 
 ## 2. The Golden Rule of Multi-Server Networks
 
-> [!CAUTION]
-> To prevent multiple servers from fighting over YAML files or overwriting changes, you must designate **only one Primary Management Node**.
+!!! caution
+    To prevent multiple servers from fighting over YAML files or overwriting changes, you must designate **only one Primary Management Node**.
 
 * **Primary Server (e.g., Lobby or Admin Server)**:
   ```yaml
