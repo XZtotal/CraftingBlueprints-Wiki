@@ -1764,10 +1764,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-before-you-submit-a-ticket" class="md-nav__link">
+  <a href="#1-pre-flight-checklist" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Before You Submit a Ticket
+        1. Pre-Flight Checklist
       
     </span>
   </a>
@@ -1786,10 +1786,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#3-what-information-to-provide" class="md-nav__link">
+  <a href="#3-what-information-to-include" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. What Information to Provide
+        3. What Information to Include
       
     </span>
   </a>
@@ -1839,10 +1839,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-before-you-submit-a-ticket" class="md-nav__link">
+  <a href="#1-pre-flight-checklist" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Before You Submit a Ticket
+        1. Pre-Flight Checklist
       
     </span>
   </a>
@@ -1861,10 +1861,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#3-what-information-to-provide" class="md-nav__link">
+  <a href="#3-what-information-to-include" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. What Information to Provide
+        3. What Information to Include
       
     </span>
   </a>
@@ -1892,29 +1892,44 @@
 
 
 <h1 id="reporting-bugs-getting-help">Reporting Bugs &amp; Getting Help</h1>
-<p>If you encounter unexpected behavior or need assistance with CraftingBlueprints, follow this guide to get support quickly.</p>
+<p>If you encounter unexpected behavior, suspect a bug, or have a feature proposal for CraftingBlueprints, follow this guide to report issues and receive prompt technical assistance.</p>
 <hr />
-<h2 id="1-before-you-submit-a-ticket">1. Before You Submit a Ticket</h2>
-<p>To help us resolve your issue promptly, please run through this quick checklist:</p>
+<h2 id="1-pre-flight-checklist">1. Pre-Flight Checklist</h2>
+<p>Before opening an issue or asking for support, run through this quick checklist:</p>
 <ul>
-<li>[ ] Verify that your server is running a supported engine (Paper or Purpur 1.18.2 – 1.21.x).</li>
-<li>[ ] Run <code>/cb validate</code> to rule out syntax errors in your blueprint YAML files.</li>
-<li>[ ] Check your console logs for any error stacktraces.</li>
+<li>[ ] <strong>Verify Server Engine</strong>: Ensure you are running an official build of <strong>Paper</strong> or <strong>Purpur</strong> (1.18.2 – 1.21.x). CraftBukkit and standalone Spigot are not supported.</li>
+<li>[ ] <strong>Verify Java Version</strong>: Minecraft 1.18.2–1.20.4 requires Java 17 or 21. Minecraft 1.20.5+ and 1.21+ strictly require <strong>Java 21</strong>.</li>
+<li>[ ] <strong>Run Dry-Run Validation</strong>: Execute <code>/cb validate</code> to rule out syntax typos or malformed YAML indentation.</li>
+<li>[ ] <strong>Capture <code>/cb status</code></strong>: Run <code>/cb status</code> in console to inspect your active database backend, NMS adapter, and registered blueprint counts.</li>
+<li>[ ] <strong>Check Server Logs</strong>: Search <code>logs/latest.log</code> for any relevant stack traces or warning banners.</li>
 </ul>
 <hr />
 <h2 id="2-opening-an-issue-on-github">2. Opening an Issue on GitHub</h2>
-<p>We track all bug reports and feature requests via our official GitHub repository:</p>
-<p>👉 <strong><a href="https://github.com/XZtotal/CraftingBlueprints-Wiki/issues/new?template=bug_report.yml">Submit a Bug Report</a></strong>
-👉 <strong><a href="https://github.com/XZtotal/CraftingBlueprints-Wiki/issues/new?template=feature_request.yml">Submit a Feature Request</a></strong></p>
+<p>We track all official bug reports and feature requests through our GitHub repository:</p>
+<div class="grid cards">
+<ul>
+<li>
+<p><span class="twemoji lg middle"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14 12h-4v-2h4m0 6h-4v-2h4m6-6h-2.81a6 6 0 0 0-1.82-1.96L17 4.41 15.59 3l-2.17 2.17a6 6 0 0 0-2.83 0L8.41 3 7 4.41l1.62 1.63C7.88 6.55 7.26 7.22 6.81 8H4v2h2.09c-.05.33-.09.66-.09 1v1H4v2h2v1c0 .34.04.67.09 1H4v2h2.81c1.04 1.79 2.97 3 5.19 3s4.15-1.21 5.19-3H20v-2h-2.09c.05-.33.09-.66.09-1v-1h2v-2h-2v-1c0-.34-.04-.67-.09-1H20z"/></svg></span> <strong><a href="https://github.com/XZtotal/CraftingBlueprints-Wiki/issues/new?template=bug_report.yml">Submit a Bug Report</a></strong></p>
 <hr />
-<h2 id="3-what-information-to-provide">3. What Information to Provide</h2>
-<p>When reporting an issue, always include:</p>
+<p>Report unexpected behavior, crafting desyncs, or plugin errors using our structured template.</p>
+</li>
+<li>
+<p><span class="twemoji lg middle"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 2.38 1.19 4.47 3 5.74V17a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2.26c1.81-1.27 3-3.36 3-5.74a7 7 0 0 0-7-7M9 21a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1v-1H9z"/></svg></span> <strong><a href="https://github.com/XZtotal/CraftingBlueprints-Wiki/issues/new?template=feature_request.yml">Submit a Feature Request</a></strong></p>
+<hr />
+<p>Propose new workstation integrations, map visual themes, or administrative quality-of-life tools.</p>
+</li>
+</ul>
+</div>
+<hr />
+<h2 id="3-what-information-to-include">3. What Information to Include</h2>
+<p>When submitting a ticket, always provide the following technical details:</p>
 <ol>
-<li><strong>Exact Server Software &amp; Version</strong>: (e.g. <code>Paper 1.20.4 build 498</code>).</li>
-<li><strong>CraftingBlueprints Version</strong>: Run <code>/cb status</code> to find your version.</li>
-<li><strong>Database Engine</strong>: Whether you are using SQLite or MySQL.</li>
-<li><strong>Console Logs</strong>: Use a paste service like <a href="https://mclo.gs/">mclo.gs</a> or <a href="https://hastebin.com/">hastebin</a> to share your logs. Never post raw screenshots of console text.</li>
-<li><strong>Step-by-Step Reproduction</strong>: Detailed steps explaining how to trigger the problem.</li>
+<li><strong>Exact Server Software &amp; Build Number</strong>: (e.g. <code>Purpur 1.20.4 build 2174</code>).</li>
+<li><strong>CraftingBlueprints Diagnostic Report</strong>: Paste the full output of <code>/cb status</code>.</li>
+<li><strong>Database Backend</strong>: Whether your server is running on embedded <code>sqlite</code> or multi-server <code>mysql</code>.</li>
+<li><strong>Console Logs</strong>: Upload your full <code>logs/latest.log</code> to a clean paste service such as <strong><a href="https://mclo.gs/">mclo.gs</a></strong> or <strong><a href="https://hastebin.com/">hastebin</a></strong>. Never post cropped screenshots of console text.</li>
+<li><strong>Clear Step-by-Step Reproduction</strong>: Detailed numbered steps explaining how to trigger the issue on a clean test server.</li>
+<li><strong>Relevant Configuration Snippets</strong>: The exact YAML block from <code>config.yml</code> or your blueprint file in <code>blueprints/</code>.</li>
 </ol>
 
 

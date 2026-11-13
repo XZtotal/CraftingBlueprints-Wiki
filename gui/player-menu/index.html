@@ -80,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#player-progression-menu-cb-menu" class="md-skip">
+        <a href="#player-progression-dashboard-cb-menu" class="md-skip">
           Skip to content
         </a>
       
@@ -1052,21 +1052,71 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#menu-layout-components" class="md-nav__link">
+  <a href="#interface-layout-key-components" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Menu Layout &amp; Components
+        Interface Layout &amp; Key Components
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Interface Layout &amp; Key Components">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-player-profile-head" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Player Profile Head
       
     </span>
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#anti-steal-item-protection" class="md-nav__link">
+        
+          <li class="md-nav__item">
+  <a href="#2-active-expirations-timer-monitoring" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Anti-Steal Item Protection
+        2. Active Expirations &amp; Timer Monitoring
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-one-click-catalog-shortcut" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. One-Click Catalog Shortcut
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-navigation-stack-return-button-cb-return" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Navigation Stack &amp; Return Button (/cb return)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#anti-steal-item-protection-inventory-security" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Anti-Steal Item Protection &amp; Inventory Security
       
     </span>
   </a>
@@ -1852,21 +1902,71 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#menu-layout-components" class="md-nav__link">
+  <a href="#interface-layout-key-components" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Menu Layout &amp; Components
+        Interface Layout &amp; Key Components
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Interface Layout &amp; Key Components">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-player-profile-head" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Player Profile Head
       
     </span>
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#anti-steal-item-protection" class="md-nav__link">
+        
+          <li class="md-nav__item">
+  <a href="#2-active-expirations-timer-monitoring" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Anti-Steal Item Protection
+        2. Active Expirations &amp; Timer Monitoring
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-one-click-catalog-shortcut" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. One-Click Catalog Shortcut
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-navigation-stack-return-button-cb-return" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Navigation Stack &amp; Return Button (/cb return)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#anti-steal-item-protection-inventory-security" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Anti-Steal Item Protection &amp; Inventory Security
       
     </span>
   </a>
@@ -1893,45 +1993,58 @@
   
 
 
-<h1 id="player-progression-menu-cb-menu">Player Progression Menu (/cb menu)</h1>
-<p>The personal player menu (<code>/cb menu</code>) gives players an overview of their unlocked blueprints, active time limits, remaining craft uses, and personal crafting statistics.</p>
+<h1 id="player-progression-dashboard-cb-menu">Player Progression Dashboard (/cb menu)</h1>
+<p>The personal player progression dashboard (<code>/cb menu</code>) provides players with an interactive graphical interface to track their unlocked blueprints, monitor active countdown timers, check remaining craft uses, and navigate the server's crafting encyclopedia.</p>
 <hr />
 <h2 id="opening-the-menu">Opening the Menu</h2>
-<p>Any player with the <code>craftingblueprints.menu</code> permission (granted by default) can open their personal dashboard using:</p>
+<p>Any player with the <code>craftingblueprints.menu</code> permission (granted by default to all players) can open their dashboard at any time:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>/cb menu
 </span></code></pre></div>
 <hr />
-<h2 id="menu-layout-components">Menu Layout &amp; Components</h2>
-<p>The interface displays:</p>
-<ol>
-<li><strong>Player Skull Profile</strong>:</li>
-<li>Shows total blueprints unlocked.</li>
-<li>Percentage of server blueprints discovered.</li>
-<li>
-<p>Personal crafting statistics.</p>
-</li>
-<li>
-<p><strong>Active Timers &amp; Expirations</strong>:</p>
-</li>
-<li>Displays all recipes that have active time countdowns or craft limits.</li>
-<li>Shows exact time remaining (e.g. <code>Expires in 3d 14h</code>).</li>
-<li>
-<p>Shows remaining craft counts (e.g. <code>2/5 uses remaining</code>).</p>
-</li>
-<li>
-<p><strong>Catalog Shortcut</strong>:</p>
-</li>
-<li>
-<p>One-click button to jump directly to the server's public blueprint catalog (<code>/cb item list</code>).</p>
-</li>
-<li>
-<p><strong>Return Button</strong>:</p>
-</li>
-<li>If navigated from a previous menu, clicking the return button or running <code>/cb return</code> navigates back smoothly without losing context.</li>
-</ol>
+<h2 id="interface-layout-key-components">Interface Layout &amp; Key Components</h2>
+<p>The player menu features an intuitive layout designed with custom Kyori Adventure component titles:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>┌─────────────────────────────────────────────────────────────┐
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>│                   [CraftingBlueprints]                      │
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>├─────────────────────────────────────────────────────────────┤
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>│  [Player Head]      [Active Timers]     [Expiring Uses]     │
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>│   Progression        3 Licensings        2 Limited Crafts   │
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>│                                                             │
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>│                                                             │
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>│  [Catalog Button]                      [Close / Return]     │
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>│   Browse All (/cb item list)            Back to Previous    │
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>└─────────────────────────────────────────────────────────────┘
+</span></code></pre></div>
+<h3 id="1-player-profile-head">1. Player Profile Head</h3>
+<ul>
+<li><strong>Display Name</strong>: The player's custom textured skin skull.</li>
+<li><strong>Progression Lore</strong>:</li>
+<li>Total blueprints unlocked on this server.</li>
+<li>Server completion percentage (e.g. <code>14 / 42 Blueprints Unlocked (33.3%)</code>).</li>
+<li>Lifetime crafts completed using blueprints.</li>
+</ul>
+<h3 id="2-active-expirations-timer-monitoring">2. Active Expirations &amp; Timer Monitoring</h3>
+<ul>
+<li>Displays all blueprints that have active temporal countdowns (e.g., 24-hour licenses, weekly guild permits).</li>
+<li>Shows exact real-time remaining duration (e.g. <code>Expires in: 3d 14h 22m</code>).</li>
+<li>Displays blueprints with finite craft counters (e.g. <code>Remaining Forges: 2 / 5 crafts</code>).</li>
+</ul>
+<h3 id="3-one-click-catalog-shortcut">3. One-Click Catalog Shortcut</h3>
+<ul>
+<li>Clicking the centered book icon jumps directly to the server's public blueprint catalog (<code>/cb item list</code>), allowing players to browse locked schematics or purchase missing recipes.</li>
+</ul>
+<h3 id="4-navigation-stack-return-button-cb-return">4. Navigation Stack &amp; Return Button (<code>/cb return</code>)</h3>
+<ul>
+<li>If opened from another interface, clicking the return button smoothly re-opens the parent menu without losing context or page position.</li>
+</ul>
 <hr />
-<h2 id="anti-steal-item-protection">Anti-Steal Item Protection</h2>
-<p>All GUI menus in CraftingBlueprints are protected by an internal anti-steal engine. Players cannot drag, shift-click, drop, or duplicate items out of the interface. Any stray GUI item detected on cursor, hotbar, or death is instantly cancelled and purged.</p>
+<h2 id="anti-steal-item-protection-inventory-security">Anti-Steal Item Protection &amp; Inventory Security</h2>
+<p>All menus in CraftingBlueprints inherit from <code>BaseMenu.kt</code> and are protected by an automated, low-level anti-steal security engine:</p>
+<ul>
+<li><strong>Slot Locking</strong>: Non-input menu slots are locked. Shift-clicking, dragging, hotkey swapping, and dropping items out of the interface are intercepted and cancelled immediately.</li>
+<li><strong>PDC Menu Tagging</strong>: All visual icons placed inside menus are tagged with a Persistent Data Container marker (<code>ItemPDT(ItemManager.MENU_TYPE)</code>).</li>
+<li><strong>Purge Engine</strong>: If a player attempts to exploit client-side glitches, disconnect macros, or death drops to extract GUI items, the <code>ItemInteractListener</code> intercepts the item on cursor, hotbar, pickup, block placement, or death, and <strong>instantly purges</strong> the phantom item.</li>
+<li>Zero menu items can ever leak into the server's survival economy.</li>
+</ul>
 
 
 

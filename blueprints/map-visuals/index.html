@@ -762,10 +762,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#built-in-background-catalog" class="md-nav__link">
+  <a href="#the-canonical-map-configuration-block" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Built-In Background Catalog
+        The Canonical map: Configuration Block
       
     </span>
   </a>
@@ -773,10 +773,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#configuring-visuals-on-a-blueprint" class="md-nav__link">
+  <a href="#complete-catalog-of-25-built-in-textures" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Configuring Visuals on a Blueprint
+        Complete Catalog of 25 Built-In Textures
       
     </span>
   </a>
@@ -784,10 +784,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#rarity-tiers-tier-aesthetics" class="md-nav__link">
+  <a href="#canonical-corner-frames-guilloche-rosettes" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Rarity Tiers (Tier Aesthetics)
+        Canonical Corner Frames &amp; Guilloché Rosettes
       
     </span>
   </a>
@@ -795,10 +795,32 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#using-custom-background-images" class="md-nav__link">
+  <a href="#the-6-masterpiece-canvases" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Using Custom Background Images
+        The 6 Masterpiece Canvases
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#flyweight-map-registry-anti-desync-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Flyweight Map Registry &amp; Anti-Desync Architecture
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#using-custom-background-pngs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Using Custom Background PNGs
       
     </span>
   </a>
@@ -1874,10 +1896,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#built-in-background-catalog" class="md-nav__link">
+  <a href="#the-canonical-map-configuration-block" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Built-In Background Catalog
+        The Canonical map: Configuration Block
       
     </span>
   </a>
@@ -1885,10 +1907,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#configuring-visuals-on-a-blueprint" class="md-nav__link">
+  <a href="#complete-catalog-of-25-built-in-textures" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Configuring Visuals on a Blueprint
+        Complete Catalog of 25 Built-In Textures
       
     </span>
   </a>
@@ -1896,10 +1918,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#rarity-tiers-tier-aesthetics" class="md-nav__link">
+  <a href="#canonical-corner-frames-guilloche-rosettes" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Rarity Tiers (Tier Aesthetics)
+        Canonical Corner Frames &amp; Guilloché Rosettes
       
     </span>
   </a>
@@ -1907,10 +1929,32 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#using-custom-background-images" class="md-nav__link">
+  <a href="#the-6-masterpiece-canvases" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Using Custom Background Images
+        The 6 Masterpiece Canvases
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#flyweight-map-registry-anti-desync-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Flyweight Map Registry &amp; Anti-Desync Architecture
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#using-custom-background-pngs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Using Custom Background PNGs
       
     </span>
   </a>
@@ -1938,150 +1982,293 @@
 
 
 <h1 id="map-schematics-visuals-guilloche-frames">Map Schematics, Visuals &amp; Guilloche Frames</h1>
-<p>CraftingBlueprints features an advanced map rendering engine that composites photorealistic technical drafting schematics, recipe grids, mathematical banknote-style borders, and custom artwork directly onto in-game Minecraft Maps.</p>
+<p>CraftingBlueprints features an advanced in-game map rendering engine that composites photorealistic technical drafting schematics, banknote-grade Guilloché security borders, procedural item outlines, and custom artwork directly onto in-game Minecraft Maps (<code>Material.FILLED_MAP</code>).</p>
 <hr />
 <h2 id="enabling-map-graphics">Enabling Map Graphics</h2>
-<p>Ensure the following setting is active in <code>plugins/CraftingBlueprints/config.yml</code>:</p>
-<div class="language-yaml highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># Enable high-resolution rendered schematics on Minecraft maps</span>
+<p>Ensure map graphics are active in <code>plugins/CraftingBlueprints/config.yml</code>:</p>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># Enable fabulous BlueprintsItems with images on maps</span>
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nt">images-on-maps</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 </span></code></pre></div>
-<p>When enabled, any blueprint using <code>item.material: FILLED_MAP</code> renders a custom 128x128 pixel visual schematic.</p>
+<p>When active, any blueprint configured with <code>item.material: FILLED_MAP</code> renders a custom 128x128 pixel visual schematic when held in a player's hand or mounted in an Item Frame.</p>
 <hr />
-<h2 id="built-in-background-catalog">Built-In Background Catalog</h2>
-<p>CraftingBlueprints includes over 20 pre-calibrated background textures that you can reference immediately by name:</p>
+<h2 id="the-canonical-map-configuration-block">The Canonical <code>map:</code> Configuration Block</h2>
+<p>Map aesthetics are configured declaratively under the <code>map:</code> block of any blueprint:</p>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># yaml-language-server: $schema=./blueprint.schema.json</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nt">singles</span><span class="p">:</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">  </span><span class="nt">excalibur_blade</span><span class="p">:</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="nt">blueprint</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">NETHERITE_SWORD</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">"&lt;gradient:#FFD700:#FFA500&gt;&lt;bold&gt;Excalibur</span><span class="nv"> </span><span class="s">Holy</span><span class="nv"> </span><span class="s">Blade&lt;/bold&gt;&lt;/gradient&gt;"</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">    </span><span class="nt">permanent</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">    </span><span class="nt">item</span><span class="p">:</span>
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">      </span><span class="nt">material</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">FILLED_MAP</span>
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="w">      </span><span class="nt">glowing</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>
+</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="w">    </span><span class="nt">map</span><span class="p">:</span>
+</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="w">      </span><span class="c1"># 1. Base Background Canvas (Theme name or image filename in images/backgrounds/)</span>
+</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="w">      </span><span class="nt">theme</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">imperial_gold</span>
+</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>
+</span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="w">      </span><span class="c1"># 2. Corner Geometry Style: bracket, chamfer, diamond, runic, rosette, star, none</span>
+</span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="w">      </span><span class="nt">frame</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">rosette</span>
+</span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>
+</span><span id="__span-1-19"><a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a><span class="w">      </span><span class="c1"># 3. Workstation Plaque Badge: crafting, anvil, brewing, smithing, furnace, none</span>
+</span><span id="__span-1-20"><a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a><span class="w">      </span><span class="nt">badge</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">smithing</span>
+</span><span id="__span-1-21"><a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a>
+</span><span id="__span-1-22"><a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a><span class="w">      </span><span class="c1"># 4. Central Item Sprite Scaling &amp; Ambient Shadow</span>
+</span><span id="__span-1-23"><a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a><span class="w">      </span><span class="nt">icon_scale</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span><span class="w">            </span><span class="c1"># Integer scale (1 to 4) using sharp nearest-neighbor interpolation</span>
+</span><span id="__span-1-24"><a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a><span class="w">      </span><span class="nt">drop_shadow</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w">        </span><span class="c1"># Subtle 2px ambient occlusion shadow behind item sprite</span>
+</span><span id="__span-1-25"><a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a>
+</span><span id="__span-1-26"><a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a><span class="w">      </span><span class="c1"># 5. Procedural Item Contour Outline</span>
+</span><span id="__span-1-27"><a id="__codelineno-1-27" name="__codelineno-1-27" href="#__codelineno-1-27"></a><span class="w">      </span><span class="nt">item_outline</span><span class="p">:</span>
+</span><span id="__span-1-28"><a id="__codelineno-1-28" name="__codelineno-1-28" href="#__codelineno-1-28"></a><span class="w">        </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</span><span id="__span-1-29"><a id="__codelineno-1-29" name="__codelineno-1-29" href="#__codelineno-1-29"></a><span class="w">        </span><span class="nt">width</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span><span class="w">               </span><span class="c1"># Thickness in pixels (1 to 8)</span>
+</span><span id="__span-1-30"><a id="__codelineno-1-30" name="__codelineno-1-30" href="#__codelineno-1-30"></a><span class="w">        </span><span class="nt">color</span><span class="p">:</span><span class="w"> </span><span class="s">"rainbow"</span><span class="w">       </span><span class="c1"># 'rainbow', hex '#ffd700', or gradient</span>
+</span><span id="__span-1-31"><a id="__codelineno-1-31" name="__codelineno-1-31" href="#__codelineno-1-31"></a><span class="w">        </span><span class="nt">opacity</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">100</span>
+</span><span id="__span-1-32"><a id="__codelineno-1-32" name="__codelineno-1-32" href="#__codelineno-1-32"></a>
+</span><span id="__span-1-33"><a id="__codelineno-1-33" name="__codelineno-1-33" href="#__codelineno-1-33"></a><span class="w">      </span><span class="c1"># 6. Technical Cartesian Drafting Grid &amp; Measurement Ticks</span>
+</span><span id="__span-1-34"><a id="__codelineno-1-34" name="__codelineno-1-34" href="#__codelineno-1-34"></a><span class="w">      </span><span class="nt">grid</span><span class="p">:</span>
+</span><span id="__span-1-35"><a id="__codelineno-1-35" name="__codelineno-1-35" href="#__codelineno-1-35"></a><span class="w">        </span><span class="nt">show</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</span><span id="__span-1-36"><a id="__codelineno-1-36" name="__codelineno-1-36" href="#__codelineno-1-36"></a><span class="w">        </span><span class="nt">color</span><span class="p">:</span><span class="w"> </span><span class="s">"#334155"</span>
+</span><span id="__span-1-37"><a id="__codelineno-1-37" name="__codelineno-1-37" href="#__codelineno-1-37"></a><span class="w">        </span><span class="nt">ticks</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</span><span id="__span-1-38"><a id="__codelineno-1-38" name="__codelineno-1-38" href="#__codelineno-1-38"></a><span class="w">        </span><span class="nt">ticks_color</span><span class="p">:</span><span class="w"> </span><span class="s">"#64748b"</span>
+</span><span id="__span-1-39"><a id="__codelineno-1-39" name="__codelineno-1-39" href="#__codelineno-1-39"></a>
+</span><span id="__span-1-40"><a id="__codelineno-1-40" name="__codelineno-1-40" href="#__codelineno-1-40"></a><span class="w">      </span><span class="c1"># 7. Typography Nameplate Banner</span>
+</span><span id="__span-1-41"><a id="__codelineno-1-41" name="__codelineno-1-41" href="#__codelineno-1-41"></a><span class="w">      </span><span class="nt">title</span><span class="p">:</span>
+</span><span id="__span-1-42"><a id="__codelineno-1-42" name="__codelineno-1-42" href="#__codelineno-1-42"></a><span class="w">        </span><span class="nt">show</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</span><span id="__span-1-43"><a id="__codelineno-1-43" name="__codelineno-1-43" href="#__codelineno-1-43"></a><span class="w">        </span><span class="nt">text</span><span class="p">:</span><span class="w"> </span><span class="s">"%blueprint_name%"</span><span class="w"> </span><span class="c1"># Supports %blueprint_name% and %bname%</span>
+</span><span id="__span-1-44"><a id="__codelineno-1-44" name="__codelineno-1-44" href="#__codelineno-1-44"></a><span class="w">        </span><span class="nt">color</span><span class="p">:</span><span class="w"> </span><span class="s">"gold"</span>
+</span><span id="__span-1-45"><a id="__codelineno-1-45" name="__codelineno-1-45" href="#__codelineno-1-45"></a><span class="w">        </span><span class="nt">shadow</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</span><span id="__span-1-46"><a id="__codelineno-1-46" name="__codelineno-1-46" href="#__codelineno-1-46"></a>
+</span><span id="__span-1-47"><a id="__codelineno-1-47" name="__codelineno-1-47" href="#__codelineno-1-47"></a><span class="w">      </span><span class="c1"># 8. Top-Right Status Wax Seal Stamp</span>
+</span><span id="__span-1-48"><a id="__codelineno-1-48" name="__codelineno-1-48" href="#__codelineno-1-48"></a><span class="w">      </span><span class="nt">stamp</span><span class="p">:</span>
+</span><span id="__span-1-49"><a id="__codelineno-1-49" name="__codelineno-1-49" href="#__codelineno-1-49"></a><span class="w">        </span><span class="nt">show</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</span><span id="__span-1-50"><a id="__codelineno-1-50" name="__codelineno-1-50" href="#__codelineno-1-50"></a><span class="w">        </span><span class="nt">style</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">wax_seal</span><span class="w">        </span><span class="c1"># wax_seal, clock, box, plaque, none</span>
+</span><span id="__span-1-51"><a id="__codelineno-1-51" name="__codelineno-1-51" href="#__codelineno-1-51"></a><span class="w">        </span><span class="nt">text</span><span class="p">:</span><span class="w"> </span><span class="s">"PERM"</span>
+</span><span id="__span-1-52"><a id="__codelineno-1-52" name="__codelineno-1-52" href="#__codelineno-1-52"></a><span class="w">        </span><span class="nt">border_color</span><span class="p">:</span><span class="w"> </span><span class="s">"#22c55e"</span>
+</span></code></pre></div>
+<hr />
+<h2 id="complete-catalog-of-25-built-in-textures">Complete Catalog of 25 Built-In Textures</h2>
+<p>CraftingBlueprints bundles 25 pre-calibrated background textures located in <code>plugins/CraftingBlueprints/images/backgrounds/</code>. You can reference them directly by name (with or without the <code>texture_</code> prefix or <code>.png</code> extension):</p>
 <table>
 <thead>
 <tr>
-<th style="text-align: left;">Texture ID</th>
-<th style="text-align: left;">Aesthetic Style &amp; Theme</th>
+<th style="text-align: left;">Texture Identifier</th>
+<th style="text-align: left;">Theme Category</th>
+<th style="text-align: left;">Aesthetic Description &amp; Visual Style</th>
 </tr>
 </thead>
 <tbody>
 <tr>
+<td style="text-align: left;"><code>texture_technical_slate</code></td>
+<td style="text-align: left;">Architectural</td>
+<td style="text-align: left;">Deep charcoal slate (<code>#141822</code>) with micrometer vernier ticks and archival drafting grain.</td>
+</tr>
+<tr>
 <td style="text-align: left;"><code>texture_blueprint_grid</code></td>
-<td style="text-align: left;">Classic cyan technical drafting blueprint grid.</td>
+<td style="text-align: left;">Drafting</td>
+<td style="text-align: left;">Classic cyan technical blueprint grid with 16px Cartesian drafting coordinates.</td>
 </tr>
 <tr>
 <td style="text-align: left;"><code>texture_isometric_drafting</code></td>
-<td style="text-align: left;">30-degree isometric engineering grid with focal guide lines.</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>texture_technical_slate</code></td>
-<td style="text-align: left;">Matte dark charcoal architectural slate with subtle measurements.</td>
+<td style="text-align: left;">Engineering</td>
+<td style="text-align: left;">30-degree isometric engineering grid with focal convergence guide lines.</td>
 </tr>
 <tr>
 <td style="text-align: left;"><code>texture_carbon_weave</code></td>
-<td style="text-align: left;">High-tech diagonal carbon fiber weave.</td>
+<td style="text-align: left;">High-Tech</td>
+<td style="text-align: left;">4x4 diagonal twill carbon fiber weave with tactile anisotropic reflection.</td>
 </tr>
 <tr>
 <td style="text-align: left;"><code>texture_hex_cyber_grid</code></td>
-<td style="text-align: left;">Futuristic glowing honeycomb matrix.</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>texture_celestial_astral</code></td>
-<td style="text-align: left;">Deep midnight astral constellation charts.</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>texture_dwarven_magma</code></td>
-<td style="text-align: left;">Chiseled volcanic basalt with glowing magma veins.</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>texture_frost_crystal</code></td>
-<td style="text-align: left;">Glacial crystalline frost patterns with cold cyan specular highlights.</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>texture_imperial_gold</code></td>
-<td style="text-align: left;">Opulent baroque gold-leaf filigree over royal velvet.</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>texture_nautical_astrolabe</code></td>
-<td style="text-align: left;">Antique marine navigation chart with brass astrolabe rings.</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>texture_parchment_aged</code></td>
-<td style="text-align: left;">Weathered ancient papyrus with burned edges.</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>texture_rainbow_aurora</code></td>
-<td style="text-align: left;">Shifting northern lights atmospheric gradient.</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>texture_rainbow_bismuth</code></td>
-<td style="text-align: left;">Stepped geometric bismuth crystal rainbow staircase.</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>texture_rainbow_holofoil</code></td>
-<td style="text-align: left;">Prismatic holographic trading card sheen.</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>texture_rainbow_nebula</code></td>
-<td style="text-align: left;">Deep cosmos stellar nebula with stellar dust clouds.</td>
+<td style="text-align: left;">Cybernetic</td>
+<td style="text-align: left;">Futuristic beveled hexagonal matrix with glowing circuit traces.</td>
 </tr>
 <tr>
 <td style="text-align: left;"><code>texture_riveted_steel</code></td>
-<td style="text-align: left;">Heavy industrial boiler plate with reinforced rivets.</td>
+<td style="text-align: left;">Industrial</td>
+<td style="text-align: left;">Heavy boiler plate with reinforced industrial bevels and structural corner rivets.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>texture_dwarven_magma</code></td>
+<td style="text-align: left;">Volcanic Forge</td>
+<td style="text-align: left;">Chiseled basalt masonry with cellular Voronoi fissure veins and cooled crusts.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>texture_imperial_gold</code></td>
+<td style="text-align: left;">Sovereign</td>
+<td style="text-align: left;">24k gold brocade over royal obsidian amber (<code>#241408</code>) with 32-ray radiant sunburst backlighting.</td>
 </tr>
 <tr>
 <td style="text-align: left;"><code>texture_royal_damask</code></td>
-<td style="text-align: left;">Ornate gothic floral damask tapestry.</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>texture_sandstone_hieroglyph</code></td>
-<td style="text-align: left;">Weathered desert sandstone with carved glyphs.</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>texture_transmutation_circle</code></td>
-<td style="text-align: left;">Alchemical transmutation geometric circle.</td>
+<td style="text-align: left;">Gothic Palace</td>
+<td style="text-align: left;">Ornate gothic floral damask tapestry with velvet shadow embossing.</td>
 </tr>
 <tr>
 <td style="text-align: left;"><code>texture_verdigris_botanical</code></td>
-<td style="text-align: left;">Oxidized copper flora with intricate vine traceries.</td>
+<td style="text-align: left;">Alchemical</td>
+<td style="text-align: left;">Forest obsidian (<code>#0e1e18</code>) with logarithmic spiral vines and oxidized bronze inlays.</td>
 </tr>
 <tr>
 <td style="text-align: left;"><code>texture_void_grimoire</code></td>
-<td style="text-align: left;">Eldritch void energy fractures and cosmic rifts.</td>
+<td style="text-align: left;">Arcane Void</td>
+<td style="text-align: left;">Deep obsidian violet (<code>#180e28</code>) with zero synthetic circles, gothic runic interlacing, and amethyst backlighting.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>texture_nautical_astrolabe</code></td>
+<td style="text-align: left;">Marine</td>
+<td style="text-align: left;">Deep cobalt sapphire (<code>#0d1832</code>) with 16-point nautical compass rose, meridian arcs, and star charts.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>texture_parchment_aged</code></td>
+<td style="text-align: left;">Antiquity</td>
+<td style="text-align: left;">Interlocking papyrus fibers with weathered, burnished edges and organic paper grain.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>texture_sandstone_hieroglyph</code></td>
+<td style="text-align: left;">Desert Relic</td>
+<td style="text-align: left;">Sunbaked weathered sandstone with precision chiseled alchemical glyphs.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>texture_transmutation_circle</code></td>
+<td style="text-align: left;">Alchemical</td>
+<td style="text-align: left;">Parametric transmutation matrix with alchemical lozenges and planetary symbols.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>texture_frost_crystal</code></td>
+<td style="text-align: left;">Glacial</td>
+<td style="text-align: left;">Interlocking ice crystal needles with cold cyan specular highlights.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>texture_celestial_astral</code></td>
+<td style="text-align: left;">Astral</td>
+<td style="text-align: left;">Midnight indigo cosmic void with natural twinkling star constellations.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>texture_rainbow</code></td>
+<td style="text-align: left;">Masterpiece</td>
+<td style="text-align: left;">2D Continuous Gradient Mesh emitting a full prismatic rainbow spectrum into an obsidian focal sanctuary.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>texture_rainbow_holofoil</code></td>
+<td style="text-align: left;">Secret Rare</td>
+<td style="text-align: left;">Trading-card 45° holographic diffraction sheen with stardust glitter flecks.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>texture_rainbow_nebula</code></td>
+<td style="text-align: left;">Deep Cosmos</td>
+<td style="text-align: left;">Multi-octave interstellar gas clouds and cosmic dust filaments.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>texture_rainbow_aurora</code></td>
+<td style="text-align: left;">Atmospheric</td>
+<td style="text-align: left;">Fluid undulating curtains of celestial rainbow light flowing inward from all 4 borders.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>texture_rainbow_moire</code></td>
+<td style="text-align: left;">Fine Art</td>
+<td style="text-align: left;">Banknote-grade Guilloché wave interference ribbons in silky rainbow harmonics.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>texture_rainbow_bismuth</code></td>
+<td style="text-align: left;">Mineral</td>
+<td style="text-align: left;">Stepped geometric crystal growth facets radiating multi-color bismuth iridescence.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>gradient_linear_drafting</code></td>
+<td style="text-align: left;">Minimalist</td>
+<td style="text-align: left;">Clean linear drafting luminance ramp calibrated to native Minecraft map palette.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>gradient_radial_vignette</code></td>
+<td style="text-align: left;">Minimalist</td>
+<td style="text-align: left;">Radial vignette focusing illumination onto the central item socket.</td>
 </tr>
 </tbody>
 </table>
 <hr />
-<h2 id="configuring-visuals-on-a-blueprint">Configuring Visuals on a Blueprint</h2>
-<p>Add the <code>rendering:</code> section to any blueprint definition:</p>
-<div class="language-yaml highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nt">rendering</span><span class="p">:</span>
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="c1"># Any built-in texture ID or custom PNG name</span>
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">  </span><span class="nt">background</span><span class="p">:</span><span class="w"> </span><span class="s">"texture_dwarven_magma"</span>
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>
-</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">  </span><span class="c1"># Rarity tier: COMMON, UNCOMMON, RARE, EPIC, MYTHIC</span>
-</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">  </span><span class="nt">tier</span><span class="p">:</span><span class="w"> </span><span class="s">"MYTHIC"</span>
-</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>
-</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">  </span><span class="c1"># Enable mathematical banknote-style spirograph security borders</span>
-</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">  </span><span class="nt">guilloche_border</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>
-</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="w">  </span><span class="c1"># Overlays the 3x3 crafting matrix in the corner of the map</span>
-</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="w">  </span><span class="nt">show_ingredients</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-</span></code></pre></div>
+<h2 id="canonical-corner-frames-guilloche-rosettes">Canonical Corner Frames &amp; Guilloché Rosettes</h2>
+<p>The <code>frame:</code> property controls the geometric corner architecture of the map:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Frame ID</th>
+<th style="text-align: left;">Default Palette</th>
+<th style="text-align: left;">Visual Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>bracket</code></td>
+<td style="text-align: left;">Brushed Steel (<code>#94a3b8</code>)</td>
+<td style="text-align: left;">Utilitarian hairline 2px L-bracket with a single 1px corner vertex stud.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>chamfer</code></td>
+<td style="text-align: left;">Verdigris Emerald (<code>#34d399</code>)</td>
+<td style="text-align: left;">Clean 45-degree angled corner notch. Ideal for botanical and alchemical themes.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>diamond</code></td>
+<td style="text-align: left;">Lapis Sapphire (<code>#60a5fa</code>)</td>
+<td style="text-align: left;">Single-line precision border with corner diamond rhombus studs.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>runic</code></td>
+<td style="text-align: left;">Void Amethyst (<code>#c084fc</code>)</td>
+<td style="text-align: left;">Gothic runic notch with alchemical lozenges and apex relief.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>rosette</code></td>
+<td style="text-align: left;">Imperial 24k Gold (<code>#facc15</code>)</td>
+<td style="text-align: left;">Twin banknote-grade <strong>Guilloché rosettes</strong> in upper corners with a continuous gold filigree pedestal rail across the base.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>star</code></td>
+<td style="text-align: left;">Iridescent Cyan (<code>#22d3ee</code>)</td>
+<td style="text-align: left;">4-point starlight nexus stars in upper corners with an integrated prismatic pedestal rail.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>none</code></td>
+<td style="text-align: left;">—</td>
+<td style="text-align: left;">Completely borderless canvas.</td>
+</tr>
+</tbody>
+</table>
 <hr />
-<h2 id="rarity-tiers-tier-aesthetics">Rarity Tiers (Tier Aesthetics)</h2>
-<p>The <code>tier:</code> property automatically themes the outer border, corner geometry, and gradient highlights of the map:</p>
-<ul>
-<li><strong><code>COMMON</code></strong>: Clean monochrome border. Ideal for basic wooden and stone tools.</li>
-<li><strong><code>UNCOMMON</code></strong>: Subtle emerald green palette with reinforced geometric corners.</li>
-<li><strong><code>RARE</code></strong>: Azure sapphire styling with decorative corner brackets.</li>
-<li><strong><code>EPIC</code></strong>: Royal amethyst filigree with ornate rosette accents.</li>
-<li><strong><code>MYTHIC</code></strong>: Iridescent celestial styling featuring multi-frequency <strong>Guilloche curves</strong> (spirograph bank-note security patterns) that prevent visual repetition.</li>
-</ul>
+<h2 id="the-6-masterpiece-canvases">The 6 Masterpiece Canvases</h2>
+<p>CraftingBlueprints provides 6 canonical Masterpiece Canvases combining generative mathematics, harmonic lighting, and fine-art craftsmanship:</p>
+<ol>
+<li><strong>Canvas I: Technical Slate (<code>technical_slate</code>)</strong>: Dual-frequency micrometer grid, vernier registration ticks, and subtle paper grain.</li>
+<li><strong>Canvas II: Botanical Verdigris (<code>verdigris_botanical</code>)</strong>: Logarithmic spiral vines ($r = ae^{b\theta}$), delicate acanthus corner curls, and oxidized bronze inlays.</li>
+<li><strong>Canvas III: Nautical Astrolabe (<code>nautical_astrolabe</code>)</strong>: 16-point compass rose, trigonometric orbital rings, and latitude meridian arcs.</li>
+<li><strong>Canvas IV: Arcane Grimoire (<code>void_grimoire</code>)</strong>: Zero synthetic circles; intricate gothic runic filigree with Algiz and Sowilo cartouches.</li>
+<li><strong>Canvas V: Imperial Gold Guilloché (<code>imperial_gold</code>)</strong>: Epitrochoid Guilloché banknote rosettes with a 32-ray radiant sunburst backlighting halo.</li>
+<li><strong>Canvas VI: Rainbow Gradient Mesh (<code>rainbow</code>)</strong>: 16-node 2D Continuous Gradient Mesh emitting a full spectral rainbow into a velvety obsidian item sanctuary ($r \le 22$).</li>
+</ol>
 <hr />
-<h2 id="using-custom-background-images">Using Custom Background Images</h2>
-<p>You can import your own server logos, custom artwork, or guild emblems:</p>
+<h2 id="flyweight-map-registry-anti-desync-architecture">Flyweight Map Registry &amp; Anti-Desync Architecture</h2>
+<p>When <code>images-on-maps</code> is enabled, CraftingBlueprints protects your server performance and disk space through its <strong>Flyweight Map Registry</strong>:</p>
+<ol>
+<li><strong>Zero World Save Bloat</strong>: In vanilla Minecraft, creating maps allocates a new Map ID for every item, creating thousands of duplicate <code>map_&lt;id&gt;.dat</code> files in <code>world/data/</code>. CraftingBlueprints computes a deterministic <code>VisualKey</code> for each visual configuration and assigns <strong>exactly one MapView per distinct visual render</strong>, regardless of whether 10 or 10,000 players own that blueprint.</li>
+<li><strong>Cross-Server Map Virtualization</strong>: In multi-server networks (Bungee/Velocity), Map ID <code>104</code> on Server A might be an Excalibur sword, while on Server B it is the spawn hub map. The physical item's PDC stores the normalized <code>visual_key</code>. When a player transfers between servers, the plugin's <code>MapRelinkListener</code> dynamically re-links the item to the local canonical Map ID in-place, guaranteeing blueprints never turn blank or corrupt local maps.</li>
+<li><strong>Container &amp; Item Frame Persistence</strong>: Blueprints stored in chests, shulker boxes, or displayed in Item Frames retain their renderers across server restarts without reverting to vanilla terrain maps.</li>
+<li><strong>Sub-Tick Rendering Performance</strong>: All image quantization executes on asynchronous background threads, pre-quantizing images into native <code>byte[16384]</code> palette buffers. Blitting on the server tick loop executes in <strong>&lt; 0.02 milliseconds</strong>, maintaining buttery-smooth 20.0 TPS.</li>
+</ol>
+<hr />
+<h2 id="using-custom-background-pngs">Using Custom Background PNGs</h2>
+<p>You can import custom guild emblems, server logos, or hand-drawn schematics:</p>
 <ol>
 <li>Create a <strong>128x128 pixel</strong> image in <strong>32-bit RGBA PNG</strong> format.</li>
 <li>Place the file inside:
-   <div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>plugins/CraftingBlueprints/images/backgrounds/my_custom_logo.png
+   <div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>plugins/CraftingBlueprints/images/backgrounds/guild_crest.png
 </span></code></pre></div></li>
-<li>Reference the file in your YAML blueprint without the <code>.png</code> extension:
-   <div class="language-yaml highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nt">rendering</span><span class="p">:</span>
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="nt">background</span><span class="p">:</span><span class="w"> </span><span class="s">"my_custom_logo"</span>
+<li>Reference the filename in your YAML blueprint:
+   <div class="language-yaml highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nt">map</span><span class="p">:</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="nt">theme</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">guild_crest</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">  </span><span class="nt">frame</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">rosette</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">  </span><span class="nt">badge</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">crafting</span>
 </span></code></pre></div></li>
-<li>Run <code>/cb reload blueprints</code> to load the image immediately without restarting the server.</li>
+<li>Run <code>/cb reload blueprints</code> to load the image immediately without a restart!</li>
 </ol>
 
 

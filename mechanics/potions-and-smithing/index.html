@@ -80,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#potions-smithing-upgrades" class="md-skip">
+        <a href="#potions-smithing-table-specialized-workstations" class="md-skip">
           Skip to content
         </a>
       
@@ -952,22 +952,22 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-gating-alchemy-potions" class="md-nav__link">
+  <a href="#1-gating-alchemy-potion-brewing" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Gating Alchemy &amp; Potions
+        1. Gating Alchemy &amp; Potion Brewing
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="1. Gating Alchemy &amp; Potions">
+    <nav class="md-nav" aria-label="1. Gating Alchemy &amp; Potion Brewing">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#step-1-restrict-the-potion-in-configyml" class="md-nav__link">
+  <a href="#step-1-restrict-potions-in-configyml" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Step 1: Restrict the Potion in config.yml
+        Step 1: Restrict Potions in config.yml
       
     </span>
   </a>
@@ -979,6 +979,17 @@
     <span class="md-ellipsis">
       
         Step 2: Create the Alchemy Blueprint
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#in-game-brewing-interception" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        In-Game Brewing Interception:
       
     </span>
   </a>
@@ -1007,6 +1018,45 @@
     <span class="md-ellipsis">
       
         Restricting Netherite Upgrades
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#in-game-smithing-interception" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        In-Game Smithing Interception:
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-workstations-configuration-stations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Workstations Configuration (stations)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Workstations Configuration (stations)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#hopper-protection-for-automated-furnaces" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Hopper Protection for Automated Furnaces:
       
     </span>
   </a>
@@ -1875,22 +1925,22 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-gating-alchemy-potions" class="md-nav__link">
+  <a href="#1-gating-alchemy-potion-brewing" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Gating Alchemy &amp; Potions
+        1. Gating Alchemy &amp; Potion Brewing
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="1. Gating Alchemy &amp; Potions">
+    <nav class="md-nav" aria-label="1. Gating Alchemy &amp; Potion Brewing">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#step-1-restrict-the-potion-in-configyml" class="md-nav__link">
+  <a href="#step-1-restrict-potions-in-configyml" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Step 1: Restrict the Potion in config.yml
+        Step 1: Restrict Potions in config.yml
       
     </span>
   </a>
@@ -1902,6 +1952,17 @@
     <span class="md-ellipsis">
       
         Step 2: Create the Alchemy Blueprint
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#in-game-brewing-interception" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        In-Game Brewing Interception:
       
     </span>
   </a>
@@ -1936,6 +1997,45 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#in-game-smithing-interception" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        In-Game Smithing Interception:
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-workstations-configuration-stations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Workstations Configuration (stations)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Workstations Configuration (stations)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#hopper-protection-for-automated-furnaces" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Hopper Protection for Automated Furnaces:
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1961,39 +2061,57 @@
   
 
 
-<h1 id="potions-smithing-upgrades">Potions &amp; Smithing Upgrades</h1>
-<p>In addition to standard 3x3 crafting tables, CraftingBlueprints supports gating <strong>Alchemy (Brewing Stands)</strong> and <strong>Smithing Table Upgrades</strong>.</p>
+<h1 id="potions-smithing-table-specialized-workstations">Potions, Smithing Table &amp; Specialized Workstations</h1>
+<p>Beyond standard 3x3 crafting tables, CraftingBlueprints intercepts and gates specialized Minecraft workstations: <strong>Alchemy (Brewing Stands)</strong>, <strong>Smithing Tables (Netherite Upgrades &amp; Armor Trims)</strong>, <strong>Smelting Furnaces</strong>, <strong>Stonecutters</strong>, and <strong>Enchantment Tables</strong>.</p>
 <hr />
-<h2 id="1-gating-alchemy-potions">1. Gating Alchemy &amp; Potions</h2>
-<p>You can lock high-tier combat potions (e.g., Strength II, Invisibility, Turtle Master) behind alchemy blueprints.</p>
-<h3 id="step-1-restrict-the-potion-in-configyml">Step 1: Restrict the Potion in config.yml</h3>
-<p>In <code>plugins/CraftingBlueprints/config.yml</code>:</p>
+<h2 id="1-gating-alchemy-potion-brewing">1. Gating Alchemy &amp; Potion Brewing</h2>
+<p>High-tier combat potions (Strength II, Speed II, Invisibility, Turtle Master) can destabilize PvP economies if left unrestricted. CraftingBlueprints tracks Brewing Stand operations in real time.</p>
+<h3 id="step-1-restrict-potions-in-configyml">Step 1: Restrict Potions in <code>config.yml</code></h3>
+<p>Under <code>restrictions.restricted-items</code>, add potion patterns using the <code>potion:</code> category prefix:</p>
 <div class="language-yaml highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nt">restrictions</span><span class="p">:</span>
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="nt">mode</span><span class="p">:</span><span class="w"> </span><span class="s">"restricted-only"</span>
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">  </span><span class="nt">restricted-items</span><span class="p">:</span>
 </span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"potion:strength.*"</span>
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"potion:invisibility.*"</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"potion:speed.*"</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"potion:invisibility.*"</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"potion:turtle_master.*"</span>
 </span></code></pre></div>
 <h3 id="step-2-create-the-alchemy-blueprint">Step 2: Create the Alchemy Blueprint</h3>
-<p>In <code>plugins/CraftingBlueprints/blueprints/potions.yml</code>:</p>
-<div class="language-yaml highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nt">singles</span><span class="p">:</span>
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="nt">strength_potion_recipe</span><span class="p">:</span>
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="nt">blueprint</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">POTION</span>
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">"&lt;gradient:#FF0000:#FF7700&gt;&lt;bold&gt;Elixir</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">Greater</span><span class="nv"> </span><span class="s">Strength&lt;/bold&gt;&lt;/gradient&gt;"</span>
-</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">    </span><span class="nt">permanent</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">    </span><span class="nt">rendering</span><span class="p">:</span>
-</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">      </span><span class="nt">background</span><span class="p">:</span><span class="w"> </span><span class="s">"texture_transmutation_circle"</span>
-</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">      </span><span class="nt">tier</span><span class="p">:</span><span class="w"> </span><span class="s">"RARE"</span>
-</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">    </span><span class="nt">lore</span><span class="p">:</span>
-</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"&lt;gray&gt;Unlocks</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">ability</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">brew</span><span class="nv"> </span><span class="s">Strength</span><span class="nv"> </span><span class="s">potions.&lt;/gray&gt;"</span>
+<p>In any blueprint file (e.g. <code>plugins/CraftingBlueprints/blueprints/alchemy.yml</code>):</p>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># yaml-language-server: $schema=./blueprint.schema.json</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nt">singles</span><span class="p">:</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">  </span><span class="nt">elixir_of_strength</span><span class="p">:</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="nt">blueprint</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">STRENGTH</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">"&lt;gradient:#FF0000:#FF7700&gt;&lt;bold&gt;Elixir</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">Greater</span><span class="nv"> </span><span class="s">Strength</span><span class="nv"> </span><span class="s">Blueprint&lt;/bold&gt;&lt;/gradient&gt;"</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">    </span><span class="nt">permanent</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">    </span><span class="nt">item</span><span class="p">:</span>
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">      </span><span class="nt">material</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">POTION</span>
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="w">      </span><span class="nt">glowing</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>
+</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="w">    </span><span class="nt">map</span><span class="p">:</span>
+</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="w">      </span><span class="nt">theme</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">transmutation_circle</span>
+</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="w">      </span><span class="nt">frame</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">runic</span>
+</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="w">      </span><span class="nt">badge</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">brewing</span>
+</span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>
+</span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="w">    </span><span class="nt">lore</span><span class="p">:</span>
+</span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"&lt;gray&gt;Classification:&lt;/gray&gt;</span><span class="nv"> </span><span class="s">&lt;gold&gt;Master</span><span class="nv"> </span><span class="s">Alchemy&lt;/gold&gt;"</span>
+</span><span id="__span-1-19"><a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"&lt;gray&gt;Unlocks:&lt;/gray&gt;</span><span class="nv"> </span><span class="s">&lt;white&gt;Strength</span><span class="nv"> </span><span class="s">I</span><span class="nv"> </span><span class="s">&amp;</span><span class="nv"> </span><span class="s">Strength</span><span class="nv"> </span><span class="s">II</span><span class="nv"> </span><span class="s">Brewing&lt;/white&gt;"</span>
+</span><span id="__span-1-20"><a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">""</span>
+</span><span id="__span-1-21"><a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"&lt;dark_gray&gt;Right-click</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">hand</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">memorize</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">recipe.&lt;/dark_gray&gt;"</span>
 </span></code></pre></div>
-<p>When a player places blaze powder and brewing ingredients into a Brewing Stand, the brewing process only completes if the player has unlocked the required blueprint.</p>
+<h3 id="in-game-brewing-interception">In-Game Brewing Interception:</h3>
+<ol>
+<li>When a player inserts ingredients and water bottles into a Brewing Stand, the plugin evaluates the output bottles upon brewing completion.</li>
+<li>If the player who loaded the stand has unlocked the blueprint, the brewing completes successfully.</li>
+<li>If the player lacks the blueprint, the brewing operation is blocked and ingredients remain safe.</li>
+</ol>
 <hr />
 <h2 id="2-gating-smithing-table-upgrades-netherite-armor-trims">2. Gating Smithing Table Upgrades (Netherite &amp; Armor Trims)</h2>
-<p>Minecraft 1.20+ introduced the revised Smithing Table with Netherite Upgrade Templates and Armor Trims.</p>
+<p>Minecraft 1.20+ introduced the 3-slot Smithing Table requiring a <strong>Smithing Template</strong>, a <strong>Base Item</strong>, and an <strong>Ingot/Crystal Addition</strong>.</p>
 <h3 id="restricting-netherite-upgrades">Restricting Netherite Upgrades</h3>
-<p>To prevent players from upgrading Diamond gear into Netherite without finding an ancient forge schematic:</p>
-<p>In <code>config.yml</code>:
+<p>To prevent players from upgrading Diamond equipment into Netherite without finding ancient schematics:</p>
+<p>In <code>plugins/CraftingBlueprints/config.yml</code>:</p>
 <div class="language-yaml highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nt">restrictions</span><span class="p">:</span>
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="nt">mode</span><span class="p">:</span><span class="w"> </span><span class="s">"restricted-only"</span>
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">  </span><span class="nt">restricted-items</span><span class="p">:</span>
@@ -2006,19 +2124,74 @@
 </span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"netherite_chestplate"</span>
 </span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"netherite_leggings"</span>
 </span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"netherite_boots"</span>
-</span></code></pre></div></p>
-<p>In your blueprint file:
-<div class="language-yaml highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nt">singles</span><span class="p">:</span>
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="nt">ancient_netherite_forging</span><span class="p">:</span>
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="nt">blueprint</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">NETHERITE_CHESTPLATE</span>
-</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">"&lt;gold&gt;&lt;bold&gt;Ancient</span><span class="nv"> </span><span class="s">Netherite</span><span class="nv"> </span><span class="s">Smithing</span><span class="nv"> </span><span class="s">Technique&lt;/bold&gt;&lt;/gold&gt;"</span>
-</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">    </span><span class="nt">permanent</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">    </span><span class="nt">rendering</span><span class="p">:</span>
-</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">      </span><span class="nt">background</span><span class="p">:</span><span class="w"> </span><span class="s">"texture_dwarven_magma"</span>
-</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">      </span><span class="nt">tier</span><span class="p">:</span><span class="w"> </span><span class="s">"EPIC"</span>
-</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="w">      </span><span class="nt">guilloche_border</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-</span></code></pre></div></p>
-<p>If an unauthorized player places a Diamond chestplate, netherite ingot, and upgrade template into the smithing table, the output slot remains locked until they unlock the blueprint.</p>
+</span></code></pre></div>
+<p>In your blueprint file (e.g. <code>blueprints/netherite.yml</code>):</p>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># yaml-language-server: $schema=./blueprint.schema.json</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="nt">singles</span><span class="p">:</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">  </span><span class="nt">ancient_netherite_smithing</span><span class="p">:</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="nt">blueprint</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">NETHERITE_CHESTPLATE</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">"&lt;gradient:#FF5555:#FFAA00&gt;&lt;bold&gt;Ancient</span><span class="nv"> </span><span class="s">Netherite</span><span class="nv"> </span><span class="s">Smithing</span><span class="nv"> </span><span class="s">Technique&lt;/bold&gt;&lt;/gradient&gt;"</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">    </span><span class="nt">permanent</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">    </span><span class="nt">item</span><span class="p">:</span>
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="w">      </span><span class="nt">material</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">FILLED_MAP</span>
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="w">      </span><span class="nt">glowing</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>
+</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="w">    </span><span class="nt">map</span><span class="p">:</span>
+</span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="w">      </span><span class="nt">theme</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dwarven_magma</span>
+</span><span id="__span-3-14"><a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="w">      </span><span class="nt">frame</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">rosette</span>
+</span><span id="__span-3-15"><a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="w">      </span><span class="nt">badge</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">smithing</span>
+</span><span id="__span-3-16"><a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="w">      </span><span class="nt">item_outline</span><span class="p">:</span>
+</span><span id="__span-3-17"><a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="w">        </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</span><span id="__span-3-18"><a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a><span class="w">        </span><span class="nt">width</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
+</span><span id="__span-3-19"><a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a><span class="w">        </span><span class="nt">color</span><span class="p">:</span><span class="w"> </span><span class="s">"gold"</span>
+</span><span id="__span-3-20"><a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a>
+</span><span id="__span-3-21"><a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a><span class="w">    </span><span class="nt">lore</span><span class="p">:</span>
+</span><span id="__span-3-22"><a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"&lt;gray&gt;Target</span><span class="nv"> </span><span class="s">Equipment:&lt;/gray&gt;</span><span class="nv"> </span><span class="s">&lt;white&gt;Netherite</span><span class="nv"> </span><span class="s">Upgrades&lt;/white&gt;"</span>
+</span><span id="__span-3-23"><a id="__codelineno-3-23" name="__codelineno-3-23" href="#__codelineno-3-23"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"&lt;gray&gt;Status:&lt;/gray&gt;</span><span class="nv"> </span><span class="s">&lt;green&gt;Permanent</span><span class="nv"> </span><span class="s">Unlock&lt;/green&gt;"</span>
+</span><span id="__span-3-24"><a id="__codelineno-3-24" name="__codelineno-3-24" href="#__codelineno-3-24"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">""</span>
+</span><span id="__span-3-25"><a id="__codelineno-3-25" name="__codelineno-3-25" href="#__codelineno-3-25"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"&lt;yellow&gt;Grants</span><span class="nv"> </span><span class="s">knowledge</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">forge</span><span class="nv"> </span><span class="s">Netherite</span><span class="nv"> </span><span class="s">armor.&lt;/yellow&gt;"</span>
+</span></code></pre></div>
+<h3 id="in-game-smithing-interception">In-Game Smithing Interception:</h3>
+<ul>
+<li>When an unauthorized player inserts a Netherite Upgrade Template, a Diamond item, and a Netherite Ingot, the output slot remains locked.</li>
+<li>If <code>ux.prepare-preview.mode: "LOCKED_OVERLAY"</code> is configured, the output slot displays the Netherite item with red warning lore: <code>&lt;red&gt;&lt;bold&gt;Recipe Locked: Requires Ancient Netherite Smithing Technique&lt;/bold&gt;&lt;/red&gt;</code>.</li>
+</ul>
+<hr />
+<h2 id="3-workstations-configuration-stations">3. Workstations Configuration (<code>stations</code>)</h2>
+<p>Under <code>stations:</code> in <code>plugins/CraftingBlueprints/config.yml</code>, configure workstation enforcement:</p>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nt">stations</span><span class="p">:</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span><span class="c1"># Smelting Stations (Furnace, Blast Furnace, Smoker, Campfire)</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">  </span><span class="nt">smelting</span><span class="p">:</span>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">    </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">    </span><span class="nt">restrict-furnace</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">    </span><span class="nt">restrict-blast-furnace</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">    </span><span class="nt">restrict-smoker</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="w">    </span><span class="nt">restrict-campfire</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>
+</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="w">    </span><span class="c1"># Hopper Ownership Protection: tracks the player who placed the hopper.</span>
+</span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="w">    </span><span class="c1"># Unowned hoppers cannot smelt restricted recipes.</span>
+</span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="w">    </span><span class="nt">track-hoppers</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</span><span id="__span-4-13"><a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>
+</span><span id="__span-4-14"><a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a><span class="w">    </span><span class="c1"># Play fail click and smoke particles when a smelt is blocked</span>
+</span><span id="__span-4-15"><a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a><span class="w">    </span><span class="nt">fail-effect</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</span><span id="__span-4-16"><a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a>
+</span><span id="__span-4-17"><a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a><span class="w">  </span><span class="c1"># Stonecutter Station</span>
+</span><span id="__span-4-18"><a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a><span class="w">  </span><span class="nt">stonecutter</span><span class="p">:</span>
+</span><span id="__span-4-19"><a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a><span class="w">    </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</span><span id="__span-4-20"><a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a><span class="w">    </span><span class="nt">prepare-preview</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</span><span id="__span-4-21"><a id="__codelineno-4-21" name="__codelineno-4-21" href="#__codelineno-4-21"></a>
+</span><span id="__span-4-22"><a id="__codelineno-4-22" name="__codelineno-4-22" href="#__codelineno-4-22"></a><span class="w">  </span><span class="c1"># Enchantment Table Station</span>
+</span><span id="__span-4-23"><a id="__codelineno-4-23" name="__codelineno-4-23" href="#__codelineno-4-23"></a><span class="w">  </span><span class="nt">enchanting-table</span><span class="p">:</span>
+</span><span id="__span-4-24"><a id="__codelineno-4-24" name="__codelineno-4-24" href="#__codelineno-4-24"></a><span class="w">    </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</span><span id="__span-4-25"><a id="__codelineno-4-25" name="__codelineno-4-25" href="#__codelineno-4-25"></a><span class="w">    </span><span class="nt">cancel-if-locked</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</span><span id="__span-4-26"><a id="__codelineno-4-26" name="__codelineno-4-26" href="#__codelineno-4-26"></a><span class="w">    </span><span class="nt">send-fail-message</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</span></code></pre></div>
+<h3 id="hopper-protection-for-automated-furnaces">Hopper Protection for Automated Furnaces:</h3>
+<p>When players automate smelting using hoppers feeding into Furnaces or Blast Furnaces:
+* When <code>track-hoppers: true</code> is enabled, CraftingBlueprints records the UUID of the player who placed the hopper into its PersistentDataContainer (PDC).
+* The smelting station inherits the placer's blueprint unlocks.
+* Hoppers placed by unauthorized players (or naturally generated hoppers) cannot automatically smelt restricted items.</p>
 
 
 

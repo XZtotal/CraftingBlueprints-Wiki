@@ -1225,52 +1225,35 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#recommended-luckperms-configurations" class="md-nav__link">
+  <a href="#recipe-group-permissions-craftingblueprintsgroupid" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Recommended LuckPerms Configurations
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Recommended LuckPerms Configurations">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1-default-players-default-group" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1. Default Players (default group)
+        Recipe Group Permissions (craftingblueprints.group.&lt;id&gt;)
       
     </span>
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#2-moderators-builders-moderator-group" class="md-nav__link">
+      
+        <li class="md-nav__item">
+  <a href="#production-luckperms-configurations" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Moderators / Builders (moderator group)
+        Production LuckPerms Configurations
       
     </span>
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#3-server-administrators-admin-group" class="md-nav__link">
+      
+        <li class="md-nav__item">
+  <a href="#network-world-specific-permissions" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Server Administrators (admin group)
+        Network &amp; World-Specific Permissions
       
     </span>
   </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -1880,52 +1863,35 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#recommended-luckperms-configurations" class="md-nav__link">
+  <a href="#recipe-group-permissions-craftingblueprintsgroupid" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Recommended LuckPerms Configurations
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Recommended LuckPerms Configurations">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1-default-players-default-group" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1. Default Players (default group)
+        Recipe Group Permissions (craftingblueprints.group.&lt;id&gt;)
       
     </span>
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#2-moderators-builders-moderator-group" class="md-nav__link">
+      
+        <li class="md-nav__item">
+  <a href="#production-luckperms-configurations" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Moderators / Builders (moderator group)
+        Production LuckPerms Configurations
       
     </span>
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#3-server-administrators-admin-group" class="md-nav__link">
+      
+        <li class="md-nav__item">
+  <a href="#network-world-specific-permissions" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Server Administrators (admin group)
+        Network &amp; World-Specific Permissions
       
     </span>
   </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -1950,98 +1916,187 @@
 
 
 <h1 id="permissions-luckperms-guide">Permissions &amp; LuckPerms Guide</h1>
-<p>This guide details all permission nodes for CraftingBlueprints and provides copy-paste permission sets for your LuckPerms groups.</p>
+<p>This guide provides the complete permission nodes reference for CraftingBlueprints, explains recipe group permission mechanics, and provides copy-paste LuckPerms configurations for production server ranks.</p>
 <hr />
 <h2 id="master-permissions-table">Master Permissions Table</h2>
 <table>
 <thead>
 <tr>
 <th style="text-align: left;">Permission Node</th>
-<th style="text-align: left;">Description</th>
-<th style="text-align: left;">Default</th>
+<th style="text-align: left;">Default Assignment</th>
+<th style="text-align: left;">Description &amp; Access Scope</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td style="text-align: left;"><code>craftingblueprints.*</code></td>
-<td style="text-align: left;">Grants full administrative access to all commands and features.</td>
-<td style="text-align: left;"><code>op</code></td>
+<td style="text-align: left;">Server Operators (<code>op</code>)</td>
+<td style="text-align: left;">Grants unrestricted access to all commands, editors, and administrative tools.</td>
 </tr>
 <tr>
 <td style="text-align: left;"><code>craftingblueprints.menu</code></td>
+<td style="text-align: left;"><code>true</code> (All Players)</td>
 <td style="text-align: left;">Allows opening the personal progression dashboard (<code>/cb menu</code>).</td>
-<td style="text-align: left;"><code>true</code> (all players)</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>craftingblueprints.item.list</code></td>
-<td style="text-align: left;">Allows opening the public blueprint catalog (<code>/cb item list</code>).</td>
-<td style="text-align: left;"><code>true</code> (all players)</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>craftingblueprints.info</code></td>
-<td style="text-align: left;">Allows viewing detailed recipe specs (<code>/cb info</code>).</td>
-<td style="text-align: left;"><code>true</code> (all players)</td>
 </tr>
 <tr>
 <td style="text-align: left;"><code>craftingblueprints.return</code></td>
-<td style="text-align: left;">Allows using the back navigation stack (<code>/cb return</code>).</td>
-<td style="text-align: left;"><code>true</code> (all players)</td>
+<td style="text-align: left;"><code>true</code> (All Players)</td>
+<td style="text-align: left;">Allows navigating back through previous menus using <code>/cb return</code>.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>craftingblueprints.item.list</code></td>
+<td style="text-align: left;"><code>true</code> (All Players)</td>
+<td style="text-align: left;">Allows opening the public blueprint catalog and shop (<code>/cb item list</code>).</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>craftingblueprints.info</code></td>
+<td style="text-align: left;"><code>true</code> (All Players)</td>
+<td style="text-align: left;">Allows viewing detailed 3x3 recipe specifications and lore via <code>/cb info</code>.</td>
 </tr>
 <tr>
 <td style="text-align: left;"><code>craftingblueprints.give</code></td>
-<td style="text-align: left;">Allows giving blueprints to players (<code>/cb give</code>).</td>
-<td style="text-align: left;"><code>op</code></td>
+<td style="text-align: left;">Server Operators (<code>op</code>)</td>
+<td style="text-align: left;">Allows distributing physical blueprints to players via <code>/cb give</code>.</td>
 </tr>
 <tr>
 <td style="text-align: left;"><code>craftingblueprints.reload</code></td>
-<td style="text-align: left;">Allows hot-reloading configurations (<code>/cb reload</code>).</td>
-<td style="text-align: left;"><code>op</code></td>
+<td style="text-align: left;">Server Operators (<code>op</code>)</td>
+<td style="text-align: left;">Allows hot-reloading configurations, translations, and blueprints (<code>/cb reload</code>).</td>
 </tr>
 <tr>
 <td style="text-align: left;"><code>craftingblueprints.admin</code></td>
-<td style="text-align: left;">Access to core administration tools (<code>/cb validate</code>, etc.).</td>
-<td style="text-align: left;"><code>op</code></td>
+<td style="text-align: left;">Server Operators (<code>op</code>)</td>
+<td style="text-align: left;">Allows executing dry-run syntax validation passes (<code>/cb validate</code>).</td>
 </tr>
 <tr>
 <td style="text-align: left;"><code>craftingblueprints.status</code></td>
-<td style="text-align: left;">Allows running diagnostic health checks (<code>/cb status</code>).</td>
-<td style="text-align: left;"><code>op</code></td>
+<td style="text-align: left;">Server Operators (<code>op</code>)</td>
+<td style="text-align: left;">Allows viewing system metrics, database health, and latency (<code>/cb status</code>).</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>craftingblueprints.item.edit</code></td>
+<td style="text-align: left;">Server Operators (<code>op</code>)</td>
+<td style="text-align: left;">Allows opening the visual in-game GUI blueprint editor (<code>/cb item edit</code>).</td>
 </tr>
 <tr>
 <td style="text-align: left;"><code>craftingblueprints.admin.preset</code></td>
-<td style="text-align: left;">Allows installing or removing preset packs (<code>/cb preset</code>).</td>
-<td style="text-align: left;"><code>op</code></td>
+<td style="text-align: left;">Server Operators (<code>op</code>)</td>
+<td style="text-align: left;">Allows installing, previewing, and removing modality presets (<code>/cb preset</code>).</td>
 </tr>
 <tr>
 <td style="text-align: left;"><code>craftingblueprints.admin.generate</code></td>
-<td style="text-align: left;">Allows auto-scaffolding blueprints from recipes (<code>/cb generate</code>).</td>
-<td style="text-align: left;"><code>op</code></td>
+<td style="text-align: left;">Server Operators (<code>op</code>)</td>
+<td style="text-align: left;">Allows auto-scaffolding blueprint YAML files from recipes (<code>/cb generate</code>).</td>
 </tr>
 <tr>
 <td style="text-align: left;"><code>craftingblueprints.bypass.ownership</code></td>
-<td style="text-align: left;">Bypasses item ownership restrictions.</td>
-<td style="text-align: left;"><code>op</code></td>
+<td style="text-align: left;">Server Operators (<code>op</code>)</td>
+<td style="text-align: left;">Allows holding, inspecting, and learning blueprints bound to other player UUIDs.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>craftingblueprints.group.&lt;id&gt;</code></td>
+<td style="text-align: left;">None</td>
+<td style="text-align: left;">Unlocks all recipes configured within the specified permission group in <code>config.yml</code>.</td>
 </tr>
 </tbody>
 </table>
 <hr />
-<h2 id="recommended-luckperms-configurations">Recommended LuckPerms Configurations</h2>
-<p>Run these commands in your console to configure your server ranks cleanly:</p>
-<h3 id="1-default-players-default-group">1. Default Players (<code>default</code> group)</h3>
-<p>Standard players only need access to view their own progress and open the catalog:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>lp<span class="w"> </span>group<span class="w"> </span>default<span class="w"> </span>permission<span class="w"> </span><span class="nb">set</span><span class="w"> </span>craftingblueprints.menu<span class="w"> </span><span class="nb">true</span>
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>lp<span class="w"> </span>group<span class="w"> </span>default<span class="w"> </span>permission<span class="w"> </span><span class="nb">set</span><span class="w"> </span>craftingblueprints.item.list<span class="w"> </span><span class="nb">true</span>
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>lp<span class="w"> </span>group<span class="w"> </span>default<span class="w"> </span>permission<span class="w"> </span><span class="nb">set</span><span class="w"> </span>craftingblueprints.info<span class="w"> </span><span class="nb">true</span>
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>lp<span class="w"> </span>group<span class="w"> </span>default<span class="w"> </span>permission<span class="w"> </span><span class="nb">set</span><span class="w"> </span>craftingblueprints.return<span class="w"> </span><span class="nb">true</span>
+<h2 id="recipe-group-permissions-craftingblueprintsgroupid">Recipe Group Permissions (<code>craftingblueprints.group.&lt;id&gt;</code>)</h2>
+<p>In <code>plugins/CraftingBlueprints/config.yml</code>, you define permission groups (e.g., <code>default</code>, <code>vip</code>, <code>pro</code>, <code>alchemist</code>):</p>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nt">groups</span><span class="p">:</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="nt">vip</span><span class="p">:</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">"VIP"</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="nt">inherits</span><span class="p">:</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">default</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">    </span><span class="nt">blueprints</span><span class="p">:</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"iron_.*"</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"shield"</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"crossbow"</span>
 </span></code></pre></div>
-<h3 id="2-moderators-builders-moderator-group">2. Moderators / Builders (<code>moderator</code> group)</h3>
-<p>Moderators who need to inspect plugin status:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>lp<span class="w"> </span>group<span class="w"> </span>moderator<span class="w"> </span>permission<span class="w"> </span><span class="nb">set</span><span class="w"> </span>craftingblueprints.status<span class="w"> </span><span class="nb">true</span>
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>lp<span class="w"> </span>group<span class="w"> </span>moderator<span class="w"> </span>permission<span class="w"> </span><span class="nb">set</span><span class="w"> </span>craftingblueprints.info<span class="w"> </span><span class="nb">true</span>
+<p>To grant all recipes in the <code>vip</code> group to your VIP rank, assign the node:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>craftingblueprints.group.vip
 </span></code></pre></div>
-<h3 id="3-server-administrators-admin-group">3. Server Administrators (<code>admin</code> group)</h3>
-<p>Full access to reload, validate, and grant items:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>lp<span class="w"> </span>group<span class="w"> </span>admin<span class="w"> </span>permission<span class="w"> </span><span class="nb">set</span><span class="w"> </span>craftingblueprints.*<span class="w"> </span><span class="nb">true</span>
+<p>Because <code>vip</code> inherits <code>default</code>, players with this permission automatically unlock all recipes in <code>default</code> as well.</p>
+<hr />
+<h2 id="production-luckperms-configurations">Production LuckPerms Configurations</h2>
+<p>Below are ready-to-use configurations for standard server ranks:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">LuckPerms CLI Commands</label><label for="__tabbed_1_2">YAML Format (groups.yml)</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p>Run these commands in your server console or in-game as an administrator:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># --------------------------------------------------</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="c1"># 1. Default Players (default rank)</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="c1"># --------------------------------------------------</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>lp<span class="w"> </span>group<span class="w"> </span>default<span class="w"> </span>permission<span class="w"> </span><span class="nb">set</span><span class="w"> </span>craftingblueprints.menu<span class="w"> </span><span class="nb">true</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>lp<span class="w"> </span>group<span class="w"> </span>default<span class="w"> </span>permission<span class="w"> </span><span class="nb">set</span><span class="w"> </span>craftingblueprints.return<span class="w"> </span><span class="nb">true</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>lp<span class="w"> </span>group<span class="w"> </span>default<span class="w"> </span>permission<span class="w"> </span><span class="nb">set</span><span class="w"> </span>craftingblueprints.item.list<span class="w"> </span><span class="nb">true</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>lp<span class="w"> </span>group<span class="w"> </span>default<span class="w"> </span>permission<span class="w"> </span><span class="nb">set</span><span class="w"> </span>craftingblueprints.info<span class="w"> </span><span class="nb">true</span>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>lp<span class="w"> </span>group<span class="w"> </span>default<span class="w"> </span>permission<span class="w"> </span><span class="nb">set</span><span class="w"> </span>craftingblueprints.group.default<span class="w"> </span><span class="nb">true</span>
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="c1"># --------------------------------------------------</span>
+</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="c1"># 2. VIP Players (vip rank)</span>
+</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="c1"># --------------------------------------------------</span>
+</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>lp<span class="w"> </span>group<span class="w"> </span>vip<span class="w"> </span>permission<span class="w"> </span><span class="nb">set</span><span class="w"> </span>craftingblueprints.group.vip<span class="w"> </span><span class="nb">true</span>
+</span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>
+</span><span id="__span-2-15"><a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="c1"># --------------------------------------------------</span>
+</span><span id="__span-2-16"><a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="c1"># 3. Moderators &amp; Staff (moderator rank)</span>
+</span><span id="__span-2-17"><a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a><span class="c1"># --------------------------------------------------</span>
+</span><span id="__span-2-18"><a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a>lp<span class="w"> </span>group<span class="w"> </span>moderator<span class="w"> </span>permission<span class="w"> </span><span class="nb">set</span><span class="w"> </span>craftingblueprints.status<span class="w"> </span><span class="nb">true</span>
+</span><span id="__span-2-19"><a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a>lp<span class="w"> </span>group<span class="w"> </span>moderator<span class="w"> </span>permission<span class="w"> </span><span class="nb">set</span><span class="w"> </span>craftingblueprints.bypass.ownership<span class="w"> </span><span class="nb">true</span>
+</span><span id="__span-2-20"><a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a>
+</span><span id="__span-2-21"><a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a><span class="c1"># --------------------------------------------------</span>
+</span><span id="__span-2-22"><a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a><span class="c1"># 4. Server Administrators (admin rank)</span>
+</span><span id="__span-2-23"><a id="__codelineno-2-23" name="__codelineno-2-23" href="#__codelineno-2-23"></a><span class="c1"># --------------------------------------------------</span>
+</span><span id="__span-2-24"><a id="__codelineno-2-24" name="__codelineno-2-24" href="#__codelineno-2-24"></a>lp<span class="w"> </span>group<span class="w"> </span>admin<span class="w"> </span>permission<span class="w"> </span><span class="nb">set</span><span class="w"> </span>craftingblueprints.*<span class="w"> </span><span class="nb">true</span>
+</span></code></pre></div>
+</div>
+<div class="tabbed-block">
+<p>If you manage LuckPerms via file storage (<code>plugins/LuckPerms/yaml-storage/groups.yml</code>):</p>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nt">default</span><span class="p">:</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="nt">permissions</span><span class="p">:</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">craftingblueprints.menu</span><span class="p">:</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">craftingblueprints.return</span><span class="p">:</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">craftingblueprints.item.list</span><span class="p">:</span>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">craftingblueprints.info</span><span class="p">:</span>
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">craftingblueprints.group.default</span><span class="p">:</span>
+</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>
+</span><span id="__span-3-14"><a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="nt">vip</span><span class="p">:</span>
+</span><span id="__span-3-15"><a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="w">  </span><span class="nt">parents</span><span class="p">:</span>
+</span><span id="__span-3-16"><a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">default</span>
+</span><span id="__span-3-17"><a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="w">  </span><span class="nt">permissions</span><span class="p">:</span>
+</span><span id="__span-3-18"><a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">craftingblueprints.group.vip</span><span class="p">:</span>
+</span><span id="__span-3-19"><a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a><span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</span><span id="__span-3-20"><a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a>
+</span><span id="__span-3-21"><a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a><span class="nt">moderator</span><span class="p">:</span>
+</span><span id="__span-3-22"><a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a><span class="w">  </span><span class="nt">parents</span><span class="p">:</span>
+</span><span id="__span-3-23"><a id="__codelineno-3-23" name="__codelineno-3-23" href="#__codelineno-3-23"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">default</span>
+</span><span id="__span-3-24"><a id="__codelineno-3-24" name="__codelineno-3-24" href="#__codelineno-3-24"></a><span class="w">  </span><span class="nt">permissions</span><span class="p">:</span>
+</span><span id="__span-3-25"><a id="__codelineno-3-25" name="__codelineno-3-25" href="#__codelineno-3-25"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">craftingblueprints.status</span><span class="p">:</span>
+</span><span id="__span-3-26"><a id="__codelineno-3-26" name="__codelineno-3-26" href="#__codelineno-3-26"></a><span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</span><span id="__span-3-27"><a id="__codelineno-3-27" name="__codelineno-3-27" href="#__codelineno-3-27"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">craftingblueprints.bypass.ownership</span><span class="p">:</span>
+</span><span id="__span-3-28"><a id="__codelineno-3-28" name="__codelineno-3-28" href="#__codelineno-3-28"></a><span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</span><span id="__span-3-29"><a id="__codelineno-3-29" name="__codelineno-3-29" href="#__codelineno-3-29"></a>
+</span><span id="__span-3-30"><a id="__codelineno-3-30" name="__codelineno-3-30" href="#__codelineno-3-30"></a><span class="nt">admin</span><span class="p">:</span>
+</span><span id="__span-3-31"><a id="__codelineno-3-31" name="__codelineno-3-31" href="#__codelineno-3-31"></a><span class="w">  </span><span class="nt">permissions</span><span class="p">:</span>
+</span><span id="__span-3-32"><a id="__codelineno-3-32" name="__codelineno-3-32" href="#__codelineno-3-32"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">craftingblueprints.*</span><span class="p">:</span>
+</span><span id="__span-3-33"><a id="__codelineno-3-33" name="__codelineno-3-33" href="#__codelineno-3-33"></a><span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</span></code></pre></div>
+</div>
+</div>
+</div>
+<hr />
+<h2 id="network-world-specific-permissions">Network &amp; World-Specific Permissions</h2>
+<p>On multi-server networks or multi-world servers where crafting progression differs between worlds (e.g. Survival vs Creative):</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># Allow catalog access only in the survival world</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>lp<span class="w"> </span>group<span class="w"> </span>default<span class="w"> </span>permission<span class="w"> </span><span class="nb">set</span><span class="w"> </span>craftingblueprints.item.list<span class="w"> </span><span class="nb">true</span><span class="w"> </span><span class="nv">world</span><span class="o">=</span>survival
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="c1"># Restrict admin status check to the management hub server</span>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>lp<span class="w"> </span>group<span class="w"> </span>moderator<span class="w"> </span>permission<span class="w"> </span><span class="nb">set</span><span class="w"> </span>craftingblueprints.status<span class="w"> </span><span class="nb">true</span><span class="w"> </span><span class="nv">server</span><span class="o">=</span>lobby
 </span></code></pre></div>
 
 

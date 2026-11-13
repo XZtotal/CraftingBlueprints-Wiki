@@ -444,10 +444,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-hot-reload-the-blueprints" class="md-nav__link">
+  <a href="#2-dry-run-syntax-validation-cb-validate" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Hot-Reload the Blueprints
+        2. Dry-Run Syntax Validation (/cb validate)
       
     </span>
   </a>
@@ -455,10 +455,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#3-grant-the-blueprint-to-yourself" class="md-nav__link">
+  <a href="#3-hot-reload-the-blueprints" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Grant the Blueprint to Yourself
+        3. Hot-Reload the Blueprints
       
     </span>
   </a>
@@ -466,10 +466,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#4-learn-and-craft" class="md-nav__link">
+  <a href="#4-grant-the-blueprint-item-to-yourself" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4. Learn and Craft
+        4. Grant the Blueprint Item to Yourself
       
     </span>
   </a>
@@ -477,10 +477,21 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#whats-next" class="md-nav__link">
+  <a href="#5-unlock-and-craft-in-survival" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What's Next?
+        5. Unlock and Craft in Survival
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#next-steps-deep-exploration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Next Steps &amp; Deep Exploration
       
     </span>
   </a>
@@ -1874,10 +1885,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-hot-reload-the-blueprints" class="md-nav__link">
+  <a href="#2-dry-run-syntax-validation-cb-validate" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Hot-Reload the Blueprints
+        2. Dry-Run Syntax Validation (/cb validate)
       
     </span>
   </a>
@@ -1885,10 +1896,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#3-grant-the-blueprint-to-yourself" class="md-nav__link">
+  <a href="#3-hot-reload-the-blueprints" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Grant the Blueprint to Yourself
+        3. Hot-Reload the Blueprints
       
     </span>
   </a>
@@ -1896,10 +1907,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#4-learn-and-craft" class="md-nav__link">
+  <a href="#4-grant-the-blueprint-item-to-yourself" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4. Learn and Craft
+        4. Grant the Blueprint Item to Yourself
       
     </span>
   </a>
@@ -1907,10 +1918,21 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#whats-next" class="md-nav__link">
+  <a href="#5-unlock-and-craft-in-survival" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What's Next?
+        5. Unlock and Craft in Survival
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#next-steps-deep-exploration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Next Steps &amp; Deep Exploration
       
     </span>
   </a>
@@ -1938,72 +1960,103 @@
 
 
 <h1 id="quickstart-your-first-blueprint-in-3-minutes">Quickstart: Your First Blueprint in 3 Minutes</h1>
-<p>Follow this quick tutorial to create, grant, and craft your very first custom blueprint.</p>
+<p>This hands-on walkthrough guides you through creating, testing, granting, and crafting your very first custom blueprint on a live server.</p>
 <hr />
 <h2 id="1-create-a-test-blueprint-file">1. Create a Test Blueprint File</h2>
-<p>Navigate to your server directory and create a new YAML file named <code>test_sword.yml</code> inside:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>plugins/CraftingBlueprints/blueprints/test_sword.yml
+<p>Navigate to your server directory and create a new YAML file named <code>obsidian_blade.yml</code> inside the <code>blueprints/</code> directory:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>plugins/CraftingBlueprints/blueprints/obsidian_blade.yml
 </span></code></pre></div>
-<p>Paste the following configuration:</p>
-<div class="language-yaml highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nt">singles</span><span class="p">:</span>
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="nt">obsidian_blade</span><span class="p">:</span>
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="c1"># Target Bukkit recipe to unlock</span>
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="nt">blueprint</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DIAMOND_SWORD</span>
-</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">"&lt;gradient:#9900EE:#FF0055&gt;&lt;bold&gt;Obsidian</span><span class="nv"> </span><span class="s">Blade</span><span class="nv"> </span><span class="s">Blueprint&lt;/bold&gt;&lt;/gradient&gt;"</span>
-</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>
-</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">    </span><span class="c1"># Durability &amp; limits (permanent = player keeps the recipe forever)</span>
-</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">    </span><span class="nt">permanent</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">    </span><span class="nt">time</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span>
-</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="w">    </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span>
-</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>
-</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="w">    </span><span class="c1"># Physical item representation</span>
-</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="w">    </span><span class="nt">item</span><span class="p">:</span>
-</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="w">      </span><span class="nt">material</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">FILLED_MAP</span>
-</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="w">      </span><span class="nt">glowing</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<p>Paste the following production-ready configuration:</p>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># yaml-language-server: $schema=./blueprint.schema.json</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nt">singles</span><span class="p">:</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">  </span><span class="nt">obsidian_blade</span><span class="p">:</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="c1"># 1. Target Minecraft recipe to unlock</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">    </span><span class="nt">blueprint</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DIAMOND_SWORD</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">"&lt;gradient:#9900EE:#FF0055&gt;&lt;bold&gt;Obsidian</span><span class="nv"> </span><span class="s">Blade</span><span class="nv"> </span><span class="s">Blueprint&lt;/bold&gt;&lt;/gradient&gt;"</span>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">    </span><span class="c1"># 2. Durability &amp; Limits (permanent = unlocked forever)</span>
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">    </span><span class="nt">permanent</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="w">    </span><span class="nt">time</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span>
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="w">    </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span>
+</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>
+</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="w">    </span><span class="c1"># 3. Economy Pricing (Requires Vault)</span>
+</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="w">    </span><span class="nt">price</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5000.0</span>
+</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="w">    </span><span class="nt">sell_price</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1250.0</span>
 </span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>
-</span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="w">    </span><span class="c1"># Visual map aesthetic</span>
-</span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="w">    </span><span class="nt">rendering</span><span class="p">:</span>
-</span><span id="__span-1-19"><a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a><span class="w">      </span><span class="nt">background</span><span class="p">:</span><span class="w"> </span><span class="s">"texture_dwarven_magma"</span>
-</span><span id="__span-1-20"><a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a><span class="w">      </span><span class="nt">tier</span><span class="p">:</span><span class="w"> </span><span class="s">"EPIC"</span>
-</span><span id="__span-1-21"><a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a><span class="w">      </span><span class="nt">guilloche_border</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-</span><span id="__span-1-22"><a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a><span class="w">      </span><span class="nt">show_ingredients</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-</span><span id="__span-1-23"><a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a>
-</span><span id="__span-1-24"><a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a><span class="w">    </span><span class="c1"># Lore description</span>
-</span><span id="__span-1-25"><a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a><span class="w">    </span><span class="nt">lore</span><span class="p">:</span>
-</span><span id="__span-1-26"><a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"&lt;gray&gt;Schematic</span><span class="nv"> </span><span class="s">Target:&lt;/gray&gt;</span><span class="nv"> </span><span class="s">&lt;white&gt;{blueprint_target}&lt;/white&gt;"</span>
-</span><span id="__span-1-27"><a id="__codelineno-1-27" name="__codelineno-1-27" href="#__codelineno-1-27"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">""</span>
-</span><span id="__span-1-28"><a id="__codelineno-1-28" name="__codelineno-1-28" href="#__codelineno-1-28"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"&lt;dark_gray&gt;Right-click</span><span class="nv"> </span><span class="s">with</span><span class="nv"> </span><span class="s">this</span><span class="nv"> </span><span class="s">map</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">hand</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">unlock</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">recipe.&lt;/dark_gray&gt;"</span>
+</span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="w">    </span><span class="c1"># 4. In-Game Physical Item Representation</span>
+</span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="w">    </span><span class="nt">item</span><span class="p">:</span>
+</span><span id="__span-1-19"><a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a><span class="w">      </span><span class="nt">material</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">FILLED_MAP</span>
+</span><span id="__span-1-20"><a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a><span class="w">      </span><span class="nt">glowing</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</span><span id="__span-1-21"><a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a>
+</span><span id="__span-1-22"><a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a><span class="w">    </span><span class="c1"># 5. Visual Map Drafting Aesthetic</span>
+</span><span id="__span-1-23"><a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a><span class="w">    </span><span class="nt">map</span><span class="p">:</span>
+</span><span id="__span-1-24"><a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a><span class="w">      </span><span class="nt">theme</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">forge</span><span class="w">              </span><span class="c1"># Volcanic basalt &amp; ember background</span>
+</span><span id="__span-1-25"><a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a><span class="w">      </span><span class="nt">frame</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">rosette</span><span class="w">            </span><span class="c1"># Regal gilded corner rosettes</span>
+</span><span id="__span-1-26"><a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a><span class="w">      </span><span class="nt">badge</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">smithing</span><span class="w">           </span><span class="c1"># Workstation icon on top-left</span>
+</span><span id="__span-1-27"><a id="__codelineno-1-27" name="__codelineno-1-27" href="#__codelineno-1-27"></a><span class="w">      </span><span class="nt">icon_scale</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span><span class="w">             </span><span class="c1"># Sharp 2x pixel-art scaling</span>
+</span><span id="__span-1-28"><a id="__codelineno-1-28" name="__codelineno-1-28" href="#__codelineno-1-28"></a><span class="w">      </span><span class="nt">drop_shadow</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w">         </span><span class="c1"># Soft ambient item shadow</span>
+</span><span id="__span-1-29"><a id="__codelineno-1-29" name="__codelineno-1-29" href="#__codelineno-1-29"></a>
+</span><span id="__span-1-30"><a id="__codelineno-1-30" name="__codelineno-1-30" href="#__codelineno-1-30"></a><span class="w">    </span><span class="c1"># 6. MiniMessage Lore Description</span>
+</span><span id="__span-1-31"><a id="__codelineno-1-31" name="__codelineno-1-31" href="#__codelineno-1-31"></a><span class="w">    </span><span class="nt">lore</span><span class="p">:</span>
+</span><span id="__span-1-32"><a id="__codelineno-1-32" name="__codelineno-1-32" href="#__codelineno-1-32"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"&lt;gray&gt;Target</span><span class="nv"> </span><span class="s">Equipment:&lt;/gray&gt;</span><span class="nv"> </span><span class="s">&lt;white&gt;{blueprint_name}&lt;/white&gt;"</span>
+</span><span id="__span-1-33"><a id="__codelineno-1-33" name="__codelineno-1-33" href="#__codelineno-1-33"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"&lt;gray&gt;Status:&lt;/gray&gt;</span><span class="nv"> </span><span class="s">&lt;green&gt;Permanent</span><span class="nv"> </span><span class="s">Unlock&lt;/green&gt;"</span>
+</span><span id="__span-1-34"><a id="__codelineno-1-34" name="__codelineno-1-34" href="#__codelineno-1-34"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">""</span>
+</span><span id="__span-1-35"><a id="__codelineno-1-35" name="__codelineno-1-35" href="#__codelineno-1-35"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"&lt;yellow&gt;Shop</span><span class="nv"> </span><span class="s">Value:&lt;/yellow&gt;</span><span class="nv"> </span><span class="s">&lt;gold&gt;${price}&lt;/gold&gt;"</span>
+</span><span id="__span-1-36"><a id="__codelineno-1-36" name="__codelineno-1-36" href="#__codelineno-1-36"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">""</span>
+</span><span id="__span-1-37"><a id="__codelineno-1-37" name="__codelineno-1-37" href="#__codelineno-1-37"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"&lt;dark_gray&gt;Hold</span><span class="nv"> </span><span class="s">this</span><span class="nv"> </span><span class="s">map</span><span class="nv"> </span><span class="s">and</span><span class="nv"> </span><span class="s">Right-Click</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">memorize</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">schematic.&lt;/dark_gray&gt;"</span>
 </span></code></pre></div>
 <hr />
-<h2 id="2-hot-reload-the-blueprints">2. Hot-Reload the Blueprints</h2>
-<p>Back in your server console or in-game as an operator, execute:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>/cb reload blueprints
+<h2 id="2-dry-run-syntax-validation-cb-validate">2. Dry-Run Syntax Validation (<code>/cb validate</code>)</h2>
+<p>Before reloading your live server, execute the dry-run validator command in your server console or in-game:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>/cb validate
 </span></code></pre></div>
-<p>You will see confirmation that <code>test_sword.yml</code> was parsed and registered without needing a server restart.</p>
+<p>CraftingBlueprints parses all YAML files in <code>blueprints/</code> and verifies:
+* All Bukkit materials and recipe identifiers are valid on your server version.
+* Map themes, frames, and badge identifiers conform to the visual rendering engine.
+* YAML indentation and structure are completely error-free.</p>
+<p>If everything is valid, the console displays:
+<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>[CraftingBlueprints] Validation passed: 1 blueprint file verified with 0 errors and 0 warnings.
+</span></code></pre></div></p>
+<hr />
+<h2 id="3-hot-reload-the-blueprints">3. Hot-Reload the Blueprints</h2>
+<p>Apply your new file to the live server with zero downtime and zero lag:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>/cb reload blueprints
+</span></code></pre></div>
+<p>You will see immediate console confirmation that <code>obsidian_blade.yml</code> was parsed, synchronized to the database, and registered in runtime memory.</p>
 <div class="admonition tip">
-<p class="admonition-title">Tip</p>
-<p>Before deploying complex YAML files on a live server, run <code>/cb validate</code> to check for typos or invalid material names.</p>
+<p class="admonition-title">Automatic File Watcher</p>
+<p>If <code>file-management.auto-reload.enabled: true</code> is active in <code>config.yml</code>, you do not even need to type <code>/cb reload blueprints</code>. The plugin detects file saves on disk and hot-reloads automatically after a short 1.5-second debounce window.</p>
 </div>
 <hr />
-<h2 id="3-grant-the-blueprint-to-yourself">3. Grant the Blueprint to Yourself</h2>
+<h2 id="4-grant-the-blueprint-item-to-yourself">4. Grant the Blueprint Item to Yourself</h2>
 <p>Give yourself the blueprint using the <code>/cb give</code> command:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>/cb give &lt;your_player_name&gt; obsidian_blade 1
+<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>/cb give &lt;your_player_name&gt; obsidian_blade 1
 </span></code></pre></div>
-<p>Look at your inventory. You will receive a high-resolution map item rendering the Dwarven Magma background, the crafting ingredients matrix, and the Epic tier Guilloche border.</p>
+<p>Look at your hotbar. You will receive a high-resolution in-game map (<code>Material.FILLED_MAP</code>) rendering the volcanic Dwarven Forge theme, the central Diamond Sword sprite, the Smithing Table workstation badge, and the Guilloche corner rosettes.</p>
+<div class="admonition note">
+<p class="admonition-title">Overflow Safety Guarantee</p>
+<p>If your inventory happens to be completely full when running <code>/cb give</code>, CraftingBlueprints automatically drops the leftover items safely onto the ground directly at your feet, preventing silent item deletion.</p>
+</div>
 <hr />
-<h2 id="4-learn-and-craft">4. Learn and Craft</h2>
+<h2 id="5-unlock-and-craft-in-survival">5. Unlock and Craft in Survival</h2>
 <ol>
-<li><strong>Hold the map</strong> in your main hand and <strong>right-click</strong>. You will receive a message confirming that you have permanently unlocked the recipe.</li>
-<li>Open a standard crafting table.</li>
-<li>Place two diamonds and a stick into the matrix. The diamond sword will craft normally.</li>
-<li>If you have enabled <a href="../../mechanics/recipe-restrictions/">Recipe Restrictions</a>, any player without the blueprint who attempts to craft that item will be blocked with an informative message.</li>
+<li><strong>Memorize the Blueprint</strong>: Place the map in your main hand and <strong>Right-Click</strong>. A sound effect plays and chat confirms:
+   <div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>[CraftingBlueprints] You have unlocked the blueprint for Obsidian Blade Blueprint!
+</span></code></pre></div>
+   The physical map is consumed from your hand.</li>
+<li><strong>Open a Crafting Table</strong>: Place two diamonds and a stick into the 3x3 crafting matrix. The Diamond Sword appears in the result slot and crafts normally.</li>
+<li><strong>Test Whitelist Protection</strong>:</li>
+<li>Open <code>plugins/CraftingBlueprints/config.yml</code> and ensure <code>restrictions.mode: "restricted-only"</code> with <code>diamond_.*</code> included in <code>restricted-items</code>.</li>
+<li>Either temporarily deop yourself (<code>/deop &lt;your_name&gt;</code>) or set <code>op-bypass: false</code> in <code>config.yml</code>.</li>
+<li>Have an unauthorized player (or test account) place the same ingredients into the crafting table: the recipe will be locked, and the player will be notified that they lack the required blueprint!</li>
 </ol>
 <hr />
-<h2 id="whats-next">What's Next?</h2>
+<h2 id="next-steps-deep-exploration">Next Steps &amp; Deep Exploration</h2>
 <ul>
-<li><a href="../../configuration/config-guide/">Understand all settings in config.yml</a></li>
-<li><a href="../../blueprints/basic-blueprint-yaml/">Explore advanced YAML properties and limits</a></li>
-<li><a href="../../blueprints/durability-and-uses/">Learn how to create limited-use scrolls (e.g. 5 crafts)</a></li>
+<li><a href="../../configuration/config-guide/">Examine the Line-by-Line Configuration Guide</a></li>
+<li><a href="../../blueprints/basic-blueprint-yaml/">Learn Full YAML Blueprint Properties &amp; Fields</a></li>
+<li><a href="../../blueprints/durability-and-uses/">Create Limited-Use Scrolls (e.g., 3 crafts or 24 hours)</a></li>
+<li><a href="../../mechanics/recipe-restrictions/">Configure Whitelist Mode for SMP Servers</a></li>
 </ul>
 
 

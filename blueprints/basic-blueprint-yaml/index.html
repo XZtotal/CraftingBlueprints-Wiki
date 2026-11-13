@@ -80,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#yaml-structure-blueprint-fields" class="md-skip">
+        <a href="#declarative-yaml-blueprint-authoring" class="md-skip">
           Skip to content
         </a>
       
@@ -639,10 +639,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#anatomy-of-a-single-blueprint" class="md-nav__link">
+  <a href="#authoritative-json-schema-ide-intellisense" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Anatomy of a Single Blueprint
+        Authoritative JSON Schema &amp; IDE IntelliSense
       
     </span>
   </a>
@@ -650,10 +650,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#property-reference-table" class="md-nav__link">
+  <a href="#anatomy-of-a-production-blueprint" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Property Reference Table
+        Anatomy of a Production Blueprint
       
     </span>
   </a>
@@ -661,10 +661,71 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#validating-yaml-before-deployment" class="md-nav__link">
+  <a href="#complete-property-reference-table" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Validating YAML Before Deployment
+        Complete Property Reference Table
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#file-organization-lexical-scope" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        File Organization &amp; Lexical Scope
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="File Organization &amp; Lexical Scope">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-deterministic-first-win-id-collision-rule" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Deterministic First-Win ID Collision Rule
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-atomic-fail-safe-on-syntax-errors" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Atomic Fail-Safe on Syntax Errors
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-non-fatal-version-skipping" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Non-Fatal Version Skipping
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dry-run-validation-cb-validate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dry-Run Validation (/cb validate)
       
     </span>
   </a>
@@ -1841,10 +1902,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#anatomy-of-a-single-blueprint" class="md-nav__link">
+  <a href="#authoritative-json-schema-ide-intellisense" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Anatomy of a Single Blueprint
+        Authoritative JSON Schema &amp; IDE IntelliSense
       
     </span>
   </a>
@@ -1852,10 +1913,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#property-reference-table" class="md-nav__link">
+  <a href="#anatomy-of-a-production-blueprint" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Property Reference Table
+        Anatomy of a Production Blueprint
       
     </span>
   </a>
@@ -1863,10 +1924,71 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#validating-yaml-before-deployment" class="md-nav__link">
+  <a href="#complete-property-reference-table" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Validating YAML Before Deployment
+        Complete Property Reference Table
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#file-organization-lexical-scope" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        File Organization &amp; Lexical Scope
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="File Organization &amp; Lexical Scope">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-deterministic-first-win-id-collision-rule" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Deterministic First-Win ID Collision Rule
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-atomic-fail-safe-on-syntax-errors" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Atomic Fail-Safe on Syntax Errors
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-non-fatal-version-skipping" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Non-Fatal Version Skipping
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dry-run-validation-cb-validate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dry-Run Validation (/cb validate)
       
     </span>
   </a>
@@ -1893,59 +2015,77 @@
   
 
 
-<h1 id="yaml-structure-blueprint-fields">YAML Structure &amp; Blueprint Fields</h1>
-<p>All blueprints are defined in YAML files placed inside <code>plugins/CraftingBlueprints/blueprints/</code>. You can organize them into multiple files (e.g. <code>weapons.yml</code>, <code>armor.yml</code>, <code>tools.yml</code>)—the plugin automatically scans and loads all <code>.yml</code> files in that folder.</p>
+<h1 id="declarative-yaml-blueprint-authoring">Declarative YAML Blueprint Authoring</h1>
+<p>All blueprints in CraftingBlueprints are authored declaratively in YAML files placed inside <code>plugins/CraftingBlueprints/blueprints/</code>. The plugin recursively scans this directory and all nested subdirectories (e.g. <code>weapons/</code>, <code>armor/</code>, <code>potions/</code>) in deterministic alphabetical order.</p>
 <hr />
-<h2 id="anatomy-of-a-single-blueprint">Anatomy of a Single Blueprint</h2>
-<p>Here is a complete, production-ready blueprint entry with all available properties:</p>
-<div class="language-yaml highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nt">singles</span><span class="p">:</span>
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="nt">ancient_netherite_axe</span><span class="p">:</span>
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="c1"># 1. Target Recipe to unlock</span>
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="nt">blueprint</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">NETHERITE_AXE</span>
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">"&lt;gradient:#FF5555:#FFAA00&gt;&lt;bold&gt;Ancient</span><span class="nv"> </span><span class="s">Battleaxe</span><span class="nv"> </span><span class="s">Blueprint&lt;/bold&gt;&lt;/gradient&gt;"</span>
-</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>
-</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">    </span><span class="c1"># 2. Reusable Templates (Mixins)</span>
-</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">    </span><span class="nt">templates</span><span class="p">:</span>
-</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">visual_legendary_relic</span>
-</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">economy_legendary_tier</span>
-</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>
-</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="w">    </span><span class="c1"># 3. Durability &amp; Usage Limits</span>
-</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="w">    </span><span class="nt">permanent</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
-</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="w">    </span><span class="nt">time</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">86400</span><span class="w">      </span><span class="c1"># Valid for 24 hours (in seconds), 0 = unlimited</span>
-</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="w">    </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10</span><span class="w">         </span><span class="c1"># Can craft 10 times, 0 = unlimited</span>
-</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>
-</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="w">    </span><span class="c1"># 4. Economy Pricing (Requires Vault)</span>
-</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="w">    </span><span class="nt">price</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">15000.0</span><span class="w">   </span><span class="c1"># Buy price in GUI/shop</span>
-</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="w">    </span><span class="nt">sell_price</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3500.0</span>
-</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>
-</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a><span class="w">    </span><span class="c1"># 5. In-Game Physical Item Representation</span>
-</span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a><span class="w">    </span><span class="nt">item</span><span class="p">:</span>
-</span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a><span class="w">      </span><span class="nt">material</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">FILLED_MAP</span><span class="w">     </span><span class="c1"># FILLED_MAP, PAPER, BOOK, NETHER_STAR, etc.</span>
-</span><span id="__span-0-24"><a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a><span class="w">      </span><span class="nt">custom_model_data</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2004</span><span class="w">  </span><span class="c1"># CustomModelData for resource packs (optional)</span>
-</span><span id="__span-0-25"><a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a><span class="w">      </span><span class="nt">glowing</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w">            </span><span class="c1"># Enchantment glint effect</span>
-</span><span id="__span-0-26"><a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a>
-</span><span id="__span-0-27"><a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a><span class="w">    </span><span class="c1"># 6. Map Visual Rendering (Optional)</span>
-</span><span id="__span-0-28"><a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a><span class="w">    </span><span class="nt">rendering</span><span class="p">:</span>
-</span><span id="__span-0-29"><a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a><span class="w">      </span><span class="nt">background</span><span class="p">:</span><span class="w"> </span><span class="s">"texture_dwarven_magma"</span><span class="w"> </span><span class="c1"># Built-in background texture</span>
-</span><span id="__span-0-30"><a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a><span class="w">      </span><span class="nt">tier</span><span class="p">:</span><span class="w"> </span><span class="s">"MYTHIC"</span><span class="w">                      </span><span class="c1"># COMMON, UNCOMMON, RARE, EPIC, MYTHIC</span>
-</span><span id="__span-0-31"><a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a><span class="w">      </span><span class="nt">guilloche_border</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w">              </span><span class="c1"># Banknote-style Guilloche border</span>
-</span><span id="__span-0-32"><a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a><span class="w">      </span><span class="nt">show_ingredients</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w">              </span><span class="c1"># Render the 3x3 recipe grid overlay</span>
-</span><span id="__span-0-33"><a id="__codelineno-0-33" name="__codelineno-0-33" href="#__codelineno-0-33"></a>
-</span><span id="__span-0-34"><a id="__codelineno-0-34" name="__codelineno-0-34" href="#__codelineno-0-34"></a><span class="w">    </span><span class="c1"># 7. Lore Description (Supports MiniMessage &amp; Placeholders)</span>
-</span><span id="__span-0-35"><a id="__codelineno-0-35" name="__codelineno-0-35" href="#__codelineno-0-35"></a><span class="w">    </span><span class="nt">lore</span><span class="p">:</span>
-</span><span id="__span-0-36"><a id="__codelineno-0-36" name="__codelineno-0-36" href="#__codelineno-0-36"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"&lt;gray&gt;Target</span><span class="nv"> </span><span class="s">Equipment:&lt;/gray&gt;</span><span class="nv"> </span><span class="s">&lt;white&gt;{blueprint_target}&lt;/white&gt;"</span>
-</span><span id="__span-0-37"><a id="__codelineno-0-37" name="__codelineno-0-37" href="#__codelineno-0-37"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"&lt;gray&gt;Remaining</span><span class="nv"> </span><span class="s">Uses:&lt;/gray&gt;</span><span class="nv"> </span><span class="s">&lt;yellow&gt;{uses}&lt;/yellow&gt;"</span>
-</span><span id="__span-0-38"><a id="__codelineno-0-38" name="__codelineno-0-38" href="#__codelineno-0-38"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">""</span>
-</span><span id="__span-0-39"><a id="__codelineno-0-39" name="__codelineno-0-39" href="#__codelineno-0-39"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"&lt;dark_gray&gt;Unlock</span><span class="nv"> </span><span class="s">this</span><span class="nv"> </span><span class="s">schematic</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">forge</span><span class="nv"> </span><span class="s">ancient</span><span class="nv"> </span><span class="s">battleaxes.&lt;/dark_gray&gt;"</span>
-</span><span id="__span-0-40"><a id="__codelineno-0-40" name="__codelineno-0-40" href="#__codelineno-0-40"></a>
-</span><span id="__span-0-41"><a id="__codelineno-0-41" name="__codelineno-0-41" href="#__codelineno-0-41"></a><span class="w">    </span><span class="c1"># 8. Custom Metadata (Extensible)</span>
-</span><span id="__span-0-42"><a id="__codelineno-0-42" name="__codelineno-0-42" href="#__codelineno-0-42"></a><span class="w">    </span><span class="nt">extra</span><span class="p">:</span>
-</span><span id="__span-0-43"><a id="__codelineno-0-43" name="__codelineno-0-43" href="#__codelineno-0-43"></a><span class="w">      </span><span class="nt">tier</span><span class="p">:</span><span class="w"> </span><span class="s">"LEGENDARY"</span>
-</span><span id="__span-0-44"><a id="__codelineno-0-44" name="__codelineno-0-44" href="#__codelineno-0-44"></a><span class="w">      </span><span class="nt">category</span><span class="p">:</span><span class="w"> </span><span class="s">"WEAPONS"</span>
-</span><span id="__span-0-45"><a id="__codelineno-0-45" name="__codelineno-0-45" href="#__codelineno-0-45"></a><span class="w">      </span><span class="nt">tradeable</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<h2 id="authoritative-json-schema-ide-intellisense">Authoritative JSON Schema &amp; IDE IntelliSense</h2>
+<p>To eliminate syntax errors, typo-induced bugs, and cognitive overload, CraftingBlueprints provides an authoritative JSON Schema (<code>blueprint.schema.json</code>).</p>
+<p>To enable real-time autocompletion, field descriptions, and instant error highlighting in Visual Studio Code or IntelliJ IDEA, add this directive as the very first line of any blueprint YAML file:</p>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># yaml-language-server: $schema=./blueprint.schema.json</span>
 </span></code></pre></div>
 <hr />
-<h2 id="property-reference-table">Property Reference Table</h2>
+<h2 id="anatomy-of-a-production-blueprint">Anatomy of a Production Blueprint</h2>
+<p>Below is an exhaustive, production-ready blueprint configuration demonstrating every canonical property and sub-block:</p>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># yaml-language-server: $schema=./blueprint.schema.json</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nt">singles</span><span class="p">:</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">  </span><span class="nt">ancient_netherite_axe</span><span class="p">:</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="c1"># 1. Target Recipe to Unlock (Material, Custom Item, Potion, or Enchantment)</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">    </span><span class="nt">blueprint</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">NETHERITE_AXE</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">"&lt;gradient:#FF5555:#FFAA00&gt;&lt;bold&gt;Ancient</span><span class="nv"> </span><span class="s">Netherite</span><span class="nv"> </span><span class="s">Battleaxe&lt;/bold&gt;&lt;/gradient&gt;"</span>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">    </span><span class="c1"># 2. Reusable Template Mixins (Optional)</span>
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">    </span><span class="nt">templates</span><span class="p">:</span>
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">visual_legendary_relic</span>
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">economy_tier_legendary</span>
+</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>
+</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="w">    </span><span class="c1"># 3. Durability &amp; Expiration Limits</span>
+</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="w">    </span><span class="nt">permanent</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="w">    </span><span class="nt">time</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">86400</span><span class="w">           </span><span class="c1"># Duration in seconds (or human format '24h', '7d'). 0 = no time limit</span>
+</span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="w">    </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10</span><span class="w">              </span><span class="c1"># Maximum craft count before the blueprint expires. 0 = unlimited</span>
+</span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>
+</span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="w">    </span><span class="c1"># 4. Vault Economy Integration</span>
+</span><span id="__span-1-19"><a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a><span class="w">    </span><span class="nt">price</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">15000.0</span><span class="w">        </span><span class="c1"># Purchase price in catalog (/cb item list) and /cb buy</span>
+</span><span id="__span-1-20"><a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a><span class="w">    </span><span class="nt">sell_price</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3750.0</span><span class="w">    </span><span class="c1"># Refund value when selling back to the catalog</span>
+</span><span id="__span-1-21"><a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a>
+</span><span id="__span-1-22"><a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a><span class="w">    </span><span class="c1"># 5. In-Game Physical Item Representation</span>
+</span><span id="__span-1-23"><a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a><span class="w">    </span><span class="nt">item</span><span class="p">:</span>
+</span><span id="__span-1-24"><a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a><span class="w">      </span><span class="nt">material</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">FILLED_MAP</span><span class="w">     </span><span class="c1"># FILLED_MAP, PAPER, BOOK, NETHER_STAR, etc.</span>
+</span><span id="__span-1-25"><a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a><span class="w">      </span><span class="nt">custom_model_data</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2004</span><span class="w">  </span><span class="c1"># CustomModelData integer for resource pack models</span>
+</span><span id="__span-1-26"><a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a><span class="w">      </span><span class="nt">glowing</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w">            </span><span class="c1"># Enchantment shimmer sheen without lore clutter</span>
+</span><span id="__span-1-27"><a id="__codelineno-1-27" name="__codelineno-1-27" href="#__codelineno-1-27"></a>
+</span><span id="__span-1-28"><a id="__codelineno-1-28" name="__codelineno-1-28" href="#__codelineno-1-28"></a><span class="w">    </span><span class="c1"># 6. Map Visual Drafting Aesthetics (Active when material is FILLED_MAP)</span>
+</span><span id="__span-1-29"><a id="__codelineno-1-29" name="__codelineno-1-29" href="#__codelineno-1-29"></a><span class="w">    </span><span class="nt">map</span><span class="p">:</span>
+</span><span id="__span-1-30"><a id="__codelineno-1-30" name="__codelineno-1-30" href="#__codelineno-1-30"></a><span class="w">      </span><span class="nt">theme</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">forge</span><span class="w">             </span><span class="c1"># Procedural theme or image in images/backgrounds/</span>
+</span><span id="__span-1-31"><a id="__codelineno-1-31" name="__codelineno-1-31" href="#__codelineno-1-31"></a><span class="w">      </span><span class="nt">frame</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">rosette</span><span class="w">           </span><span class="c1"># Corner architecture: bracket, chamfer, diamond, runic, rosette, star, none</span>
+</span><span id="__span-1-32"><a id="__codelineno-1-32" name="__codelineno-1-32" href="#__codelineno-1-32"></a><span class="w">      </span><span class="nt">badge</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">smithing</span><span class="w">          </span><span class="c1"># Workstation badge: crafting, anvil, brewing, smithing, furnace, none</span>
+</span><span id="__span-1-33"><a id="__codelineno-1-33" name="__codelineno-1-33" href="#__codelineno-1-33"></a><span class="w">      </span><span class="nt">icon_scale</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span><span class="w">            </span><span class="c1"># Integer scale (1 to 4) using sharp nearest-neighbor interpolation</span>
+</span><span id="__span-1-34"><a id="__codelineno-1-34" name="__codelineno-1-34" href="#__codelineno-1-34"></a><span class="w">      </span><span class="nt">drop_shadow</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w">        </span><span class="c1"># Subtle 2px ambient occlusion drop shadow behind item sprite</span>
+</span><span id="__span-1-35"><a id="__codelineno-1-35" name="__codelineno-1-35" href="#__codelineno-1-35"></a><span class="w">      </span><span class="nt">item_outline</span><span class="p">:</span>
+</span><span id="__span-1-36"><a id="__codelineno-1-36" name="__codelineno-1-36" href="#__codelineno-1-36"></a><span class="w">        </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</span><span id="__span-1-37"><a id="__codelineno-1-37" name="__codelineno-1-37" href="#__codelineno-1-37"></a><span class="w">        </span><span class="nt">width</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span><span class="w">               </span><span class="c1"># Continuous contour outline width in pixels (1 to 8)</span>
+</span><span id="__span-1-38"><a id="__codelineno-1-38" name="__codelineno-1-38" href="#__codelineno-1-38"></a><span class="w">        </span><span class="nt">color</span><span class="p">:</span><span class="w"> </span><span class="s">"rainbow"</span><span class="w">       </span><span class="c1"># 'rainbow', hex '#ffd700', or gradient</span>
+</span><span id="__span-1-39"><a id="__codelineno-1-39" name="__codelineno-1-39" href="#__codelineno-1-39"></a><span class="w">        </span><span class="nt">opacity</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">100</span><span class="w">           </span><span class="c1"># Opacity percentage (1 to 100)</span>
+</span><span id="__span-1-40"><a id="__codelineno-1-40" name="__codelineno-1-40" href="#__codelineno-1-40"></a>
+</span><span id="__span-1-41"><a id="__codelineno-1-41" name="__codelineno-1-41" href="#__codelineno-1-41"></a><span class="w">    </span><span class="c1"># 7. MiniMessage Lore Description Card</span>
+</span><span id="__span-1-42"><a id="__codelineno-1-42" name="__codelineno-1-42" href="#__codelineno-1-42"></a><span class="w">    </span><span class="nt">lore</span><span class="p">:</span>
+</span><span id="__span-1-43"><a id="__codelineno-1-43" name="__codelineno-1-43" href="#__codelineno-1-43"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"&lt;dark_gray&gt;&lt;strikethrough&gt;-----------------------------&lt;/strikethrough&gt;&lt;/dark_gray&gt;"</span>
+</span><span id="__span-1-44"><a id="__codelineno-1-44" name="__codelineno-1-44" href="#__codelineno-1-44"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"&lt;gray&gt;Target</span><span class="nv"> </span><span class="s">Equipment:&lt;/gray&gt;</span><span class="nv"> </span><span class="s">&lt;white&gt;{target_item}&lt;/white&gt;"</span>
+</span><span id="__span-1-45"><a id="__codelineno-1-45" name="__codelineno-1-45" href="#__codelineno-1-45"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"&lt;gray&gt;Remaining</span><span class="nv"> </span><span class="s">Forges:&lt;/gray&gt;</span><span class="nv"> </span><span class="s">&lt;yellow&gt;&lt;bold&gt;{uses}</span><span class="nv"> </span><span class="s">/</span><span class="nv"> </span><span class="s">10&lt;/bold&gt;&lt;/yellow&gt;"</span>
+</span><span id="__span-1-46"><a id="__codelineno-1-46" name="__codelineno-1-46" href="#__codelineno-1-46"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"&lt;gray&gt;Licensing</span><span class="nv"> </span><span class="s">Time:&lt;/gray&gt;</span><span class="nv"> </span><span class="s">&lt;aqua&gt;{time}&lt;/aqua&gt;"</span>
+</span><span id="__span-1-47"><a id="__codelineno-1-47" name="__codelineno-1-47" href="#__codelineno-1-47"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"&lt;dark_gray&gt;&lt;strikethrough&gt;-----------------------------&lt;/strikethrough&gt;&lt;/dark_gray&gt;"</span>
+</span><span id="__span-1-48"><a id="__codelineno-1-48" name="__codelineno-1-48" href="#__codelineno-1-48"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"&lt;yellow&gt;Catalog</span><span class="nv"> </span><span class="s">Price:&lt;/yellow&gt;</span><span class="nv"> </span><span class="s">&lt;green&gt;${price}&lt;/green&gt;"</span>
+</span><span id="__span-1-49"><a id="__codelineno-1-49" name="__codelineno-1-49" href="#__codelineno-1-49"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"&lt;yellow&gt;Scrap</span><span class="nv"> </span><span class="s">Value:&lt;/yellow&gt;</span><span class="nv"> </span><span class="s">&lt;gold&gt;${sell_price}&lt;/gold&gt;"</span>
+</span><span id="__span-1-50"><a id="__codelineno-1-50" name="__codelineno-1-50" href="#__codelineno-1-50"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"&lt;dark_gray&gt;&lt;strikethrough&gt;-----------------------------&lt;/strikethrough&gt;&lt;/dark_gray&gt;"</span>
+</span><span id="__span-1-51"><a id="__codelineno-1-51" name="__codelineno-1-51" href="#__codelineno-1-51"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"&lt;dark_gray&gt;Hold</span><span class="nv"> </span><span class="s">map</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">hand</span><span class="nv"> </span><span class="s">and</span><span class="nv"> </span><span class="s">Right-Click</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">memorize.&lt;/dark_gray&gt;"</span>
+</span><span id="__span-1-52"><a id="__codelineno-1-52" name="__codelineno-1-52" href="#__codelineno-1-52"></a>
+</span><span id="__span-1-53"><a id="__codelineno-1-53" name="__codelineno-1-53" href="#__codelineno-1-53"></a><span class="w">    </span><span class="c1"># 8. Extensible Metadata Block (Custom Scripts &amp; Hooks)</span>
+</span><span id="__span-1-54"><a id="__codelineno-1-54" name="__codelineno-1-54" href="#__codelineno-1-54"></a><span class="w">    </span><span class="nt">extra</span><span class="p">:</span>
+</span><span id="__span-1-55"><a id="__codelineno-1-55" name="__codelineno-1-55" href="#__codelineno-1-55"></a><span class="w">      </span><span class="nt">tier</span><span class="p">:</span><span class="w"> </span><span class="s">"MYTHIC"</span>
+</span><span id="__span-1-56"><a id="__codelineno-1-56" name="__codelineno-1-56" href="#__codelineno-1-56"></a><span class="w">      </span><span class="nt">category</span><span class="p">:</span><span class="w"> </span><span class="s">"HEAVY_WEAPONS"</span>
+</span><span id="__span-1-57"><a id="__codelineno-1-57" name="__codelineno-1-57" href="#__codelineno-1-57"></a><span class="w">      </span><span class="nt">tradeable</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+</span></code></pre></div>
+<hr />
+<h2 id="complete-property-reference-table">Complete Property Reference Table</h2>
 <table>
 <thead>
 <tr>
@@ -1953,7 +2093,7 @@
 <th style="text-align: left;">Type</th>
 <th style="text-align: left;">Required?</th>
 <th style="text-align: left;">Default</th>
-<th style="text-align: left;">Description</th>
+<th style="text-align: left;">Description &amp; Accepted Values</th>
 </tr>
 </thead>
 <tbody>
@@ -1962,121 +2102,228 @@
 <td style="text-align: left;">String</td>
 <td style="text-align: left;"><strong>Yes</strong></td>
 <td style="text-align: left;">—</td>
-<td style="text-align: left;">Target Bukkit <code>Material</code> (e.g. <code>DIAMOND_SWORD</code>, <code>BOW</code>) or custom item ID.</td>
+<td style="text-align: left;">Target Bukkit <code>Material</code> (e.g. <code>NETHERITE_SWORD</code>), <code>PotionType</code> (<code>SPEED</code>), <code>Enchantment</code> (<code>MENDING</code>), or custom item identifier (<code>ia:...</code>, <code>nexo:...</code>, <code>oraxen:...</code>).</td>
 </tr>
 <tr>
 <td style="text-align: left;"><code>name</code></td>
 <td style="text-align: left;">String</td>
 <td style="text-align: left;">No</td>
-<td style="text-align: left;">Formatted Material</td>
-<td style="text-align: left;">Display name in chat, GUIs, and item tooltips.</td>
+<td style="text-align: left;">Formatted Target</td>
+<td style="text-align: left;">Display name supporting MiniMessage tags and gradients (<code>&lt;gradient:#HEX1:#HEX2&gt;</code>).</td>
 </tr>
 <tr>
 <td style="text-align: left;"><code>permanent</code></td>
 <td style="text-align: left;">Boolean</td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;"><code>true</code></td>
-<td style="text-align: left;">If <code>true</code>, the unlocked recipe never expires.</td>
+<td style="text-align: left;">If <code>true</code>, the blueprint remains unlocked indefinitely.</td>
 </tr>
 <tr>
 <td style="text-align: left;"><code>time</code></td>
-<td style="text-align: left;">Integer</td>
+<td style="text-align: left;">Integer / String</td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;"><code>0</code></td>
-<td style="text-align: left;">Expiration countdown in seconds after unlocking (<code>0</code> = no time limit).</td>
+<td style="text-align: left;">Expiration countdown. Accepts raw seconds (<code>86400</code>) or human durations (<code>45s</code>, <code>30m</code>, <code>12h</code>, <code>7d</code>). <code>0</code> = no time expiration.</td>
 </tr>
 <tr>
 <td style="text-align: left;"><code>uses</code></td>
 <td style="text-align: left;">Integer</td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;"><code>0</code></td>
-<td style="text-align: left;">Maximum craft count allowed before the blueprint expires (<code>0</code> = unlimited).</td>
+<td style="text-align: left;">Maximum craft count allowed before the blueprint expires. <code>0</code> = unlimited crafts.</td>
 </tr>
 <tr>
 <td style="text-align: left;"><code>price</code></td>
 <td style="text-align: left;">Double</td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;"><code>0.0</code></td>
-<td style="text-align: left;">Cost to buy the blueprint via GUI catalog or economy shop.</td>
+<td style="text-align: left;">Vault purchase price when bought from <code>/cb item list</code> catalog.</td>
 </tr>
 <tr>
 <td style="text-align: left;"><code>sell_price</code></td>
 <td style="text-align: left;">Double</td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;"><code>0.0</code></td>
-<td style="text-align: left;">Value received when selling the blueprint via economy shop.</td>
+<td style="text-align: left;">Vault currency refunded when selling back via the catalog.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>templates</code> / <code>template</code></td>
+<td style="text-align: left;">List / String</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;"><code>[]</code></td>
+<td style="text-align: left;">List of reusable template mixin IDs inherited by this blueprint.</td>
 </tr>
 <tr>
 <td style="text-align: left;"><code>item.material</code></td>
 <td style="text-align: left;">String</td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;"><code>FILLED_MAP</code></td>
-<td style="text-align: left;">Bukkit item used when giving the blueprint physically to a player.</td>
+<td style="text-align: left;">Bukkit Material used when giving the physical blueprint item to a player.</td>
 </tr>
 <tr>
 <td style="text-align: left;"><code>item.custom_model_data</code></td>
 <td style="text-align: left;">Integer</td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;"><code>0</code></td>
-<td style="text-align: left;">CustomModelData integer tag for custom resource pack models.</td>
+<td style="text-align: left;">CustomModelData integer tag for resource pack model overrides.</td>
 </tr>
 <tr>
 <td style="text-align: left;"><code>item.glowing</code></td>
 <td style="text-align: left;">Boolean</td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;"><code>false</code></td>
-<td style="text-align: left;">Adds visual enchantment sheen without showing enchantment lore.</td>
+<td style="text-align: left;">Adds visual enchantment shimmer without showing enchantment lore.</td>
 </tr>
 <tr>
-<td style="text-align: left;"><code>rendering.background</code></td>
-<td style="text-align: left;">String</td>
-<td style="text-align: left;">No</td>
-<td style="text-align: left;"><code>default</code></td>
-<td style="text-align: left;">Background texture ID for map schematics.</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>rendering.tier</code></td>
-<td style="text-align: left;">String</td>
-<td style="text-align: left;">No</td>
-<td style="text-align: left;"><code>COMMON</code></td>
-<td style="text-align: left;">Visual rarity tier (<code>COMMON</code>, <code>UNCOMMON</code>, <code>RARE</code>, <code>EPIC</code>, <code>MYTHIC</code>).</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>rendering.guilloche_border</code></td>
-<td style="text-align: left;">Boolean</td>
-<td style="text-align: left;">No</td>
-<td style="text-align: left;"><code>false</code></td>
-<td style="text-align: left;">Enables mathematical spirograph banknote-style security borders.</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>rendering.show_ingredients</code></td>
+<td style="text-align: left;"><code>map.enabled</code></td>
 <td style="text-align: left;">Boolean</td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;"><code>true</code></td>
-<td style="text-align: left;">Overlays the 3x3 crafting matrix in the corner of the map.</td>
+<td style="text-align: left;">Controls whether the 128x128 map drafting renderer is active for this item.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>map.theme</code></td>
+<td style="text-align: left;">String</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;"><code>technical</code></td>
+<td style="text-align: left;">Base background theme (<code>technical</code>, <code>antique</code>, <code>forge</code>, <code>royal</code>, <code>runic</code>, <code>dark</code>, <code>rainbow</code>) or PNG filename in <code>images/backgrounds/</code>.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>map.frame</code></td>
+<td style="text-align: left;">String</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;"><code>bracket</code></td>
+<td style="text-align: left;">Corner geometry frame: <code>bracket</code>, <code>chamfer</code>, <code>diamond</code>, <code>runic</code>, <code>rosette</code>, <code>star</code>, or <code>none</code>.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>map.badge</code></td>
+<td style="text-align: left;">String</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">Auto-detected</td>
+<td style="text-align: left;">Top-left workstation badge: <code>crafting</code>, <code>anvil</code>, <code>brewing</code>, <code>smithing</code>, <code>furnace</code>, or <code>none</code>.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>map.icon_scale</code></td>
+<td style="text-align: left;">Integer</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;"><code>2</code></td>
+<td style="text-align: left;">Central item sprite scale factor (<code>1</code> to <code>4</code>) using pixel-art nearest-neighbor scaling.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>map.drop_shadow</code></td>
+<td style="text-align: left;">Boolean</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;"><code>true</code></td>
+<td style="text-align: left;">Renders a subtle 2px ambient occlusion drop shadow behind the central sprite.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>map.item_outline.enabled</code></td>
+<td style="text-align: left;">Boolean</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;"><code>false</code></td>
+<td style="text-align: left;">Enables procedural contour outline around the central item sprite.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>map.item_outline.width</code></td>
+<td style="text-align: left;">Integer</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;"><code>2</code></td>
+<td style="text-align: left;">Outline thickness in pixels (<code>1</code> to <code>8</code>).</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>map.item_outline.color</code></td>
+<td style="text-align: left;">String</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;"><code>rainbow</code></td>
+<td style="text-align: left;">Outline color: <code>rainbow</code>, hex <code>#RRGGBB</code>, or gradient string.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>map.title.show</code></td>
+<td style="text-align: left;">Boolean</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;"><code>true</code></td>
+<td style="text-align: left;">Controls rendering of the bottom typography plaque banner.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>map.title.text</code></td>
+<td style="text-align: left;">String</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;"><code>%bname%</code></td>
+<td style="text-align: left;">Custom title banner text. Supports <code>%blueprint_name%</code> and <code>%bname%</code>.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>map.stamp.show</code></td>
+<td style="text-align: left;">Boolean</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;"><code>true</code></td>
+<td style="text-align: left;">Controls rendering of the top-right authentication wax seal stamp.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>map.stamp.style</code></td>
+<td style="text-align: left;">String</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">Auto</td>
+<td style="text-align: left;">Seal style: <code>wax_seal</code>, <code>clock</code>, <code>box</code>, <code>plaque</code>, or <code>none</code>.</td>
 </tr>
 <tr>
 <td style="text-align: left;"><code>lore</code></td>
 <td style="text-align: left;">List<String></td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;"><code>[]</code></td>
-<td style="text-align: left;">List of MiniMessage lore strings displayed on the item.</td>
+<td style="text-align: left;">List of MiniMessage lore lines supporting dynamic context placeholders.</td>
 </tr>
 <tr>
 <td style="text-align: left;"><code>extra</code></td>
-<td style="text-align: left;">Key-Value</td>
+<td style="text-align: left;">Map</td>
 <td style="text-align: left;">No</td>
 <td style="text-align: left;"><code>{}</code></td>
-<td style="text-align: left;">Custom key-value pairs for scripts or external plugin hooks.</td>
+<td style="text-align: left;">Extensible key-value metadata block accessible to scripts, quests, and third-party plugins.</td>
 </tr>
 </tbody>
 </table>
 <hr />
-<h2 id="validating-yaml-before-deployment">Validating YAML Before Deployment</h2>
-<p>Before reloading a live server, always test your files with the built-in validator:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>/cb validate
+<h2 id="file-organization-lexical-scope">File Organization &amp; Lexical Scope</h2>
+<p>You can organize your YAML files into any directory hierarchy inside <code>plugins/CraftingBlueprints/blueprints/</code>:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>plugins/CraftingBlueprints/blueprints/
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>├── 00_templates.yml           # Global templates (visible to all directories)
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>├── weapons/
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>│   ├── swords.yml             # Single blueprints
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>│   ├── axes.yml
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>│   └── legendary/
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>│       └── mythic_blades.yml
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>├── armor/
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>│   ├── sets.yml               # Package blueprints (full sets)
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>│   └── shields.yml
+</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>└── consumables/
+</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>    ├── potions.yml            # Alchemy brewing blueprints
+</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>    └── enchanted_books.yml    # Anvil enchantment blueprints
 </span></code></pre></div>
-<p>If you made a typo (such as <code>DIAMND_SWORD</code> instead of <code>DIAMOND_SWORD</code>), <code>/cb validate</code> will tell you the exact file and line number to fix.</p>
+<h3 id="1-deterministic-first-win-id-collision-rule">1. Deterministic First-Win ID Collision Rule</h3>
+<p>If two blueprints in different files (or within the same file) declare the identical lowercase ID (e.g. <code>starter_sword</code> in both <code>weapons/swords.yml</code> and <code>kits/beginner.yml</code>):
+* The <strong>first file encountered</strong> during alphabetical directory traversal wins and registers the blueprint.
+* The duplicate definition is ignored, and a warning is printed to the console:
+  <div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>[CraftingBlueprints] Duplicate blueprint ID 'starter_sword' in 'kits/beginner.yml' ignored: already defined in 'weapons/swords.yml'.
+</span></code></pre></div></p>
+<h3 id="2-atomic-fail-safe-on-syntax-errors">2. Atomic Fail-Safe on Syntax Errors</h3>
+<ul>
+<li>If any YAML file contains malformed syntax (unbalanced quotes, illegal tab indentation, broken blocks), the reload process triggers an <strong>immediate atomic abort</strong>.</li>
+<li><strong>Zero Database Modifications</strong>: No blueprints are inserted, updated, or pruned.</li>
+<li>The previous working database state remains 100% intact, protecting your live server from broken configurations.</li>
+</ul>
+<h3 id="3-non-fatal-version-skipping">3. Non-Fatal Version Skipping</h3>
+<ul>
+<li>If a blueprint specifies an item, material, or recipe that does not exist on your server version (e.g. <code>MACE</code> or <code>WIND_CHARGE</code> on Paper 1.20.4), the plugin <strong>safely skips</strong> that individual item without aborting the reload or deleting existing records. All other valid blueprints in the file load normally.</li>
+</ul>
+<hr />
+<h2 id="dry-run-validation-cb-validate">Dry-Run Validation (<code>/cb validate</code>)</h2>
+<p>Always verify your files before or after editing:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>/cb validate
+</span></code></pre></div>
+<p>The validator performs comprehensive linting:
+* Verifies Bukkit material, potion, and enchantment identifiers against the active server version.
+* Validates hex colors and named color palette references.
+* Detects circular dependencies and unresolved template references.
+* Emits Levenshtein distance "Did you mean?" suggestions for minor typos (e.g., <code>roseta</code> $\rightarrow$ <code>rosette</code>).</p>
 
 
 

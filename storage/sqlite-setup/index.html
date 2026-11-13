@@ -80,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#standalone-setup-sqlite" class="md-skip">
+        <a href="#standalone-server-storage-sqlite" class="md-skip">
           Skip to content
         </a>
       
@@ -1303,10 +1303,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#configuration-in-configyml" class="md-nav__link">
+  <a href="#zero-configuration-setup" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Configuration in config.yml
+        Zero-Configuration Setup
       
     </span>
   </a>
@@ -1314,10 +1314,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#where-are-player-unlocks-stored" class="md-nav__link">
+  <a href="#file-location-data-schema" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Where Are Player Unlocks Stored?
+        File Location &amp; Data Schema
       
     </span>
   </a>
@@ -1325,13 +1325,52 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#backing-up-your-sqlite-database" class="md-nav__link">
+  <a href="#performance-concurrency-architecture" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Backing Up Your SQLite Database
+        Performance &amp; Concurrency Architecture
       
     </span>
   </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#live-backup-restore-procedures" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Live Backup &amp; Restore Procedures
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Live Backup &amp; Restore Procedures">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#creating-a-backup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Creating a Backup
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#restoring-from-backup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Restoring from Backup
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1841,10 +1880,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#configuration-in-configyml" class="md-nav__link">
+  <a href="#zero-configuration-setup" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Configuration in config.yml
+        Zero-Configuration Setup
       
     </span>
   </a>
@@ -1852,10 +1891,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#where-are-player-unlocks-stored" class="md-nav__link">
+  <a href="#file-location-data-schema" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Where Are Player Unlocks Stored?
+        File Location &amp; Data Schema
       
     </span>
   </a>
@@ -1863,13 +1902,52 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#backing-up-your-sqlite-database" class="md-nav__link">
+  <a href="#performance-concurrency-architecture" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Backing Up Your SQLite Database
+        Performance &amp; Concurrency Architecture
       
     </span>
   </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#live-backup-restore-procedures" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Live Backup &amp; Restore Procedures
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Live Backup &amp; Restore Procedures">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#creating-a-backup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Creating a Backup
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#restoring-from-backup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Restoring from Backup
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1893,29 +1971,57 @@
   
 
 
-<h1 id="standalone-setup-sqlite">Standalone Setup (SQLite)</h1>
-<p>By default, CraftingBlueprints uses an embedded <strong>SQLite</strong> database engine. This is the optimal configuration for standalone survival servers, RPG worlds, and minigames operating on a single server instance.</p>
+<h1 id="standalone-server-storage-sqlite">Standalone Server Storage (SQLite)</h1>
+<p>By default, CraftingBlueprints uses an embedded <strong>SQLite</strong> relational database engine. This is the optimal configuration for standalone Survival servers, Skyblock worlds, RPG realms, and minigames operating on a single server instance.</p>
 <hr />
-<h2 id="configuration-in-configyml">Configuration in config.yml</h2>
-<p>SQLite requires zero setup:</p>
-<div class="language-yaml highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># Storage engine: sqlite</span>
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nt">database-type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sqlite</span>
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="c1"># Database filename (saved as crafting_blueprints.db)</span>
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="nt">database-name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">crafting_blueprints</span>
+<h2 id="zero-configuration-setup">Zero-Configuration Setup</h2>
+<p>SQLite requires zero external software, no database servers, and no user management. CraftingBlueprints automatically provisions the database file and manages schema migrations on startup.</p>
+<p>In <code>plugins/CraftingBlueprints/config.yml</code>:</p>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># ------------------------------------------------------------ #</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="c1"># Database Storage Configuration</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="c1"># ------------------------------------------------------------ #</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="c1"># Storage engine backend: sqlite</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="nt">database-type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sqlite</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="c1"># Database filename (saved as crafting_blueprints.db)</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="nt">database-name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">crafting_blueprints</span>
 </span></code></pre></div>
 <hr />
-<h2 id="where-are-player-unlocks-stored">Where Are Player Unlocks Stored?</h2>
-<p>All unlocked recipes, active timer countdowns, and remaining craft counts are saved directly inside:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>plugins/CraftingBlueprints/crafting_blueprints.db
+<h2 id="file-location-data-schema">File Location &amp; Data Schema</h2>
+<p>All persistent data is stored directly in a single file inside your plugin directory:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>your-server/
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>└── plugins/
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>    └── CraftingBlueprints/
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>        └── crafting_blueprints.db
 </span></code></pre></div>
+<p>This database maintains:
+* <strong><code>cb_player_data</code></strong>: All unlocked blueprints, remaining craft usage counts, and expiration timestamps per player UUID.
+* <strong><code>ITEM_BLUEPRINTS</code></strong>: Blueprints created in-game via GUI or commands (<code>is_file_managed: false</code>).
+* <strong><code>cb_schema_version</code></strong>: Automated schema migration version markers.</p>
 <hr />
-<h2 id="backing-up-your-sqlite-database">Backing Up Your SQLite Database</h2>
-<p>To create a safe backup of your player blueprint progression:</p>
+<h2 id="performance-concurrency-architecture">Performance &amp; Concurrency Architecture</h2>
+<ul>
+<li><strong>Zero Main-Thread Blocking</strong>: All database read and write operations execute on asynchronous background daemon worker threads. Player crafting, inventory clicks, and server ticks are never blocked waiting for disk I/O.</li>
+<li><strong>Keyed FIFO Task Dispatcher</strong>: Writes for each player are strictly queued in First-In-First-Out order, guaranteeing atomic check-and-consume invariants even during high-frequency crafting events.</li>
+<li><strong>Capacity</strong>: Embedded SQLite handles single-server workloads effortlessly, supporting over 150+ concurrent active players with sub-millisecond local query latencies.</li>
+</ul>
+<hr />
+<h2 id="live-backup-restore-procedures">Live Backup &amp; Restore Procedures</h2>
+<p>Because CraftingBlueprints uses asynchronous transactions, you can safely back up your database while the server is live:</p>
+<h3 id="creating-a-backup">Creating a Backup</h3>
 <ol>
-<li>You can safely copy <code>crafting_blueprints.db</code> while the server is running.</li>
-<li>Store the copy in your automated server backup folder.</li>
-<li>If you ever need to restore, stop the server, replace <code>crafting_blueprints.db</code>, and start the server again.</li>
+<li>Navigate to <code>plugins/CraftingBlueprints/</code>.</li>
+<li>Copy <code>crafting_blueprints.db</code> to your backup directory or cloud storage.</li>
+<li>You can safely run this copy operation from a scheduled backup script while players are online.</li>
+</ol>
+<h3 id="restoring-from-backup">Restoring from Backup</h3>
+<ol>
+<li>Stop the server safely:
+   <div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>/stop
+</span></code></pre></div></li>
+<li>Replace <code>plugins/CraftingBlueprints/crafting_blueprints.db</code> with your backup copy.</li>
+<li>Start the server. The plugin validates the database integrity upon boot and resumes operations immediately.</li>
 </ol>
 
 

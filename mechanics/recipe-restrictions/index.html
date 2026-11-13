@@ -80,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#recipe-restrictions-whitelist-mode" class="md-skip">
+        <a href="#recipe-restrictions-whitelist-mode-vs-universal-gating" class="md-skip">
           Skip to content
         </a>
       
@@ -896,10 +896,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#operating-modes" class="md-nav__link">
+  <a href="#operating-modes-comparison" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Operating Modes
+        Operating Modes Comparison
       
     </span>
   </a>
@@ -907,38 +907,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#1-selective-mode-mode-restricted-only-recommended-for-smpsurvival" class="md-nav__link">
+  <a href="#pattern-matching-reference-table" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Selective Mode (mode: "restricted-only") (Recommended for SMP/Survival)
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="1. Selective Mode (mode: &#34;restricted-only&#34;) (Recommended for SMP/Survival)">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#why-use-selective-mode" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Why use Selective Mode?
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#2-universal-gating-mode-mode-all" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2. Universal Gating Mode (mode: "all")
+        Pattern Matching Reference Table
       
     </span>
   </a>
@@ -946,10 +918,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#pattern-matching-syntax" class="md-nav__link">
+  <a href="#category-prefixes-specificity" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Pattern Matching Syntax
+        Category Prefixes &amp; Specificity
       
     </span>
   </a>
@@ -957,10 +929,21 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#operator-bypass-op-bypass" class="md-nav__link">
+  <a href="#testing-gotcha-operator-bypass-op-bypass" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Operator Bypass (op-bypass)
+        Testing Gotcha: Operator Bypass (op-bypass)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#modular-preset-restriction-aggregation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Modular Preset Restriction Aggregation
       
     </span>
   </a>
@@ -1880,10 +1863,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#operating-modes" class="md-nav__link">
+  <a href="#operating-modes-comparison" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Operating Modes
+        Operating Modes Comparison
       
     </span>
   </a>
@@ -1891,38 +1874,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#1-selective-mode-mode-restricted-only-recommended-for-smpsurvival" class="md-nav__link">
+  <a href="#pattern-matching-reference-table" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Selective Mode (mode: "restricted-only") (Recommended for SMP/Survival)
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="1. Selective Mode (mode: &#34;restricted-only&#34;) (Recommended for SMP/Survival)">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#why-use-selective-mode" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Why use Selective Mode?
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#2-universal-gating-mode-mode-all" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2. Universal Gating Mode (mode: "all")
+        Pattern Matching Reference Table
       
     </span>
   </a>
@@ -1930,10 +1885,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#pattern-matching-syntax" class="md-nav__link">
+  <a href="#category-prefixes-specificity" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Pattern Matching Syntax
+        Category Prefixes &amp; Specificity
       
     </span>
   </a>
@@ -1941,10 +1896,21 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#operator-bypass-op-bypass" class="md-nav__link">
+  <a href="#testing-gotcha-operator-bypass-op-bypass" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Operator Bypass (op-bypass)
+        Testing Gotcha: Operator Bypass (op-bypass)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#modular-preset-restriction-aggregation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Modular Preset Restriction Aggregation
       
     </span>
   </a>
@@ -1971,85 +1937,160 @@
   
 
 
-<h1 id="recipe-restrictions-whitelist-mode">Recipe Restrictions (Whitelist Mode)</h1>
-<p>CraftingBlueprints includes a flexible restriction engine that controls whether your server operates in <strong>Universal Gating Mode</strong> or <strong>Selective Whitelist Mode</strong>.</p>
+<h1 id="recipe-restrictions-whitelist-mode-vs-universal-gating">Recipe Restrictions (Whitelist Mode vs Universal Gating)</h1>
+<p>CraftingBlueprints features an intelligent restriction engine (<code>RestrictionEngine.kt</code>) allowing server administrators to choose between <strong>Selective Whitelist Mode</strong> (recommended for Survival SMP) and <strong>Universal Progression Mode</strong> (recommended for Hardcore RPG).</p>
 <hr />
-<h2 id="operating-modes">Operating Modes</h2>
-<p>Configured in <code>plugins/CraftingBlueprints/config.yml</code> under <code>restrictions:</code>:</p>
+<h2 id="operating-modes-comparison">Operating Modes Comparison</h2>
+<p>Configured in <code>plugins/CraftingBlueprints/config.yml</code> under the <code>restrictions:</code> block:</p>
 <div class="language-yaml highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nt">restrictions</span><span class="p">:</span>
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="c1"># Mode options: 'all' or 'restricted-only'</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="c1"># Mode options: 'restricted-only' or 'all'</span>
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">  </span><span class="nt">mode</span><span class="p">:</span><span class="w"> </span><span class="s">"restricted-only"</span>
 </span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">  </span><span class="c1"># Items that require blueprints when mode is 'restricted-only'</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">  </span><span class="c1"># Items, recipes, potions, or enchantments that require blueprints</span>
 </span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">  </span><span class="nt">restricted-items</span><span class="p">:</span>
 </span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"diamond_.*"</span>
 </span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"netherite_.*"</span>
 </span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"enchanted_golden_apple"</span>
 </span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"beacon"</span>
 </span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"potion:strength.*"</span>
-</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"enchantment:mending"</span>
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"potion:speed.*"</span>
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"enchantment:mending"</span>
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"enchantment:sharpness.*"</span>
 </span></code></pre></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Selective Whitelist Mode (mode: 'restricted-only')</label><label for="__tabbed_1_2">Universal Progression Mode (mode: 'all')</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<ul>
+<li><strong>Default for Modern SMP &amp; Skyblock Servers</strong>.</li>
+<li><strong>All standard Minecraft recipes are completely FREE for all players by default!</strong> Players can craft wooden tools, stone pickaxes, iron armor, torches, furnaces, and beds without ever touching a blueprint.</li>
+<li><strong>ONLY items matching <code>restricted-items</code> require a blueprint.</strong></li>
+<li><strong>Why choose this mode?</strong> It eliminates player frustration. You can introduce custom blueprints for endgame gear (such as Netherite weapons, Beacons, or Mending enchantments) while leaving standard survival crafting 100% natural and unhindered.</li>
+</ul>
+</div>
+<div class="tabbed-block">
+<ul>
+<li><strong>Designed for Hardcore RPG, Skyblock, and Quest Networks</strong>.</li>
+<li><strong>Every single craftable item, potion, and enchantment on your server requires a blueprint</strong> before it can be produced.</li>
+<li>Players must discover, purchase, or unlock blueprints for basic wood, stone, iron, and farming equipment step-by-step.</li>
+<li>Combine this mode with <a href="../../blueprints/groups-and-packs/#3-permission-groups-in-configyml-groups">Permission Groups</a> to grant tiers of basic recipes to player ranks automatically.</li>
+</ul>
+</div>
+</div>
+</div>
 <hr />
-<h2 id="1-selective-mode-mode-restricted-only-recommended-for-smpsurvival">1. Selective Mode (<code>mode: "restricted-only"</code>) <em>(Recommended for SMP/Survival)</em></h2>
-<p>In this mode:
-* <strong>All standard Minecraft recipes are freely craftable by everyone by default</strong> without needing any blueprints (wood, torches, bread, stone tools, iron armor).
-* <strong>Only items matching <code>restricted-items</code> are locked behind blueprints.</strong></p>
-<h3 id="why-use-selective-mode">Why use Selective Mode?</h3>
-<p>It allows you to introduce custom blueprints for endgame gear (such as Netherite weapons, Beacons, or Elytra repairs) without annoying your players by forcing them to unlock basic wooden pickaxes or torches.</p>
-<hr />
-<h2 id="2-universal-gating-mode-mode-all">2. Universal Gating Mode (<code>mode: "all"</code>)</h2>
-<p>In this mode:
-* <strong>Every craftable item, potion, and enchantment on your server requires a blueprint</strong> before it can be made.
-* Ideal for hardcore RPG, tech progression, and progression-locked MMO servers where players must unlock their crafting repertoire step-by-step.</p>
-<hr />
-<h2 id="pattern-matching-syntax">Pattern Matching Syntax</h2>
-<p>The <code>restricted-items:</code> list supports exact names, category prefixes, and regular expressions:</p>
+<h2 id="pattern-matching-reference-table">Pattern Matching Reference Table</h2>
+<p>The <code>restricted-items:</code> list supports exact identifiers, wildcard globs, regular expressions (regex), and category prefixes:</p>
 <table>
 <thead>
 <tr>
-<th style="text-align: left;">Pattern</th>
-<th style="text-align: left;">Description</th>
-<th style="text-align: left;">Matches</th>
+<th style="text-align: left;">Pattern Syntax</th>
+<th style="text-align: left;">Category Filtered</th>
+<th style="text-align: left;">Example Matches</th>
+<th style="text-align: left;">Operational Behavior</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td style="text-align: left;"><code>beacon</code></td>
-<td style="text-align: left;">Exact material match.</td>
+<td style="text-align: left;">Crafting</td>
 <td style="text-align: left;"><code>BEACON</code></td>
+<td style="text-align: left;">Exact material match. Case-insensitive.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>enchanted_golden_apple</code></td>
+<td style="text-align: left;">Crafting</td>
+<td style="text-align: left;"><code>ENCHANTED_GOLDEN_APPLE</code></td>
+<td style="text-align: left;">Locks crafting of god apples (if enabled by datapacks).</td>
 </tr>
 <tr>
 <td style="text-align: left;"><code>diamond_.*</code></td>
-<td style="text-align: left;">Wildcard match for all Diamond gear.</td>
+<td style="text-align: left;">Crafting</td>
 <td style="text-align: left;"><code>DIAMOND_SWORD</code>, <code>DIAMOND_CHESTPLATE</code>, <code>DIAMOND_PICKAXE</code>, etc.</td>
+<td style="text-align: left;">Regex matching all equipment starting with <code>diamond_</code>.</td>
 </tr>
 <tr>
 <td style="text-align: left;"><code>netherite_.*</code></td>
-<td style="text-align: left;">Wildcard match for all Netherite gear.</td>
-<td style="text-align: left;"><code>NETHERITE_HELMET</code>, <code>NETHERITE_AXE</code>, etc.</td>
+<td style="text-align: left;">Crafting &amp; Smithing</td>
+<td style="text-align: left;"><code>NETHERITE_HELMET</code>, <code>NETHERITE_SWORD</code>, <code>NETHERITE_AXE</code>, etc.</td>
+<td style="text-align: left;">Regex matching all Netherite tools, weapons, and armor.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>*gold*</code></td>
+<td style="text-align: left;">Crafting</td>
+<td style="text-align: left;"><code>GOLDEN_SWORD</code>, <code>GOLDEN_APPLE</code>, <code>GOLD_INGOT</code>, etc.</td>
+<td style="text-align: left;">Wildcard glob matching any item containing "gold".</td>
 </tr>
 <tr>
 <td style="text-align: left;"><code>potion:strength.*</code></td>
-<td style="text-align: left;">Restricts Strength I and Strength II brewing.</td>
-<td style="text-align: left;">Standard, splash, and lingering Strength potions.</td>
+<td style="text-align: left;">Alchemy / Brewing</td>
+<td style="text-align: left;">Strength I, Strength II, Extended &amp; Splash variants</td>
+<td style="text-align: left;">Locks brewing of all Strength potion variants.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>potion:speed.*</code></td>
+<td style="text-align: left;">Alchemy / Brewing</td>
+<td style="text-align: left;">Speed I, Speed II, Splash Speed</td>
+<td style="text-align: left;">Locks brewing of all Speed potion variants.</td>
 </tr>
 <tr>
 <td style="text-align: left;"><code>enchantment:mending</code></td>
-<td style="text-align: left;">Restricts applying Mending enchantments in anvils.</td>
-<td style="text-align: left;">Mending books and equipment.</td>
+<td style="text-align: left;">Anvil / Enchanting</td>
+<td style="text-align: left;">Mending books and items in anvils</td>
+<td style="text-align: left;">Locks combining or applying Mending enchantments.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>enchantment:sharpness.*</code></td>
+<td style="text-align: left;">Anvil / Enchanting</td>
+<td style="text-align: left;">Sharpness I through Sharpness V</td>
+<td style="text-align: left;">Locks applying Sharpness enchantments.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>smelt:iron_ingot</code></td>
+<td style="text-align: left;">Furnace / Smelting</td>
+<td style="text-align: left;">Raw iron $\rightarrow$ Iron ingot</td>
+<td style="text-align: left;">Locks smelting iron ingots in furnaces and blast furnaces.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>stonecut:.*stairs</code></td>
+<td style="text-align: left;">Stonecutter</td>
+<td style="text-align: left;">All stairs cut via stonecutter</td>
+<td style="text-align: left;">Locks stonecutter recipes matching the pattern.</td>
 </tr>
 </tbody>
 </table>
 <hr />
-<h2 id="operator-bypass-op-bypass">Operator Bypass (<code>op-bypass</code>)</h2>
-<p>In <code>config.yml</code>:</p>
+<h2 id="category-prefixes-specificity">Category Prefixes &amp; Specificity</h2>
+<p>By default, an unqualified pattern without a prefix (e.g. <code>diamond_sword</code>) matches across all workstations. You can restrict evaluation to specific crafting stations using category prefixes:</p>
+<ul>
+<li><strong><code>craft:</code> / <code>item:</code></strong>: Evaluates only standard 2x2 and 3x3 crafting workbench recipes.</li>
+<li><strong><code>potion:</code> / <code>brew:</code></strong>: Evaluates only Brewing Stand potion brewing actions.</li>
+<li><strong><code>enchant:</code> / <code>enchantment:</code></strong>: Evaluates only Anvil and Enchantment Table operations.</li>
+<li><strong><code>smelt:</code> / <code>furnace:</code></strong>: Evaluates Furnaces, Blast Furnaces, Smokers, and Campfires.</li>
+<li><strong><code>stonecut:</code> / <code>stonecutter:</code></strong>: Evaluates Stonecutter workstation recipes.</li>
+</ul>
+<hr />
+<h2 id="testing-gotcha-operator-bypass-op-bypass">Testing Gotcha: Operator Bypass (<code>op-bypass</code>)</h2>
+<p>In <code>plugins/CraftingBlueprints/config.yml</code>:</p>
 <div class="language-yaml highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nt">op-bypass</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 </span></code></pre></div>
-<ul>
-<li>If <code>true</code>, server operators (<code>/op</code>) bypass all recipe restrictions and can craft freely.</li>
-<li>If you are testing whether restrictions work, make sure to deop your account or set <code>op-bypass: false</code> temporarily.</li>
-<li>For permissions-based bypass for moderators or VIPs, assign the permission <code>craftingblueprints.bypass.ownership</code>.</li>
-</ul>
+<div class="admonition warning">
+<p class="admonition-title">Are you testing with /op?</p>
+<p>If your testing account has server operator status (<code>/op</code>), CraftingBlueprints will allow you to craft, brew, and enchant restricted recipes freely, bypassing all locks.</p>
+<p>To properly test recipe restrictions as a normal player:
+1. Temporarily deop yourself: <code>/deop &lt;your_player_name&gt;</code>
+2. Alternatively, set <code>op-bypass: false</code> in <code>config.yml</code> and run <code>/cb reload config</code>.</p>
+</div>
+<p>To grant bypass rights to staff members or builders without giving them full operator status, assign the LuckPerms permission:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>lp<span class="w"> </span>group<span class="w"> </span>moderator<span class="w"> </span>permission<span class="w"> </span><span class="nb">set</span><span class="w"> </span>craftingblueprints.bypass.ownership<span class="w"> </span><span class="nb">true</span>
+</span></code></pre></div>
+<hr />
+<h2 id="modular-preset-restriction-aggregation">Modular Preset Restriction Aggregation</h2>
+<p>When you install pre-built gameplay presets using <code>/cb preset apply</code> (e.g. Hardcore SMP or RPG Tiers), the plugin <strong>never modifies your <code>config.yml</code></strong>.</p>
+<p>Instead:
+1. <code>config.yml</code> remains the sole authority for global operational mode (<code>restrictions.mode: "restricted-only"</code>).
+2. Presets deploy their required restricted items to <code>configs/presets/&lt;preset_id&gt;/restrictions.yml</code>.
+3. When the server boots or executes <code>/cb reload</code>, the engine performs a mathematical <strong>Set Union</strong> ($A \cup B$) between <code>config.yml</code> and all active preset restriction files.
+4. When you uninstall a preset (<code>/cb preset remove &lt;preset_id&gt;</code>), its restrictions are cleanly purged from memory upon reload with zero leftovers.</p>
 
 
 

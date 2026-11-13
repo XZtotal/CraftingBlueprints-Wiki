@@ -80,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#tutorial-distributing-blueprints-via-crates-and-quests" class="md-skip">
+        <a href="#tutorial-distributing-blueprints-via-crates-quests" class="md-skip">
           Skip to content
         </a>
       
@@ -1643,41 +1643,24 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#3-integrating-with-quests-betonquest" class="md-nav__link">
+  <a href="#3-integrating-with-quests-by-pukejoy_1-happypikachu" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Integrating with Quests / BetonQuest
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="3. Integrating with Quests / BetonQuest">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#quests-by-pukejoy_1-happypikachu" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Quests (by Pukejoy_1 / HappyPikachu)
+        3. Integrating with Quests (by Pukejoy_1 / HappyPikachu)
       
     </span>
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#betonquest" class="md-nav__link">
+      
+        <li class="md-nav__item">
+  <a href="#4-integrating-with-betonquest" class="md-nav__link">
     <span class="md-ellipsis">
       
-        BetonQuest
+        4. Integrating with BetonQuest
       
     </span>
   </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -1891,41 +1874,24 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#3-integrating-with-quests-betonquest" class="md-nav__link">
+  <a href="#3-integrating-with-quests-by-pukejoy_1-happypikachu" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Integrating with Quests / BetonQuest
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="3. Integrating with Quests / BetonQuest">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#quests-by-pukejoy_1-happypikachu" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Quests (by Pukejoy_1 / HappyPikachu)
+        3. Integrating with Quests (by Pukejoy_1 / HappyPikachu)
       
     </span>
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#betonquest" class="md-nav__link">
+      
+        <li class="md-nav__item">
+  <a href="#4-integrating-with-betonquest" class="md-nav__link">
     <span class="md-ellipsis">
       
-        BetonQuest
+        4. Integrating with BetonQuest
       
     </span>
   </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -1949,44 +1915,81 @@
   
 
 
-<h1 id="tutorial-distributing-blueprints-via-crates-and-quests">Tutorial: Distributing Blueprints via Crates and Quests</h1>
-<p>Blueprints make fantastic rewards for loot crates, battle passes, and questlines. This tutorial covers how to integrate CraftingBlueprints safely into popular third-party plugins.</p>
+<h1 id="tutorial-distributing-blueprints-via-crates-quests">Tutorial: Distributing Blueprints via Crates &amp; Quests</h1>
+<p>Blueprints make fantastic high-value rewards for loot crates, battle passes, dungeon boss drops, and questlines. Because CraftingBlueprints guarantees <strong>Physical Overflow Preservation</strong>, players will never lose blueprint items even if their inventories are completely full when completing a quest or opening a crate.</p>
 <hr />
 <h2 id="1-the-core-console-reward-command">1. The Core Console Reward Command</h2>
-<p>Whenever a third-party plugin executes a console command to reward a player, use:</p>
+<p>Whenever a third-party plugin executes a console command to reward an online player, execute:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>cb give %player% &lt;blueprint_id&gt; [amount]
 </span></code></pre></div>
 <div class="admonition note">
-<p class="admonition-title">Note</p>
-<p><code>/cb give</code> features <strong>Physical Preservation</strong>. If the player's inventory is full when opening a crate or completing a quest, remaining blueprint maps will safely drop to their feet on the ground rather than vanishing into thin air.</p>
+<p class="admonition-title">Physical Preservation Guarantee</p>
+<p>If the recipient's inventory happens to be 100% full when a crate opens or a quest finishes, CraftingBlueprints automatically drops the leftover blueprint items safely onto the ground directly at the player's feet (<code>world.dropItem(...)</code>). No items ever vanish into thin air.</p>
 </div>
 <hr />
 <h2 id="2-integrating-with-crazycrates">2. Integrating with CrazyCrates</h2>
-<p>In your CrazyCrates config (e.g. <code>plugins/CrazyCrates/Crates/MythicCrate.yml</code>):</p>
-<div class="language-yaml highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nt">Prize</span><span class="p">:</span>
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="nt">DisplayName</span><span class="p">:</span><span class="w"> </span><span class="s">"&lt;gradient:#FF5555:#FFAA00&gt;&lt;bold&gt;Ancient</span><span class="nv"> </span><span class="s">Netherite</span><span class="nv"> </span><span class="s">Blueprint&lt;/bold&gt;&lt;/gradient&gt;"</span>
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">  </span><span class="nt">DisplayItem</span><span class="p">:</span><span class="w"> </span><span class="s">"FILLED_MAP"</span>
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">  </span><span class="nt">DisplayAmount</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
-</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">  </span><span class="nt">Lore</span><span class="p">:</span>
-</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"&lt;gray&gt;Win</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">rare</span><span class="nv"> </span><span class="s">schematic</span><span class="nv"> </span><span class="s">allowing</span><span class="nv"> </span><span class="s">you</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">forge&lt;/gray&gt;"</span>
-</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"&lt;gray&gt;ancient</span><span class="nv"> </span><span class="s">Netherite</span><span class="nv"> </span><span class="s">equipment.&lt;/gray&gt;"</span>
-</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">  </span><span class="nt">Commands</span><span class="p">:</span>
-</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"cb</span><span class="nv"> </span><span class="s">give</span><span class="nv"> </span><span class="s">%player%</span><span class="nv"> </span><span class="s">ancient_netherite_smithing</span><span class="nv"> </span><span class="s">1"</span>
-</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="w">  </span><span class="nt">Chance</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5</span>
-</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="w">  </span><span class="nt">MaxRange</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">100</span>
+<p>In your CrazyCrates configuration (e.g. <code>plugins/CrazyCrates/Crates/MythicCrate.yml</code>), add the blueprint as a reward prize:</p>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nt">Crate</span><span class="p">:</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="nt">CrateType</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CSGO</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">  </span><span class="nt">CrateName</span><span class="p">:</span><span class="w"> </span><span class="s">"&lt;gradient:#9900EE:#FF0055&gt;&lt;bold&gt;Mythic</span><span class="nv"> </span><span class="s">Forge</span><span class="nv"> </span><span class="s">Crate&lt;/bold&gt;&lt;/gradient&gt;"</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="nt">Prizes</span><span class="p">:</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">  </span><span class="nt">AncientNetheriteBlueprint</span><span class="p">:</span>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">    </span><span class="nt">DisplayName</span><span class="p">:</span><span class="w"> </span><span class="s">"&lt;gradient:#FF5555:#FFAA00&gt;&lt;bold&gt;Ancient</span><span class="nv"> </span><span class="s">Netherite</span><span class="nv"> </span><span class="s">Blueprint&lt;/bold&gt;&lt;/gradient&gt;"</span>
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">    </span><span class="nt">DisplayItem</span><span class="p">:</span><span class="w"> </span><span class="s">"FILLED_MAP"</span>
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">    </span><span class="nt">DisplayAmount</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="w">    </span><span class="nt">Lore</span><span class="p">:</span>
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"&lt;gray&gt;Win</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">rare</span><span class="nv"> </span><span class="s">schematic</span><span class="nv"> </span><span class="s">allowing</span><span class="nv"> </span><span class="s">you</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">forge&lt;/gray&gt;"</span>
+</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"&lt;gray&gt;endgame</span><span class="nv"> </span><span class="s">Netherite</span><span class="nv"> </span><span class="s">equipment</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">Smithing</span><span class="nv"> </span><span class="s">Tables.&lt;/gray&gt;"</span>
+</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">""</span>
+</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"&lt;yellow&gt;Chance:&lt;/yellow&gt;</span><span class="nv"> </span><span class="s">&lt;gold&gt;5%&lt;/gold&gt;"</span>
+</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="w">    </span><span class="nt">MaxRange</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">100</span>
+</span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="w">    </span><span class="nt">Chance</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5</span>
+</span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="w">    </span><span class="nt">Commands</span><span class="p">:</span>
+</span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="w">      </span><span class="c1"># Console execution command:</span>
+</span><span id="__span-1-19"><a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"cb</span><span class="nv"> </span><span class="s">give</span><span class="nv"> </span><span class="s">%Player%</span><span class="nv"> </span><span class="s">ancient_netherite_smithing</span><span class="nv"> </span><span class="s">1"</span>
 </span></code></pre></div>
 <hr />
-<h2 id="3-integrating-with-quests-betonquest">3. Integrating with Quests / BetonQuest</h2>
-<h3 id="quests-by-pukejoy_1-happypikachu">Quests (by Pukejoy_1 / HappyPikachu)</h3>
-<p>In your quest rewards configuration:
-<div class="language-yaml highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nt">rewards</span><span class="p">:</span>
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="nt">commands</span><span class="p">:</span>
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"cb</span><span class="nv"> </span><span class="s">give</span><span class="nv"> </span><span class="s">&lt;player&gt;</span><span class="nv"> </span><span class="s">dragon_slayer_blade</span><span class="nv"> </span><span class="s">1"</span>
-</span></code></pre></div></p>
-<h3 id="betonquest">BetonQuest</h3>
-<p>In <code>events.yml</code>:
-<div class="language-yaml highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nt">reward_blueprint</span><span class="p">:</span><span class="w"> </span><span class="s">"command</span><span class="nv"> </span><span class="s">cb</span><span class="nv"> </span><span class="s">give</span><span class="nv"> </span><span class="s">%player%</span><span class="nv"> </span><span class="s">dragon_slayer_blade</span><span class="nv"> </span><span class="s">1"</span>
-</span></code></pre></div></p>
+<h2 id="3-integrating-with-quests-by-pukejoy_1-happypikachu">3. Integrating with Quests (by Pukejoy_1 / HappyPikachu)</h2>
+<p>In your Quests configuration file (<code>plugins/Quests/quests.yml</code>):</p>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nt">quests</span><span class="p">:</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="nt">custom_blacksmith_trial</span><span class="p">:</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">"The</span><span class="nv"> </span><span class="s">Master</span><span class="nv"> </span><span class="s">Blacksmith's</span><span class="nv"> </span><span class="s">Trial"</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="nt">npc-giver-id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">12</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">    </span><span class="nt">redo-delay</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">86400</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">    </span><span class="nt">stages</span><span class="p">:</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">      </span><span class="nt">ordered</span><span class="p">:</span>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">        </span><span class="s">'1'</span><span class="p p-Indicator">:</span>
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">          </span><span class="nt">break-block-names</span><span class="p">:</span>
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ANCIENT_DEBRIS</span>
+</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="w">          </span><span class="nt">break-block-amounts</span><span class="p">:</span>
+</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8</span>
+</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="w">    </span><span class="nt">rewards</span><span class="p">:</span>
+</span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="w">      </span><span class="nt">money</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5000</span>
+</span><span id="__span-2-15"><a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="w">      </span><span class="nt">exp</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1200</span>
+</span><span id="__span-2-16"><a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="w">      </span><span class="nt">commands</span><span class="p">:</span>
+</span><span id="__span-2-17"><a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a><span class="w">        </span><span class="c1"># Reward the player with the 3-use magic forge scroll</span>
+</span><span id="__span-2-18"><a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a><span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"cb</span><span class="nv"> </span><span class="s">give</span><span class="nv"> </span><span class="s">&lt;player&gt;</span><span class="nv"> </span><span class="s">astral_blade_scroll</span><span class="nv"> </span><span class="s">1"</span>
+</span></code></pre></div>
+<hr />
+<h2 id="4-integrating-with-betonquest">4. Integrating with BetonQuest</h2>
+<p>In your BetonQuest events configuration (<code>plugins/BetonQuest/default/events.yml</code>):</p>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nt">events</span><span class="p">:</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="c1"># Command event executed from console</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">  </span><span class="nt">reward_netherite_blueprint</span><span class="p">:</span><span class="w"> </span><span class="s">"command</span><span class="nv"> </span><span class="s">cb</span><span class="nv"> </span><span class="s">give</span><span class="nv"> </span><span class="s">%player%</span><span class="nv"> </span><span class="s">ancient_netherite_smithing</span><span class="nv"> </span><span class="s">1"</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">  </span><span class="nt">reward_rpg_scroll</span><span class="p">:</span><span class="w"> </span><span class="s">"command</span><span class="nv"> </span><span class="s">cb</span><span class="nv"> </span><span class="s">give</span><span class="nv"> </span><span class="s">%player%</span><span class="nv"> </span><span class="s">astral_blade_scroll</span><span class="nv"> </span><span class="s">1"</span>
+</span></code></pre></div>
+<p>In your quest conversation or objective rewards:</p>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nt">conversations</span><span class="p">:</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span><span class="nt">dungeon_master</span><span class="p">:</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="nt">quester</span><span class="p">:</span><span class="w"> </span><span class="s">"Dungeon</span><span class="nv"> </span><span class="s">Master"</span>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">    </span><span class="nt">first</span><span class="p">:</span><span class="w"> </span><span class="s">"greeting"</span>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">    </span><span class="nt">NPC_options</span><span class="p">:</span>
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">      </span><span class="nt">greeting</span><span class="p">:</span>
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">        </span><span class="nt">text</span><span class="p">:</span><span class="w"> </span><span class="s">"You</span><span class="nv"> </span><span class="s">have</span><span class="nv"> </span><span class="s">defeated</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">Nether</span><span class="nv"> </span><span class="s">Abomination!</span><span class="nv"> </span><span class="s">Here</span><span class="nv"> </span><span class="s">is</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">ancient</span><span class="nv"> </span><span class="s">smithing</span><span class="nv"> </span><span class="s">schematic."</span>
+</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="w">        </span><span class="nt">events</span><span class="p">:</span>
+</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"reward_netherite_blueprint"</span>
+</span></code></pre></div>
 
 
 

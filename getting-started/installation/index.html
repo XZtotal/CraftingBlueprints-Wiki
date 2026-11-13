@@ -405,10 +405,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#system-requirements" class="md-nav__link">
+  <a href="#system-requirements-compatibility" class="md-nav__link">
     <span class="md-ellipsis">
       
-        System Requirements
+        System Requirements &amp; Compatibility
       
     </span>
   </a>
@@ -427,10 +427,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#verifying-plugin-health" class="md-nav__link">
+  <a href="#first-run-diagnostics-cb-status" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Verifying Plugin Health
+        First-Run Diagnostics (/cb status)
       
     </span>
   </a>
@@ -449,10 +449,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#next-step" class="md-nav__link">
+  <a href="#next-steps" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Next Step
+        Next Steps
       
     </span>
   </a>
@@ -1863,10 +1863,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#system-requirements" class="md-nav__link">
+  <a href="#system-requirements-compatibility" class="md-nav__link">
     <span class="md-ellipsis">
       
-        System Requirements
+        System Requirements &amp; Compatibility
       
     </span>
   </a>
@@ -1885,10 +1885,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#verifying-plugin-health" class="md-nav__link">
+  <a href="#first-run-diagnostics-cb-status" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Verifying Plugin Health
+        First-Run Diagnostics (/cb status)
       
     </span>
   </a>
@@ -1907,10 +1907,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#next-step" class="md-nav__link">
+  <a href="#next-steps" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Next Step
+        Next Steps
       
     </span>
   </a>
@@ -1938,74 +1938,112 @@
 
 
 <h1 id="installation-system-requirements">Installation &amp; System Requirements</h1>
-<p>This guide outlines the system prerequisites and step-by-step setup procedure for installing <strong>CraftingBlueprints</strong> on your Minecraft server.</p>
+<p>This guide provides the system prerequisites, compatibility matrix, and a clean 4-step installation procedure for deploying <strong>CraftingBlueprints</strong> on modern Minecraft servers.</p>
 <hr />
-<h2 id="system-requirements">System Requirements</h2>
+<h2 id="system-requirements-compatibility">System Requirements &amp; Compatibility</h2>
+<p>CraftingBlueprints is engineered specifically for modern Paper-based server software. It features automated version adapters that load dynamically depending on your server runtime. A single <code>.jar</code> file supports all listed versions.</p>
 <table>
 <thead>
 <tr>
 <th style="text-align: left;">Requirement</th>
 <th style="text-align: left;">Supported Versions</th>
-<th style="text-align: left;">Notes</th>
+<th style="text-align: left;">Operational Notes</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td style="text-align: left;"><strong>Server Engine</strong></td>
 <td style="text-align: left;"><strong>Paper</strong>, <strong>Purpur</strong> (1.18.2 – 1.21.x)</td>
-<td style="text-align: left;">Modern Paper-based forks are required. Legacy CraftBukkit / Spigot alone is not supported.</td>
+<td style="text-align: left;">Modern Paper forks are required. Legacy CraftBukkit and standalone Spigot are not supported due to missing Adventure and PDC APIs.</td>
 </tr>
 <tr>
 <td style="text-align: left;"><strong>Java Runtime</strong></td>
 <td style="text-align: left;"><strong>Java 17</strong> or <strong>Java 21+</strong></td>
-<td style="text-align: left;">Minecraft 1.20.5+ requires Java 21 minimum.</td>
+<td style="text-align: left;">Minecraft 1.18.2–1.20.4 runs on Java 17 or 21. Minecraft 1.20.5+ and 1.21+ strictly require <strong>Java 21</strong> minimum.</td>
 </tr>
 <tr>
 <td style="text-align: left;"><strong>Database</strong></td>
-<td style="text-align: left;">SQLite (Embedded) or <strong>MySQL 8.0+ / MariaDB 10.5+</strong></td>
-<td style="text-align: left;">SQLite is enabled by default with zero configuration required.</td>
+<td style="text-align: left;"><strong>SQLite</strong> (Default) or <strong>MySQL 8.0+ / MariaDB 10.5+</strong></td>
+<td style="text-align: left;">Standalone servers run on embedded SQLite with zero setup. Multi-server networks connect to MySQL via built-in HikariCP connection pooling.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Network Proxies</strong></td>
+<td style="text-align: left;">Velocity, BungeeCord, Waterfall</td>
+<td style="text-align: left;">Full support for cross-server networks via shared MySQL and real-time heartbeat sync signals.</td>
 </tr>
 </tbody>
 </table>
 <div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>CraftingBlueprints features automated multi-version adapters. You do not need different builds for 1.18.2, 1.20.4, or 1.21.x; a single <code>.jar</code> works across all supported versions out of the box.</p>
+<p class="admonition-title">Automated Version Abstraction Layer</p>
+<p>CraftingBlueprints uses an internal Version Abstraction Layer. You do not need separate builds for 1.18.2, 1.20.4, or 1.21.x. Advanced features (such as 1.21 Crafter block interception or 1.20 3-slot Smithing Tables) activate automatically when running on compatible server versions and remain safely dormant on older versions.</p>
 </div>
 <hr />
 <h2 id="clean-installation-in-4-steps">Clean Installation in 4 Steps</h2>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Paper / Purpur (Single Server)</label><label for="__tabbed_1_2">Multi-Server Network (Bungee / Velocity)</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <ol>
-<li><strong>Download the Jar</strong>: Obtain the latest official <code>CraftingBlueprints-x.x.x.jar</code>.</li>
-<li><strong>Copy to Plugins</strong>: Place the downloaded <code>.jar</code> file directly into your server's <code>plugins/</code> directory.</li>
-<li><strong>Start or Restart Server</strong>: Start your server.
-   !!! warning
-       Do not use the <code>/reload</code> or <code>/reload confirm</code> command when installing or updating plugins. A clean restart ensures that database drivers and NMS adapters initialize safely.</li>
-<li><strong>Verify Console Boot</strong>: Check your server console for the startup banner:
-   <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>[CraftingBlueprints] Enabling CraftingBlueprints vX.X.X...
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>[CraftingBlueprints] Detected Server Engine: Paper 1.20.4
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>[CraftingBlueprints] SQLite database connection established.
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>[CraftingBlueprints] Loaded X blueprints successfully.
+<li><strong>Download the Plugin</strong>: Obtain the latest official <code>CraftingBlueprints-x.x.x.jar</code>.</li>
+<li><strong>Place in Plugins Directory</strong>: Copy the <code>.jar</code> directly into your server's <code>plugins/</code> directory:
+   <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>your-server/
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>└── plugins/
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    └── CraftingBlueprints-x.x.x.jar
+</span></code></pre></div></li>
+<li><strong>Start the Server</strong>: Start the server to generate default configuration files, bundled templates, and sample blueprints.
+   !!! warning "Avoid /reload"
+       Never use the Bukkit <code>/reload</code> or <code>/reload confirm</code> command when installing or updating plugins. A clean restart ensures that database connection pools, file watchers, and version adapters initialize safely.</li>
+<li><strong>Verify Boot Output</strong>: Review your server console for the startup diagnostics banner:
+   <div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>[CraftingBlueprints] Enabling CraftingBlueprints vX.X.X...
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>[CraftingBlueprints] Detected Server Engine: Paper 1.20.4 (Adapter: Adapter_v1_20_R3)
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>[CraftingBlueprints] SQLite database connection established: plugins/CraftingBlueprints/crafting_blueprints.db
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>[CraftingBlueprints] Loaded 3 blueprint groups: default (142 recipes), vip (157 recipes), pro (210 recipes).
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>[CraftingBlueprints] Successfully registered 42 blueprints from YAML files.
 </span></code></pre></div></li>
 </ol>
+</div>
+<div class="tabbed-block">
+<ol>
+<li><strong>Install on Every Server</strong>: Copy <code>CraftingBlueprints-x.x.x.jar</code> into the <code>plugins/</code> directory of each sub-server (Hub, Survival, Skyblock, etc.).</li>
+<li><strong>Configure Central MySQL</strong>: On every server, open <code>plugins/CraftingBlueprints/config.yml</code> and set <code>database-type: mysql</code> with your shared database credentials.</li>
+<li><strong>Enforce the Golden Rule</strong>:</li>
+<li>Designate <strong>one Primary Management Server</strong> (e.g., Hub/Admin) with:
+     <div class="language-yaml highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nt">file-management</span><span class="p">:</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="nt">sync-from-files</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</span></code></pre></div></li>
+<li>Configure <strong>all Worker Servers</strong> (Survival, Skyblock, etc.) with:
+     <div class="language-yaml highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nt">file-management</span><span class="p">:</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="nt">sync-from-files</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+</span></code></pre></div></li>
+<li><strong>Start Servers &amp; Confirm Sync</strong>: Start the primary server first, then the worker nodes. Review our <a href="../../storage/mysql-multiserver/">Multi-Server Setup Guide</a> for network-specific connection pooling advice.</li>
+</ol>
+</div>
+</div>
+</div>
 <hr />
-<h2 id="verifying-plugin-health">Verifying Plugin Health</h2>
-<p>Once the server has fully loaded, run the status diagnostic command in console or as a server operator (<code>/op</code>):</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>/cb status
+<h2 id="first-run-diagnostics-cb-status">First-Run Diagnostics (<code>/cb status</code>)</h2>
+<p>Once your server has fully started, verify the operational health of CraftingBlueprints by running the status diagnostic command in console or as a server operator:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>/cb status
 </span></code></pre></div>
-<p>This command reports:
-* The detected server engine and multi-version adapter.
-* Active database backend status (SQLite or MySQL).
-* Total count of blueprints registered in memory.</p>
-<hr />
-<h2 id="recommended-complementary-plugins">Recommended Complementary Plugins</h2>
-<p>CraftingBlueprints works standalone, but integrates seamlessly with common server infrastructure:</p>
+<p>This diagnostic report provides immediate insight into your deployment:</p>
 <ul>
-<li><strong><a href="https://www.spigotmc.org/resources/vault.34315/">Vault</a></strong> + Any Economy Plugin (EssentialsX, Economy): Enables buying and selling blueprints for in-game currency.</li>
-<li><strong><a href="https://luckperms.net/">LuckPerms</a></strong>: Recommended for managing permission nodes across player ranks. See our <a href="../../commands-permissions/luckperms-guide/">LuckPerms Guide</a>.</li>
-<li><strong><a href="https://www.spigotmc.org/resources/placeholderapi.6245/">PlaceholderAPI</a></strong>: Allows displaying remaining blueprint uses and active counts in external scoreboards, chat, and tablists.</li>
+<li><strong>Engine &amp; Version Adapter</strong>: Confirms the active Paper version and corresponding capability adapter (Smithing Table 3-slot, Data Components, Crafter block).</li>
+<li><strong>Database Backend</strong>: Displays active connection status (<code>SQLite (Connected)</code> or <code>MySQL (HikariCP Active)</code>), active connection pool statistics, and round-trip query latency.</li>
+<li><strong>Blueprint Counts</strong>: Reports the total number of blueprints registered across all categories (<code>singles</code>, <code>packages</code>, <code>mysteries</code>).</li>
+<li><strong>File Management Mode</strong>: Shows whether the node is running as a <strong>Master Node</strong> (<code>sync-from-files: true</code>) or a <strong>Worker Node</strong> (<code>sync-from-files: false</code>).</li>
+<li><strong>Memory &amp; Buffer Cache</strong>: Displays active memory consumption for player profiles, blueprint definitions, and pre-quantized map byte buffers.</li>
 </ul>
 <hr />
-<h2 id="next-step">Next Step</h2>
-<p>Now that your plugin is installed, test your first blueprint in 3 minutes with our <a href="../quickstart/">Quickstart Guide</a>.</p>
+<h2 id="recommended-complementary-plugins">Recommended Complementary Plugins</h2>
+<p>While CraftingBlueprints works completely standalone with vanilla Minecraft economies, it integrates seamlessly with industry-standard server plugins:</p>
+<ul>
+<li><strong><a href="https://www.spigotmc.org/resources/vault.34315/">Vault</a></strong> + Economy Provider (EssentialsX, Economy): Enables buying and selling blueprints directly through the <code>/cb item list</code> catalog GUI.</li>
+<li><strong><a href="https://luckperms.net/">LuckPerms</a></strong>: The recommended permissions plugin for managing player progression tiers and recipe groups (<code>craftingblueprints.group.&lt;id&gt;</code>). See our <a href="../../commands-permissions/luckperms-guide/">LuckPerms Guide</a>.</li>
+<li><strong><a href="https://www.spigotmc.org/resources/placeholderapi.6245/">PlaceholderAPI</a></strong>: Allows surfacing remaining blueprint uses, active unlock counts, and expiration timers in scoreboards, tablists, and chat formats.</li>
+<li><strong>Custom Item Plugins</strong>: Full support for custom weapons, tools, and armor from <a href="../../blueprints/custom-items/">ItemsAdder</a>, <a href="../../blueprints/custom-items/">Oraxen</a>, <a href="../../blueprints/custom-items/">Nexo</a>, <a href="../../blueprints/custom-items/">MMOItems</a>, <a href="../../blueprints/custom-items/">EcoItems</a>, and <a href="../../blueprints/custom-items/">MythicMobs</a>.</li>
+</ul>
+<hr />
+<h2 id="next-steps">Next Steps</h2>
+<p>Now that CraftingBlueprints is installed and healthy, test your first custom blueprint in under 3 minutes with our <a href="../quickstart/">Quickstart Guide</a>.</p>
 
 
 

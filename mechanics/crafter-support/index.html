@@ -80,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#crafter-automation-interception-121" class="md-skip">
+        <a href="#automated-crafter-interception-minecraft-121" class="md-skip">
           Skip to content
         </a>
       
@@ -935,10 +935,32 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#configuration" class="md-nav__link">
+  <a href="#configuration-in-configyml" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Configuration
+        Configuration in config.yml
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#operating-policies-block-vs-bypass" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Operating Policies: Block vs Bypass
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#multi-version-compatibility" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Multi-Version Compatibility
       
     </span>
   </a>
@@ -1841,10 +1863,32 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#configuration" class="md-nav__link">
+  <a href="#configuration-in-configyml" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Configuration
+        Configuration in config.yml
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#operating-policies-block-vs-bypass" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Operating Policies: Block vs Bypass
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#multi-version-compatibility" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Multi-Version Compatibility
       
     </span>
   </a>
@@ -1871,36 +1915,64 @@
   
 
 
-<h1 id="crafter-automation-interception-121">Crafter Automation Interception (1.21+)</h1>
+<h1 id="automated-crafter-interception-minecraft-121">Automated Crafter Interception (Minecraft 1.21+)</h1>
 <p>Minecraft 1.21 introduced the redstone-powered <strong>Crafter</strong> block (<code>Material.CRAFTER</code>), enabling automated, hopper-driven crafting without a human player clicking an inventory slot.</p>
-<p>Without dedicated protection, players can build automated redstone factories to mass-produce locked, rare, or mythic items (such as Netherite gear or beacons) without ever finding or unlocking the required blueprint.</p>
-<p>CraftingBlueprints includes native interception to protect your economy from this exploit.</p>
+<p>Because Crafters operate autonomously when pulsed with redstone, they do <strong>not</strong> trigger standard player crafting events (<code>CraftItemEvent</code>). Without dedicated protection, players can build automated redstone factories to mass-produce locked, rare, epic, or mythic items (such as Netherite equipment or beacons) without ever finding or unlocking the required blueprints, completely circumventing your server's progression economy.</p>
+<p>CraftingBlueprints features native, low-level interception to protect your economy from this exploit.</p>
 <hr />
 <h2 id="how-protection-works">How Protection Works</h2>
-<p>When a redstone pulse powers a Crafter block:</p>
+<p>When a redstone pulse activates a Crafter block:</p>
 <ol>
-<li><strong>Recipe Inspection</strong>: The plugin identifies the target item being assembled inside the Crafter.</li>
-<li><strong>Restriction Check</strong>: The plugin verifies whether the target recipe is locked behind a blueprint or restricted in Whitelist Mode.</li>
-<li><strong>Execution or Interception</strong>:</li>
-<li>If the recipe is <strong>unrestricted</strong> (e.g., standard iron ingots into blocks): The Crafter operates normally.</li>
-<li>If the recipe is <strong>locked</strong>: The Crafter's operation is intercepted. The block emits fail particles and sounds, and all ingredients remain safely inside the Crafter's grid without duplication or loss.</li>
+<li><strong>Recipe Inspection</strong>: The plugin intercepts the pending craft before items are produced, resolving the output item and recipe key.</li>
+<li><strong>Restriction Engine Consultation</strong>: The plugin queries <code>RestrictionEngine.isBlueprintRequired(name, type)</code>:</li>
+<li><strong>Unrestricted Recipes</strong>: If the recipe does not require a blueprint (e.g. iron ingots into blocks, bread, paper, or torches in Whitelist Mode), the craft executes normally with zero interference.</li>
+<li><strong>Restricted Recipes</strong>: If the item requires a blueprint, the Crafter evaluates the active configuration policy.</li>
+<li><strong>Execution Policy Enforcement</strong>:</li>
+<li><strong>Blocked</strong>: The craft is cancelled. The Crafter block emits fail particles and sounds, and all ingredient items remain safely inside the Crafter's grid without duplication or item loss.</li>
+<li><strong>Bypassed</strong>: If configured by the administrator, the Crafter is allowed to produce the locked recipe autonomously.</li>
 </ol>
 <hr />
-<h2 id="configuration">Configuration</h2>
-<p>In <code>plugins/CraftingBlueprints/config.yml</code>:</p>
-<div class="language-yaml highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nt">crafter</span><span class="p">:</span>
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="c1"># Intercept redstone Crafter blocks (Minecraft 1.21+)</span>
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<h2 id="configuration-in-configyml">Configuration in <code>config.yml</code></h2>
+<p>Configure the interception behavior in <code>plugins/CraftingBlueprints/config.yml</code>:</p>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># ------------------------------------------------------------ #</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="c1"># Automated Crafter Interception (Minecraft 1.21+)</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="c1"># ------------------------------------------------------------ #</span>
 </span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">  </span><span class="c1"># Policy when an automated Crafter attempts to craft a locked recipe:</span>
-</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">  </span><span class="c1"># - 'block': Cancel the craft and retain materials safely in the grid.</span>
-</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">  </span><span class="c1"># - 'bypass': Allow automated crafters to craft all recipes freely.</span>
-</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">  </span><span class="nt">policy</span><span class="p">:</span><span class="w"> </span><span class="s">"block"</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="nt">crafter</span><span class="p">:</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">  </span><span class="c1"># If true, redstone-powered Crafter blocks are blocked from crafting</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">  </span><span class="c1"># recipes that require an unlocked blueprint.</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">  </span><span class="c1"># If false, Crafters bypass player checks and craft all recipes automatically.</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="w">  </span><span class="nt">block-restricted</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="w">  </span><span class="c1"># If true, plays a dispenser fail click sound and spawns smoke particles</span>
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="w">  </span><span class="c1"># at the Crafter block when a craft is blocked.</span>
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="w">  </span><span class="nt">fail-effect</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 </span></code></pre></div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>On servers running Minecraft 1.18.2 or 1.20.4, this module automatically loads in a dormant state with zero performance overhead and no compatibility errors.</p>
+<hr />
+<h2 id="operating-policies-block-vs-bypass">Operating Policies: Block vs Bypass</h2>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Block Policy (block-restricted: true) - RECOMMENDED</label><label for="__tabbed_1_2">Bypass Policy (block-restricted: false)</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<ul>
+<li><strong>Economic Integrity Guarantee</strong>: Autonomous machines cannot craft recipes that players haven't earned.</li>
+<li><strong>No Resource Deletion</strong>: When a Crafter block receives a redstone pulse while loaded with ingredients for a locked recipe, the craft is cancelled cleanly. The raw materials remain inside the Crafter's 9 slots.</li>
+<li><strong>Visual &amp; Audio Feedback</strong>: If <code>fail-effect: true</code> is enabled, the Crafter emits the classic dispenser fail click (<code>Sound.BLOCK_DISPENSER_FAIL</code>) and puffs of smoke particles (<code>Particle.SMOKE_NORMAL</code>), alerting nearby players that the automated recipe is locked.</li>
+<li><strong>Recommended For</strong>: Survival SMP, RPG networks, Skyblock, and balanced economies.</li>
+</ul>
 </div>
+<div class="tabbed-block">
+<ul>
+<li><strong>Full Redstone Automation</strong>: Allows automated Crafter machines to produce all recipes freely, even if players would normally need a blueprint to craft them manually.</li>
+<li><strong>Use Case</strong>: Anarchy servers or specialized technical modded networks where redstone automation is intentionally unrestricted.</li>
+</ul>
+</div>
+</div>
+</div>
+<hr />
+<h2 id="multi-version-compatibility">Multi-Version Compatibility</h2>
+<p>Because <code>CrafterCraftEvent</code> only exists in Bukkit/Paper API 1.21+:
+* On servers running <strong>Paper 1.18.2 or 1.20.4</strong>, this module loads as a lightweight no-op adapter (<code>NoOpCrafterAdapter</code>). It introduces zero performance overhead, executes zero listeners, and causes zero <code>ClassNotFoundException</code> errors.
+* On servers running <strong>Paper 1.21.1+</strong>, the dedicated implementation (<code>CrafterAdapterImpl</code>) activates automatically without configuration changes.</p>
 
 
 

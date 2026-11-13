@@ -1604,10 +1604,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-1-configure-blueprint-prices" class="md-nav__link">
+  <a href="#step-1-configure-reusable-economy-templates" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Step 1: Configure Blueprint Prices
+        Step 1: Configure Reusable Economy Templates
       
     </span>
   </a>
@@ -1615,10 +1615,32 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-2-in-game-purchasing-flow" class="md-nav__link">
+  <a href="#step-2-configure-blueprint-shop-items" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Step 2: In-Game Purchasing Flow
+        Step 2: Configure Blueprint Shop Items
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-3-the-in-game-purchasing-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 3: The In-Game Purchasing Flow
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-4-selling-blueprints-back-to-the-catalog" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 4: Selling Blueprints Back to the Catalog
       
     </span>
   </a>
@@ -1852,10 +1874,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-1-configure-blueprint-prices" class="md-nav__link">
+  <a href="#step-1-configure-reusable-economy-templates" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Step 1: Configure Blueprint Prices
+        Step 1: Configure Reusable Economy Templates
       
     </span>
   </a>
@@ -1863,10 +1885,32 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-2-in-game-purchasing-flow" class="md-nav__link">
+  <a href="#step-2-configure-blueprint-shop-items" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Step 2: In-Game Purchasing Flow
+        Step 2: Configure Blueprint Shop Items
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-3-the-in-game-purchasing-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 3: The In-Game Purchasing Flow
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-4-selling-blueprints-back-to-the-catalog" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 4: Selling Blueprints Back to the Catalog
       
     </span>
   </a>
@@ -1894,47 +1938,96 @@
 
 
 <h1 id="tutorial-setting-up-a-blueprint-economy-shop-vault">Tutorial: Setting Up a Blueprint Economy Shop (Vault)</h1>
-<p>CraftingBlueprints integrates directly with <strong>Vault</strong> and your server's economy provider (EssentialsX, Economy, etc.), allowing players to purchase and sell blueprints using server currency directly from the <code>/cb item list</code> catalog GUI.</p>
+<p>CraftingBlueprints integrates directly with <strong>Vault</strong> and your server's economy provider (EssentialsX, Economy, etc.), allowing players to purchase and sell blueprints using server currency directly from the interactive <code>/cb item list</code> catalog GUI.</p>
 <hr />
 <h2 id="prerequisites">Prerequisites</h2>
-<p>Ensure the following plugins are installed on your server:
-* <strong>CraftingBlueprints</strong>
-* <strong>Vault</strong>
-* Any compatible economy provider (e.g. EssentialsX Economy)</p>
+<p>Ensure the following plugins are installed on your server:</p>
+<ol>
+<li><strong>CraftingBlueprints</strong></li>
+<li><strong><a href="https://www.spigotmc.org/resources/vault.34315/">Vault</a></strong></li>
+<li>Any Vault-compatible economy plugin (e.g. <strong>EssentialsX Economy</strong>, <strong>TheEconomy</strong>)</li>
+</ol>
 <hr />
-<h2 id="step-1-configure-blueprint-prices">Step 1: Configure Blueprint Prices</h2>
-<p>In any blueprint file inside <code>plugins/CraftingBlueprints/blueprints/</code>, add the <code>price:</code> and <code>sell_price:</code> fields:</p>
-<div class="language-yaml highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nt">singles</span><span class="p">:</span>
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="nt">diamond_drill_blueprint</span><span class="p">:</span>
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="nt">blueprint</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DIAMOND_PICKAXE</span>
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">"&lt;gradient:#00AAFF:#00FFAA&gt;&lt;bold&gt;Industrial</span><span class="nv"> </span><span class="s">Diamond</span><span class="nv"> </span><span class="s">Drill</span><span class="nv"> </span><span class="s">Blueprint&lt;/bold&gt;&lt;/gradient&gt;"</span>
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span><span class="nt">permanent</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>
-</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">    </span><span class="c1"># Economy settings</span>
-</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">    </span><span class="nt">price</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">15000.0</span><span class="w">   </span><span class="c1"># Cost to purchase via catalog GUI</span>
-</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="w">    </span><span class="nt">sell_price</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3500.0</span><span class="w"> </span><span class="c1"># Refund given if sold back</span>
-</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>
-</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="w">    </span><span class="nt">lore</span><span class="p">:</span>
-</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"&lt;gray&gt;Target</span><span class="nv"> </span><span class="s">Item:&lt;/gray&gt;</span><span class="nv"> </span><span class="s">&lt;white&gt;{blueprint_target}&lt;/white&gt;"</span>
-</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"&lt;yellow&gt;Purchase</span><span class="nv"> </span><span class="s">Cost:&lt;/yellow&gt;</span><span class="nv"> </span><span class="s">&lt;green&gt;${price}&lt;/green&gt;"</span>
-</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"&lt;yellow&gt;Sell</span><span class="nv"> </span><span class="s">Value:&lt;/yellow&gt;</span><span class="nv"> </span><span class="s">&lt;yellow&gt;${sell_price}&lt;/yellow&gt;"</span>
+<h2 id="step-1-configure-reusable-economy-templates">Step 1: Configure Reusable Economy Templates</h2>
+<p>To maintain consistent pricing across your server, create an economy template file at <code>plugins/CraftingBlueprints/blueprints/00_economy_tiers.yml</code>:</p>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># yaml-language-server: $schema=./blueprint.schema.json</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nt">templates</span><span class="p">:</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">  </span><span class="c1"># Tier 1: Apprentice Gear</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">  </span><span class="nt">economy_apprentice</span><span class="p">:</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span><span class="nt">price</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1500.0</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">    </span><span class="nt">sell_price</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">375.0</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">    </span><span class="nt">extra</span><span class="p">:</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">      </span><span class="nt">tier</span><span class="p">:</span><span class="w"> </span><span class="s">"APPRENTICE"</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="w">  </span><span class="c1"># Tier 2: Journeyman Equipment</span>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="w">  </span><span class="nt">economy_journeyman</span><span class="p">:</span>
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="w">    </span><span class="nt">price</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">7500.0</span>
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="w">    </span><span class="nt">sell_price</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1875.0</span>
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="w">    </span><span class="nt">extra</span><span class="p">:</span>
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="w">      </span><span class="nt">tier</span><span class="p">:</span><span class="w"> </span><span class="s">"JOURNEYMAN"</span>
+</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>
+</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="w">  </span><span class="c1"># Tier 3: Master Artifacts</span>
+</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="w">  </span><span class="nt">economy_master</span><span class="p">:</span>
+</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="w">    </span><span class="nt">price</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">35000.0</span>
+</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a><span class="w">    </span><span class="nt">sell_price</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8750.0</span>
+</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a><span class="w">    </span><span class="nt">extra</span><span class="p">:</span>
+</span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a><span class="w">      </span><span class="nt">tier</span><span class="p">:</span><span class="w"> </span><span class="s">"MASTER"</span>
 </span></code></pre></div>
-<p>Reload the blueprints:
-<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>/cb reload blueprints
+<hr />
+<h2 id="step-2-configure-blueprint-shop-items">Step 2: Configure Blueprint Shop Items</h2>
+<p>Create your blueprint definitions referencing the economy templates (e.g. <code>plugins/CraftingBlueprints/blueprints/industrial_tools.yml</code>):</p>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># yaml-language-server: $schema=./blueprint.schema.json</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nt">singles</span><span class="p">:</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">  </span><span class="nt">diamond_drill_blueprint</span><span class="p">:</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="nt">blueprint</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DIAMOND_PICKAXE</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">"&lt;gradient:#00AAFF:#00FFAA&gt;&lt;bold&gt;Industrial</span><span class="nv"> </span><span class="s">Diamond</span><span class="nv"> </span><span class="s">Drill</span><span class="nv"> </span><span class="s">Blueprint&lt;/bold&gt;&lt;/gradient&gt;"</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">    </span><span class="nt">permanent</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">    </span><span class="c1"># Inherit Master tier economy ($35,000 buy / $8,750 sell)</span>
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">    </span><span class="nt">templates</span><span class="p">:</span>
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">economy_master</span>
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>
+</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="w">    </span><span class="nt">item</span><span class="p">:</span>
+</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="w">      </span><span class="nt">material</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">FILLED_MAP</span>
+</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="w">      </span><span class="nt">glowing</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>
+</span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="w">    </span><span class="nt">map</span><span class="p">:</span>
+</span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="w">      </span><span class="nt">theme</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">technical_slate</span>
+</span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="w">      </span><span class="nt">frame</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bracket</span>
+</span><span id="__span-1-19"><a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a><span class="w">      </span><span class="nt">badge</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">crafting</span>
+</span><span id="__span-1-20"><a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a>
+</span><span id="__span-1-21"><a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a><span class="w">    </span><span class="nt">lore</span><span class="p">:</span>
+</span><span id="__span-1-22"><a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"&lt;dark_gray&gt;&lt;strikethrough&gt;-----------------------------&lt;/strikethrough&gt;&lt;/dark_gray&gt;"</span>
+</span><span id="__span-1-23"><a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"&lt;gray&gt;Target</span><span class="nv"> </span><span class="s">Equipment:&lt;/gray&gt;</span><span class="nv"> </span><span class="s">&lt;white&gt;{target_item}&lt;/white&gt;"</span>
+</span><span id="__span-1-24"><a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"&lt;gray&gt;Tier</span><span class="nv"> </span><span class="s">Classification:&lt;/gray&gt;</span><span class="nv"> </span><span class="s">&lt;gold&gt;&lt;bold&gt;{tier}&lt;/bold&gt;&lt;/gold&gt;"</span>
+</span><span id="__span-1-25"><a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"&lt;dark_gray&gt;&lt;strikethrough&gt;-----------------------------&lt;/strikethrough&gt;&lt;/dark_gray&gt;"</span>
+</span><span id="__span-1-26"><a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"&lt;yellow&gt;Catalog</span><span class="nv"> </span><span class="s">Buy</span><span class="nv"> </span><span class="s">Price:&lt;/yellow&gt;</span><span class="nv"> </span><span class="s">&lt;green&gt;${price}&lt;/green&gt;"</span>
+</span><span id="__span-1-27"><a id="__codelineno-1-27" name="__codelineno-1-27" href="#__codelineno-1-27"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"&lt;yellow&gt;Catalog</span><span class="nv"> </span><span class="s">Sell</span><span class="nv"> </span><span class="s">Value:&lt;/yellow&gt;</span><span class="nv"> </span><span class="s">&lt;gold&gt;${sell_price}&lt;/gold&gt;"</span>
+</span><span id="__span-1-28"><a id="__codelineno-1-28" name="__codelineno-1-28" href="#__codelineno-1-28"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"&lt;dark_gray&gt;&lt;strikethrough&gt;-----------------------------&lt;/strikethrough&gt;&lt;/dark_gray&gt;"</span>
+</span><span id="__span-1-29"><a id="__codelineno-1-29" name="__codelineno-1-29" href="#__codelineno-1-29"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"&lt;dark_gray&gt;Left-Click</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">catalog</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">purchase</span><span class="nv"> </span><span class="s">with</span><span class="nv"> </span><span class="s">Vault.&lt;/dark_gray&gt;"</span>
+</span></code></pre></div>
+<p>Reload the blueprints to update the catalog:
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>/cb reload blueprints
 </span></code></pre></div></p>
 <hr />
-<h2 id="step-2-in-game-purchasing-flow">Step 2: In-Game Purchasing Flow</h2>
+<h2 id="step-3-the-in-game-purchasing-flow">Step 3: The In-Game Purchasing Flow</h2>
 <ol>
-<li>Player types:
-   <div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>/cb item list
+<li>The player opens the server catalog:
+   <div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>/cb item list
 </span></code></pre></div></li>
-<li>The player browses the catalog. Blueprints with a configured price display their cost.</li>
-<li>Left-clicking an unlocked blueprint prompts the purchase confirmation.</li>
-<li>If the player has sufficient funds:</li>
-<li>Vault deducts <code>$15,000</code> from their account.</li>
-<li>The blueprint is unlocked immediately.</li>
-<li>The status badge changes from <img alt="🔒" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f512.svg" title=":lock:" /> to <img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/2705.svg" title=":white_check_mark:" />.</li>
+<li>The player browses through the pages. Blueprints with a configured <code>price:</code> display their cost and a <img alt="🔒" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f512.svg" title=":lock:" /> locked indicator.</li>
+<li>The player <strong>Left-Clicks</strong> the <code>Industrial Diamond Drill Blueprint</code>:</li>
+<li>A confirmation menu opens displaying the <code>$35,000</code> purchase price and the player's current balance.</li>
+<li>Upon clicking <strong>Confirm Purchase</strong>:</li>
+<li>Vault checks the player's account balance.</li>
+<li>If funds are sufficient, Vault deducts <code>$35,000</code>.</li>
+<li>The blueprint is unlocked immediately on the player's account.</li>
+<li>A chime sound plays, and the status icon switches to <img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/2705.svg" title=":white_check_mark:" /> <strong>Unlocked</strong>!</li>
 </ol>
+<hr />
+<h2 id="step-4-selling-blueprints-back-to-the-catalog">Step 4: Selling Blueprints Back to the Catalog</h2>
+<p>If a player has an unlearned physical blueprint item in their inventory that defines a <code>sell_price:</code>:
+* Players can run <code>/cb sell</code> (or click the sell icon in the catalog GUI) to surrender the physical item and receive the configured refund value (<code>$8,750</code>) deposited into their Vault economy balance.</p>
 
 
 

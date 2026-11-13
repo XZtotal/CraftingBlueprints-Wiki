@@ -1186,10 +1186,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#player-commands" class="md-nav__link">
+  <a href="#master-command-reference-table" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Player Commands
+        Master Command Reference Table
       
     </span>
   </a>
@@ -1197,26 +1197,15 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#administration-commands" class="md-nav__link">
+  <a href="#detailed-command-explanations-operational-safety" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Administration Commands
+        Detailed Command Explanations &amp; Operational Safety
       
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#detailed-command-explanations" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Detailed Command Explanations
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Detailed Command Explanations">
+    <nav class="md-nav" aria-label="Detailed Command Explanations &amp; Operational Safety">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -1231,10 +1220,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#cb-reload-module" class="md-nav__link">
+  <a href="#cb-reload-allblueprintsconfiglang" class="md-nav__link">
     <span class="md-ellipsis">
       
-        /cb reload [module]
+        /cb reload [all|blueprints|config|lang]
       
     </span>
   </a>
@@ -1246,6 +1235,17 @@
     <span class="md-ellipsis">
       
         /cb validate
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cb-status" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        /cb status
       
     </span>
   </a>
@@ -1880,10 +1880,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#player-commands" class="md-nav__link">
+  <a href="#master-command-reference-table" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Player Commands
+        Master Command Reference Table
       
     </span>
   </a>
@@ -1891,26 +1891,15 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#administration-commands" class="md-nav__link">
+  <a href="#detailed-command-explanations-operational-safety" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Administration Commands
+        Detailed Command Explanations &amp; Operational Safety
       
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#detailed-command-explanations" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Detailed Command Explanations
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Detailed Command Explanations">
+    <nav class="md-nav" aria-label="Detailed Command Explanations &amp; Operational Safety">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -1925,10 +1914,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#cb-reload-module" class="md-nav__link">
+  <a href="#cb-reload-allblueprintsconfiglang" class="md-nav__link">
     <span class="md-ellipsis">
       
-        /cb reload [module]
+        /cb reload [all|blueprints|config|lang]
       
     </span>
   </a>
@@ -1940,6 +1929,17 @@
     <span class="md-ellipsis">
       
         /cb validate
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cb-status" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        /cb status
       
     </span>
   </a>
@@ -1972,16 +1972,17 @@
 
 
 <h1 id="command-reference">Command Reference</h1>
-<p>All commands in CraftingBlueprints originate from the root <code>/cb</code> command (alias: <code>/craftingblueprints</code>).</p>
+<p>All CraftingBlueprints commands originate from the master <code>/cb</code> command (alias: <code>/craftingblueprints</code>).</p>
 <hr />
-<h2 id="player-commands">Player Commands</h2>
+<h2 id="master-command-reference-table">Master Command Reference Table</h2>
 <table>
 <thead>
 <tr>
-<th style="text-align: left;">Command</th>
-<th style="text-align: left;">Arguments</th>
-<th style="text-align: left;">Permission</th>
-<th style="text-align: left;">Description</th>
+<th style="text-align: left;">Command Syntax</th>
+<th style="text-align: left;">Arguments &amp; Parameters</th>
+<th style="text-align: left;">Required Permission</th>
+<th style="text-align: left;">Allowed Senders</th>
+<th style="text-align: left;">Operational Description</th>
 </tr>
 </thead>
 <tbody>
@@ -1989,101 +1990,124 @@
 <td style="text-align: left;"><code>/cb menu</code></td>
 <td style="text-align: left;">None</td>
 <td style="text-align: left;"><code>craftingblueprints.menu</code></td>
+<td style="text-align: left;">Players</td>
 <td style="text-align: left;">Opens your personal blueprint progression dashboard.</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>/cb item list</code></td>
-<td style="text-align: left;">None</td>
-<td style="text-align: left;"><code>craftingblueprints.item.list</code></td>
-<td style="text-align: left;">Opens the paginated server blueprint catalog.</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>/cb info</code></td>
-<td style="text-align: left;"><code>[id]</code></td>
-<td style="text-align: left;"><code>craftingblueprints.info</code></td>
-<td style="text-align: left;">Opens detailed recipe specifications and lore for a blueprint.</td>
 </tr>
 <tr>
 <td style="text-align: left;"><code>/cb return</code></td>
 <td style="text-align: left;">None</td>
 <td style="text-align: left;"><code>craftingblueprints.return</code></td>
-<td style="text-align: left;">Navigates back to the previously opened menu in the history stack.</td>
+<td style="text-align: left;">Players</td>
+<td style="text-align: left;">Re-opens the previous menu in the navigation history stack.</td>
 </tr>
-</tbody>
-</table>
-<hr />
-<h2 id="administration-commands">Administration Commands</h2>
-<table>
-<thead>
 <tr>
-<th style="text-align: left;">Command</th>
-<th style="text-align: left;">Arguments</th>
-<th style="text-align: left;">Permission</th>
-<th style="text-align: left;">Description</th>
+<td style="text-align: left;"><code>/cb item list</code></td>
+<td style="text-align: left;">None</td>
+<td style="text-align: left;"><code>craftingblueprints.item.list</code></td>
+<td style="text-align: left;">Players</td>
+<td style="text-align: left;">Opens the paginated server blueprint catalog and economy shop.</td>
 </tr>
-</thead>
-<tbody>
+<tr>
+<td style="text-align: left;"><code>/cb item edit</code></td>
+<td style="text-align: left;"><code>&lt;blueprint_id&gt;</code></td>
+<td style="text-align: left;"><code>craftingblueprints.item.edit</code></td>
+<td style="text-align: left;">Operators</td>
+<td style="text-align: left;">Opens the visual in-game GUI modifier for a blueprint.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>/cb info</code></td>
+<td style="text-align: left;"><code>[blueprint_id]</code></td>
+<td style="text-align: left;"><code>craftingblueprints.info</code></td>
+<td style="text-align: left;">Players / Console</td>
+<td style="text-align: left;">Opens the detailed 3x3 recipe inspector and durability stats.</td>
+</tr>
 <tr>
 <td style="text-align: left;"><code>/cb give</code></td>
-<td style="text-align: left;"><code>&lt;player&gt; &lt;blueprint_id&gt; [amount]</code></td>
+<td style="text-align: left;"><code>&lt;player&gt; &lt;id&gt; [amount]</code></td>
 <td style="text-align: left;"><code>craftingblueprints.give</code></td>
+<td style="text-align: left;">Operators / Console</td>
 <td style="text-align: left;">Gives physical blueprint items to a player with overflow protection.</td>
 </tr>
 <tr>
 <td style="text-align: left;"><code>/cb reload</code></td>
 <td style="text-align: left;"><code>[all\|blueprints\|config\|lang]</code></td>
 <td style="text-align: left;"><code>craftingblueprints.reload</code></td>
-<td style="text-align: left;">Hot-reloads configuration files, translations, or YAML blueprints.</td>
+<td style="text-align: left;">Operators / Console</td>
+<td style="text-align: left;">Hot-reloads configuration files, language strings, or YAML blueprints.</td>
 </tr>
 <tr>
 <td style="text-align: left;"><code>/cb validate</code></td>
 <td style="text-align: left;">None</td>
 <td style="text-align: left;"><code>craftingblueprints.admin</code></td>
-<td style="text-align: left;">Performs a dry-run linting pass over all blueprint files in <code>blueprints/</code>.</td>
+<td style="text-align: left;">Operators / Console</td>
+<td style="text-align: left;">Executes a dry-run linting pass over all blueprint files in <code>blueprints/</code>.</td>
 </tr>
 <tr>
 <td style="text-align: left;"><code>/cb status</code></td>
 <td style="text-align: left;">None</td>
 <td style="text-align: left;"><code>craftingblueprints.status</code></td>
-<td style="text-align: left;">Displays system metrics, active NMS adapter, and database health.</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>/cb item edit</code></td>
-<td style="text-align: left;"><code>&lt;blueprint_id&gt;</code></td>
-<td style="text-align: left;"><code>craftingblueprints.item.edit</code></td>
-<td style="text-align: left;">Opens the visual GUI editor for a blueprint.</td>
+<td style="text-align: left;">Operators / Console</td>
+<td style="text-align: left;">Displays system diagnostics, database latency, and health metrics.</td>
 </tr>
 <tr>
 <td style="text-align: left;"><code>/cb preset</code></td>
 <td style="text-align: left;"><code>&lt;list\|apply\|remove\|export\|download&gt;</code></td>
 <td style="text-align: left;"><code>craftingblueprints.admin.preset</code></td>
-<td style="text-align: left;">Manages blueprint preset packages in <code>presets/</code>.</td>
+<td style="text-align: left;">Operators / Console</td>
+<td style="text-align: left;">Manages pre-built modality packs in the <code>presets/</code> repository.</td>
 </tr>
 <tr>
 <td style="text-align: left;"><code>/cb generate</code></td>
 <td style="text-align: left;"><code>&lt;source&gt; [flags]</code></td>
 <td style="text-align: left;"><code>craftingblueprints.admin.generate</code></td>
-<td style="text-align: left;">Scans registered recipes and auto-scaffolds blueprint YAML files.</td>
+<td style="text-align: left;">Operators / Console</td>
+<td style="text-align: left;">Scans Bukkit recipes or plugins and auto-scaffolds YAML blueprints.</td>
 </tr>
 </tbody>
 </table>
 <hr />
-<h2 id="detailed-command-explanations">Detailed Command Explanations</h2>
+<h2 id="detailed-command-explanations-operational-safety">Detailed Command Explanations &amp; Operational Safety</h2>
 <h3 id="cb-give-player-blueprint_id-amount"><code>/cb give &lt;player&gt; &lt;blueprint_id&gt; [amount]</code></h3>
-<p>Distributes physical blueprint items directly into a player's inventory:
-* <strong>Amount Bounds</strong>: Strictly accepts numbers between <code>1</code> and <code>2304</code> (maximum player inventory capacity).
-* <strong>Inventory Overflow Protection</strong>: If the player's inventory is full, remaining items are safely dropped directly at the player's feet into the world to prevent item loss.</p>
-<h3 id="cb-reload-module"><code>/cb reload [module]</code></h3>
-<p>Hot-reloads plugin subsystems instantly without lag or disconnects:
-* <code>/cb reload all</code>: Full reload of config, blueprints, and language files.
-* <code>/cb reload blueprints</code>: Re-reads and recompiles all files in <code>blueprints/</code>.
-* <code>/cb reload config</code>: Reloads <code>config.yml</code>.
-* <code>/cb reload lang</code>: Reloads <code>messages_en.yml</code> and <code>messages_es.yml</code>.</p>
+<p>Grants physical blueprint items directly to a target player:
+* <strong>Quantity Bounds</strong>: The <code>amount</code> parameter strictly requires a positive integer between <code>1</code> and <code>2304</code> (the maximum physical capacity of a player inventory: $36 \text{ slots} \times 64 \text{ items}$). Negative numbers, <code>0</code>, non-numeric strings, or exorbitant numbers are rejected immediately with localized error feedback.
+* <strong>Physical Overflow Safety</strong>: When giving items to a player whose inventory is full, CraftingBlueprints uses an atomic safe-drop protocol. Instead of dropping items into the void or deleting them, leftover items are dropped safely into the world directly at the player's location (<code>world.dropItem(...)</code>).</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a># Give Steve 1 Ancient Netherite Battleaxe blueprint
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>/cb give Steve ancient_netherite_axe 1
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a># Give Alex 5 3-use magic scrolls via console
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>/cb give Alex astral_blade_scroll 5
+</span></code></pre></div>
+<hr />
+<h3 id="cb-reload-allblueprintsconfiglang"><code>/cb reload [all|blueprints|config|lang]</code></h3>
+<p>Hot-reloads plugin subsystems instantly on live servers without disconnects or lag spikes:</p>
+<ul>
+<li><code>/cb reload all</code>: Full reload of <code>config.yml</code>, language files, and declarative YAML blueprints.</li>
+<li><code>/cb reload blueprints</code>: Re-reads and recompiles all files in <code>blueprints/</code>, updates the shared database, and emits a network sync signal to worker nodes.</li>
+<li><code>/cb reload config</code>: Reloads <code>config.yml</code> (groups, restrictions, crafter rules, cache).</li>
+<li><code>/cb reload lang</code>: Hot-reloads <code>messages_en.yml</code> and <code>messages_es.yml</code> translations.</li>
+</ul>
+<hr />
 <h3 id="cb-validate"><code>/cb validate</code></h3>
-<p>Executes an offline dry-run verification:
-* Validates that all Bukkit material names exist.
-* Checks template references and detects circular dependencies.
-* Reports exact line numbers and filenames for syntax errors.</p>
+<p>Executes an offline dry-run verification across all blueprint files in <code>blueprints/</code>:
+* <strong>Zero Database Modifications</strong>: Performs no database inserts, updates, or prunings.
+* <strong>Semantic Verification</strong>: Verifies that every Bukkit <code>Material</code>, <code>PotionType</code>, and <code>Enchantment</code> exists on the current server version.
+* <strong>Visual Key Linting</strong>: Recursively validates <code>map:</code> blocks against valid themes, frames, and badges.
+* <strong>Levenshtein Suggestions</strong>: Automatically emits helpful "Did you mean?" suggestions for minor typos (e.g. <code>roseta</code> $\rightarrow$ <code>rosette</code>).
+* <strong>Line-Number Error Context</strong>: In the event of a syntax error, reports the exact file path, line number, column, and error description.</p>
+<hr />
+<h3 id="cb-status"><code>/cb status</code></h3>
+<p>Displays comprehensive system diagnostics:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>[CraftingBlueprints] ========== System Status ==========
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>[CraftingBlueprints] Version: 4.1.0 | Engine: Paper 1.20.4
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>[CraftingBlueprints] Active Adapter: Adapter_v1_20_R3 (VAL Native)
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>[CraftingBlueprints] Storage Backend: MySQL (HikariCP Active)
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>[CraftingBlueprints] Database Latency: 1.42 ms | Pool: 10 total (8 idle, 2 active)
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>[CraftingBlueprints] Blueprints Registered: 42 (36 singles, 4 packages, 2 mysteries)
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>[CraftingBlueprints] Node Role: Primary Master Node (sync-from-files: true)
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>[CraftingBlueprints] Active Cached Profiles: 14 / 500 max
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>[CraftingBlueprints] Pre-Quantized Map Buffers: 42 / 500 cached (~672 KB)
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>[CraftingBlueprints] ======================================
+</span></code></pre></div>
 
 
 

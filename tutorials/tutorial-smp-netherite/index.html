@@ -80,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#tutorial-gating-netherite-gear-in-an-smp" class="md-skip">
+        <a href="#tutorial-gating-netherite-gear-behind-bastion-loot-in-smp" class="md-skip">
           Skip to content
         </a>
       
@@ -1537,10 +1537,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#step-1-enable-selective-recipe-restrictions" class="md-nav__link">
+  <a href="#step-1-enable-whitelist-mode-in-configyml" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Step 1: Enable Selective Recipe Restrictions
+        Step 1: Enable Whitelist Mode in config.yml
       
     </span>
   </a>
@@ -1559,21 +1559,49 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-3-distribute-the-blueprint-via-dungeon-loot" class="md-nav__link">
+  <a href="#step-3-add-to-bastion-chest-loot-tables" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Step 3: Distribute the Blueprint via Dungeon Loot
+        Step 3: Add to Bastion Chest Loot Tables
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Step 3: Add to Bastion Chest Loot Tables">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#option-a-via-mythicdrops-or-customloot-plugin" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Option A: Via MythicDrops or CustomLoot Plugin
       
     </span>
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#step-4-verification" class="md-nav__link">
+        
+          <li class="md-nav__item">
+  <a href="#option-b-vanilla-datapack-loot-table-injection" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Step 4: Verification
+        Option B: Vanilla Datapack Loot Table Injection
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-4-verification-testing-in-survival" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 4: Verification &amp; Testing in Survival
       
     </span>
   </a>
@@ -1852,10 +1880,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#step-1-enable-selective-recipe-restrictions" class="md-nav__link">
+  <a href="#step-1-enable-whitelist-mode-in-configyml" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Step 1: Enable Selective Recipe Restrictions
+        Step 1: Enable Whitelist Mode in config.yml
       
     </span>
   </a>
@@ -1874,21 +1902,49 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-3-distribute-the-blueprint-via-dungeon-loot" class="md-nav__link">
+  <a href="#step-3-add-to-bastion-chest-loot-tables" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Step 3: Distribute the Blueprint via Dungeon Loot
+        Step 3: Add to Bastion Chest Loot Tables
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Step 3: Add to Bastion Chest Loot Tables">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#option-a-via-mythicdrops-or-customloot-plugin" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Option A: Via MythicDrops or CustomLoot Plugin
       
     </span>
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#step-4-verification" class="md-nav__link">
+        
+          <li class="md-nav__item">
+  <a href="#option-b-vanilla-datapack-loot-table-injection" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Step 4: Verification
+        Option B: Vanilla Datapack Loot Table Injection
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-4-verification-testing-in-survival" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 4: Verification &amp; Testing in Survival
       
     </span>
   </a>
@@ -1915,68 +1971,116 @@
   
 
 
-<h1 id="tutorial-gating-netherite-gear-in-an-smp">Tutorial: Gating Netherite Gear in an SMP</h1>
-<p>In vanilla Minecraft, players often rush Netherite gear within a few days of a server launch. This tutorial walks you through setting up CraftingBlueprints to <strong>gate Netherite armor and tools</strong> behind rare blueprints found in Bastion Remnants.</p>
+<h1 id="tutorial-gating-netherite-gear-behind-bastion-loot-in-smp">Tutorial: Gating Netherite Gear Behind Bastion Loot in SMP</h1>
+<p>In vanilla Minecraft, dedicated players often rush Netherite armor and tools within the first 48 hours of a server launch, trivializing PvE encounters and crashing survival economies.</p>
+<p>This step-by-step cookbook tutorial shows you how to configure CraftingBlueprints to <strong>gate all Netherite equipment behind rare, physical blueprint maps</strong> that can only be found in Nether Bastion Remnant loot chests.</p>
 <hr />
-<h2 id="step-1-enable-selective-recipe-restrictions">Step 1: Enable Selective Recipe Restrictions</h2>
-<p>Open <code>plugins/CraftingBlueprints/config.yml</code> and configure the restriction block:</p>
-<div class="language-yaml highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nt">restrictions</span><span class="p">:</span>
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="nt">mode</span><span class="p">:</span><span class="w"> </span><span class="s">"restricted-only"</span>
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">  </span><span class="nt">restricted-items</span><span class="p">:</span>
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"netherite_sword"</span>
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"netherite_pickaxe"</span>
-</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"netherite_axe"</span>
-</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"netherite_shovel"</span>
-</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"netherite_hoe"</span>
-</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"netherite_helmet"</span>
-</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"netherite_chestplate"</span>
-</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"netherite_leggings"</span>
-</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"netherite_boots"</span>
+<h2 id="step-1-enable-whitelist-mode-in-configyml">Step 1: Enable Whitelist Mode in <code>config.yml</code></h2>
+<p>Open <code>plugins/CraftingBlueprints/config.yml</code> and ensure your server is running in Selective Whitelist Mode with Netherite equipment restricted:</p>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># ------------------------------------------------------------ #</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="c1"># Recipe Restrictions &amp; Whitelist Mode</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="c1"># ------------------------------------------------------------ #</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="nt">restrictions</span><span class="p">:</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">  </span><span class="c1"># In 'restricted-only' mode, all basic wood, stone, iron, and diamond</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">  </span><span class="c1"># recipes remain completely free and natural for all players!</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">  </span><span class="nt">mode</span><span class="p">:</span><span class="w"> </span><span class="s">"restricted-only"</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="w">  </span><span class="c1"># ONLY items matching this list will require an unlocked blueprint:</span>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="w">  </span><span class="nt">restricted-items</span><span class="p">:</span>
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"netherite_sword"</span>
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"netherite_pickaxe"</span>
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"netherite_axe"</span>
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"netherite_shovel"</span>
+</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"netherite_hoe"</span>
+</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"netherite_helmet"</span>
+</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"netherite_chestplate"</span>
+</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"netherite_leggings"</span>
+</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"netherite_boots"</span>
 </span></code></pre></div>
-<ul>
-<li>This keeps all wooden, stone, iron, and diamond gear freely craftable without blueprints.</li>
-<li>Only Netherite items will require unlocking.</li>
-</ul>
+<p>Save the file and execute:
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>/cb reload config
+</span></code></pre></div></p>
 <hr />
 <h2 id="step-2-create-the-ancient-netherite-blueprint">Step 2: Create the Ancient Netherite Blueprint</h2>
-<p>Create a new file named <code>plugins/CraftingBlueprints/blueprints/netherite_progression.yml</code>:</p>
-<div class="language-yaml highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nt">singles</span><span class="p">:</span>
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="nt">ancient_netherite_smithing</span><span class="p">:</span>
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="nt">blueprint</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">NETHERITE_CHESTPLATE</span>
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">"&lt;gradient:#FF5555:#FFAA00&gt;&lt;bold&gt;Ancient</span><span class="nv"> </span><span class="s">Netherite</span><span class="nv"> </span><span class="s">Smithing</span><span class="nv"> </span><span class="s">Technique&lt;/bold&gt;&lt;/gradient&gt;"</span>
-</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">    </span><span class="nt">permanent</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>
-</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">    </span><span class="nt">item</span><span class="p">:</span>
-</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">      </span><span class="nt">material</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">FILLED_MAP</span>
-</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">      </span><span class="nt">glowing</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>
-</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="w">    </span><span class="nt">rendering</span><span class="p">:</span>
-</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="w">      </span><span class="nt">background</span><span class="p">:</span><span class="w"> </span><span class="s">"texture_dwarven_magma"</span>
-</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="w">      </span><span class="nt">tier</span><span class="p">:</span><span class="w"> </span><span class="s">"MYTHIC"</span>
-</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="w">      </span><span class="nt">guilloche_border</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="w">      </span><span class="nt">show_ingredients</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-</span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>
-</span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="w">    </span><span class="nt">lore</span><span class="p">:</span>
-</span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"&lt;gray&gt;Type:&lt;/gray&gt;</span><span class="nv"> </span><span class="s">&lt;gold&gt;Ancient</span><span class="nv"> </span><span class="s">Smithing</span><span class="nv"> </span><span class="s">Knowledge&lt;/gold&gt;"</span>
-</span><span id="__span-1-19"><a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"&lt;gray&gt;Rarity:&lt;/gray&gt;</span><span class="nv"> </span><span class="s">&lt;light_purple&gt;Mythic&lt;/light_purple&gt;"</span>
-</span><span id="__span-1-20"><a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">""</span>
-</span><span id="__span-1-21"><a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"&lt;yellow&gt;Grants</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">forbidden</span><span class="nv"> </span><span class="s">knowledge</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">forge&lt;/yellow&gt;"</span>
-</span><span id="__span-1-22"><a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"&lt;yellow&gt;and</span><span class="nv"> </span><span class="s">upgrade</span><span class="nv"> </span><span class="s">Netherite</span><span class="nv"> </span><span class="s">equipment.&lt;/yellow&gt;"</span>
-</span><span id="__span-1-23"><a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">""</span>
-</span><span id="__span-1-24"><a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"&lt;dark_gray&gt;Right-click</span><span class="nv"> </span><span class="s">with</span><span class="nv"> </span><span class="s">this</span><span class="nv"> </span><span class="s">map</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">hand</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">unlock.&lt;/dark_gray&gt;"</span>
+<p>Create a new file named <code>netherite_progression.yml</code> inside <code>plugins/CraftingBlueprints/blueprints/</code>:</p>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># yaml-language-server: $schema=./blueprint.schema.json</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="nt">singles</span><span class="p">:</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">  </span><span class="nt">ancient_netherite_smithing</span><span class="p">:</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="c1"># Target item unlocked in 3-slot Smithing Table</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">    </span><span class="nt">blueprint</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">NETHERITE_CHESTPLATE</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">"&lt;gradient:#FF5555:#FFAA00&gt;&lt;bold&gt;Ancient</span><span class="nv"> </span><span class="s">Netherite</span><span class="nv"> </span><span class="s">Smithing</span><span class="nv"> </span><span class="s">Technique&lt;/bold&gt;&lt;/gradient&gt;"</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">    </span><span class="c1"># Permanent unlock: once learned, the player can upgrade Netherite indefinitely</span>
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">    </span><span class="nt">permanent</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="w">    </span><span class="nt">time</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span>
+</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="w">    </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span>
+</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>
+</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="w">    </span><span class="c1"># In-game physical item</span>
+</span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="w">    </span><span class="nt">item</span><span class="p">:</span>
+</span><span id="__span-2-15"><a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="w">      </span><span class="nt">material</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">FILLED_MAP</span>
+</span><span id="__span-2-16"><a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="w">      </span><span class="nt">glowing</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</span><span id="__span-2-17"><a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a>
+</span><span id="__span-2-18"><a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a><span class="w">    </span><span class="c1"># Map visual schematic</span>
+</span><span id="__span-2-19"><a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a><span class="w">    </span><span class="nt">map</span><span class="p">:</span>
+</span><span id="__span-2-20"><a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a><span class="w">      </span><span class="nt">theme</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dwarven_magma</span><span class="w">       </span><span class="c1"># Molten volcanic basalt background</span>
+</span><span id="__span-2-21"><a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a><span class="w">      </span><span class="nt">frame</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">rosette</span><span class="w">             </span><span class="c1"># Regal Guilloché corner rosettes</span>
+</span><span id="__span-2-22"><a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a><span class="w">      </span><span class="nt">badge</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">smithing</span><span class="w">            </span><span class="c1"># Workstation icon on top-left</span>
+</span><span id="__span-2-23"><a id="__codelineno-2-23" name="__codelineno-2-23" href="#__codelineno-2-23"></a><span class="w">      </span><span class="nt">icon_scale</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
+</span><span id="__span-2-24"><a id="__codelineno-2-24" name="__codelineno-2-24" href="#__codelineno-2-24"></a><span class="w">      </span><span class="nt">drop_shadow</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</span><span id="__span-2-25"><a id="__codelineno-2-25" name="__codelineno-2-25" href="#__codelineno-2-25"></a><span class="w">      </span><span class="nt">item_outline</span><span class="p">:</span>
+</span><span id="__span-2-26"><a id="__codelineno-2-26" name="__codelineno-2-26" href="#__codelineno-2-26"></a><span class="w">        </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</span><span id="__span-2-27"><a id="__codelineno-2-27" name="__codelineno-2-27" href="#__codelineno-2-27"></a><span class="w">        </span><span class="nt">width</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
+</span><span id="__span-2-28"><a id="__codelineno-2-28" name="__codelineno-2-28" href="#__codelineno-2-28"></a><span class="w">        </span><span class="nt">color</span><span class="p">:</span><span class="w"> </span><span class="s">"gold"</span>
+</span><span id="__span-2-29"><a id="__codelineno-2-29" name="__codelineno-2-29" href="#__codelineno-2-29"></a>
+</span><span id="__span-2-30"><a id="__codelineno-2-30" name="__codelineno-2-30" href="#__codelineno-2-30"></a><span class="w">    </span><span class="c1"># Lore card</span>
+</span><span id="__span-2-31"><a id="__codelineno-2-31" name="__codelineno-2-31" href="#__codelineno-2-31"></a><span class="w">    </span><span class="nt">lore</span><span class="p">:</span>
+</span><span id="__span-2-32"><a id="__codelineno-2-32" name="__codelineno-2-32" href="#__codelineno-2-32"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"&lt;dark_gray&gt;&lt;strikethrough&gt;---------------------------------&lt;/strikethrough&gt;&lt;/dark_gray&gt;"</span>
+</span><span id="__span-2-33"><a id="__codelineno-2-33" name="__codelineno-2-33" href="#__codelineno-2-33"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"&lt;gray&gt;Classification:&lt;/gray&gt;</span><span class="nv"> </span><span class="s">&lt;gold&gt;&lt;bold&gt;Ancient</span><span class="nv"> </span><span class="s">Smithing</span><span class="nv"> </span><span class="s">Knowledge&lt;/bold&gt;&lt;/gold&gt;"</span>
+</span><span id="__span-2-34"><a id="__codelineno-2-34" name="__codelineno-2-34" href="#__codelineno-2-34"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"&lt;gray&gt;Rarity</span><span class="nv"> </span><span class="s">Tier:&lt;/gray&gt;</span><span class="nv"> </span><span class="s">&lt;light_purple&gt;MYTHIC&lt;/light_purple&gt;"</span>
+</span><span id="__span-2-35"><a id="__codelineno-2-35" name="__codelineno-2-35" href="#__codelineno-2-35"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"&lt;dark_gray&gt;&lt;strikethrough&gt;---------------------------------&lt;/strikethrough&gt;&lt;/dark_gray&gt;"</span>
+</span><span id="__span-2-36"><a id="__codelineno-2-36" name="__codelineno-2-36" href="#__codelineno-2-36"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"&lt;yellow&gt;Grants</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">forbidden</span><span class="nv"> </span><span class="s">technique</span><span class="nv"> </span><span class="s">required&lt;/yellow&gt;"</span>
+</span><span id="__span-2-37"><a id="__codelineno-2-37" name="__codelineno-2-37" href="#__codelineno-2-37"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"&lt;yellow&gt;to</span><span class="nv"> </span><span class="s">forge</span><span class="nv"> </span><span class="s">Netherite</span><span class="nv"> </span><span class="s">gear</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">Smithing</span><span class="nv"> </span><span class="s">Table.&lt;/yellow&gt;"</span>
+</span><span id="__span-2-38"><a id="__codelineno-2-38" name="__codelineno-2-38" href="#__codelineno-2-38"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"&lt;dark_gray&gt;&lt;strikethrough&gt;---------------------------------&lt;/strikethrough&gt;&lt;/dark_gray&gt;"</span>
+</span><span id="__span-2-39"><a id="__codelineno-2-39" name="__codelineno-2-39" href="#__codelineno-2-39"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"&lt;dark_gray&gt;Hold</span><span class="nv"> </span><span class="s">this</span><span class="nv"> </span><span class="s">map</span><span class="nv"> </span><span class="s">and</span><span class="nv"> </span><span class="s">Right-Click</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">memorize.&lt;/dark_gray&gt;"</span>
 </span></code></pre></div>
-<p>Run <code>/cb reload all</code> to load the changes.</p>
+<p>Reload the blueprints to activate the new schematic:
+<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>/cb reload blueprints
+</span></code></pre></div></p>
 <hr />
-<h2 id="step-3-distribute-the-blueprint-via-dungeon-loot">Step 3: Distribute the Blueprint via Dungeon Loot</h2>
-<p>You can add this blueprint to Nether Bastion chests using standard server loot plugins or datapacks by executing:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>cb give %player% ancient_netherite_smithing 1
+<h2 id="step-3-add-to-bastion-chest-loot-tables">Step 3: Add to Bastion Chest Loot Tables</h2>
+<p>You can distribute this blueprint to players via vanilla datapack loot tables or popular loot plugins.</p>
+<h3 id="option-a-via-mythicdrops-or-customloot-plugin">Option A: Via MythicDrops or CustomLoot Plugin</h3>
+<p>Configure the console reward command in your loot table configuration:</p>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nt">commands</span><span class="p">:</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"cb</span><span class="nv"> </span><span class="s">give</span><span class="nv"> </span><span class="s">%player%</span><span class="nv"> </span><span class="s">ancient_netherite_smithing</span><span class="nv"> </span><span class="s">1"</span>
+</span></code></pre></div>
+<h3 id="option-b-vanilla-datapack-loot-table-injection">Option B: Vanilla Datapack Loot Table Injection</h3>
+<p>In your server datapack (e.g. <code>data/minecraft/loot_tables/chests/bastion_treasure.json</code>):</p>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="p">{</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"minecraft:item"</span><span class="p">,</span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"minecraft:filled_map"</span><span class="p">,</span>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">  </span><span class="nt">"weight"</span><span class="p">:</span><span class="w"> </span><span class="mi">15</span><span class="p">,</span>
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">  </span><span class="nt">"functions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">    </span><span class="p">{</span>
+</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="w">      </span><span class="nt">"function"</span><span class="p">:</span><span class="w"> </span><span class="s2">"minecraft:set_nbt"</span><span class="p">,</span>
+</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="w">      </span><span class="nt">"tag"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{PublicBukkitValues:{\"craftingblueprints:id\":\"ancient_netherite_smithing\"}}"</span>
+</span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-5-10"><a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="w">  </span><span class="p">]</span>
+</span><span id="__span-5-11"><a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="p">}</span>
 </span></code></pre></div>
 <hr />
-<h2 id="step-4-verification">Step 4: Verification</h2>
+<h2 id="step-4-verification-testing-in-survival">Step 4: Verification &amp; Testing in Survival</h2>
 <ol>
-<li>Try upgrading a diamond chestplate to Netherite in a Smithing Table without learning the blueprint. The output slot will remain locked.</li>
-<li>Right-click the <code>Ancient Netherite Smithing Technique</code> map.</li>
-<li>Return to the Smithing Table: the Netherite upgrade is now unlocked and crafts successfully!</li>
+<li><strong>Test Failure as Unauthorized Player</strong>:</li>
+<li>Temporarily deop yourself: <code>/deop &lt;your_player_name&gt;</code></li>
+<li>Place a Diamond Chestplate, a Netherite Upgrade Smithing Template, and a Netherite Ingot into a Smithing Table.</li>
+<li>The output slot remains locked! Clicking the result warns that you lack the required blueprint.</li>
+<li><strong>Grant &amp; Memorize</strong>:</li>
+<li>Grant yourself the blueprint map: <code>/cb give &lt;your_player_name&gt; ancient_netherite_smithing 1</code></li>
+<li>Hold the high-resolution map in hand and <strong>Right-Click</strong>. A chime sound plays and chat confirms you have memorized the recipe.</li>
+<li><strong>Test Successful Forging</strong>:</li>
+<li>Return to the Smithing Table. The Netherite Chestplate is now unlocked and crafts successfully!</li>
 </ol>
 
 
