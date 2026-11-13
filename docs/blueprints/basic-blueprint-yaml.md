@@ -137,6 +137,7 @@ plugins/CraftingBlueprints/blueprints/
 
 ### 1. Deterministic First-Win ID Collision Rule
 If two blueprints in different files (or within the same file) declare the identical lowercase ID (e.g. `starter_sword` in both `weapons/swords.yml` and `kits/beginner.yml`):
+
 * The **first file encountered** during alphabetical directory traversal wins and registers the blueprint.
 * The duplicate definition is ignored, and a warning is printed to the console:
   ```text
@@ -162,6 +163,7 @@ Always verify your files before or after editing:
 ```
 
 The validator performs comprehensive linting:
+
 * Verifies Bukkit material, potion, and enchantment identifiers against the active server version.
 * Validates hex colors and named color palette references.
 * Detects circular dependencies and unresolved template references.

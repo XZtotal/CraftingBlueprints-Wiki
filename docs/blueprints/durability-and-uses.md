@@ -204,6 +204,7 @@ CraftingBlueprints eliminates this exploit via an atomic calculation on every sh
 3. **Remaining Uses Bound**: Restricts the craft to the exact number of uses remaining on the player's blueprint.
 
 **Example**:
+
 * A player with **2 remaining uses** places materials for 8 Netherite Swords into the crafting grid and shift-clicks.
 * The plugin crafts **exactly 2 swords** and deducts **exactly 2 uses**, immediately locking the recipe.
 * The remaining ingredients for 6 swords remain completely safe in the crafting grid. Over-crafting is impossible.

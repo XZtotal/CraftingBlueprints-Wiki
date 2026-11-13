@@ -26,6 +26,7 @@ All CraftingBlueprints commands originate from the master `/cb` command (alias: 
 
 ### `/cb give <player> <blueprint_id> [amount]`
 Grants physical blueprint items directly to a target player:
+
 * **Quantity Bounds**: The `amount` parameter strictly requires a positive integer between `1` and `2304` (the maximum physical capacity of a player inventory: 36 slots x 64 items). Negative numbers, `0`, non-numeric strings, or exorbitant numbers are rejected immediately with localized error feedback.
 * **Physical Overflow Safety**: When giving items to a player whose inventory is full, CraftingBlueprints uses an atomic safe-drop protocol. Instead of dropping items into the void or deleting them, leftover items are dropped safely into the world directly at the player's location (`world.dropItem(...)`).
 
@@ -51,6 +52,7 @@ Hot-reloads plugin subsystems instantly on live servers without disconnects or l
 
 ### `/cb validate`
 Executes an offline dry-run verification across all blueprint files in `blueprints/`:
+
 * **Zero Database Modifications**: Performs no database inserts, updates, or prunings.
 * **Semantic Verification**: Verifies that every Bukkit `Material`, `PotionType`, and `Enchantment` exists on the current server version.
 * **Visual Key Linting**: Recursively validates `map:` blocks against valid themes, frames, and badges.

@@ -85,6 +85,7 @@ op-bypass: true
     If your testing account has server operator status (`/op`), CraftingBlueprints will allow you to craft, brew, and enchant restricted recipes freely, bypassing all locks.
     
     To properly test recipe restrictions as a normal player:
+    
     1. Temporarily deop yourself: `/deop <your_player_name>`
     2. Alternatively, set `op-bypass: false` in `config.yml` and run `/cb reload config`.
 
@@ -101,6 +102,7 @@ lp group moderator permission set craftingblueprints.bypass.ownership true
 When you install pre-built gameplay presets using `/cb preset apply` (e.g. Hardcore SMP or RPG Tiers), the plugin **never modifies your `config.yml`**.
 
 Instead:
+
 1. `config.yml` remains the sole authority for global operational mode (`restrictions.mode: "restricted-only"`).
 2. Presets deploy their required restricted items to `configs/presets/<preset_id>/restrictions.yml`.
 3. When the server boots or executes `/cb reload`, the engine automatically combines the restrictions from `config.yml` with all active preset restriction files.

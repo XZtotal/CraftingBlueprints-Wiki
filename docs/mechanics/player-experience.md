@@ -29,6 +29,7 @@ When a player receives a blueprint map (`Material.FILLED_MAP`):
       ```text
       [CraftingBlueprints] You have unlocked the blueprint for Obsidian Blade Blueprint!
       ```
+
     * The physical map item is consumed from the player's hand (unless configured otherwise).
     * The recipe is registered permanently or temporally into the player's account database profile.
 
@@ -45,6 +46,7 @@ Once a blueprint is unlocked, the player approaches any standard 3x3 Crafting Ta
 
 ### Scenario B: The Recipe is Restricted & Locked
 If the player arranges ingredients for a locked recipe without owning the blueprint:
+
 * **Result Slot Preview**: Governed by `ux.prepare-preview` in `config.yml`:
     * `HIDE_RESULT`: The crafting table output slot remains completely empty.
     * `LOCKED_OVERLAY`: Keeps the output item icon, but appends red warning lore: `<red><bold>Recipe Locked</bold></red>`.
@@ -55,6 +57,7 @@ If the player arranges ingredients for a locked recipe without owning the bluepr
       ```text
       [CraftingBlueprints] You must unlock the Ancient Netherite Battleaxe blueprint before crafting this item!
       ```
+
     * Ingredients remain completely safe inside the 3x3 grid without duplication, corruption, or loss.
 
 ---
@@ -106,6 +109,7 @@ Players can inspect any blueprint recipe directly in-game without opening web br
 ```
 
 This opens an interactive inspection menu displaying:
+
 * The 3x3 crafting ingredient matrix or smithing ingredients.
 * Active durability mode (Permanent, Countdown Timer, or Remaining Uses).
 * Rarity tier, catalog purchase price, and item lore.

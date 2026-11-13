@@ -46,6 +46,7 @@ This guarantees that when a player unlocks a blueprint on one server, their reci
       auto-reload:
         enabled: true
     ```
+
     * This primary server reads your local YAML blueprints in `blueprints/` and synchronizes them into the shared MySQL database.
     * Whenever you edit files or run `/cb reload`, the primary node writes changes to the database and dispatches a network signal ping (`cb_sync_signals`).
 
@@ -58,6 +59,7 @@ This guarantees that when a player unlocks a blueprint on one server, their reci
       auto-reload:
         enabled: false
     ```
+
     * Worker nodes load all registered blueprints directly from the shared MySQL database into memory.
     * They **never** overwrite the database with local files, ensuring 100% data consistency.
     * They automatically detect database signal pings from the primary node and refresh their memory cache in real time with zero manual commands.
@@ -110,10 +112,12 @@ In traditional plugins, updating configurations on a multi-server network requir
 ## 5. Cross-Server Map Virtualization & PDC Relinking
 
 In cross-server networks, Minecraft map IDs frequently clash:
+
 * Map ID `104` on the Survival server might be a Diamond Sword blueprint.
 * Map ID `104` on the Lobby server might be the server spawn hub map.
 
 CraftingBlueprints solves this using **Visual Key Re-Linking**:
+
 * The physical map item stores the visual identity of the blueprint in its persistent data.
 * When a player switches between servers via BungeeCord or Velocity, the plugin automatically re-links the item to the local server's canonical Map ID as soon as the player joins or opens their inventory.
 * **Guaranteed Outcome**: The physical map always renders the correct blueprint artwork on every server without corrupting local maps or world files.
@@ -123,5 +127,6 @@ CraftingBlueprints solves this using **Visual Key Re-Linking**:
 ## 6. Player Lifecycle & Quick-Switch Protection
 
 When players switch rapidly between servers (e.g. entering portals or typing `/server survival`):
+
 * The plugin uses an atomic handoff reservation system that prevents Server B from loading player data before Server A finishes saving recent crafts to MySQL.
 * If a player rejoins within milliseconds, their active craft counts and timers sync cleanly, eliminating data rollbacks, item duplication, and lost progress.

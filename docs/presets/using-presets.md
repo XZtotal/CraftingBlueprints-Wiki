@@ -101,6 +101,7 @@ Administrators can completely uninstall an active preset without leaving leftove
 ```
 
 This command:
+
 1. Safely deletes deployed folders across `blueprints/presets/hardcore_smp/`, `images/presets/hardcore_smp/`, and `configs/presets/hardcore_smp/`.
 2. Clears image caches and reloads groups and recipe restrictions.
 3. Automatically prunes the recipes from the database and broadcasts a sync signal to all worker nodes.
@@ -131,5 +132,6 @@ Deploying or removing presets **NEVER modifies your `config.yml`**.
 ## Master / Worker Safety Guard
 
 In multi-server MySQL networks:
+
 * Preset modifications (`apply`, `remove`, `export`) are strictly restricted to the **Primary Management Node** (`sync-from-files: true`).
 * Executing `/cb preset apply` on a Worker Node (`sync-from-files: false`) is blocked immediately with a clear localized error redirecting you to execute the command on the master server.

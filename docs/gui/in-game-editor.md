@@ -80,13 +80,16 @@ For multi-recipe packages (`PackageModifierMenu`) and mystery roll crates (`Myst
 ## Automatic Exporter & Rolling Backups
 
 Whenever in-game blueprints are saved:
+
 1. The updated definition is persisted to the database.
 2. The export engine automatically dumps all in-game blueprints into:
    ```text
    plugins/CraftingBlueprints/exports/manual_blueprints.yml
    ```
+
 3. Periodic rolling backups are created automatically in:
    ```text
    plugins/CraftingBlueprints/exports/backups/manual_blueprints_<timestamp>.yml
    ```
+
 4. If you later declare the same blueprint ID in a file inside `blueprints/`, the plugin adopts the YAML definition, sets `is_file_managed: true`, and removes it from the manual export dump.

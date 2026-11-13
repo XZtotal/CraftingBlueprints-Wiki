@@ -150,6 +150,7 @@ stations:
 
 ### Hopper Protection for Automated Furnaces:
 When players automate smelting using hoppers feeding into Furnaces or Blast Furnaces:
+
 * When `track-hoppers: true` is enabled, CraftingBlueprints records the UUID of the player who placed the hopper into its PersistentDataContainer (PDC).
 * The smelting station inherits the placer's blueprint unlocks.
 * Hoppers placed by unauthorized players (or naturally generated hoppers) cannot automatically smelt restricted items.

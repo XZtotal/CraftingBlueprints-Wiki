@@ -65,6 +65,7 @@ Before reloading your live server, execute the dry-run validator command in your
 ```
 
 CraftingBlueprints parses all YAML files in `blueprints/` and verifies:
+
 * All Bukkit materials and recipe identifiers are valid on your server version.
 * Map themes, frames, and badge identifiers conform to the visual rendering engine.
 * YAML indentation and structure are completely error-free.

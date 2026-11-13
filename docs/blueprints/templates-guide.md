@@ -129,6 +129,7 @@ Parent Defaults -> Folder Defaults -> File Defaults -> Template 1 -> Template 2 
 1. **Blueprint Local Wins**: Any property defined explicitly on the blueprint itself (e.g. `uses: 5`, `price: 25000.0`, or local `name:`) **always takes absolute precedence** over all templates and defaults.
 2. **Template Order (Right Overrides Left)**: If `Template 1` defines `price: 10000.0` and `Template 2` defines `price: 15000.0`, `Template 2` wins because it is evaluated later in the list:
    `Blueprint Local > Template 2 > Template 1`.
+
 3. **Dictionaries & Maps (`item:`, `map:`, `extra:`)**: Deep-merged recursively. If `Template 1` sets `item.material: FILLED_MAP` and `Template 2` sets `item.glowing: true`, the resulting item will have **both** `material: FILLED_MAP` and `glowing: true`.
 4. **Lists (`lore:`, `blueprints:`, `pool:`)**: Replaced entirely by the latest non-empty list declared in the cascade.
 5. **Scalars (`name:`, `price:`, `permanent:`, `uses:`, `time:`)**: Overwritten by the latest declared non-null scalar.
@@ -141,8 +142,10 @@ Templates are not flat global variables; they follow downward directory scoping:
 
 1. **Global Templates (Root Scope)**:
    Any template declared in a YAML file at the root of `plugins/CraftingBlueprints/blueprints/` (e.g. `blueprints/00_templates.yml`) is **globally visible** to all blueprints across all folders and subfolders.
+
 2. **Folder-Scoped Templates**:
    A template declared in `blueprints/weapons/templates.yml` is visible **only** to files inside `blueprints/weapons/` and its subdirectories (e.g. `weapons/swords/`, `weapons/axes/`). It cannot be accessed by `armor/` or root files.
+
 3. **Template Shadowing (Nearest-Ancestor)**:
    If a template named `tier_epic` is declared at both the root level and inside `weapons/`, blueprints in `weapons/` will inherit the local `weapons/tier_epic` definition.
 

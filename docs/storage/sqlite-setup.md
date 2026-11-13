@@ -36,6 +36,7 @@ your-server/
 ```
 
 This database maintains:
+
 * **`cb_player_data`**: All unlocked blueprints, remaining craft usage counts, and expiration timestamps per player UUID.
 * **`ITEM_BLUEPRINTS`**: Blueprints created in-game via GUI or commands (`is_file_managed: false`).
 * **`cb_schema_version`**: Automated schema migration version markers.
@@ -64,5 +65,6 @@ Because CraftingBlueprints uses asynchronous transactions, you can safely back u
    ```text
    /stop
    ```
+
 2. Replace `plugins/CraftingBlueprints/crafting_blueprints.db` with your backup copy.
 3. Start the server. The plugin validates the database integrity upon boot and resumes operations immediately.

@@ -1,6 +1,7 @@
 # Blueprint Packs, Packages & Permission Groups
 
 CraftingBlueprints provides multiple ways to manage collections of recipes together:
+
 1. **Multi-Recipe Packages (`packages:`)**: Single physical or virtual items that unlock an entire collection of recipes simultaneously (such as a full armor set).
 2. **Mystery Blueprints (`mysteries:`)**: Probability-weighted loot scrolls that roll a random reward from a pool upon right-click.
 3. **Permission Groups (`groups:` in `config.yml`)**: Virtual permission tiers assigned to player ranks via LuckPerms (`craftingblueprints.group.<id>`).

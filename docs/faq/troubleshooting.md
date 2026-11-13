@@ -50,6 +50,7 @@ If executing `/cb preset apply` or `/cb generate` results in an error:
 
 ### Cause & Solution:
 To prevent database divergence and split-brain conflicts across multi-server MySQL networks, all file generation and preset deployments **must be executed on your designated Primary Management Node** (`sync-from-files: true`).
+
 * Connect to your Hub or Lobby server and execute the command there.
 * The master server will update the shared database and broadcast an atomic sync signal (`cb_sync_signals`) to all worker nodes automatically.
 
@@ -67,5 +68,6 @@ If automated redstone Crafter blocks are mass-producing restricted recipes:
      block-restricted: true
      fail-effect: true
    ```
+
 3. Run `/cb reload config`.
 4. Ensure the item being produced matches your `restrictions.restricted-items` list.

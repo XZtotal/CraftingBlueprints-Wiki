@@ -31,9 +31,11 @@ CraftingBlueprints is engineered specifically for modern Paper-based server soft
        └── plugins/
            └── CraftingBlueprints-x.x.x.jar
        ```
+
     3. **Start the Server**: Start the server to generate default configuration files, bundled templates, and sample blueprints.
        !!! warning "Avoid /reload"
            Never use the Bukkit `/reload` or `/reload confirm` command when installing or updating plugins. A clean restart ensures that database connection pools, file watchers, and version adapters initialize safely.
+    
     4. **Verify Boot Output**: Review your server console for the startup diagnostics banner:
        ```text
        [CraftingBlueprints] Enabling CraftingBlueprints vX.X.X...
@@ -53,11 +55,13 @@ CraftingBlueprints is engineered specifically for modern Paper-based server soft
           file-management:
             sync-from-files: true
           ```
+
         * Configure **all Worker Servers** (Survival, Skyblock, etc.) with:
           ```yaml
           file-management:
             sync-from-files: false
           ```
+
     4. **Start Servers & Confirm Sync**: Start the primary server first, then the worker nodes. Review our [Multi-Server Setup Guide](../storage/mysql-multiserver.md) for network-specific connection pooling advice.
 
 ---

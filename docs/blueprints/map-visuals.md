@@ -161,6 +161,7 @@ You can import custom guild emblems, server logos, or hand-drawn schematics:
    ```text
    plugins/CraftingBlueprints/images/backgrounds/guild_crest.png
    ```
+
 3. Reference the filename in your YAML blueprint:
    ```yaml
    map:
@@ -168,4 +169,5 @@ You can import custom guild emblems, server logos, or hand-drawn schematics:
      frame: rosette
      badge: crafting
    ```
+
 4. Run `/cb reload blueprints` to load the image immediately without a restart!

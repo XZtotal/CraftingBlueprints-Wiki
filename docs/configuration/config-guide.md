@@ -451,6 +451,7 @@ When `true`, if a custom sword (e.g. `ia:weapons:flame_blade`) does not have its
 
 #### `ux.prepare-preview`
 Controls what appears in the crafting result slot when an unauthorized player arranges ingredients for a locked recipe:
+
 * **`HIDE_RESULT`**: The output slot is completely empty.
 * **`LOCKED_OVERLAY`**: Keeps the output item icon, but appends warning lore explaining that the recipe is locked.
 * **`CUSTOM_ITEM`**: Replaces the output slot with the item defined in `locked-item` (e.g., a red Barrier block with custom model data).

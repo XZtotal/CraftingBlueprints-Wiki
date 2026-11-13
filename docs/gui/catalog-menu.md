@@ -45,6 +45,7 @@ Each blueprint item displayed in the catalog shows an intuitive status indicator
 
 ### 3. One-Click Vault Economy Purchase
 If Vault is installed and the blueprint declares a `price:` field:
+
 * The item lore displays: `<yellow>Catalog Price:</yellow> <green>${price}</green>`.
 * **Left-Clicking** a locked blueprint prompts a purchase confirmation dialogue.
 * If the player has sufficient balance:

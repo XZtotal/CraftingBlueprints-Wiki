@@ -92,5 +92,6 @@ Whether you operate a Survival SMP looking to gate Netherite gear, an MMORPG ser
 ## Community & Issue Tracker
 
 Need assistance, found an edge case, or have a feature proposal?
+
 * Browse our [Frequently Asked Questions](faq/faq.md) and [Troubleshooting Guide](faq/troubleshooting.md).
 * Submit an issue on the [Official GitHub Issue Tracker](https://github.com/XZtotal/CraftingBlueprints-Wiki/issues).

@@ -94,6 +94,7 @@ Reload the blueprints to update the catalog:
    ```text
    /cb item list
    ```
+
 2. The player browses through the pages. Blueprints with a configured `price:` display their cost and a :lock: locked indicator.
 3. The player **Left-Clicks** the `Industrial Diamond Drill Blueprint`:
     * A confirmation menu opens displaying the `$35,000` purchase price and the player's current balance.
@@ -108,4 +109,5 @@ Reload the blueprints to update the catalog:
 ## Step 4: Selling Blueprints Back to the Catalog
 
 If a player has an unlearned physical blueprint item in their inventory that defines a `sell_price:`:
+
 * Players can run `/cb sell` (or click the sell icon in the catalog GUI) to surrender the physical item and receive the configured refund value (`$8,750`) deposited into their Vault economy balance.

@@ -149,6 +149,7 @@ item-matching:
 
 ### Why is this crucial for server balance?
 Imagine your server has 50 custom swords registered in ItemsAdder that use `DIAMOND_SWORD` as their base material.
+
 * If an administrator creates an explicit blueprint for `ia:rpgweapons:flame_blade`, but forgets to configure blueprints for the other 49 custom swords:
     * With `fallback-to-vanilla: true`: The plugin checks if the base vanilla material (`diamond_sword`) is restricted in Whitelist Mode. Since it is, the unconfigured custom swords **safely fall back to requiring the base Diamond Sword blueprint**. Players cannot bypass your progression!
     * With `fallback-to-vanilla: false`: Unconfigured custom swords would be freely craftable by anyone with raw ingredients.

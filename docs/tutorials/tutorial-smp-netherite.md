@@ -131,6 +131,7 @@ In your server datapack (e.g. `data/minecraft/loot_tables/chests/bastion_treasur
    ```text
    /deop <your_player_name>
    ```
+
 2. Place a Diamond Chestplate, a Netherite Upgrade Smithing Template, and a Netherite Ingot into a Smithing Table.
 3. The output slot remains locked. Clicking the result warns that you lack the required blueprint.
 
@@ -139,6 +140,7 @@ In your server datapack (e.g. `data/minecraft/loot_tables/chests/bastion_treasur
    ```text
    /cb give <your_player_name> ancient_netherite_smithing 1
    ```
+
 2. Hold the high-resolution map in your main hand and **Right-Click**. A chime sound plays and chat confirms you have memorized the recipe.
 
 ### 3. Verify Successful Forging
