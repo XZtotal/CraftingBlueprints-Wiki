@@ -2071,17 +2071,21 @@
 <h2 id="file-managed-immutability-archivo">File-Managed Immutability (<code>[⚡ Archivo]</code>)</h2>
 <p>To prevent accidental configuration desynchronization on servers using Git workflows and declarative YAML files:</p>
 <ul>
-<li><strong>File-Managed Blueprints (<code>is_file_managed: true</code>)</strong>:</li>
+<li>
+<p><strong>File-Managed Blueprints (<code>is_file_managed: true</code>)</strong>:</p>
+<ul>
 <li>Blueprints loaded from <code>.yml</code> files in <code>blueprints/</code> display a prominent <code>[⚡ Archivo]</code> badge in the interface.</li>
 <li>These blueprints are <strong>read-only and immutable</strong> from in-game commands and menus.</li>
-<li>
-<p>If an operator attempts to modify a file-managed blueprint in-game, the interface notifies them to edit the source <code>.yml</code> file directly on disk, preserving Git version control integrity.</p>
+<li>If an operator attempts to modify a file-managed blueprint in-game, the interface notifies them to edit the source <code>.yml</code> file directly on disk, preserving Git version control integrity.</li>
+</ul>
 </li>
 <li>
 <p><strong>In-Game Manual Blueprints (<code>is_file_managed: false</code>)</strong>:</p>
-</li>
+<ul>
 <li>Blueprints created in-game via commands or modifier menus are fully editable.</li>
 <li>All adjustments are persisted directly to the database and automatically exported to <code>exports/manual_blueprints.yml</code>.</li>
+</ul>
+</li>
 </ul>
 <hr />
 <h2 id="visual-modifier-panels">Visual Modifier Panels</h2>

@@ -2013,9 +2013,7 @@
 * The main server thread is only consulted for instant Bukkit crafting event decisions, maintaining a solid 20.0 TPS.</p>
 <hr />
 <h3 id="can-players-exploit-shift-clicking-to-bypass-limited-use-blueprints">Can players exploit Shift-Clicking to bypass limited-use blueprints?</h3>
-<p><strong>No.</strong> CraftingBlueprints features an atomic Capacity Math Engine (<code>ShiftCraftMath.kt</code>). When a player shift-clicks a crafting table, the engine calculates the minimum between available ingredients, empty inventory space, and remaining blueprint uses:
-$$\text{CraftCount} = \min(\text{MatrixCapacity}, \text{InventorySpace}, \text{RemainingUses})$$
-A player with 2 uses remaining who shift-clicks a full stack of materials will craft <strong>exactly 2 items</strong>, decrement exactly 2 uses, and leave the remaining materials untouched in the crafting grid.</p>
+<p><strong>No.</strong> CraftingBlueprints calculates the smallest constraint between available ingredients, free inventory space, and remaining blueprint uses. For example, a player with 2 uses remaining who shift-clicks a full stack of materials will craft <strong>exactly 2 items</strong>, decrement exactly 2 uses, and leave the remaining materials untouched in the crafting grid. Over-crafting is strictly prevented.</p>
 <hr />
 <h3 id="how-do-i-prevent-operators-from-bypassing-recipe-restrictions-during-testing">How do I prevent operators from bypassing recipe restrictions during testing?</h3>
 <p>By default, <code>op-bypass: true</code> in <code>config.yml</code> allows server operators (<code>/op</code>) to craft, brew, and enchant all restricted recipes freely.

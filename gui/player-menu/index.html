@@ -2017,10 +2017,12 @@
 <h3 id="1-player-profile-head">1. Player Profile Head</h3>
 <ul>
 <li><strong>Display Name</strong>: The player's custom textured skin skull.</li>
-<li><strong>Progression Lore</strong>:</li>
+<li><strong>Progression Lore</strong>:<ul>
 <li>Total blueprints unlocked on this server.</li>
 <li>Server completion percentage (e.g. <code>14 / 42 Blueprints Unlocked (33.3%)</code>).</li>
 <li>Lifetime crafts completed using blueprints.</li>
+</ul>
+</li>
 </ul>
 <h3 id="2-active-expirations-timer-monitoring">2. Active Expirations &amp; Timer Monitoring</h3>
 <ul>
@@ -2038,12 +2040,12 @@
 </ul>
 <hr />
 <h2 id="anti-steal-item-protection-inventory-security">Anti-Steal Item Protection &amp; Inventory Security</h2>
-<p>All menus in CraftingBlueprints inherit from <code>BaseMenu.kt</code> and are protected by an automated, low-level anti-steal security engine:</p>
+<p>All menus in CraftingBlueprints are protected by built-in inventory security features:</p>
 <ul>
-<li><strong>Slot Locking</strong>: Non-input menu slots are locked. Shift-clicking, dragging, hotkey swapping, and dropping items out of the interface are intercepted and cancelled immediately.</li>
-<li><strong>PDC Menu Tagging</strong>: All visual icons placed inside menus are tagged with a Persistent Data Container marker (<code>ItemPDT(ItemManager.MENU_TYPE)</code>).</li>
-<li><strong>Purge Engine</strong>: If a player attempts to exploit client-side glitches, disconnect macros, or death drops to extract GUI items, the <code>ItemInteractListener</code> intercepts the item on cursor, hotbar, pickup, block placement, or death, and <strong>instantly purges</strong> the phantom item.</li>
-<li>Zero menu items can ever leak into the server's survival economy.</li>
+<li><strong>Slot Locking</strong>: Non-input menu slots are locked. Shift-clicking, dragging, hotkey number swapping, and dropping items out of the interface are intercepted and cancelled immediately.</li>
+<li><strong>Persistent Tagging</strong>: All visual icons placed inside menus carry an internal security tag.</li>
+<li><strong>Automatic Purge</strong>: If a player attempts to use client-side glitches, disconnect macros, or inventory desync to pull items out of a menu, the plugin instantly deletes the item the moment it enters their cursor, hotbar, or inventory.</li>
+<li><strong>Economy Protection</strong>: Menu display items and decorative buttons can never leak into survival gameplay or player inventories.</li>
 </ul>
 
 

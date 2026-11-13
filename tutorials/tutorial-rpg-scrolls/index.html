@@ -1621,10 +1621,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#3-first-craft-counter-3-rightarrow-2" class="md-nav__link">
+  <a href="#3-first-craft-counter-3-2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. First Craft (Counter: 3 $\rightarrow$ 2):
+        3. First Craft (Counter: 3 -&gt; 2):
       
     </span>
   </a>
@@ -1947,10 +1947,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#3-first-craft-counter-3-rightarrow-2" class="md-nav__link">
+  <a href="#3-first-craft-counter-3-2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. First Craft (Counter: 3 $\rightarrow$ 2):
+        3. First Craft (Counter: 3 -&gt; 2):
       
     </span>
   </a>
@@ -2059,17 +2059,17 @@
 </span></code></pre></div>
 <h3 id="2-binding-the-knowledge">2. Binding the Knowledge:</h3>
 <p>The player places the scroll into their main hand and <strong>Right-Clicks</strong>. A sound effect plays, and the player unlocks 3 crafting uses.</p>
-<h3 id="3-first-craft-counter-3-rightarrow-2">3. First Craft (Counter: 3 $\rightarrow$ 2):</h3>
+<h3 id="3-first-craft-counter-3-2">3. First Craft (Counter: 3 -&gt; 2):</h3>
 <p>The player crafts their first sword. Chat and action bar notify the player:
 <div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>[CraftingBlueprints] Recipe crafted! Remaining uses: 2
 </span></code></pre></div></p>
 <h3 id="4-shift-click-bulk-crafting-test">4. Shift-Click Bulk Crafting Test:</h3>
 <ul>
 <li>If the player places materials for 5 swords into the crafting matrix and <strong>Shift-Clicks</strong>:</li>
-<li>The engine evaluates: $\min(\text{MatrixCrafts: 5}, \; \text{InventorySpace: 36}, \; \text{RemainingUses: 2}) = \mathbf{2}$.</li>
+<li>The engine evaluates the smallest constraint: materials for 5 swords, 36 free inventory slots, but <strong>only 2 remaining uses</strong>.</li>
 <li>Exactly 2 swords are crafted into their inventory.</li>
 <li>Remaining uses decrement from 2 to 0.</li>
-<li>The recipe immediately locks, and the remaining materials for 3 swords remain safely untouched inside the crafting table!</li>
+<li>The recipe immediately locks, and the remaining materials for 3 swords remain safely untouched inside the crafting table.</li>
 </ul>
 
 

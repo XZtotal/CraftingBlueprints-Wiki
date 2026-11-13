@@ -2236,23 +2236,23 @@
 </table>
 <hr />
 <h2 id="the-6-masterpiece-canvases">The 6 Masterpiece Canvases</h2>
-<p>CraftingBlueprints provides 6 canonical Masterpiece Canvases combining generative mathematics, harmonic lighting, and fine-art craftsmanship:</p>
+<p>CraftingBlueprints provides 6 canonical Masterpiece Canvases combining harmonic lighting and fine-art craftsmanship:</p>
 <ol>
 <li><strong>Canvas I: Technical Slate (<code>technical_slate</code>)</strong>: Dual-frequency micrometer grid, vernier registration ticks, and subtle paper grain.</li>
-<li><strong>Canvas II: Botanical Verdigris (<code>verdigris_botanical</code>)</strong>: Logarithmic spiral vines ($r = ae^{b\theta}$), delicate acanthus corner curls, and oxidized bronze inlays.</li>
-<li><strong>Canvas III: Nautical Astrolabe (<code>nautical_astrolabe</code>)</strong>: 16-point compass rose, trigonometric orbital rings, and latitude meridian arcs.</li>
-<li><strong>Canvas IV: Arcane Grimoire (<code>void_grimoire</code>)</strong>: Zero synthetic circles; intricate gothic runic filigree with Algiz and Sowilo cartouches.</li>
-<li><strong>Canvas V: Imperial Gold Guilloché (<code>imperial_gold</code>)</strong>: Epitrochoid Guilloché banknote rosettes with a 32-ray radiant sunburst backlighting halo.</li>
-<li><strong>Canvas VI: Rainbow Gradient Mesh (<code>rainbow</code>)</strong>: 16-node 2D Continuous Gradient Mesh emitting a full spectral rainbow into a velvety obsidian item sanctuary ($r \le 22$).</li>
+<li><strong>Canvas II: Botanical Verdigris (<code>verdigris_botanical</code>)</strong>: Organic spiral vines, delicate acanthus corner curls, and oxidized bronze inlays.</li>
+<li><strong>Canvas III: Nautical Astrolabe (<code>nautical_astrolabe</code>)</strong>: 16-point compass rose, nautical navigation arcs, and latitude star charts.</li>
+<li><strong>Canvas IV: Arcane Grimoire (<code>void_grimoire</code>)</strong>: Intricate gothic runic filigree with runic cartouches and amethyst backlighting.</li>
+<li><strong>Canvas V: Imperial Gold Guilloché (<code>imperial_gold</code>)</strong>: Banknote-style Guilloché rosettes with a radiant sunburst backlighting halo.</li>
+<li><strong>Canvas VI: Rainbow Gradient Mesh (<code>rainbow</code>)</strong>: Continuous gradient mesh emitting a full spectral rainbow with a velvety obsidian focal socket.</li>
 </ol>
 <hr />
 <h2 id="flyweight-map-registry-anti-desync-architecture">Flyweight Map Registry &amp; Anti-Desync Architecture</h2>
 <p>When <code>images-on-maps</code> is enabled, CraftingBlueprints protects your server performance and disk space through its <strong>Flyweight Map Registry</strong>:</p>
 <ol>
-<li><strong>Zero World Save Bloat</strong>: In vanilla Minecraft, creating maps allocates a new Map ID for every item, creating thousands of duplicate <code>map_&lt;id&gt;.dat</code> files in <code>world/data/</code>. CraftingBlueprints computes a deterministic <code>VisualKey</code> for each visual configuration and assigns <strong>exactly one MapView per distinct visual render</strong>, regardless of whether 10 or 10,000 players own that blueprint.</li>
-<li><strong>Cross-Server Map Virtualization</strong>: In multi-server networks (Bungee/Velocity), Map ID <code>104</code> on Server A might be an Excalibur sword, while on Server B it is the spawn hub map. The physical item's PDC stores the normalized <code>visual_key</code>. When a player transfers between servers, the plugin's <code>MapRelinkListener</code> dynamically re-links the item to the local canonical Map ID in-place, guaranteeing blueprints never turn blank or corrupt local maps.</li>
+<li><strong>Zero World Save Bloat</strong>: In vanilla Minecraft, creating maps allocates a new Map ID for every item, creating thousands of duplicate <code>map_&lt;id&gt;.dat</code> files in <code>world/data/</code>. CraftingBlueprints assigns <strong>exactly one Map ID per distinct visual render</strong>, regardless of whether 10 or 10,000 players own that blueprint.</li>
+<li><strong>Cross-Server Map Virtualization</strong>: In multi-server networks (BungeeCord/Velocity), Map ID <code>104</code> on Server A might be an Excalibur sword, while on Server B it is the spawn hub map. The physical item's persistent data stores the visual key. When a player transfers between servers, the plugin automatically re-links the item to the local canonical Map ID in-place, guaranteeing blueprints never turn blank or overwrite local maps.</li>
 <li><strong>Container &amp; Item Frame Persistence</strong>: Blueprints stored in chests, shulker boxes, or displayed in Item Frames retain their renderers across server restarts without reverting to vanilla terrain maps.</li>
-<li><strong>Sub-Tick Rendering Performance</strong>: All image quantization executes on asynchronous background threads, pre-quantizing images into native <code>byte[16384]</code> palette buffers. Blitting on the server tick loop executes in <strong>&lt; 0.02 milliseconds</strong>, maintaining buttery-smooth 20.0 TPS.</li>
+<li><strong>Optimized Rendering</strong>: Heavy image processing runs asynchronously in the background. Updating map data on the main server thread takes less than 0.02 milliseconds, ensuring no TPS drops or lag spikes.</li>
 </ol>
 <hr />
 <h2 id="using-custom-background-pngs">Using Custom Background PNGs</h2>

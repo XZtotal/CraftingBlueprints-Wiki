@@ -2120,10 +2120,12 @@
 <h3 id="the-inactive-repository-vs-deployed-targets">The Inactive Repository vs Deployed Targets</h3>
 <ul>
 <li><strong>Inactive Repository (<code>plugins/CraftingBlueprints/presets/</code>)</strong>: You can store, download, and organize preset <code>.zip</code> bundles or folders here without triggering live server imports or altering your database.</li>
-<li><strong>Active Deployment Targets</strong>: Presets only become active in-game when deployed via <code>/cb preset apply &lt;id&gt; --confirm</code>:</li>
+<li><strong>Active Deployment Targets</strong>: Presets only become active in-game when deployed via <code>/cb preset apply &lt;id&gt; --confirm</code>:<ul>
 <li>Blueprints deploy to: <code>plugins/CraftingBlueprints/blueprints/presets/&lt;id&gt;/...</code></li>
 <li>Images deploy to: <code>plugins/CraftingBlueprints/images/presets/&lt;id&gt;/...</code></li>
 <li>Configurations deploy to: <code>plugins/CraftingBlueprints/configs/presets/&lt;id&gt;/...</code></li>
+</ul>
+</li>
 </ul>
 <hr />
 <h2 id="built-in-modality-presets-presetcatalog">Built-In Modality Presets (<code>PresetCatalog</code>)</h2>
@@ -2151,7 +2153,7 @@
 <td style="text-align: left;">RPG Progression Tiers (T1–T5)</td>
 <td style="text-align: left;"><code>5</code></td>
 <td style="text-align: left;"><code>34</code> total (<code>28</code> singles, <code>4</code> packages, <code>2</code> mysteries)</td>
-<td style="text-align: left;"><code>restricted-only</code>: T1 apprentice through T5 mythic weapons, armors, runes, and class kits unlocking via tiered blueprints (<code>bracket</code> $\rightarrow$ <code>rosette</code>).</td>
+<td style="text-align: left;"><code>restricted-only</code>: T1 apprentice through T5 mythic weapons, armors, runes, and class kits unlocking via tiered blueprints (<code>bracket</code> -&gt; <code>rosette</code>).</td>
 </tr>
 <tr>
 <td style="text-align: left;"><code>skyblock_coop</code></td>
@@ -2165,7 +2167,7 @@
 <td style="text-align: left;">OP Prison Ranks &amp; Pickaxes</td>
 <td style="text-align: left;"><code>4</code></td>
 <td style="text-align: left;"><code>26</code> total (<code>22</code> singles, <code>2</code> packages, <code>2</code> mysteries)</td>
-<td style="text-align: left;"><code>restricted-only</code>: Progressive ranks (<code>default</code> $\rightarrow$ <code>rank_b</code> $\rightarrow$ <code>rank_c</code> $\rightarrow$ <code>rank_prestigious</code>) unlock tiered drills, efficiency, and fortune pickaxes.</td>
+<td style="text-align: left;"><code>restricted-only</code>: Progressive ranks (<code>default</code> -&gt; <code>rank_b</code> -&gt; <code>rank_c</code> -&gt; <code>rank_prestigious</code>) unlock tiered drills, efficiency, and fortune pickaxes.</td>
 </tr>
 </tbody>
 </table>

@@ -2069,14 +2069,15 @@
 <p>When a player receives a blueprint map (<code>Material.FILLED_MAP</code>):</p>
 <ol>
 <li><strong>Visual Drafting Inspection</strong>: Holding the map in either hand renders a photorealistic 128x128 pixel drafting schematic featuring the workstation badge, the central item sprite, corner Guilloché rosettes, and remaining craft counts.</li>
-<li><strong>Right-Click Memorization</strong>: The player holds the blueprint in their main hand and <strong>Right-Clicks</strong>:</li>
-<li>A clean chime sound effect plays (<code>Sound.ENTITY_PLAYER_LEVELUP</code> or configured sound).</li>
-<li>Swirling enchanting particles appear at the player's eye level.</li>
+<li><strong>Right-Click Memorization</strong>: The player holds the blueprint in their main hand and <strong>Right-Clicks</strong>:<ul>
+<li>A chime sound plays (<code>Sound.ENTITY_PLAYER_LEVELUP</code>) and enchanting particles appear.</li>
 <li>A localized chat notification confirms the unlock:
-     <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>[CraftingBlueprints] You have unlocked the blueprint for Obsidian Blade Blueprint!
+  <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>[CraftingBlueprints] You have unlocked the blueprint for Obsidian Blade Blueprint!
 </span></code></pre></div></li>
 <li>The physical map item is consumed from the player's hand (unless configured otherwise).</li>
 <li>The recipe is registered permanently or temporally into the player's account database profile.</li>
+</ul>
+</li>
 </ol>
 <hr />
 <h2 id="3-the-workbench-crafting-experience">3. The Workbench &amp; Crafting Experience</h2>
@@ -2090,15 +2091,15 @@
 <h3 id="scenario-b-the-recipe-is-restricted-locked">Scenario B: The Recipe is Restricted &amp; Locked</h3>
 <p>If the player arranges ingredients for a locked recipe without owning the blueprint:
 * <strong>Result Slot Preview</strong>: Governed by <code>ux.prepare-preview</code> in <code>config.yml</code>:
-  * <code>HIDE_RESULT</code>: The crafting table output slot remains completely empty.
-  * <code>LOCKED_OVERLAY</code>: Keeps the output item icon, but appends red warning lore: <code>&lt;red&gt;&lt;bold&gt;Recipe Locked&lt;/bold&gt;&lt;/red&gt;</code>.
-  * <code>CUSTOM_ITEM</code>: Renders a custom indicator (e.g. a red Barrier icon).
+    * <code>HIDE_RESULT</code>: The crafting table output slot remains completely empty.
+    * <code>LOCKED_OVERLAY</code>: Keeps the output item icon, but appends red warning lore: <code>&lt;red&gt;&lt;bold&gt;Recipe Locked&lt;/bold&gt;&lt;/red&gt;</code>.
+    * <code>CUSTOM_ITEM</code>: Renders a custom indicator (e.g. a red Barrier icon).
 * <strong>Click Interception</strong>: If the player attempts to click the locked output slot:
-  * The craft is instantly cancelled.
-  * An informative message is sent to chat explaining which blueprint is missing:
-    <div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>[CraftingBlueprints] You must unlock the Ancient Netherite Battleaxe blueprint before crafting this item!
+    * The craft is instantly cancelled.
+    * An informative message is sent to chat explaining which blueprint is missing:
+      <div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>[CraftingBlueprints] You must unlock the Ancient Netherite Battleaxe blueprint before crafting this item!
 </span></code></pre></div>
-  * Ingredients remain completely safe inside the 3x3 grid without duplication, corruption, or loss.</p>
+    * Ingredients remain completely safe inside the 3x3 grid without duplication, corruption, or loss.</p>
 <hr />
 <h2 id="4-vanilla-recipe-book-integration">4. Vanilla Recipe Book Integration</h2>
 <p>Under <code>ux.vanilla-recipe-book</code> in <code>config.yml</code>:</p>
@@ -2116,19 +2117,19 @@
 <hr />
 <h2 id="5-shift-craft-safety-capacity-math">5. Shift-Craft Safety &amp; Capacity Math</h2>
 <p>A frequent vulnerability in Minecraft progression plugins is shift-crafting: players place 64 stacks of ingredients into the matrix, shift-click once, and produce 64 items while the plugin only deducts 1 use from their counter.</p>
-<p>CraftingBlueprints prevents this exploit via an atomic <strong>Capacity Math Engine</strong> (<code>ShiftCraftMath.kt</code>):</p>
-<p>$$\text{ActualCrafts} = \min\left( \text{MatrixCapacity}, \; \text{InventorySpaceCapacity}, \; \text{RemainingUses} \right)$$</p>
+<p>CraftingBlueprints prevents this exploit by evaluating three bounds on every shift-click:</p>
 <ol>
-<li><strong>Matrix Capacity</strong>: Determines how many items the ingredients can produce.</li>
-<li><strong>Inventory Space Capacity</strong>: Evaluates the player's open inventory slots and partial stacks to determine how many items can be received without dropping onto the ground.</li>
-<li><strong>Usage Capacity</strong>: Evaluates the remaining uses on the player's active blueprint.</li>
+<li><strong>Ingredient Bounds</strong>: How many items the materials in the crafting matrix can produce.</li>
+<li><strong>Inventory Space Bounds</strong>: How many items the player's inventory can receive without dropping items to the ground.</li>
+<li><strong>Blueprint Usage Bounds</strong>: The exact number of craft uses remaining on the player's active blueprint.</li>
 </ol>
+<p>The engine crafts only the amount allowed by the smallest of these three limits.</p>
 <h3 id="real-world-example">Real-World Example:</h3>
 <ul>
 <li>A player with <strong>2 remaining uses</strong> on a Netherite Sword scroll places materials for 8 swords into the table and shift-clicks.</li>
 <li>The engine crafts <strong>exactly 2 swords</strong>.</li>
 <li>Exactly 2 uses are consumed, locking the blueprint.</li>
-<li>The remaining materials for 6 swords remain completely safe in the crafting matrix. Zero over-crafting is permitted.</li>
+<li>The remaining materials for 6 swords remain completely safe in the crafting matrix. Over-crafting is strictly prevented.</li>
 </ul>
 <hr />
 <h2 id="6-real-time-recipe-inspection-cb-info">6. Real-Time Recipe Inspection (<code>/cb info</code>)</h2>

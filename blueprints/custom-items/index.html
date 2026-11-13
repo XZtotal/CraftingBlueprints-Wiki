@@ -2117,7 +2117,7 @@
 
 <h1 id="custom-items-custommodeldata-plugin-interoperability">Custom Items, CustomModelData &amp; Plugin Interoperability</h1>
 <p>Modern Minecraft RPG and survival networks rarely rely solely on vanilla items. Plugins such as <strong>ItemsAdder</strong>, <strong>Oraxen</strong>, <strong>Nexo</strong>, <strong>MMOItems</strong>, <strong>EcoItems</strong>, and <strong>MythicMobs</strong> generate hundreds of custom weapons, armor sets, and tools that share identical base vanilla materials (e.g. <code>DIAMOND_SWORD</code>, <code>BOW</code>, <code>PAPER</code>) differentiated only by <code>CustomModelData</code>, persistent NBT/PDC tags, or custom crafting recipe keys.</p>
-<p>CraftingBlueprints features an extensible <strong><code>ItemIdentifierProvider</code> Service Provider Interface (SPI)</strong> that inspects and gates custom items natively without collisions.</p>
+<p>CraftingBlueprints natively inspects and gates custom items without identifier collisions across different custom item plugins.</p>
 <hr />
 <h2 id="1-custommodeldata-on-physical-blueprint-items">1. CustomModelData on Physical Blueprint Items</h2>
 <p>If your resource pack includes custom 3D models for physical blueprint items (such as ancient parchment scrolls, magical stone tablets, or holographic holocrons):</p>
@@ -2228,8 +2228,8 @@
 <h3 id="why-is-this-crucial-for-server-balance">Why is this crucial for server balance?</h3>
 <p>Imagine your server has 50 custom swords registered in ItemsAdder that use <code>DIAMOND_SWORD</code> as their base material.
 * If an administrator creates an explicit blueprint for <code>ia:rpgweapons:flame_blade</code>, but forgets to configure blueprints for the other 49 custom swords:
-  * With <code>fallback-to-vanilla: true</code>: The plugin checks if the base vanilla material (<code>diamond_sword</code>) is restricted in Whitelist Mode. Since it is, the unconfigured custom swords <strong>safely fall back to requiring the base Diamond Sword blueprint</strong>. Players cannot bypass your progression!
-  * With <code>fallback-to-vanilla: false</code>: Unconfigured custom swords would be freely craftable by anyone with raw ingredients.</p>
+    * With <code>fallback-to-vanilla: true</code>: The plugin checks if the base vanilla material (<code>diamond_sword</code>) is restricted in Whitelist Mode. Since it is, the unconfigured custom swords <strong>safely fall back to requiring the base Diamond Sword blueprint</strong>. Players cannot bypass your progression!
+    * With <code>fallback-to-vanilla: false</code>: Unconfigured custom swords would be freely craftable by anyone with raw ingredients.</p>
 <hr />
 <h2 id="6-extensible-metadata-extra">6. Extensible Metadata (<code>extra</code>)</h2>
 <p>The <code>extra:</code> mapping allows you to attach custom key-value pairs to any blueprint. This data is preserved in memory and can be queried by external plugins, Skript, or Denizen:</p>

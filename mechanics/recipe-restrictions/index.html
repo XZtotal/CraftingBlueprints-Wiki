@@ -1938,7 +1938,7 @@
 
 
 <h1 id="recipe-restrictions-whitelist-mode-vs-universal-gating">Recipe Restrictions (Whitelist Mode vs Universal Gating)</h1>
-<p>CraftingBlueprints features an intelligent restriction engine (<code>RestrictionEngine.kt</code>) allowing server administrators to choose between <strong>Selective Whitelist Mode</strong> (recommended for Survival SMP) and <strong>Universal Progression Mode</strong> (recommended for Hardcore RPG).</p>
+<p>CraftingBlueprints allows server administrators to choose between <strong>Selective Whitelist Mode</strong> (recommended for Survival SMP) and <strong>Universal Progression Mode</strong> (recommended for Hardcore RPG).</p>
 <hr />
 <h2 id="operating-modes-comparison">Operating Modes Comparison</h2>
 <p>Configured in <code>plugins/CraftingBlueprints/config.yml</code> under the <code>restrictions:</code> block:</p>
@@ -2047,7 +2047,7 @@
 <tr>
 <td style="text-align: left;"><code>smelt:iron_ingot</code></td>
 <td style="text-align: left;">Furnace / Smelting</td>
-<td style="text-align: left;">Raw iron $\rightarrow$ Iron ingot</td>
+<td style="text-align: left;">Raw iron -&gt; Iron ingot</td>
 <td style="text-align: left;">Locks smelting iron ingots in furnaces and blast furnaces.</td>
 </tr>
 <tr>
@@ -2089,7 +2089,7 @@
 <p>Instead:
 1. <code>config.yml</code> remains the sole authority for global operational mode (<code>restrictions.mode: "restricted-only"</code>).
 2. Presets deploy their required restricted items to <code>configs/presets/&lt;preset_id&gt;/restrictions.yml</code>.
-3. When the server boots or executes <code>/cb reload</code>, the engine performs a mathematical <strong>Set Union</strong> ($A \cup B$) between <code>config.yml</code> and all active preset restriction files.
+3. When the server boots or executes <code>/cb reload</code>, the engine automatically combines the restrictions from <code>config.yml</code> with all active preset restriction files.
 4. When you uninstall a preset (<code>/cb preset remove &lt;preset_id&gt;</code>), its restrictions are cleanly purged from memory upon reload with zero leftovers.</p>
 
 

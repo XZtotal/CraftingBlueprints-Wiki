@@ -2005,15 +2005,17 @@
 <ol>
 <li><strong>Install on Every Server</strong>: Copy <code>CraftingBlueprints-x.x.x.jar</code> into the <code>plugins/</code> directory of each sub-server (Hub, Survival, Skyblock, etc.).</li>
 <li><strong>Configure Central MySQL</strong>: On every server, open <code>plugins/CraftingBlueprints/config.yml</code> and set <code>database-type: mysql</code> with your shared database credentials.</li>
-<li><strong>Enforce the Golden Rule</strong>:</li>
+<li><strong>Enforce the Golden Rule</strong>:<ul>
 <li>Designate <strong>one Primary Management Server</strong> (e.g., Hub/Admin) with:
-     <div class="language-yaml highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nt">file-management</span><span class="p">:</span>
+  <div class="language-yaml highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nt">file-management</span><span class="p">:</span>
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="nt">sync-from-files</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 </span></code></pre></div></li>
 <li>Configure <strong>all Worker Servers</strong> (Survival, Skyblock, etc.) with:
-     <div class="language-yaml highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nt">file-management</span><span class="p">:</span>
+  <div class="language-yaml highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nt">file-management</span><span class="p">:</span>
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="nt">sync-from-files</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
 </span></code></pre></div></li>
+</ul>
+</li>
 <li><strong>Start Servers &amp; Confirm Sync</strong>: Start the primary server first, then the worker nodes. Review our <a href="../../storage/mysql-multiserver/">Multi-Server Setup Guide</a> for network-specific connection pooling advice.</li>
 </ol>
 </div>
@@ -2030,7 +2032,7 @@
 <li><strong>Database Backend</strong>: Displays active connection status (<code>SQLite (Connected)</code> or <code>MySQL (HikariCP Active)</code>), active connection pool statistics, and round-trip query latency.</li>
 <li><strong>Blueprint Counts</strong>: Reports the total number of blueprints registered across all categories (<code>singles</code>, <code>packages</code>, <code>mysteries</code>).</li>
 <li><strong>File Management Mode</strong>: Shows whether the node is running as a <strong>Master Node</strong> (<code>sync-from-files: true</code>) or a <strong>Worker Node</strong> (<code>sync-from-files: false</code>).</li>
-<li><strong>Memory &amp; Buffer Cache</strong>: Displays active memory consumption for player profiles, blueprint definitions, and pre-quantized map byte buffers.</li>
+<li><strong>Map Cache &amp; Resources</strong>: Displays loaded player profiles, blueprint definitions, and cached map images.</li>
 </ul>
 <hr />
 <h2 id="recommended-complementary-plugins">Recommended Complementary Plugins</h2>

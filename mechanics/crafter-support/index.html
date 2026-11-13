@@ -1923,13 +1923,17 @@
 <h2 id="how-protection-works">How Protection Works</h2>
 <p>When a redstone pulse activates a Crafter block:</p>
 <ol>
-<li><strong>Recipe Inspection</strong>: The plugin intercepts the pending craft before items are produced, resolving the output item and recipe key.</li>
-<li><strong>Restriction Engine Consultation</strong>: The plugin queries <code>RestrictionEngine.isBlueprintRequired(name, type)</code>:</li>
-<li><strong>Unrestricted Recipes</strong>: If the recipe does not require a blueprint (e.g. iron ingots into blocks, bread, paper, or torches in Whitelist Mode), the craft executes normally with zero interference.</li>
-<li><strong>Restricted Recipes</strong>: If the item requires a blueprint, the Crafter evaluates the active configuration policy.</li>
-<li><strong>Execution Policy Enforcement</strong>:</li>
-<li><strong>Blocked</strong>: The craft is cancelled. The Crafter block emits fail particles and sounds, and all ingredient items remain safely inside the Crafter's grid without duplication or item loss.</li>
-<li><strong>Bypassed</strong>: If configured by the administrator, the Crafter is allowed to produce the locked recipe autonomously.</li>
+<li><strong>Recipe Inspection</strong>: The plugin intercepts the craft before items are produced, identifying the output item and recipe.</li>
+<li><strong>Restriction Check</strong>: The plugin checks if the target recipe requires a blueprint:<ul>
+<li><strong>Unrestricted Recipes</strong>: If the recipe does not require a blueprint (e.g. iron blocks, bread, torches in Whitelist Mode), the craft executes normally.</li>
+<li><strong>Restricted Recipes</strong>: If the item requires a blueprint, the Crafter evaluates the server policy (<code>block-restricted</code>).</li>
+</ul>
+</li>
+<li><strong>Execution Policy Enforcement</strong>:<ul>
+<li><strong>Blocked</strong>: The craft is cancelled. The Crafter block emits fail particles and sounds, leaving ingredients safely inside the Crafter's grid without duplication or item loss.</li>
+<li><strong>Bypassed</strong>: If configured by the administrator, the Crafter produces the recipe autonomously.</li>
+</ul>
+</li>
 </ol>
 <hr />
 <h2 id="configuration-in-configyml">Configuration in <code>config.yml</code></h2>
@@ -1970,9 +1974,9 @@
 </div>
 <hr />
 <h2 id="multi-version-compatibility">Multi-Version Compatibility</h2>
-<p>Because <code>CrafterCraftEvent</code> only exists in Bukkit/Paper API 1.21+:
-* On servers running <strong>Paper 1.18.2 or 1.20.4</strong>, this module loads as a lightweight no-op adapter (<code>NoOpCrafterAdapter</code>). It introduces zero performance overhead, executes zero listeners, and causes zero <code>ClassNotFoundException</code> errors.
-* On servers running <strong>Paper 1.21.1+</strong>, the dedicated implementation (<code>CrafterAdapterImpl</code>) activates automatically without configuration changes.</p>
+<p>Because the Crafter block only exists in Minecraft 1.21+:
+* On servers running <strong>Paper 1.18.2 or 1.20.4</strong>, this module is inactive. It introduces zero overhead, registers no listeners, and runs cleanly without errors.
+* On servers running <strong>Paper 1.21+</strong>, Crafter interception activates automatically with no extra setup required.</p>
 
 
 

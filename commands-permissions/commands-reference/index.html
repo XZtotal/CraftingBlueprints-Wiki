@@ -2069,7 +2069,7 @@
 <h2 id="detailed-command-explanations-operational-safety">Detailed Command Explanations &amp; Operational Safety</h2>
 <h3 id="cb-give-player-blueprint_id-amount"><code>/cb give &lt;player&gt; &lt;blueprint_id&gt; [amount]</code></h3>
 <p>Grants physical blueprint items directly to a target player:
-* <strong>Quantity Bounds</strong>: The <code>amount</code> parameter strictly requires a positive integer between <code>1</code> and <code>2304</code> (the maximum physical capacity of a player inventory: $36 \text{ slots} \times 64 \text{ items}$). Negative numbers, <code>0</code>, non-numeric strings, or exorbitant numbers are rejected immediately with localized error feedback.
+* <strong>Quantity Bounds</strong>: The <code>amount</code> parameter strictly requires a positive integer between <code>1</code> and <code>2304</code> (the maximum physical capacity of a player inventory: 36 slots x 64 items). Negative numbers, <code>0</code>, non-numeric strings, or exorbitant numbers are rejected immediately with localized error feedback.
 * <strong>Physical Overflow Safety</strong>: When giving items to a player whose inventory is full, CraftingBlueprints uses an atomic safe-drop protocol. Instead of dropping items into the void or deleting them, leftover items are dropped safely into the world directly at the player's location (<code>world.dropItem(...)</code>).</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a># Give Steve 1 Ancient Netherite Battleaxe blueprint
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>/cb give Steve ancient_netherite_axe 1
@@ -2092,7 +2092,7 @@
 * <strong>Zero Database Modifications</strong>: Performs no database inserts, updates, or prunings.
 * <strong>Semantic Verification</strong>: Verifies that every Bukkit <code>Material</code>, <code>PotionType</code>, and <code>Enchantment</code> exists on the current server version.
 * <strong>Visual Key Linting</strong>: Recursively validates <code>map:</code> blocks against valid themes, frames, and badges.
-* <strong>Levenshtein Suggestions</strong>: Automatically emits helpful "Did you mean?" suggestions for minor typos (e.g. <code>roseta</code> $\rightarrow$ <code>rosette</code>).
+* <strong>Levenshtein Suggestions</strong>: Automatically emits helpful "Did you mean?" suggestions for minor typos (e.g. <code>roseta</code> -&gt; <code>rosette</code>).
 * <strong>Line-Number Error Context</strong>: In the event of a syntax error, reports the exact file path, line number, column, and error description.</p>
 <hr />
 <h3 id="cb-status"><code>/cb status</code></h3>
@@ -2104,8 +2104,8 @@
 </span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>[CraftingBlueprints] Database Latency: 1.42 ms | Pool: 10 total (8 idle, 2 active)
 </span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>[CraftingBlueprints] Blueprints Registered: 42 (36 singles, 4 packages, 2 mysteries)
 </span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>[CraftingBlueprints] Node Role: Primary Master Node (sync-from-files: true)
-</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>[CraftingBlueprints] Active Cached Profiles: 14 / 500 max
-</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>[CraftingBlueprints] Pre-Quantized Map Buffers: 42 / 500 cached (~672 KB)
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>[CraftingBlueprints] Active Profiles: 14 loaded
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>[CraftingBlueprints] Cached Maps: 42 renders cached
 </span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>[CraftingBlueprints] ======================================
 </span></code></pre></div>
 

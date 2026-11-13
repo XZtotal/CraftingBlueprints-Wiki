@@ -485,6 +485,45 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="5. Unlock and Craft in Survival">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-a-memorize-the-blueprint" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step A: Memorize the Blueprint
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-b-open-a-crafting-table" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step B: Open a Crafting Table
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-c-test-whitelist-protection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step C: Test Whitelist Protection
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -1926,6 +1965,45 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="5. Unlock and Craft in Survival">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-a-memorize-the-blueprint" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step A: Memorize the Blueprint
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-b-open-a-crafting-table" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step B: Open a Crafting Table
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-c-test-whitelist-protection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step C: Test Whitelist Protection
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -2039,16 +2117,18 @@
 </div>
 <hr />
 <h2 id="5-unlock-and-craft-in-survival">5. Unlock and Craft in Survival</h2>
-<ol>
-<li><strong>Memorize the Blueprint</strong>: Place the map in your main hand and <strong>Right-Click</strong>. A sound effect plays and chat confirms:
-   <div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>[CraftingBlueprints] You have unlocked the blueprint for Obsidian Blade Blueprint!
+<h3 id="step-a-memorize-the-blueprint">Step A: Memorize the Blueprint</h3>
+<p>Place the map in your main hand and <strong>Right-Click</strong>. A chime sound plays and chat confirms:
+<div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>[CraftingBlueprints] You have unlocked the blueprint for Obsidian Blade Blueprint!
 </span></code></pre></div>
-   The physical map is consumed from your hand.</li>
-<li><strong>Open a Crafting Table</strong>: Place two diamonds and a stick into the 3x3 crafting matrix. The Diamond Sword appears in the result slot and crafts normally.</li>
-<li><strong>Test Whitelist Protection</strong>:</li>
+The physical map item is consumed from your hand.</p>
+<h3 id="step-b-open-a-crafting-table">Step B: Open a Crafting Table</h3>
+<p>Place two diamonds and a stick into the 3x3 crafting matrix. The Diamond Sword appears in the result slot and crafts normally.</p>
+<h3 id="step-c-test-whitelist-protection">Step C: Test Whitelist Protection</h3>
+<ol>
 <li>Open <code>plugins/CraftingBlueprints/config.yml</code> and ensure <code>restrictions.mode: "restricted-only"</code> with <code>diamond_.*</code> included in <code>restricted-items</code>.</li>
 <li>Either temporarily deop yourself (<code>/deop &lt;your_name&gt;</code>) or set <code>op-bypass: false</code> in <code>config.yml</code>.</li>
-<li>Have an unauthorized player (or test account) place the same ingredients into the crafting table: the recipe will be locked, and the player will be notified that they lack the required blueprint!</li>
+<li>Have an unauthorized player (or test account) place the same ingredients into the crafting table: the recipe will be locked, and the player will be notified that they lack the required blueprint.</li>
 </ol>
 <hr />
 <h2 id="next-steps-deep-exploration">Next Steps &amp; Deep Exploration</h2>

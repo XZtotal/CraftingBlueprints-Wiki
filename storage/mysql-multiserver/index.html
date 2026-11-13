@@ -1420,10 +1420,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#6-player-lifecycle-quick-relog-protection" class="md-nav__link">
+  <a href="#6-player-lifecycle-quick-switch-protection" class="md-nav__link">
     <span class="md-ellipsis">
       
-        6. Player Lifecycle &amp; Quick-Relog Protection
+        6. Player Lifecycle &amp; Quick-Switch Protection
       
     </span>
   </a>
@@ -1997,10 +1997,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#6-player-lifecycle-quick-relog-protection" class="md-nav__link">
+  <a href="#6-player-lifecycle-quick-switch-protection" class="md-nav__link">
     <span class="md-ellipsis">
       
-        6. Player Lifecycle &amp; Quick-Relog Protection
+        6. Player Lifecycle &amp; Quick-Switch Protection
       
     </span>
   </a>
@@ -2121,16 +2121,15 @@
 <p>In cross-server networks, Minecraft map IDs frequently clash:
 * Map ID <code>104</code> on the Survival server might be a Diamond Sword blueprint.
 * Map ID <code>104</code> on the Lobby server might be the server spawn hub map.</p>
-<p>CraftingBlueprints solves this using <strong>PDC Visual Key Virtualization</strong>:
-* The physical map item stores the normalized <code>visual_key</code> in its PersistentDataContainer (<code>cb_map:single:diamond_sword:...</code>).
-* When a player switches from Survival to Lobby via Bungee/Velocity, the <code>MapRelinkListener</code> intercepts the item upon player join or inventory open.
-* It queries the local server's <code>BlueprintMapRegistry</code> and re-links the item's <code>MapView</code> to the local canonical Map ID in-place.
-* <strong>Guaranteed Outcome</strong>: The physical map always renders the correct blueprint graphic on the local server without ever overwriting or corrupting world maps on that server.</p>
+<p>CraftingBlueprints solves this using <strong>Visual Key Re-Linking</strong>:
+* The physical map item stores the visual identity of the blueprint in its persistent data.
+* When a player switches between servers via BungeeCord or Velocity, the plugin automatically re-links the item to the local server's canonical Map ID as soon as the player joins or opens their inventory.
+* <strong>Guaranteed Outcome</strong>: The physical map always renders the correct blueprint artwork on every server without corrupting local maps or world files.</p>
 <hr />
-<h2 id="6-player-lifecycle-quick-relog-protection">6. Player Lifecycle &amp; Quick-Relog Protection</h2>
-<p>When players switch rapidly between servers (e.g. clicking a portal or executing <code>/server survival</code>):
-* <code>WaitingManager</code> and <code>cb_reservations</code> prevent race conditions where Server B attempts to load player data before Server A has finished flushing recent crafts to MySQL.
-* If a player rejoins within milliseconds, active memory state is preserved with atomic monitor locks, eliminating lost updates and rollback glitches.</p>
+<h2 id="6-player-lifecycle-quick-switch-protection">6. Player Lifecycle &amp; Quick-Switch Protection</h2>
+<p>When players switch rapidly between servers (e.g. entering portals or typing <code>/server survival</code>):
+* The plugin uses an atomic handoff reservation system that prevents Server B from loading player data before Server A finishes saving recent crafts to MySQL.
+* If a player rejoins within milliseconds, their active craft counts and timers sync cleanly, eliminating data rollbacks, item duplication, and lost progress.</p>
 
 
 

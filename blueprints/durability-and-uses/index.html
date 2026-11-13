@@ -701,10 +701,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#supported-duration-units" class="md-nav__link">
+  <a href="#supported-duration-formats" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Supported Duration Units
+        Supported Duration Formats
       
     </span>
   </a>
@@ -728,10 +728,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#shift-craft-capacity-anti-exploit-math" class="md-nav__link">
+  <a href="#shift-craft-bulk-crafting-protection" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Shift-Craft Capacity &amp; Anti-Exploit Math
+        Shift-Craft Bulk Crafting Protection
       
     </span>
   </a>
@@ -739,13 +739,52 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#how-players-track-active-uses-timers" class="md-nav__link">
+  <a href="#tracking-active-uses-timers" class="md-nav__link">
     <span class="md-ellipsis">
       
-        How Players Track Active Uses &amp; Timers
+        Tracking Active Uses &amp; Timers
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="Tracking Active Uses &amp; Timers">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#personal-menu-cb-menu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Personal Menu (/cb menu)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#server-catalog-cb-item-list" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Server Catalog (/cb item list)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#placeholderapi-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PlaceholderAPI Integration
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1925,10 +1964,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#supported-duration-units" class="md-nav__link">
+  <a href="#supported-duration-formats" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Supported Duration Units
+        Supported Duration Formats
       
     </span>
   </a>
@@ -1952,10 +1991,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#shift-craft-capacity-anti-exploit-math" class="md-nav__link">
+  <a href="#shift-craft-bulk-crafting-protection" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Shift-Craft Capacity &amp; Anti-Exploit Math
+        Shift-Craft Bulk Crafting Protection
       
     </span>
   </a>
@@ -1963,13 +2002,52 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#how-players-track-active-uses-timers" class="md-nav__link">
+  <a href="#tracking-active-uses-timers" class="md-nav__link">
     <span class="md-ellipsis">
       
-        How Players Track Active Uses &amp; Timers
+        Tracking Active Uses &amp; Timers
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="Tracking Active Uses &amp; Timers">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#personal-menu-cb-menu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Personal Menu (/cb menu)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#server-catalog-cb-item-list" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Server Catalog (/cb item list)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#placeholderapi-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PlaceholderAPI Integration
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -2126,15 +2204,54 @@
 </div>
 </div>
 </div>
-<h4 id="supported-duration-units">Supported Duration Units</h4>
-<p>The duration parser accepts human strings or raw integer seconds:
-* <code>45s</code> $\rightarrow$ 45 seconds
-* <code>30m</code> $\rightarrow$ 30 minutes (1,800 seconds)
-* <code>12h</code> $\rightarrow$ 12 hours (43,200 seconds)
-* <code>86400</code> or <code>24h</code> $\rightarrow$ 24 hours (86,400 seconds)
-* <code>7d</code>  $\rightarrow$ 7 days (604,800 seconds)
-* <code>30d</code> $\rightarrow$ 30 days (2,592,000 seconds)
-* <code>0</code>   $\rightarrow$ No temporal expiration.</p>
+<h3 id="supported-duration-formats">Supported Duration Formats</h3>
+<p>The <code>time:</code> field accepts either human-readable duration strings or raw integer seconds:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Input Format</th>
+<th style="text-align: left;">Unit / Duration</th>
+<th style="text-align: left;">Evaluated Seconds</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>45s</code></td>
+<td style="text-align: left;">45 seconds</td>
+<td style="text-align: left;">45</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>30m</code></td>
+<td style="text-align: left;">30 minutes</td>
+<td style="text-align: left;">1,800</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>12h</code></td>
+<td style="text-align: left;">12 hours</td>
+<td style="text-align: left;">43,200</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>24h</code> or <code>86400</code></td>
+<td style="text-align: left;">24 hours (1 day)</td>
+<td style="text-align: left;">86,400</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>7d</code></td>
+<td style="text-align: left;">7 days (1 week)</td>
+<td style="text-align: left;">604,800</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>30d</code></td>
+<td style="text-align: left;">30 days (1 month)</td>
+<td style="text-align: left;">2,592,000</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>0</code></td>
+<td style="text-align: left;">Unlimited</td>
+<td style="text-align: left;">No time expiration</td>
+</tr>
+</tbody>
+</table>
 <hr />
 <h2 id="4-hybrid-licensing-combined-time-uses">4. Hybrid Licensing (Combined Time &amp; Uses)</h2>
 <p>You can specify both <code>time</code> and <code>uses</code> on a single blueprint. Whichever limit is reached first will expire and lock the recipe:</p>
@@ -2144,7 +2261,7 @@
 </span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">    </span><span class="nt">blueprint</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SHIELD</span>
 </span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">"&lt;gradient:#00AAFF:#00FFAA&gt;&lt;bold&gt;Seasonal</span><span class="nv"> </span><span class="s">Aegis</span><span class="nv"> </span><span class="s">Shield&lt;/bold&gt;&lt;/gradient&gt;"</span>
 </span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>
-</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">    </span><span class="c1"># Expires in 7 days OR after 5 crafts, whichever happens first</span>
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">    </span><span class="c1"># Expires in 7 days OR after 5 crafts, whichever occurs first</span>
 </span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="w">    </span><span class="nt">permanent</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
 </span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="w">    </span><span class="nt">time</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">7d</span>
 </span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="w">    </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5</span>
@@ -2166,34 +2283,37 @@
 </span><span id="__span-4-26"><a id="__codelineno-4-26" name="__codelineno-4-26" href="#__codelineno-4-26"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"&lt;yellow&gt;Expires</span><span class="nv"> </span><span class="s">after</span><span class="nv"> </span><span class="s">5</span><span class="nv"> </span><span class="s">crafts</span><span class="nv"> </span><span class="s">or</span><span class="nv"> </span><span class="s">when</span><span class="nv"> </span><span class="s">time</span><span class="nv"> </span><span class="s">runs</span><span class="nv"> </span><span class="s">out.&lt;/yellow&gt;"</span>
 </span></code></pre></div>
 <hr />
-<h2 id="shift-craft-capacity-anti-exploit-math">Shift-Craft Capacity &amp; Anti-Exploit Math</h2>
-<p>In standard Minecraft plugins, shift-clicking crafting recipes can cause severe desynchronization, allowing players to duplicate items or craft 64 items while only deducting 1 use from their counter.</p>
-<p>CraftingBlueprints eliminates this exploit via an atomic <strong>Shift-Craft Rule Engine</strong> (<code>ShiftCraftMath.kt</code>):</p>
+<h2 id="shift-craft-bulk-crafting-protection">Shift-Craft Bulk Crafting Protection</h2>
+<p>In standard Minecraft plugins, shift-clicking crafting recipes can cause severe desynchronization, allowing players to duplicate items or craft a full stack of 64 items while only deducting 1 use from their counter.</p>
+<p>CraftingBlueprints eliminates this exploit via an atomic calculation on every shift-click:</p>
 <ol>
-<li><strong>Matrix Ingredient Capacity</strong>: Evaluates the minimum ingredient count across all matrix slots to calculate maximum possible crafts:
-   $$\text{MaxMatrixCrafts} = \min_{s \in \text{slots}}(\text{amount}_s)$$</li>
-<li><strong>Inventory Destination Capacity</strong>: Evaluates the player's empty inventory slots and partial stacks to determine the exact number of crafted items that can fit safely without overflowing:
-   $$\text{MaxSpaceCrafts} = \left\lfloor \frac{\text{FreeSpace}}{\text{RecipeYield}} \right\rfloor$$</li>
-<li><strong>Usage Bound</strong>: Evaluates the remaining uses on the player's active blueprint:
-   $$\text{CraftCount} = \min(\text{MaxMatrixCrafts}, \text{MaxSpaceCrafts}, \text{RemainingUses})$$</li>
-<li><strong>Atomic Execution</strong>: If a player with <strong>2 remaining uses</strong> shift-clicks a recipe with 64 iron ingots in the matrix, the engine crafts <strong>exactly 2 items</strong>, deducts <strong>exactly 2 uses</strong>, locks the recipe, and leaves the remaining 62 iron ingots untouched in the crafting table.</li>
+<li><strong>Ingredient Check</strong>: Evaluates how many items can be created with the materials currently in the 3x3 crafting grid.</li>
+<li><strong>Inventory Space Check</strong>: Evaluates open inventory slots to determine how many items the player can safely hold without items dropping to the ground.</li>
+<li><strong>Remaining Uses Bound</strong>: Restricts the craft to the exact number of uses remaining on the player's blueprint.</li>
 </ol>
+<p><strong>Example</strong>:
+* A player with <strong>2 remaining uses</strong> places materials for 8 Netherite Swords into the crafting grid and shift-clicks.
+* The plugin crafts <strong>exactly 2 swords</strong> and deducts <strong>exactly 2 uses</strong>, immediately locking the recipe.
+* The remaining ingredients for 6 swords remain completely safe in the crafting grid. Over-crafting is impossible.</p>
 <hr />
-<h2 id="how-players-track-active-uses-timers">How Players Track Active Uses &amp; Timers</h2>
-<p>Players have multiple real-time tools to monitor their active blueprints:</p>
-<ol>
-<li><strong>Personal Dashboard (<code>/cb menu</code>)</strong>:
-   Shows all active recipes, remaining craft counts, and live countdown timers (e.g. <code>Expires in 3d 14h</code>).</li>
-<li><strong>Catalog Inspection (<code>/cb item list</code>)</strong>:
-   Hovering over any blueprint displays dynamic status badges:</li>
-<li><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/2705.svg" title=":white_check_mark:" /> <strong>Unlocked</strong> (Permanent)</li>
-<li><img alt="⌛" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/231b.svg" title=":hourglass:" /> <strong>Active: 3/5 Uses</strong> (Limited)</li>
-<li><img alt="🔒" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f512.svg" title=":lock:" /> <strong>Locked</strong></li>
-<li><strong>PlaceholderAPI Variables</strong>:</li>
-<li><code>%craftingblueprints_uses_&lt;id&gt;%</code>: Returns remaining uses (or <code>unlimited</code>).</li>
+<h2 id="tracking-active-uses-timers">Tracking Active Uses &amp; Timers</h2>
+<p>Players and administrators have multiple tools to monitor active blueprints:</p>
+<h3 id="personal-menu-cb-menu">Personal Menu (<code>/cb menu</code>)</h3>
+<p>Running <code>/cb menu</code> displays a live dashboard showing all active recipes, remaining craft counts, and live countdown timers (e.g. <code>Expires in 3d 14h</code>).</p>
+<h3 id="server-catalog-cb-item-list">Server Catalog (<code>/cb item list</code>)</h3>
+<p>Hovering over any blueprint in the catalog displays its live status badge:</p>
+<ul>
+<li><img alt="✅" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/2705.svg" title=":white_check_mark:" /> <strong>Unlocked</strong>: Permanent access.</li>
+<li><img alt="⌛" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/231b.svg" title=":hourglass:" /> <strong>Active</strong>: Finite crafts or time remaining (e.g. <code>3/5 uses</code>).</li>
+<li><img alt="🔒" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f512.svg" title=":lock:" /> <strong>Locked</strong>: Blueprint has not been memorized.</li>
+</ul>
+<h3 id="placeholderapi-integration">PlaceholderAPI Integration</h3>
+<p>Use these placeholders in scoreboards, tablists, or custom menus:</p>
+<ul>
+<li><code>%craftingblueprints_uses_&lt;id&gt;%</code>: Returns remaining crafts (or <code>unlimited</code>).</li>
 <li><code>%craftingblueprints_time_&lt;id&gt;%</code>: Formatted remaining time (e.g. <code>23h 12m</code>).</li>
 <li><code>%craftingblueprints_is_unlocked_&lt;id&gt;%</code>: Returns <code>true</code> or <code>false</code>.</li>
-</ol>
+</ul>
 
 
 
