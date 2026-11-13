@@ -1,18 +1,10 @@
-# Recipe Scaffolder (/cb generate)
+# Recipe Auto-Scaffolder (/cb generate)
 
-Writing YAML files by hand for dozens of recipes can take hours. CraftingBlueprints includes an automatic **Recipe Scaffolder** (`/cb generate`) that inspects all recipes registered on your server and automatically creates valid blueprint YAML files in seconds.
-
----
-
-## How It Works
-
-1. The plugin scans Bukkit's recipe registry (including vanilla recipes and recipes added by other plugins).
-2. For each recipe, it detects the ingredients, target material, and amount.
-3. It generates ready-to-use YAML configuration files in `plugins/CraftingBlueprints/blueprints/` complete with matching map graphics and rarity tiers.
+Authoring dozens of blueprint YAML files by hand for existing crafting recipes can take hours. CraftingBlueprints includes a high-performance **Recipe Auto-Scaffolder** (`/cb generate`) that inspects your server's registered Bukkit recipes and external item plugins, automatically generating schema-valid blueprint YAML files with calibrated map aesthetics and scaled economy prices in seconds.
 
 ---
 
-## Command Usage
+## Command Syntax & Parameters
 
 ```text
 /cb generate <source> [flags]
@@ -22,33 +14,90 @@ Writing YAML files by hand for dozens of recipes can take hours. CraftingBluepri
 
 ---
 
-## Practical Examples
+## Supported Recipe Sources (`<source>`)
 
-### 1. Generate Blueprints for All Vanilla Recipes
-Scaffolds the entire vanilla Minecraft recipe catalog into your `blueprints/` folder:
+The scaffolder can target specific categories, namespaces, or external plugins:
+
+| Source Identifier | Source Scope & Content |
+| :--- | :--- |
+| `weapons` | Swords, axes, bows, crossbows, tridents, shields, and arrows. |
+| `armor` | Helmets, chestplates, leggings, boots, horse armor, and turtle shells. |
+| `tools` | Pickaxes, shovels, axes, hoes, shears, fishing rods, flint and steel, compasses, and brushes. |
+| `potions` | All registered brewing `PotionType` variants. |
+| `enchantments` | All registered vanilla enchantments. |
+| `redstone` | Pistons, observers, hoppers, dispensers, droppers, repeaters, comparators, crafters, and TNT. |
+| `food` | Craftable food items, golden carrots, and enchanted golden apples. |
+| `building` | Stairs, slabs, walls, fences, gates, doors, bricks, terracotta, and concrete. |
+| `all` | Every craftable recipe registered in `Bukkit.recipeIterator()` plus potions and enchantments. |
+| `minecraft:<category>` | Scoped vanilla namespace filtering (e.g. `minecraft:weapons`). |
+| `itemsadder` | Scans all custom items registered in the ItemsAdder registry (`ia:<namespace:id>`). |
+| `oraxen` | Scans all custom items registered in the Oraxen registry (`oraxen:<id>`). |
+| `nexo` | Scans all custom items registered in the Nexo registry (`nexo:<id>`). |
+
+---
+
+## Scaffolder Flags Reference
+
+| Flag | Parameter Type | Description |
+| :--- | :--- | :--- |
+| `--mode` | `single` \| `package` | Generates individual blueprints (`single`, default) or bundles items into packaged sets (`package`, chunked at $\le 24$ items per pack). |
+| `--price-scale` | Decimal factor | Multiplies base heuristic prices (Common: 250, Uncommon: 800, Rare: 2500, Legendary: 15000). Default: `1.0`. |
+| `--filter` | Regex pattern | Selectively includes only recipes matching the regex (e.g. `.*_sword$`). |
+| `--template` | Template ID | Applies a reusable template mixin to all generated blueprints without hardcoding repeated fields. |
+| `--out` | Relative path | Destination file inside `blueprints/` (e.g. `--out weapons/swords.yml`). Auto-appends `.yml`. |
+| `--theme` / `--background` | Theme ID | Sets the map background theme (`forge`, `royal`, `technical_slate`, `dwarven_magma`). |
+| `--frame` / `--tier` | Frame ID / Tier | Sets corner frame geometry (`bracket`, `chamfer`, `diamond`, `runic`, `rosette`, `star`). |
+| `--prefix` | String | Prefixes all generated blueprint IDs (e.g. `--prefix smp_` generates `smp_diamond_sword`). |
+| `--dry-run` | Flag | Simulates generation and displays matched item counts without writing to disk or database. |
+| `--force` | Flag | Overwrites destination files and bypasses first-win ID collision warnings. |
+| `--no-reload` | Flag | Generates the YAML file on disk without immediately hot-reloading it into memory. |
+
+---
+
+## Production Scaffolding Examples
+
+### 1. Scaffold All Swords into a Dedicated File
+Scans all vanilla weapon recipes, filters for swords, applies a 1.5x price multiplier, and sets the dwarven forge map theme:
 
 ```text
-/cb generate vanilla
+/cb generate minecraft:weapons --filter=".*_sword$" --price-scale=1.5 --theme=forge --frame=rosette --out="weapons/swords.yml"
 ```
 
-### 2. Generate with Specific Aesthetic Flags
-You can force generated blueprints to use a specific background texture or rarity tier:
+### 2. Scaffold a Packaged Armor Set
+Bundles all armor recipes into multi-item package portfolios:
 
 ```text
-/cb generate vanilla --tier=RARE --background=texture_blueprint_grid
+/cb generate armor --mode=package --template=economy_tier_epic --out="armor/sets.yml"
 ```
 
-### 3. Generate from an External Plugin
-If you have custom recipes registered by an external plugin:
+### 3. Scaffold Custom Weapons from ItemsAdder
+Scans custom weapons registered in ItemsAdder, preserving custom model data and names:
 
 ```text
-/cb generate plugin <plugin_name>
+/cb generate itemsadder:weapons --price-scale=2.0 --out="custom/itemsadder_weapons.yml"
 ```
 
 ---
 
-## After Generation
+## Automatic Schema Header Injection
 
-1. Review the generated files in `plugins/CraftingBlueprints/blueprints/`.
-2. Customize names, lore, or prices if desired.
-3. Run `/cb reload blueprints` to activate your newly scaffolded catalog!
+Every file generated by `/cb generate` automatically includes the relative language server schema directive at the top:
+
+```yaml
+# yaml-language-server: $schema=../blueprint.schema.json
+singles:
+  diamond_sword:
+    blueprint: DIAMOND_SWORD
+    name: "<aqua>Diamond Sword Blueprint</aqua>"
+    permanent: true
+    price: 3750.0
+    sell_price: 937.5
+    item:
+      material: FILLED_MAP
+    map:
+      theme: technical_slate
+      frame: bracket
+      badge: crafting
+```
+
+This guarantees that as soon as you open the generated file in your code editor, full IntelliSense and schema validation are active immediately!

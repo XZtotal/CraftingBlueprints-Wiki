@@ -1,82 +1,187 @@
-# Reusable Templates (Mixins)
+# Reusable Templates (Mixins) & Cascading Precedence
 
-If you are creating dozens or hundreds of custom blueprints, retyping the same lore format, pricing, and visual options for every item quickly becomes repetitive.
+When managing servers with dozens or hundreds of blueprints, retyping the same pricing, visual themes, lore cards, and durability rules for every single recipe introduces configuration bloat and maintenance errors.
 
-CraftingBlueprints features an object-oriented **Template Engine** (Mixins) that allows you to define reusable styling modules once and apply them across multiple blueprints.
+CraftingBlueprints features an object-oriented **Template Composition Engine** (Mixins) that allows server administrators to define modular template blocks once and compose them across multiple blueprints.
 
 ---
 
-## 1. Defining Templates
+## 1. Defining Reusable Templates (`templates:`)
 
-Templates are declared under the root `templates:` section of any blueprint YAML file:
+Templates are non-instantiated blueprint modules declared under the root `templates:` section of any YAML file in `plugins/CraftingBlueprints/blueprints/`:
 
 ```yaml
+# yaml-language-server: $schema=./blueprint.schema.json
 templates:
-  # Base visual styling for ancient scrolls
+  # Module 1: Visual styling for ancient magic scrolls
   visual_ancient_scroll:
     item:
       material: PAPER
       custom_model_data: 1001
       glowing: true
-    rendering:
-      background: "texture_parchment_aged"
-      tier: "RARE"
-      guilloche_border: true
+    map:
+      theme: parchment_aged
+      frame: runic
+      badge: crafting
 
-  # Economy & pricing module for Epic tier items
-  economy_epic_tier:
+  # Module 2: Visual styling for legendary forge relics
+  visual_legendary_relic:
+    item:
+      material: FILLED_MAP
+      glowing: true
+    map:
+      theme: forge
+      frame: rosette
+      badge: smithing
+      item_outline:
+        enabled: true
+        width: 2
+        color: "rainbow"
+
+  # Module 3: Economy pricing tier (Epic)
+  economy_tier_epic:
     price: 15000.0
-    sell_price: 3500.0
+    sell_price: 3750.0
     extra:
       tier: "EPIC"
       currency: "VAULT"
 
-  # Shared lore layout card with dynamic placeholders
-  lore_standard_card:
-    lore:
-      - "<gray>Schematic Target:</gray> <white>{blueprint_target}</white>"
-      - "<gray>Rarity Tier:</gray> <gold><bold>{tier}</bold></gold>"
-      - ""
-      - "<yellow>Buy Price:</yellow> <green>${price}</green>"
-      - "<yellow>Sell Value:</yellow> <yellow>${sell_price}</yellow>"
-      - ""
-      - "<dark_gray>Right-click in hand to unlock this recipe.</dark_gray>"
+  # Module 4: 3-Craft durability limit mixin
+  usage_three_crafts:
+    permanent: false
+    time: 0
+    uses: 3
+
+  # Module 5: Permanent unlimited usage mixin
+  usage_permanent:
+    permanent: true
+    time: 0
+    uses: 0
 ```
 
 ---
 
-## 2. Applying Templates to Blueprints
+## 2. Composing Templates on Blueprints
 
-To apply templates to a blueprint, add their names to the `templates:` list:
+To apply templates to a blueprint, list their IDs under `templates:` (or single string `template:`):
 
 ```yaml
+# yaml-language-server: $schema=./blueprint.schema.json
 singles:
-  ancient_netherite_axe:
-    blueprint: NETHERITE_AXE
-    name: "<gradient:#FF5555:#FFAA00><bold>Ancient Netherite Battleaxe</bold></gradient>"
-    templates:
-      - visual_ancient_scroll
-      - economy_epic_tier
-      - lore_standard_card
+  titan_greatsword:
+    blueprint: NETHERITE_SWORD
+    name: "<gradient:#FF0000:#FFAA00><bold>Titan Greatsword Blueprint</bold></gradient>"
 
-    # Specific overrides:
-    uses: 5 # Overrides the default unlimited uses
+    # Multi-template mixin composition
+    templates:
+      - visual_legendary_relic
+      - economy_tier_epic
+      - usage_three_crafts
+
+    # Specific local override (Blueprint overrides Template 3):
+    uses: 5
 ```
 
 ---
 
-## 3. Inheritance Rules
+## 3. Mixin Inheritance Precedence Rules
 
-When templates are applied, CraftingBlueprints resolves properties following strict precedence:
+When a blueprint inherits multiple templates, CraftingBlueprints resolves configurations using strict left-to-right cascading precedence:
 
-1. **Direct Blueprint Properties**: Any property defined explicitly on the blueprint itself (e.g. `uses: 5` or `price: 20000.0`) **always takes highest priority**.
-2. **Order of Templates**: If two templates define the same setting, the template listed **later** in the `templates:` list overrides the earlier one.
-3. **Placeholder Resolution**: Placeholders such as `{price}`, `{tier}`, and `{blueprint_target}` resolve dynamically *after* all templates have been merged.
+$$\text{Parent Folders } \texttt{default:} \;\longrightarrow\; \text{Folder } \texttt{default:} \;\longrightarrow\; \text{File } \texttt{file_default:} \;\longrightarrow\; \text{Template 1} \;\longrightarrow\; \text{Template 2} \;\longrightarrow\; \text{Blueprint Local Config}$$
+
+```
+                ┌──────────────────────────────────────────────┐
+                │        1. Inherited Folder Defaults          │
+                │        (From root blueprints/ downward)      │
+                └──────────────────────┬───────────────────────┘
+                                       ▼
+                ┌──────────────────────────────────────────────┐
+                │        2. Current Folder default:            │
+                └──────────────────────┬───────────────────────┘
+                                       ▼
+                ┌──────────────────────────────────────────────┐
+                │        3. Current File file_default:         │
+                └──────────────────────┬───────────────────────┘
+                                       ▼
+                ┌──────────────────────────────────────────────┐
+                │        4. Template 1 (First Mixin)           │
+                └──────────────────────┬───────────────────────┘
+                                       ▼
+                ┌──────────────────────────────────────────────┐
+                │        5. Template 2 (Second Mixin)          │
+                │            (Overrides Template 1)            │
+                └──────────────────────┬───────────────────────┘
+                                       ▼
+                ┌──────────────────────────────────────────────┐
+                │        6. Blueprint Local Configuration      │
+                │             (HIGHEST PRECEDENCE)             │
+                └──────────────────────┬───────────────────────┘
+                                       ▼
+                ┌──────────────────────────────────────────────┐
+                │            Final Merged Blueprint            │
+                └──────────────────────────────────────────────┘
+```
+
+### Precedence Invariants:
+1. **Blueprint Local Wins**: Any property defined explicitly on the blueprint itself (e.g. `uses: 5`, `price: 25000.0`, or local `name:`) **always takes absolute precedence** over all templates and defaults.
+2. **Template Order (Right Overrides Left)**: If `Template 1` defines `price: 10000.0` and `Template 2` defines `price: 15000.0`, `Template 2` wins because it is evaluated later in the list:
+   $$\text{Blueprint} > \text{Template 2} > \text{Template 1}$$
+3. **Dictionaries & Maps (`item:`, `map:`, `extra:`)**: Deep-merged recursively. If `Template 1` sets `item.material: FILLED_MAP` and `Template 2` sets `item.glowing: true`, the resulting item will have **both** `material: FILLED_MAP` and `glowing: true`.
+4. **Lists (`lore:`, `blueprints:`, `pool:`)**: Replaced entirely by the latest non-empty list declared in the cascade.
+5. **Scalars (`name:`, `price:`, `permanent:`, `uses:`, `time:`)**: Overwritten by the latest declared non-null scalar.
 
 ---
 
-## 4. Best Practices for Large Servers
+## 4. Hierarchical Lexical Scoping
 
-* Create a dedicated `templates.yml` file in `plugins/CraftingBlueprints/blueprints/` to house all your global templates.
-* Separate your templates by tier (e.g. `common_tier`, `rare_tier`, `legendary_tier`).
-* When balancing your economy, updating the price in a single template automatically updates hundreds of blueprints across your server instantly on `/cb reload blueprints`.
+Templates are not flat global variables; they follow downward directory scoping:
+
+1. **Global Templates (Root Scope)**:
+   Any template declared in a YAML file at the root of `plugins/CraftingBlueprints/blueprints/` (e.g. `blueprints/00_templates.yml`) is **globally visible** to all blueprints across all folders and subfolders.
+2. **Folder-Scoped Templates**:
+   A template declared in `blueprints/weapons/templates.yml` is visible **only** to files inside `blueprints/weapons/` and its subdirectories (e.g. `weapons/swords/`, `weapons/axes/`). It cannot be accessed by `armor/` or root files.
+3. **Template Shadowing (Nearest-Ancestor)**:
+   If a template named `tier_epic` is declared at both the root level and inside `weapons/`, blueprints in `weapons/` will inherit the local `weapons/tier_epic` definition.
+
+---
+
+## 5. Folder & File Defaults (`default:` & `file_default:`)
+
+To apply settings across an entire folder without repeatedly typing `templates:` on every item, use defaults:
+
+```yaml
+# Inside blueprints/weapons/swords.yml
+
+# File-Level Default: applies to all blueprints in this file
+file_default:
+  price: 7500.0
+  item:
+    material: FILLED_MAP
+    glowing: true
+  map:
+    theme: technical
+    frame: bracket
+
+singles:
+  iron_blade:
+    blueprint: IRON_SWORD
+    name: "<white>Iron Blade</white>"
+    # Automatically inherits price: 7500.0 and technical map theme!
+
+  diamond_blade:
+    blueprint: DIAMOND_SWORD
+    name: "<aqua>Diamond Blade</aqua>"
+    price: 15000.0 # Overrides the file default price
+```
+
+### Cutting Off Inheritance (`inherit: false`)
+If you have an isolated file (such as admin event items) and want to discard all inherited folder defaults:
+
+```yaml
+file_default:
+  inherit: false    # Discards all ancestor folder defaults; starts from clean slate
+  price: 0.0
+  extra:
+    category: "admin_only"
+```
