@@ -1,53 +1,90 @@
-# Quickstart Guide
+# Quickstart: Your First Blueprint in 3 Minutes
 
-This guide walks you through the core gameplay loops of CraftingBlueprints, from acquiring your first blueprint item to crafting custom gear.
-
----
-
-## 1. What is a Blueprint?
-
-A **Blueprint** represents technical knowledge required to craft an item. In CraftingBlueprints, blueprints exist in two primary forms:
-
-1. **Physical Blueprint (Map or Item)**: An in-game item (by default rendered on a Minecraft map with full schematics and instructions). Players can inspect it, trade it, store it in chests, or use it to learn the recipe.
-2. **Unlocked Recipe (Player Data)**: Once discovered or consumed, the player's account (UUID) permanently unlocks the ability to craft that recipe across the server network.
+Follow this quick tutorial to create, grant, and craft your very first custom blueprint.
 
 ---
 
-## 2. Testing Your First Blueprint
+## 1. Create a Test Blueprint File
 
-To quickly test the plugin in-game:
+Navigate to your server directory and create a new YAML file named `test_sword.yml` inside:
 
-1. Ensure you have the `craftingblueprints.give` permission or are server operator (`/op`).
-2. Give yourself one of the default example blueprints:
-   ```text
-   /cb give <your_name> default_sword 1
-   ```
-3. Open your inventory. You will receive a rendered technical blueprint showing the schematic, required ingredients, and target item.
-4. Open the blueprint catalog GUI:
-   ```text
-   /cb menu
-   ```
-   Or browse the registered list:
-   ```text
-   /cb item list
-   ```
+```text
+plugins/CraftingBlueprints/blueprints/test_sword.yml
+```
+
+Paste the following configuration:
+
+```yaml
+singles:
+  obsidian_blade:
+    # Target Bukkit recipe to unlock
+    blueprint: DIAMOND_SWORD
+    name: "<gradient:#9900EE:#FF0055><bold>Obsidian Blade Blueprint</bold></gradient>"
+
+    # Durability & limits (permanent = player keeps the recipe forever)
+    permanent: true
+    time: 0
+    uses: 0
+
+    # Physical item representation
+    item:
+      material: FILLED_MAP
+      glowing: true
+
+    # Visual map aesthetic
+    rendering:
+      background: "texture_dwarven_magma"
+      tier: "EPIC"
+      guilloche_border: true
+      show_ingredients: true
+
+    # Lore description
+    lore:
+      - "<gray>Schematic Target:</gray> <white>{blueprint_target}</white>"
+      - ""
+      - "<dark_gray>Right-click with this map in hand to unlock the recipe.</dark_gray>"
+```
 
 ---
 
-## 3. The Crafting Experience
+## 2. Hot-Reload the Blueprints
 
-Depending on your server configuration:
+Back in your server console or in-game as an operator, execute:
 
-* **Ownership Checking**: If `item-ownership: true` in `config.yml`, blueprints are bound to the player who unlocked them.
-* **Standard Crafting Table**: When placing the required ingredients in a crafting table, the plugin intercepts the recipe event:
-  * If the player **owns or holds** the required blueprint, the item crafts normally with full shift-click capacity support.
-  * If the player **does not own** the blueprint, crafting is blocked with an informative message.
-* **Crafter Block (1.21+)**: Redstone-driven Crafter blocks check the surrounding context or designated permissions before executing automated crafts.
+```text
+/cb reload blueprints
+```
+
+You will see confirmation that `test_sword.yml` was parsed and registered without needing a server restart.
+
+> [!TIP]
+> Before deploying complex YAML files on a live server, run `/cb validate` to check for typos or invalid material names.
 
 ---
 
-## 4. Next Steps
+## 3. Grant the Blueprint to Yourself
 
-* [Define custom blueprints in YAML](../blueprints/configuration.md)
-* [Explore aesthetic map backgrounds and guilloche frames](../blueprints/visuals.md)
-* [Review all commands and permissions](../features/commands-permissions.md)
+Give yourself the blueprint using the `/cb give` command:
+
+```text
+/cb give <your_player_name> obsidian_blade 1
+```
+
+Look at your inventory. You will receive a high-resolution map item rendering the Dwarven Magma background, the crafting ingredients matrix, and the Epic tier Guilloche border.
+
+---
+
+## 4. Learn and Craft
+
+1. **Hold the map** in your main hand and **right-click**. You will receive a message confirming that you have permanently unlocked the recipe.
+2. Open a standard crafting table.
+3. Place two diamonds and a stick into the matrix. The diamond sword will craft normally.
+4. If you have enabled [Recipe Restrictions](../mechanics/recipe-restrictions.md), any player without the blueprint who attempts to craft that item will be blocked with an informative message.
+
+---
+
+## What's Next?
+
+* [Understand all settings in config.yml](../configuration/config-guide.md)
+* [Explore advanced YAML properties and limits](../blueprints/basic-blueprint-yaml.md)
+* [Learn how to create limited-use scrolls (e.g. 5 crafts)](../blueprints/durability-and-uses.md)

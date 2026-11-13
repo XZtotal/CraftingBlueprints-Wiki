@@ -55,17 +55,41 @@ nav:
   - Home: index.md
   - Getting Started:
       - Installation & Requirements: getting-started/installation.md
-      - Quickstart Guide: getting-started/quickstart.md
-  - Blueprints & Creation:
-      - Blueprint YAML Schema: blueprints/configuration.md
-      - Templates & Inheritance: blueprints/templates.md
-      - Map Rendering & Aesthetics: blueprints/visuals.md
-  - Features & Configuration:
-      - Commands & Permissions: features/commands-permissions.md
-      - Whitelist & Recipe Restrictions: features/whitelist-mode.md
-      - Crafter Auto-Crafting (1.21): features/crafter.md
-      - Storage & Multi-Server Sync: features/storage.md
-  - Developer API:
-      - Integration & Events: developer/api.md
+      - Quickstart (First Blueprint): getting-started/quickstart.md
+  - General Configuration:
+      - Configuration Guide (config.yml): configuration/config-guide.md
+      - Messages, Colors & MiniMessage: configuration/messages-and-colors.md
+  - Blueprint Authoring:
+      - YAML Structure & Fields: blueprints/basic-blueprint-yaml.md
+      - Durability, Limits & Uses: blueprints/durability-and-uses.md
+      - Reusable Templates (Mixins): blueprints/templates-guide.md
+      - Blueprint Packs & Groups: blueprints/groups-and-packs.md
+      - Map Schematics & Visuals: blueprints/map-visuals.md
+      - Custom Items & CustomModelData: blueprints/custom-items.md
+  - In-Game Gameplay:
+      - Player Journey & Crafting: mechanics/player-experience.md
+      - Recipe Restrictions (Whitelist Mode): mechanics/recipe-restrictions.md
+      - Crafter Automation (1.21+): mechanics/crafter-support.md
+      - Potions & Smithing Upgrades: mechanics/potions-and-smithing.md
+  - In-Game Menus (GUIs):
+      - Player Progression Menu (/cb menu): gui/player-menu.md
+      - Blueprint Catalog (/cb item list): gui/catalog-menu.md
+      - In-Game Editor (/cb item edit): gui/in-game-editor.md
+  - Commands & Permissions:
+      - Command Reference: commands-permissions/commands-reference.md
+      - LuckPerms & Permissions Guide: commands-permissions/luckperms-guide.md
+  - Database & Networks:
+      - Standalone Setup (SQLite): storage/sqlite-setup.md
+      - Multi-Server Network (MySQL): storage/mysql-multiserver.md
+  - Presets & Scaffolder:
+      - Pre-Built Presets (/cb preset): presets/using-presets.md
+      - Auto-Scaffolder (/cb generate): presets/auto-scaffolder.md
+  - Tutorials & Cookbook:
+      - Gating Netherite Gear (SMP): tutorials/tutorial-smp-netherite.md
+      - Magic 3-Use Scrolls (RPG): tutorials/tutorial-rpg-scrolls.md
+      - Blueprint Economy Shop (Vault): tutorials/tutorial-vault-shop.md
+      - Crates & Quest Rewards: tutorials/tutorial-crates-and-quests.md
   - FAQ & Support:
-      - Troubleshooting: faq/troubleshooting.md
+      - Frequently Asked Questions: faq/faq.md
+      - Troubleshooting Common Issues: faq/troubleshooting.md
+      - Reporting Bugs & Getting Help: faq/getting-support.md
