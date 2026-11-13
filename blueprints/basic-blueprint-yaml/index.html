@@ -2299,11 +2299,13 @@
 </span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>    └── enchanted_books.yml    # Anvil enchantment blueprints
 </span></code></pre></div>
 <h3 id="1-deterministic-first-win-id-collision-rule">1. Deterministic First-Win ID Collision Rule</h3>
-<p>If two blueprints in different files (or within the same file) declare the identical lowercase ID (e.g. <code>starter_sword</code> in both <code>weapons/swords.yml</code> and <code>kits/beginner.yml</code>):
-* The <strong>first file encountered</strong> during alphabetical directory traversal wins and registers the blueprint.
-* The duplicate definition is ignored, and a warning is printed to the console:
+<p>If two blueprints in different files (or within the same file) declare the identical lowercase ID (e.g. <code>starter_sword</code> in both <code>weapons/swords.yml</code> and <code>kits/beginner.yml</code>):</p>
+<ul>
+<li>The <strong>first file encountered</strong> during alphabetical directory traversal wins and registers the blueprint.</li>
+<li>The duplicate definition is ignored, and a warning is printed to the console:
   <div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>[CraftingBlueprints] Duplicate blueprint ID 'starter_sword' in 'kits/beginner.yml' ignored: already defined in 'weapons/swords.yml'.
-</span></code></pre></div></p>
+</span></code></pre></div></li>
+</ul>
 <h3 id="2-atomic-fail-safe-on-syntax-errors">2. Atomic Fail-Safe on Syntax Errors</h3>
 <ul>
 <li>If any YAML file contains malformed syntax (unbalanced quotes, illegal tab indentation, broken blocks), the reload process triggers an <strong>immediate atomic abort</strong>.</li>
@@ -2319,11 +2321,13 @@
 <p>Always verify your files before or after editing:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>/cb validate
 </span></code></pre></div>
-<p>The validator performs comprehensive linting:
-* Verifies Bukkit material, potion, and enchantment identifiers against the active server version.
-* Validates hex colors and named color palette references.
-* Detects circular dependencies and unresolved template references.
-* Emits helpful "Did you mean?" suggestions for minor typos (e.g. <code>roseta</code> -&gt; <code>rosette</code>).</p>
+<p>The validator performs comprehensive linting:</p>
+<ul>
+<li>Verifies Bukkit material, potion, and enchantment identifiers against the active server version.</li>
+<li>Validates hex colors and named color palette references.</li>
+<li>Detects circular dependencies and unresolved template references.</li>
+<li>Emits helpful "Did you mean?" suggestions for minor typos (e.g. <code>roseta</code> -&gt; <code>rosette</code>).</li>
+</ul>
 
 
 

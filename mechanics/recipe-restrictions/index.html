@@ -2076,9 +2076,11 @@
 <div class="admonition warning">
 <p class="admonition-title">Are you testing with /op?</p>
 <p>If your testing account has server operator status (<code>/op</code>), CraftingBlueprints will allow you to craft, brew, and enchant restricted recipes freely, bypassing all locks.</p>
-<p>To properly test recipe restrictions as a normal player:
-1. Temporarily deop yourself: <code>/deop &lt;your_player_name&gt;</code>
-2. Alternatively, set <code>op-bypass: false</code> in <code>config.yml</code> and run <code>/cb reload config</code>.</p>
+<p>To properly test recipe restrictions as a normal player:</p>
+<ol>
+<li>Temporarily deop yourself: <code>/deop &lt;your_player_name&gt;</code></li>
+<li>Alternatively, set <code>op-bypass: false</code> in <code>config.yml</code> and run <code>/cb reload config</code>.</li>
+</ol>
 </div>
 <p>To grant bypass rights to staff members or builders without giving them full operator status, assign the LuckPerms permission:</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>lp<span class="w"> </span>group<span class="w"> </span>moderator<span class="w"> </span>permission<span class="w"> </span><span class="nb">set</span><span class="w"> </span>craftingblueprints.bypass.ownership<span class="w"> </span><span class="nb">true</span>
@@ -2086,11 +2088,13 @@
 <hr />
 <h2 id="modular-preset-restriction-aggregation">Modular Preset Restriction Aggregation</h2>
 <p>When you install pre-built gameplay presets using <code>/cb preset apply</code> (e.g. Hardcore SMP or RPG Tiers), the plugin <strong>never modifies your <code>config.yml</code></strong>.</p>
-<p>Instead:
-1. <code>config.yml</code> remains the sole authority for global operational mode (<code>restrictions.mode: "restricted-only"</code>).
-2. Presets deploy their required restricted items to <code>configs/presets/&lt;preset_id&gt;/restrictions.yml</code>.
-3. When the server boots or executes <code>/cb reload</code>, the engine automatically combines the restrictions from <code>config.yml</code> with all active preset restriction files.
-4. When you uninstall a preset (<code>/cb preset remove &lt;preset_id&gt;</code>), its restrictions are cleanly purged from memory upon reload with zero leftovers.</p>
+<p>Instead:</p>
+<ol>
+<li><code>config.yml</code> remains the sole authority for global operational mode (<code>restrictions.mode: "restricted-only"</code>).</li>
+<li>Presets deploy their required restricted items to <code>configs/presets/&lt;preset_id&gt;/restrictions.yml</code>.</li>
+<li>When the server boots or executes <code>/cb reload</code>, the engine automatically combines the restrictions from <code>config.yml</code> with all active preset restriction files.</li>
+<li>When you uninstall a preset (<code>/cb preset remove &lt;preset_id&gt;</code>), its restrictions are cleanly purged from memory upon reload with zero leftovers.</li>
+</ol>
 
 
 

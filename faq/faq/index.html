@@ -2007,36 +2007,44 @@
 <p>Direct, authoritative answers to the most common questions asked by server administrators and creators.</p>
 <hr />
 <h3 id="does-craftingblueprints-impact-server-tps-or-cause-lag-spikes">Does CraftingBlueprints impact server TPS or cause lag spikes?</h3>
-<p><strong>No.</strong> CraftingBlueprints is engineered from the ground up for high-concurrency production networks:
-* All database persistence, HikariCP connection queries, file watching, and map graphic dithering execute strictly on asynchronous background threads.
-* Pre-quantized <code>byte[16384]</code> palette buffers are blitted onto maps in <strong>&lt; 0.02 milliseconds</strong> per tick.
-* The main server thread is only consulted for instant Bukkit crafting event decisions, maintaining a solid 20.0 TPS.</p>
+<p><strong>No.</strong> CraftingBlueprints is engineered from the ground up for high-concurrency production networks:</p>
+<ul>
+<li>All database persistence, HikariCP connection queries, file watching, and map graphic dithering execute strictly on asynchronous background threads.</li>
+<li>Pre-quantized <code>byte[16384]</code> palette buffers are blitted onto maps in <strong>&lt; 0.02 milliseconds</strong> per tick.</li>
+<li>The main server thread is only consulted for instant Bukkit crafting event decisions, maintaining a solid 20.0 TPS.</li>
+</ul>
 <hr />
 <h3 id="can-players-exploit-shift-clicking-to-bypass-limited-use-blueprints">Can players exploit Shift-Clicking to bypass limited-use blueprints?</h3>
 <p><strong>No.</strong> CraftingBlueprints calculates the smallest constraint between available ingredients, free inventory space, and remaining blueprint uses. For example, a player with 2 uses remaining who shift-clicks a full stack of materials will craft <strong>exactly 2 items</strong>, decrement exactly 2 uses, and leave the remaining materials untouched in the crafting grid. Over-crafting is strictly prevented.</p>
 <hr />
 <h3 id="how-do-i-prevent-operators-from-bypassing-recipe-restrictions-during-testing">How do I prevent operators from bypassing recipe restrictions during testing?</h3>
-<p>By default, <code>op-bypass: true</code> in <code>config.yml</code> allows server operators (<code>/op</code>) to craft, brew, and enchant all restricted recipes freely.
-* To test restrictions properly as a normal player, either deop yourself: <code>/deop &lt;your_name&gt;</code>
-* Or temporarily set <code>op-bypass: false</code> in <code>config.yml</code> and execute <code>/cb reload config</code>.</p>
+<p>By default, <code>op-bypass: true</code> in <code>config.yml</code> allows server operators (<code>/op</code>) to craft, brew, and enchant all restricted recipes freely.</p>
+<ul>
+<li>To test restrictions properly as a normal player, either deop yourself: <code>/deop &lt;your_name&gt;</code></li>
+<li>Or temporarily set <code>op-bypass: false</code> in <code>config.yml</code> and execute <code>/cb reload config</code>.</li>
+</ul>
 <hr />
 <h3 id="what-happens-if-a-players-inventory-is-full-when-receiving-a-blueprint">What happens if a player's inventory is full when receiving a blueprint?</h3>
 <p>CraftingBlueprints enforces <strong>Physical Overflow Preservation</strong>. When running <code>/cb give</code>, if the player's inventory has no free slots, the remaining blueprint items automatically drop onto the ground directly at the player's feet (<code>world.dropItem(...)</code>). No items ever vanish into the void.</p>
 <hr />
 <h3 id="does-craftingblueprints-work-with-custom-items-from-itemsadder-oraxen-and-nexo">Does CraftingBlueprints work with custom items from ItemsAdder, Oraxen, and Nexo?</h3>
-<p><strong>Yes.</strong> The plugin features an extensible <code>ItemIdentifierProvider</code> SPI. You can gate custom weapons, armor, and tools using their native prefixes:
-* ItemsAdder: <code>ia:&lt;namespace:id&gt;</code>
-* Oraxen: <code>oraxen:&lt;id&gt;</code>
-* Nexo: <code>nexo:&lt;id&gt;</code>
-* MMOItems: <code>mmoitems:&lt;TYPE&gt;:&lt;ID&gt;</code>
-* Pure CustomModelData: <code>diamond_sword@custom_model_data:1042</code>
-See our <a href="../../blueprints/custom-items/">Custom Items Guide</a>.</p>
+<p><strong>Yes.</strong> The plugin features an extensible <code>ItemIdentifierProvider</code> SPI. You can gate custom weapons, armor, and tools using their native prefixes:</p>
+<ul>
+<li>ItemsAdder: <code>ia:&lt;namespace:id&gt;</code></li>
+<li>Oraxen: <code>oraxen:&lt;id&gt;</code></li>
+<li>Nexo: <code>nexo:&lt;id&gt;</code></li>
+<li>MMOItems: <code>mmoitems:&lt;TYPE&gt;:&lt;ID&gt;</code></li>
+<li>Pure CustomModelData: <code>diamond_sword@custom_model_data:1042</code>
+See our <a href="../../blueprints/custom-items/">Custom Items Guide</a>.</li>
+</ul>
 <hr />
 <h3 id="can-i-connect-multiple-servers-to-a-shared-mysql-database">Can I connect multiple servers to a shared MySQL database?</h3>
-<p><strong>Yes.</strong> CraftingBlueprints fully supports BungeeCord and Velocity networks. Follow the <strong>Golden Rule of Multi-Server Networks</strong>:
-* Designate <strong>ONE Primary Management Node</strong> (e.g. Hub) with <code>sync-from-files: true</code>.
-* Configure <strong>ALL Worker Nodes</strong> (Survival, Skyblock, Factions) with <code>sync-from-files: false</code>.
-When the master server reloads, it emits an atomic heartbeat ping (<code>cb_sync_signals</code>), and worker nodes automatically refresh their local cache within seconds. See our <a href="../../storage/mysql-multiserver/">Multi-Server Setup Guide</a>.</p>
+<p><strong>Yes.</strong> CraftingBlueprints fully supports BungeeCord and Velocity networks. Follow the <strong>Golden Rule of Multi-Server Networks</strong>:</p>
+<ul>
+<li>Designate <strong>ONE Primary Management Node</strong> (e.g. Hub) with <code>sync-from-files: true</code>.</li>
+<li>Configure <strong>ALL Worker Nodes</strong> (Survival, Skyblock, Factions) with <code>sync-from-files: false</code>.
+When the master server reloads, it emits an atomic heartbeat ping (<code>cb_sync_signals</code>), and worker nodes automatically refresh their local cache within seconds. See our <a href="../../storage/mysql-multiserver/">Multi-Server Setup Guide</a>.</li>
+</ul>
 <hr />
 <h3 id="how-do-i-prevent-minecraft-121-redstone-crafters-from-bypassing-blueprints">How do I prevent Minecraft 1.21 redstone Crafters from bypassing blueprints?</h3>
 <p>In <code>config.yml</code>, ensure <code>crafter.block-restricted: true</code> is enabled. When active, redstone-powered Crafter blocks attempting to produce restricted recipes are intercepted, emit dispenser fail clicks and smoke particles, and leave all raw materials safely in the grid.</p>

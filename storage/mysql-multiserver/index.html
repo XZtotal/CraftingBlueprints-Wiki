@@ -2059,27 +2059,31 @@
 <div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Primary Management Node (Hub / Admin)</label><label for="__tabbed_1_2">Worker Nodes (Survival, Skyblock, etc.)</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<p><div class="language-yaml highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nt">file-management</span><span class="p">:</span>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nt">file-management</span><span class="p">:</span>
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="c1"># ENABLED ONLY ON THIS SERVER:</span>
 </span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">  </span><span class="nt">sync-from-files</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 </span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">  </span><span class="nt">prune-deleted</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 </span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">  </span><span class="nt">auto-reload</span><span class="p">:</span>
 </span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">    </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 </span></code></pre></div>
-* This primary server reads your local YAML blueprints in <code>blueprints/</code> and synchronizes them into the shared MySQL database.
-* Whenever you edit files or run <code>/cb reload</code>, the primary node writes changes to the database and dispatches a network signal ping (<code>cb_sync_signals</code>).</p>
+<ul>
+<li>This primary server reads your local YAML blueprints in <code>blueprints/</code> and synchronizes them into the shared MySQL database.</li>
+<li>Whenever you edit files or run <code>/cb reload</code>, the primary node writes changes to the database and dispatches a network signal ping (<code>cb_sync_signals</code>).</li>
+</ul>
 </div>
 <div class="tabbed-block">
-<p><div class="language-yaml highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nt">file-management</span><span class="p">:</span>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nt">file-management</span><span class="p">:</span>
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="c1"># STRICTLY FALSE ON ALL GAME SERVERS:</span>
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">  </span><span class="nt">sync-from-files</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
 </span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">  </span><span class="nt">prune-deleted</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
 </span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">  </span><span class="nt">auto-reload</span><span class="p">:</span>
 </span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">    </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
 </span></code></pre></div>
-* Worker nodes load all registered blueprints directly from the shared MySQL database into memory.
-* They <strong>never</strong> overwrite the database with local files, ensuring 100% data consistency.
-* They automatically detect database signal pings from the primary node and refresh their memory cache in real time with zero manual commands.</p>
+<ul>
+<li>Worker nodes load all registered blueprints directly from the shared MySQL database into memory.</li>
+<li>They <strong>never</strong> overwrite the database with local files, ensuring 100% data consistency.</li>
+<li>They automatically detect database signal pings from the primary node and refresh their memory cache in real time with zero manual commands.</li>
+</ul>
 </div>
 </div>
 </div>
@@ -2118,18 +2122,24 @@
 </ol>
 <hr />
 <h2 id="5-cross-server-map-virtualization-pdc-relinking">5. Cross-Server Map Virtualization &amp; PDC Relinking</h2>
-<p>In cross-server networks, Minecraft map IDs frequently clash:
-* Map ID <code>104</code> on the Survival server might be a Diamond Sword blueprint.
-* Map ID <code>104</code> on the Lobby server might be the server spawn hub map.</p>
-<p>CraftingBlueprints solves this using <strong>Visual Key Re-Linking</strong>:
-* The physical map item stores the visual identity of the blueprint in its persistent data.
-* When a player switches between servers via BungeeCord or Velocity, the plugin automatically re-links the item to the local server's canonical Map ID as soon as the player joins or opens their inventory.
-* <strong>Guaranteed Outcome</strong>: The physical map always renders the correct blueprint artwork on every server without corrupting local maps or world files.</p>
+<p>In cross-server networks, Minecraft map IDs frequently clash:</p>
+<ul>
+<li>Map ID <code>104</code> on the Survival server might be a Diamond Sword blueprint.</li>
+<li>Map ID <code>104</code> on the Lobby server might be the server spawn hub map.</li>
+</ul>
+<p>CraftingBlueprints solves this using <strong>Visual Key Re-Linking</strong>:</p>
+<ul>
+<li>The physical map item stores the visual identity of the blueprint in its persistent data.</li>
+<li>When a player switches between servers via BungeeCord or Velocity, the plugin automatically re-links the item to the local server's canonical Map ID as soon as the player joins or opens their inventory.</li>
+<li><strong>Guaranteed Outcome</strong>: The physical map always renders the correct blueprint artwork on every server without corrupting local maps or world files.</li>
+</ul>
 <hr />
 <h2 id="6-player-lifecycle-quick-switch-protection">6. Player Lifecycle &amp; Quick-Switch Protection</h2>
-<p>When players switch rapidly between servers (e.g. entering portals or typing <code>/server survival</code>):
-* The plugin uses an atomic handoff reservation system that prevents Server B from loading player data before Server A finishes saving recent crafts to MySQL.
-* If a player rejoins within milliseconds, their active craft counts and timers sync cleanly, eliminating data rollbacks, item duplication, and lost progress.</p>
+<p>When players switch rapidly between servers (e.g. entering portals or typing <code>/server survival</code>):</p>
+<ul>
+<li>The plugin uses an atomic handoff reservation system that prevents Server B from loading player data before Server A finishes saving recent crafts to MySQL.</li>
+<li>If a player rejoins within milliseconds, their active craft counts and timers sync cleanly, eliminating data rollbacks, item duplication, and lost progress.</li>
+</ul>
 
 
 

@@ -2115,9 +2115,13 @@
 <h3 id="precedence-invariants">Precedence Invariants:</h3>
 <ol>
 <li><strong>Blueprint Local Wins</strong>: Any property defined explicitly on the blueprint itself (e.g. <code>uses: 5</code>, <code>price: 25000.0</code>, or local <code>name:</code>) <strong>always takes absolute precedence</strong> over all templates and defaults.</li>
-<li><strong>Template Order (Right Overrides Left)</strong>: If <code>Template 1</code> defines <code>price: 10000.0</code> and <code>Template 2</code> defines <code>price: 15000.0</code>, <code>Template 2</code> wins because it is evaluated later in the list:
-   <code>Blueprint Local &gt; Template 2 &gt; Template 1</code>.</li>
-<li><strong>Dictionaries &amp; Maps (<code>item:</code>, <code>map:</code>, <code>extra:</code>)</strong>: Deep-merged recursively. If <code>Template 1</code> sets <code>item.material: FILLED_MAP</code> and <code>Template 2</code> sets <code>item.glowing: true</code>, the resulting item will have <strong>both</strong> <code>material: FILLED_MAP</code> and <code>glowing: true</code>.</li>
+<li>
+<p><strong>Template Order (Right Overrides Left)</strong>: If <code>Template 1</code> defines <code>price: 10000.0</code> and <code>Template 2</code> defines <code>price: 15000.0</code>, <code>Template 2</code> wins because it is evaluated later in the list:
+   <code>Blueprint Local &gt; Template 2 &gt; Template 1</code>.</p>
+</li>
+<li>
+<p><strong>Dictionaries &amp; Maps (<code>item:</code>, <code>map:</code>, <code>extra:</code>)</strong>: Deep-merged recursively. If <code>Template 1</code> sets <code>item.material: FILLED_MAP</code> and <code>Template 2</code> sets <code>item.glowing: true</code>, the resulting item will have <strong>both</strong> <code>material: FILLED_MAP</code> and <code>glowing: true</code>.</p>
+</li>
 <li><strong>Lists (<code>lore:</code>, <code>blueprints:</code>, <code>pool:</code>)</strong>: Replaced entirely by the latest non-empty list declared in the cascade.</li>
 <li><strong>Scalars (<code>name:</code>, <code>price:</code>, <code>permanent:</code>, <code>uses:</code>, <code>time:</code>)</strong>: Overwritten by the latest declared non-null scalar.</li>
 </ol>
@@ -2125,12 +2129,18 @@
 <h2 id="4-hierarchical-lexical-scoping">4. Hierarchical Lexical Scoping</h2>
 <p>Templates are not flat global variables; they follow downward directory scoping:</p>
 <ol>
-<li><strong>Global Templates (Root Scope)</strong>:
-   Any template declared in a YAML file at the root of <code>plugins/CraftingBlueprints/blueprints/</code> (e.g. <code>blueprints/00_templates.yml</code>) is <strong>globally visible</strong> to all blueprints across all folders and subfolders.</li>
-<li><strong>Folder-Scoped Templates</strong>:
-   A template declared in <code>blueprints/weapons/templates.yml</code> is visible <strong>only</strong> to files inside <code>blueprints/weapons/</code> and its subdirectories (e.g. <code>weapons/swords/</code>, <code>weapons/axes/</code>). It cannot be accessed by <code>armor/</code> or root files.</li>
-<li><strong>Template Shadowing (Nearest-Ancestor)</strong>:
-   If a template named <code>tier_epic</code> is declared at both the root level and inside <code>weapons/</code>, blueprints in <code>weapons/</code> will inherit the local <code>weapons/tier_epic</code> definition.</li>
+<li>
+<p><strong>Global Templates (Root Scope)</strong>:
+   Any template declared in a YAML file at the root of <code>plugins/CraftingBlueprints/blueprints/</code> (e.g. <code>blueprints/00_templates.yml</code>) is <strong>globally visible</strong> to all blueprints across all folders and subfolders.</p>
+</li>
+<li>
+<p><strong>Folder-Scoped Templates</strong>:
+   A template declared in <code>blueprints/weapons/templates.yml</code> is visible <strong>only</strong> to files inside <code>blueprints/weapons/</code> and its subdirectories (e.g. <code>weapons/swords/</code>, <code>weapons/axes/</code>). It cannot be accessed by <code>armor/</code> or root files.</p>
+</li>
+<li>
+<p><strong>Template Shadowing (Nearest-Ancestor)</strong>:
+   If a template named <code>tier_epic</code> is declared at both the root level and inside <code>weapons/</code>, blueprints in <code>weapons/</code> will inherit the local <code>weapons/tier_epic</code> definition.</p>
+</li>
 </ol>
 <hr />
 <h2 id="5-folder-file-defaults-default-file_default">5. Folder &amp; File Defaults (<code>default:</code> &amp; <code>file_default:</code>)</h2>

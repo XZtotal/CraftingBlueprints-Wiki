@@ -2148,21 +2148,27 @@
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>[CraftingBlueprints] Command rejected: This server is configured as a Worker Node (sync-from-files: false).
 </span></code></pre></div></p>
 <h3 id="cause-solution">Cause &amp; Solution:</h3>
-<p>To prevent database divergence and split-brain conflicts across multi-server MySQL networks, all file generation and preset deployments <strong>must be executed on your designated Primary Management Node</strong> (<code>sync-from-files: true</code>).
-* Connect to your Hub or Lobby server and execute the command there.
-* The master server will update the shared database and broadcast an atomic sync signal (<code>cb_sync_signals</code>) to all worker nodes automatically.</p>
+<p>To prevent database divergence and split-brain conflicts across multi-server MySQL networks, all file generation and preset deployments <strong>must be executed on your designated Primary Management Node</strong> (<code>sync-from-files: true</code>).</p>
+<ul>
+<li>Connect to your Hub or Lobby server and execute the command there.</li>
+<li>The master server will update the shared database and broadcast an atomic sync signal (<code>cb_sync_signals</code>) to all worker nodes automatically.</li>
+</ul>
 <hr />
 <h2 id="5-issue-minecraft-121-crafters-continue-auto-crafting-locked-recipes">5. Issue: "Minecraft 1.21 Crafters continue auto-crafting locked recipes"</h2>
 <p>If automated redstone Crafter blocks are mass-producing restricted recipes:</p>
 <h3 id="diagnostic-checklist">Diagnostic Checklist:</h3>
 <ol>
 <li>Open <code>plugins/CraftingBlueprints/config.yml</code>.</li>
-<li>Verify that the Crafter interception block is configured:
+<li>
+<p>Verify that the Crafter interception block is configured:
    <div class="language-yaml highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nt">crafter</span><span class="p">:</span>
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="nt">block-restricted</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 </span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">  </span><span class="nt">fail-effect</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-</span></code></pre></div></li>
-<li>Run <code>/cb reload config</code>.</li>
+</span></code></pre></div></p>
+</li>
+<li>
+<p>Run <code>/cb reload config</code>.</p>
+</li>
 <li>Ensure the item being produced matches your <code>restrictions.restricted-items</code> list.</li>
 </ol>
 

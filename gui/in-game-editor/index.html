@@ -2133,15 +2133,23 @@
 </ul>
 <hr />
 <h2 id="automatic-exporter-rolling-backups">Automatic Exporter &amp; Rolling Backups</h2>
-<p>Whenever in-game blueprints are saved:
-1. The updated definition is persisted to the database.
-2. The export engine automatically dumps all in-game blueprints into:
+<p>Whenever in-game blueprints are saved:</p>
+<ol>
+<li>The updated definition is persisted to the database.</li>
+<li>
+<p>The export engine automatically dumps all in-game blueprints into:
    <div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>plugins/CraftingBlueprints/exports/manual_blueprints.yml
-</span></code></pre></div>
-3. Periodic rolling backups are created automatically in:
+</span></code></pre></div></p>
+</li>
+<li>
+<p>Periodic rolling backups are created automatically in:
    <div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>plugins/CraftingBlueprints/exports/backups/manual_blueprints_&lt;timestamp&gt;.yml
-</span></code></pre></div>
-4. If you later declare the same blueprint ID in a file inside <code>blueprints/</code>, the plugin adopts the YAML definition, sets <code>is_file_managed: true</code>, and removes it from the manual export dump.</p>
+</span></code></pre></div></p>
+</li>
+<li>
+<p>If you later declare the same blueprint ID in a file inside <code>blueprints/</code>, the plugin adopts the YAML definition, sets <code>is_file_managed: true</code>, and removes it from the manual export dump.</p>
+</li>
+</ol>
 
 
 

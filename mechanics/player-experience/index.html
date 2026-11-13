@@ -2069,12 +2069,18 @@
 <p>When a player receives a blueprint map (<code>Material.FILLED_MAP</code>):</p>
 <ol>
 <li><strong>Visual Drafting Inspection</strong>: Holding the map in either hand renders a photorealistic 128x128 pixel drafting schematic featuring the workstation badge, the central item sprite, corner Guilloché rosettes, and remaining craft counts.</li>
-<li><strong>Right-Click Memorization</strong>: The player holds the blueprint in their main hand and <strong>Right-Clicks</strong>:<ul>
+<li>
+<p><strong>Right-Click Memorization</strong>: The player holds the blueprint in their main hand and <strong>Right-Clicks</strong>:</p>
+<ul>
 <li>A chime sound plays (<code>Sound.ENTITY_PLAYER_LEVELUP</code>) and enchanting particles appear.</li>
-<li>A localized chat notification confirms the unlock:
+<li>
+<p>A localized chat notification confirms the unlock:
   <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>[CraftingBlueprints] You have unlocked the blueprint for Obsidian Blade Blueprint!
-</span></code></pre></div></li>
-<li>The physical map item is consumed from the player's hand (unless configured otherwise).</li>
+</span></code></pre></div></p>
+</li>
+<li>
+<p>The physical map item is consumed from the player's hand (unless configured otherwise).</p>
+</li>
 <li>The recipe is registered permanently or temporally into the player's account database profile.</li>
 </ul>
 </li>
@@ -2089,17 +2095,29 @@
 <li>If the blueprint has limited uses (e.g. 5 crafts), each crafted item decrements the counter in real time. When the counter reaches zero, the recipe locks automatically.</li>
 </ul>
 <h3 id="scenario-b-the-recipe-is-restricted-locked">Scenario B: The Recipe is Restricted &amp; Locked</h3>
-<p>If the player arranges ingredients for a locked recipe without owning the blueprint:
-* <strong>Result Slot Preview</strong>: Governed by <code>ux.prepare-preview</code> in <code>config.yml</code>:
-    * <code>HIDE_RESULT</code>: The crafting table output slot remains completely empty.
-    * <code>LOCKED_OVERLAY</code>: Keeps the output item icon, but appends red warning lore: <code>&lt;red&gt;&lt;bold&gt;Recipe Locked&lt;/bold&gt;&lt;/red&gt;</code>.
-    * <code>CUSTOM_ITEM</code>: Renders a custom indicator (e.g. a red Barrier icon).
-* <strong>Click Interception</strong>: If the player attempts to click the locked output slot:
-    * The craft is instantly cancelled.
-    * An informative message is sent to chat explaining which blueprint is missing:
-      <div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>[CraftingBlueprints] You must unlock the Ancient Netherite Battleaxe blueprint before crafting this item!
-</span></code></pre></div>
-    * Ingredients remain completely safe inside the 3x3 grid without duplication, corruption, or loss.</p>
+<p>If the player arranges ingredients for a locked recipe without owning the blueprint:</p>
+<ul>
+<li><strong>Result Slot Preview</strong>: Governed by <code>ux.prepare-preview</code> in <code>config.yml</code>:<ul>
+<li><code>HIDE_RESULT</code>: The crafting table output slot remains completely empty.</li>
+<li><code>LOCKED_OVERLAY</code>: Keeps the output item icon, but appends red warning lore: <code>&lt;red&gt;&lt;bold&gt;Recipe Locked&lt;/bold&gt;&lt;/red&gt;</code>.</li>
+<li><code>CUSTOM_ITEM</code>: Renders a custom indicator (e.g. a red Barrier icon).</li>
+</ul>
+</li>
+<li>
+<p><strong>Click Interception</strong>: If the player attempts to click the locked output slot:</p>
+<ul>
+<li>The craft is instantly cancelled.</li>
+<li>
+<p>An informative message is sent to chat explaining which blueprint is missing:
+  <div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>[CraftingBlueprints] You must unlock the Ancient Netherite Battleaxe blueprint before crafting this item!
+</span></code></pre></div></p>
+</li>
+<li>
+<p>Ingredients remain completely safe inside the 3x3 grid without duplication, corruption, or loss.</p>
+</li>
+</ul>
+</li>
+</ul>
 <hr />
 <h2 id="4-vanilla-recipe-book-integration">4. Vanilla Recipe Book Integration</h2>
 <p>Under <code>ux.vanilla-recipe-book</code> in <code>config.yml</code>:</p>
@@ -2136,10 +2154,12 @@
 <p>Players can inspect any blueprint recipe directly in-game without opening web browsers:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>/cb info &lt;blueprint_id&gt;
 </span></code></pre></div>
-<p>This opens an interactive inspection menu displaying:
-* The 3x3 crafting ingredient matrix or smithing ingredients.
-* Active durability mode (Permanent, Countdown Timer, or Remaining Uses).
-* Rarity tier, catalog purchase price, and item lore.</p>
+<p>This opens an interactive inspection menu displaying:</p>
+<ul>
+<li>The 3x3 crafting ingredient matrix or smithing ingredients.</li>
+<li>Active durability mode (Permanent, Countdown Timer, or Remaining Uses).</li>
+<li>Rarity tier, catalog purchase price, and item lore.</li>
+</ul>
 
 
 

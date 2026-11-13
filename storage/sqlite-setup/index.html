@@ -1995,10 +1995,12 @@
 </span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>    └── CraftingBlueprints/
 </span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>        └── crafting_blueprints.db
 </span></code></pre></div>
-<p>This database maintains:
-* <strong><code>cb_player_data</code></strong>: All unlocked blueprints, remaining craft usage counts, and expiration timestamps per player UUID.
-* <strong><code>ITEM_BLUEPRINTS</code></strong>: Blueprints created in-game via GUI or commands (<code>is_file_managed: false</code>).
-* <strong><code>cb_schema_version</code></strong>: Automated schema migration version markers.</p>
+<p>This database maintains:</p>
+<ul>
+<li><strong><code>cb_player_data</code></strong>: All unlocked blueprints, remaining craft usage counts, and expiration timestamps per player UUID.</li>
+<li><strong><code>ITEM_BLUEPRINTS</code></strong>: Blueprints created in-game via GUI or commands (<code>is_file_managed: false</code>).</li>
+<li><strong><code>cb_schema_version</code></strong>: Automated schema migration version markers.</li>
+</ul>
 <hr />
 <h2 id="performance-concurrency-architecture">Performance &amp; Concurrency Architecture</h2>
 <ul>
@@ -2017,10 +2019,14 @@
 </ol>
 <h3 id="restoring-from-backup">Restoring from Backup</h3>
 <ol>
-<li>Stop the server safely:
+<li>
+<p>Stop the server safely:
    <div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>/stop
-</span></code></pre></div></li>
-<li>Replace <code>plugins/CraftingBlueprints/crafting_blueprints.db</code> with your backup copy.</li>
+</span></code></pre></div></p>
+</li>
+<li>
+<p>Replace <code>plugins/CraftingBlueprints/crafting_blueprints.db</code> with your backup copy.</p>
+</li>
 <li>Start the server. The plugin validates the database integrity upon boot and resumes operations immediately.</li>
 </ol>
 

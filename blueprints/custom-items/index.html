@@ -2226,10 +2226,14 @@
 </span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">  </span><span class="nt">fallback-to-vanilla</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 </span></code></pre></div>
 <h3 id="why-is-this-crucial-for-server-balance">Why is this crucial for server balance?</h3>
-<p>Imagine your server has 50 custom swords registered in ItemsAdder that use <code>DIAMOND_SWORD</code> as their base material.
-* If an administrator creates an explicit blueprint for <code>ia:rpgweapons:flame_blade</code>, but forgets to configure blueprints for the other 49 custom swords:
-    * With <code>fallback-to-vanilla: true</code>: The plugin checks if the base vanilla material (<code>diamond_sword</code>) is restricted in Whitelist Mode. Since it is, the unconfigured custom swords <strong>safely fall back to requiring the base Diamond Sword blueprint</strong>. Players cannot bypass your progression!
-    * With <code>fallback-to-vanilla: false</code>: Unconfigured custom swords would be freely craftable by anyone with raw ingredients.</p>
+<p>Imagine your server has 50 custom swords registered in ItemsAdder that use <code>DIAMOND_SWORD</code> as their base material.</p>
+<ul>
+<li>If an administrator creates an explicit blueprint for <code>ia:rpgweapons:flame_blade</code>, but forgets to configure blueprints for the other 49 custom swords:<ul>
+<li>With <code>fallback-to-vanilla: true</code>: The plugin checks if the base vanilla material (<code>diamond_sword</code>) is restricted in Whitelist Mode. Since it is, the unconfigured custom swords <strong>safely fall back to requiring the base Diamond Sword blueprint</strong>. Players cannot bypass your progression!</li>
+<li>With <code>fallback-to-vanilla: false</code>: Unconfigured custom swords would be freely craftable by anyone with raw ingredients.</li>
+</ul>
+</li>
+</ul>
 <hr />
 <h2 id="6-extensible-metadata-extra">6. Extensible Metadata (<code>extra</code>)</h2>
 <p>The <code>extra:</code> mapping allows you to attach custom key-value pairs to any blueprint. This data is preserved in memory and can be queried by external plugins, Skript, or Denizen:</p>
