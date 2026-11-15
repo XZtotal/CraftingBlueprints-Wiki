@@ -65,3 +65,21 @@ This repository serves as the official issue tracker for CraftingBlueprints:
 
 * **[Submit a Bug Report](https://github.com/XZtotal/CraftingBlueprints-Wiki/issues/new?template=bug_report.yml)**
 * **[Submit a Feature Request](https://github.com/XZtotal/CraftingBlueprints-Wiki/issues/new?template=feature_request.yml)**
+
+---
+
+## 🛠️ Local Development & Preview
+
+This documentation site is powered by **[Zensical](https://zensical.org/)** (the modern Rust-powered successor to Material for MkDocs).
+
+To preview changes locally:
+```bash
+# 1. Install Zensical
+pip install zensical
+
+# 2. Start local hot-reloading development server
+zensical serve
+
+# 3. Or perform a clean static production build
+zensical build --clean
+```
