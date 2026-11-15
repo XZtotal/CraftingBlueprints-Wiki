@@ -30,7 +30,7 @@ singles:
       badge: crafting
 
     lore:
-      - "<gray>Target Equipment:</gray> <white>{target_item}</white>"
+      - "<gray>Target Equipment:</gray> <white>{target}</white>"
       - "<gray>Duration:</gray> <green>Permanent</green>"
       - ""
       - "<dark_gray>Right-click to permanently memorize this recipe.</dark_gray>"
@@ -71,7 +71,7 @@ singles:
         text: "3x"
 
     lore:
-      - "<gray>Target Equipment:</gray> <white>{target_item}</white>"
+      - "<gray>Target Equipment:</gray> <white>{target}</white>"
       - "<gray>Remaining Forges:</gray> <yellow><bold>{uses} / 3 crafts</bold></yellow>"
       - ""
       - "<yellow>Allows forging up to 3 blades before dissolving.</yellow>"
@@ -84,11 +84,15 @@ singles:
 
 ---
 
-## 3. Time-Limited Blueprints (`time: 86400` or `time: 24h`)
+## 3. Time-Limited Blueprints (`time: 24h` or `time: 86400s`)
 
 The player unlocks the recipe for a temporary duration measured from the exact moment of unlocking. While active, the player can craft unlimited items. When the timer expires, the recipe is automatically revoked:
 
-=== "Raw Integer Seconds"
+> [!NOTE]
+> **Time Duration Formats**  
+> String durations with units (`s`, `m`, `h`, `d`) are strongly recommended (e.g. `time: 24h`, `time: 7d`, `time: 86400s`). Raw integers without units are evaluated in **milliseconds** (e.g. `86400000` = 24 hours; setting `time: 86400` as a raw number would expire in only 86.4 seconds).
+
+=== "Human Duration String (Recommended)"
     ```yaml
     # yaml-language-server: $schema=./blueprint.schema.json
     singles:
@@ -96,9 +100,9 @@ The player unlocks the recipe for a temporary duration measured from the exact m
         blueprint: CROSSBOW
         name: "<gold><bold>Weekend Tournament Crossbow License</bold></gold>"
 
-        # Exactly 24 hours (86,400 seconds)
+        # Exactly 24 hours
         permanent: false
-        time: 86400
+        time: "24h"
         uses: 0
 
         item:
@@ -115,9 +119,23 @@ The player unlocks the recipe for a temporary duration measured from the exact m
             text: "24h"
 
         lore:
-          - "<gray>Target Equipment:</gray> <white>{target_item}</white>"
+          - "<gray>Target Equipment:</gray> <white>{target}</white>"
           - "<gray>License Duration:</gray> <aqua>{time}</aqua>"
           - "<gray>Craft Count:</gray> <green>Unlimited</green>"
+    ```
+
+=== "Raw Integer Milliseconds"
+    ```yaml
+    # yaml-language-server: $schema=./blueprint.schema.json
+    singles:
+      weekend_crossbow_pass:
+        blueprint: CROSSBOW
+        name: "<gold><bold>Weekend Tournament Crossbow License</bold></gold>"
+
+        # Exactly 24 hours in milliseconds (86,400,000 ms)
+        permanent: false
+        time: 86400000
+        uses: 0
     ```
 
 === "Human Duration String"
@@ -184,7 +202,7 @@ singles:
       badge: anvil
 
     lore:
-      - "<gray>Target Equipment:</gray> <white>{target_item}</white>"
+      - "<gray>Target Equipment:</gray> <white>{target}</white>"
       - "<gray>Remaining Forges:</gray> <yellow>{uses} / 5</yellow>"
       - "<gray>Time Limit:</gray> <aqua>{time}</aqua>"
       - ""
@@ -225,8 +243,11 @@ Running `/cb info <id>` opens an inspection card displaying the recipe's durabil
 Staff members with `craftingblueprints.item.list` can right-click any blueprint in the catalog to open its technical status preview (`SingleInfoMenu`), displaying permanence (Emerald/Redstone block), uses (Anvil), and remaining time (Clock).
 
 ### PlaceholderAPI Integration
-Use these placeholders in scoreboards, tablists, or custom menus:
+Use these placeholders in scoreboards, tablists, or custom menus (using the canonical colon delimiter to support IDs with underscores):
 
-* `%craftingblueprints_uses_<id>%`: Returns remaining crafts (or `unlimited`).
-* `%craftingblueprints_time_<id>%`: Formatted remaining time (e.g. `23h 12m`).
-* `%craftingblueprints_is_unlocked_<id>%`: Returns `true` or `false`.
+* `%craftingblueprints_uses_left:<id>%`: Returns remaining crafts (or `unlimited`).
+* `%craftingblueprints_time_left:<id>%`: Formatted remaining time (e.g. `23h 12m`).
+* `%craftingblueprints_has:<id>%`: Returns `true` or `false`.
+* `%craftingblueprints_is_permanent:<id>%`: Returns `true` or `false`.
+* `%craftingblueprints_progress_bar:<id>%`: Visual text progress bar of remaining uses.
+* `%craftingblueprints_max_uses:<id>%`: Total maximum uses configured on the blueprint.

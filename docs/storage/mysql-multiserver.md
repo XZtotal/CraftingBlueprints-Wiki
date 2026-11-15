@@ -21,7 +21,7 @@ This guarantees that when a player unlocks a blueprint on one server, their reci
             ┌─────────────────┐     ┌─────────────────┐     ┌─────────────────┐
             │  Lobby / Admin  │     │   Survival-01   │     │    Skyblock     │
             │ (Primary Node)  │     │  (Worker Node)  │     │  (Worker Node)  │
-            │sync-from-files: │     │sync-from-files: │     │sync-from-files: │
+            │   is-master:    │     │   is-master:    │     │   is-master:    │
             │      TRUE       │     │     FALSE       │     │     FALSE       │
             └─────────────────┘     └─────────────────┘     └─────────────────┘
 ```
@@ -30,18 +30,22 @@ This guarantees that when a player unlocks a blueprint on one server, their reci
 
 ## 2. The Golden Rule of Multi-Server Networks
 
-!!! caution "The Golden Rule: One Primary Node Only"
-    To prevent database divergence, split-brain conflicts, and race conditions, you must designate **strictly ONE Primary Management Node** on your entire network (typically your Hub, Lobby, or Staff server).
-    
-    All other sub-servers (Survival, Skyblock, Factions, Prison) must operate as **Worker Nodes**.
+> [!CAUTION]
+> **The Golden Rule: One Primary Node Only**
+> To prevent database divergence, split-brain conflicts, and race conditions, you must designate **strictly ONE Primary Management Node** on your entire network (typically your Hub, Lobby, or Staff server).
+> 
+> All other sub-servers (Survival, Skyblock, Factions, Prison) must operate as **Worker Nodes**.
 
 ### Configuration Comparison:
 
 === "Primary Management Node (Hub / Admin)"
     ```yaml
+    # Primary node flag:
+    is-master: true
+
     file-management:
-      # ENABLED ONLY ON THIS SERVER:
-      sync-from-files: true
+      directory: "blueprints"
+      presets-directory: "presets"
       prune-deleted: true
       auto-reload:
         enabled: true
@@ -52,9 +56,12 @@ This guarantees that when a player unlocks a blueprint on one server, their reci
 
 === "Worker Nodes (Survival, Skyblock, etc.)"
     ```yaml
+    # Worker node flag:
+    is-master: false
+
     file-management:
-      # STRICTLY FALSE ON ALL GAME SERVERS:
-      sync-from-files: false
+      directory: "blueprints"
+      presets-directory: "presets"
       prune-deleted: false
       auto-reload:
         enabled: false

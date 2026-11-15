@@ -103,25 +103,59 @@ singles:
 
 ---
 
-## 3. Pure Vanilla CustomModelData Matching
+## 3. Pure Vanilla CustomModelData & PDC Matching
 
-If your server uses custom items via vanilla datapacks or simple CustomModelData without a heavy plugin framework:
+If your server uses custom items via vanilla datapacks, resource packs, or simple NBT/PDC tags without a heavy plugin framework, CraftingBlueprints provides two native identifier formats:
+
+### A. CustomModelData (`cmd:<material>:<id>` or `@custom_model_data:`)
+Matches by base Material and exact CustomModelData integer:
 
 ```yaml
 # yaml-language-server: $schema=./blueprint.schema.json
 singles:
   obsidian_scythe_blueprint:
-    # Target material with CustomModelData selector
-    blueprint: "diamond_hoe@custom_model_data:1042"
+    # Matches Material.DIAMOND_HOE with CustomModelData 1042
+    blueprint: "cmd:DIAMOND_HOE:1042"
     name: "<dark_purple><bold>Obsidian Scythe Blueprint</bold></dark_purple>"
     permanent: true
 ```
+*(Legacy alias `diamond_hoe@custom_model_data:1042` is also fully supported).*
 
-CraftingBlueprints verifies that the crafted item matches both `Material.DIAMOND_HOE` and `CustomModelData == 1042`. Standard diamond hoes crafted by players remain unaffected.
+### B. PersistentDataContainer (`pdc:<namespace>:<key>[=<value>]`)
+Inspects the item's native Paper PersistentDataContainer:
+
+```yaml
+singles:
+  ancient_relic_blade:
+    # Matches items with PDC key 'customcrafting:id' set to 'relic_blade'
+    blueprint: "pdc:customcrafting:id=relic_blade"
+    name: "<yellow><bold>Relic Blade Blueprint</bold></yellow>"
+    permanent: true
+```
+
+### C. Exclusion & Negation Operator (`!`)
+Prefix any pattern with `!` to exclude specific items from matching a broader group rule:
+```yaml
+blueprints:
+  - "iron_.*"
+  - "!ia:free_starter:iron_dagger"   # Excludes starter dagger from being restricted
+```
 
 ---
 
-## 4. Gating Custom Datapack Recipes (`recipe:`)
+## 4. In-Game Identifier Inspector (`/cb inspect`)
+
+Unsure which identifier CraftingBlueprints sees for a custom item from ItemsAdder, Oraxen, Nexo, or a custom datapack?
+
+Hold the item in your main hand and execute:
+```text
+/cb inspect
+```
+The plugin inspects the item stack through all registered SPI providers and prints the exact string representation recognized by the blueprint engine (e.g. `ia:customweapons:frost_axe` or `cmd:DIAMOND_SWORD:5020`). You can immediately copy and paste this into your blueprint YAML!
+
+---
+
+## 5. Gating Custom Datapack Recipes (`recipe:`)
 
 To gate custom crafting table recipes registered via vanilla datapacks or custom crafting engines:
 

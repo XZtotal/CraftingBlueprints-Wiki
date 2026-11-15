@@ -10,13 +10,14 @@ CraftingBlueprints is engineered specifically for modern Paper-based server soft
 
 | Requirement | Supported Versions | Operational Notes |
 | :--- | :--- | :--- |
-| **Server Engine** | **Paper**, **Purpur** (1.18.2 – 1.21.x) | Modern Paper forks are required. Legacy CraftBukkit and standalone Spigot are not supported due to missing Adventure and PDC APIs. |
-| **Java Runtime** | **Java 17** or **Java 21+** | Minecraft 1.18.2–1.20.4 runs on Java 17 or 21. Minecraft 1.20.5+ and 1.21+ strictly require **Java 21** minimum. |
+| **Server Engine** | **Paper**, **Purpur** (1.18.2 – 1.21.x, 26.x+) | Modern Paper forks are required. Legacy CraftBukkit and standalone Spigot are not supported due to missing Adventure and PDC APIs. Includes forward compatibility for Minecraft 26.x year-based releases. |
+| **Java Runtime** | **Java 17**, **Java 21**, or **Java 25+** | Minecraft 1.18.2–1.20.4 runs on Java 17 or 21. Minecraft 1.20.5+ and 1.21+ require **Java 21**. Paper 26.x+ runs on **Java 25**. |
 | **Database** | **SQLite** (Default) or **MySQL 8.0+ / MariaDB 10.5+** | Standalone servers run on embedded SQLite with zero setup. Multi-server networks connect to MySQL via built-in HikariCP connection pooling. |
 | **Network Proxies** | Velocity, BungeeCord, Waterfall | Full support for cross-server networks via shared MySQL and real-time heartbeat sync signals. |
 
-!!! note "Automated Version Abstraction Layer"
-    CraftingBlueprints uses an internal Version Abstraction Layer. You do not need separate builds for 1.18.2, 1.20.4, or 1.21.x. Advanced features (such as 1.21 Crafter block interception or 1.20 3-slot Smithing Tables) activate automatically when running on compatible server versions and remain safely dormant on older versions.
+> [!NOTE]
+> **Automated Version Abstraction Layer**  
+> CraftingBlueprints uses an internal Version Abstraction Layer. You do not need separate builds for 1.18.2, 1.20.4, 1.21.x, or 26.x+. Advanced features (such as 1.21 Crafter block interception or 1.20 3-slot Smithing Tables) activate automatically when running on compatible server versions and remain safely dormant on older versions.
 
 ---
 
@@ -33,8 +34,10 @@ CraftingBlueprints is engineered specifically for modern Paper-based server soft
        ```
 
     3. **Start the Server**: Start the server to generate default configuration files, bundled templates, and sample blueprints.
-       !!! warning "Avoid /reload"
-           Never use the Bukkit `/reload` or `/reload confirm` command when installing or updating plugins. A clean restart ensures that database connection pools, file watchers, and version adapters initialize safely.
+       
+       > [!WARNING]
+       > **Avoid /reload**  
+       > Never use the Bukkit `/reload` or `/reload confirm` command when installing or updating plugins. A clean restart ensures that database connection pools, file watchers, and version adapters initialize safely.
     
     4. **Verify Boot Output**: Review your server console for the startup diagnostics banner:
        ```text
@@ -52,14 +55,12 @@ CraftingBlueprints is engineered specifically for modern Paper-based server soft
     3. **Enforce the Golden Rule**:
         * Designate **one Primary Management Server** (e.g., Hub/Admin) with:
           ```yaml
-          file-management:
-            sync-from-files: true
+          is-master: true
           ```
 
         * Configure **all Worker Servers** (Survival, Skyblock, etc.) with:
           ```yaml
-          file-management:
-            sync-from-files: false
+          is-master: false
           ```
 
     4. **Start Servers & Confirm Sync**: Start the primary server first, then the worker nodes. Review our [Multi-Server Setup Guide](../storage/mysql-multiserver.md) for network-specific connection pooling advice.
@@ -79,7 +80,7 @@ This diagnostic report provides immediate insight into your deployment:
 * **Engine & Version Adapter**: Confirms the active Paper version and corresponding capability adapter (Smithing Table 3-slot, Data Components, Crafter block).
 * **Database Backend**: Displays active connection status (`SQLite (Connected)` or `MySQL (HikariCP Active)`), active connection pool statistics, and round-trip query latency.
 * **Blueprint Counts**: Reports the total number of blueprints registered across all categories (`singles`, `packages`, `mysteries`).
-* **File Management Mode**: Shows whether the node is running as a **Master Node** (`sync-from-files: true`) or a **Worker Node** (`sync-from-files: false`).
+* **File Management Mode**: Shows whether the node is running as a **Master Node** (`is-master: true`) or a **Worker Node** (`is-master: false`).
 * **Map Cache & Resources**: Displays loaded player profiles, blueprint definitions, and cached map images.
 
 ---

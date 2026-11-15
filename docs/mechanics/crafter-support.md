@@ -62,7 +62,7 @@ crafter:
 
 ## Multi-Version Compatibility
 
-Because the Crafter block only exists in Minecraft 1.21+:
+Because the Crafter block exists in modern releases (Minecraft 1.21+ and 26.x+):
 
-* On servers running **Paper 1.18.2 or 1.20.4**, this module is inactive. It introduces zero overhead, registers no listeners, and runs cleanly without errors.
-* On servers running **Paper 1.21+**, Crafter interception activates automatically with no extra setup required.
+* On legacy servers running **Paper 1.18.2 or 1.20.4**, this module is inactive. It introduces zero overhead, registers no listeners, and runs cleanly without errors.
+* On servers running **Paper 1.21+ or Paper 26.x+**, Crafter interception activates automatically through `Adapter_v1_21_R1` with zero extra configuration required.

@@ -46,7 +46,7 @@ singles:
 
     # 6. MiniMessage Lore Description
     lore:
-      - "<gray>Target Equipment:</gray> <white>{blueprint_name}</white>"
+      - "<gray>Target Equipment:</gray> <white>{target}</white>"
       - "<gray>Status:</gray> <green>Permanent Unlock</green>"
       - ""
       - "<yellow>Shop Value:</yellow> <gold>${price}</gold>"
@@ -72,7 +72,11 @@ CraftingBlueprints parses all YAML files in `blueprints/` and verifies:
 
 If everything is valid, the console displays:
 ```text
-[CraftingBlueprints] Validation passed: 1 blueprint file verified with 0 errors and 0 warnings.
+--------------------------------------------------
+» YAML Blueprint Configuration Validation
+--------------------------------------------------
+✔ All configuration files are valid. (Files: 1, Blueprints: 1)
+--------------------------------------------------
 ```
 
 ---
@@ -87,8 +91,9 @@ Apply your new file to the live server with zero downtime and zero lag:
 
 You will see immediate console confirmation that `obsidian_blade.yml` was parsed, synchronized to the database, and registered in runtime memory.
 
-!!! tip "Automatic File Watcher"
-    If `file-management.auto-reload.enabled: true` is active in `config.yml`, you do not even need to type `/cb reload blueprints`. The plugin detects file saves on disk and hot-reloads automatically after a short 1.5-second debounce window.
+> [!TIP]
+> **Automatic File Watcher**  
+> If `file-management.auto-reload.enabled: true` is active in `config.yml`, you do not even need to type `/cb reload blueprints`. The plugin detects file saves on disk and hot-reloads automatically after a short 1.5-second debounce window.
 
 ---
 
@@ -102,8 +107,9 @@ Give yourself the blueprint using the `/cb give` command:
 
 Look at your hotbar. You will receive a high-resolution in-game map (`Material.FILLED_MAP`) rendering the volcanic Dwarven Forge theme, the central Diamond Sword sprite, the Smithing Table workstation badge, and the Guilloche corner rosettes.
 
-!!! note "Overflow Safety Guarantee"
-    If your inventory happens to be completely full when running `/cb give`, CraftingBlueprints automatically drops the leftover items safely onto the ground directly at your feet, preventing silent item deletion.
+> [!NOTE]
+> **Overflow Safety Guarantee**  
+> If your inventory happens to be completely full when running `/cb give`, CraftingBlueprints automatically drops the leftover items safely onto the ground directly at your feet, preventing silent item deletion.
 
 ---
 
@@ -112,7 +118,7 @@ Look at your hotbar. You will receive a high-resolution in-game map (`Material.F
 ### Step A: Memorize the Blueprint
 Place the map in your main hand and **Right-Click**. A chime sound plays and chat confirms:
 ```text
-[CraftingBlueprints] You have unlocked the blueprint for Obsidian Blade Blueprint!
+[CraftingBlueprints] You have unlocked the blueprint for Obsidian Blade!
 ```
 The physical map item is consumed from your hand.
 
@@ -122,7 +128,8 @@ Place two diamonds and a stick into the 3x3 crafting matrix. The Diamond Sword a
 ### Step C: Test Whitelist Protection
 1. Open `plugins/CraftingBlueprints/config.yml` and ensure `diamond_.*` is included in `restrictions.restricted-items`.
 2. Either temporarily deop yourself (`/deop <your_name>`) or set `op-bypass: false` in `config.yml`.
-3. Have an unauthorized player (or test account) place the same ingredients into the crafting table: the recipe will be locked, and the player will be notified that they lack the required blueprint.
+3. Apply config changes with `/cb reload config`.
+4. Have an unauthorized player (or test account) place the same ingredients into the crafting table: the recipe will be locked, and the player will be notified that they lack the required blueprint.
 
 ---
 

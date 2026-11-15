@@ -8,21 +8,34 @@ All CraftingBlueprints commands originate from the master `/cb` command (alias: 
 
 | Command Syntax | Arguments & Parameters | Required Permission | Default | Allowed Senders | Operational Description |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| `/cb menu` | None | `craftingblueprints.menu` | `true` | Players | Opens your personal unlocked blueprints dashboard (`PlayerInfoMenu`). |
+| `/cb help` | None | `craftingblueprints.help` | `true` | Players / Console | Displays command help menu and subcommands. |
+| `/cb menu` | `[player]` | `craftingblueprints.menu` (`.others`) | `true` (`op`) | Players / Console | Opens personal progression dashboard (`PlayerInfoMenu`) or inspects another player. |
 | `/cb buy` | `<id> [--item]` | `craftingblueprints.buy` | `true` | Players | Purchases a blueprint using Vault economy (direct unlock or physical item). |
 | `/cb sell` | None | `craftingblueprints.sell` | `true` | Players | Sells the physical blueprint held in the main hand via Vault economy. |
-| `/cb cani` | `<item>` | `craftingblueprints.cani` | `true` | Players | Checks if you have the blueprint needed to craft an item. |
+| `/cb cani` | `[item]` | `craftingblueprints.cani` | `true` | Players | Checks if you have the blueprint needed to craft an item in hand or by name. |
 | `/cb info` | `[blueprint_id]` | `craftingblueprints.info` | `true` | Players / Console | Opens technical blueprint details and durability inspector. |
 | `/cb owner` | None | `craftingblueprints.owner` | `true` | Players | Displays the player who unlocked or owns the held blueprint item. |
 | `/cb return` | None | `craftingblueprints.return` | `false` | Players | Re-opens the previous menu in the navigation history stack. |
+| `/cb add` | `<blueprint_id> [player]` | `craftingblueprints.add` | `op` | Operators / Console | Unlocks a blueprint directly in a player's profile without physical items. |
+| `/cb remove` | `<blueprint_id> [player]` | `craftingblueprints.remove` | `op` | Operators / Console | Revokes an unlocked blueprint from a player's profile. |
+| `/cb set` | `<player> <id> <uses\|time> <val>` | `craftingblueprints.set` | `op` | Operators / Console | Directly modifies remaining uses or expiration timestamp for a player. |
 | `/cb item list` | None | `craftingblueprints.item.list` | `false` | Operators / Staff | Opens the paginated blueprint catalog and item management GUI. |
 | `/cb item edit` | `<blueprint_id>` | `craftingblueprints.item.edit` | `false` | Operators | Opens the visual in-game GUI modifier for a blueprint. |
+| `/cb item create` | `<id>` | `craftingblueprints.item.create` | `false` | Operators | Creates a new blueprint item from the item currently held in hand. |
+| `/cb item delete` | `<id>` | `craftingblueprints.item.delete` | `false` | Operators | Deletes a blueprint item from the database. |
+| `/cb item duplicate` | `<id> <new_id>` | `craftingblueprints.item.duplicate` | `false` | Operators | Duplicates an existing blueprint with a new identifier. |
+| `/cb item get` | `<id>` | `craftingblueprints.item.get` | `false` | Operators | Directly retrieves a physical copy of a blueprint item. |
+| `/cb item edit-name`| `<id> <new_name>` | `craftingblueprints.item.edit-name` | `false` | Operators | Modifies the display name of a blueprint via command. |
+| `/cb item edit-lore`| `<id> <line_index> <text>` | `craftingblueprints.item.edit-lore` | `false` | Operators | Modifies a specific lore line of a blueprint via command. |
+| `/cb item remove-owner` | None | `craftingblueprints.item.remove-owner` | `false` | Operators | Strips the UUID ownership stamp from the held blueprint item. |
 | `/cb give` | `<player> <id> [amount]` | `craftingblueprints.give` | `op` | Operators / Console | Gives physical blueprint items to a player with overflow protection. |
 | `/cb reload` | `[all\|blueprints\|config\|lang]` | `craftingblueprints.reload` | `false` | Operators / Console | Hot-reloads configuration files, language strings, or YAML blueprints. |
 | `/cb validate` | None | `craftingblueprints.admin` | `op` | Operators / Console | Executes a dry-run linting pass over all blueprint files in `blueprints/`. |
+| `/cb export` | `[id]` | `craftingblueprints.admin.export` | `op` | Operators / Console | Exports in-game blueprints or resolved YAML models to the `exports/` folder. |
 | `/cb status` | None | `craftingblueprints.status` | `op` | Operators / Console | Displays system diagnostics, database latency, and health metrics. |
 | `/cb preset` | `<list\|apply\|remove\|export\|download>` | `craftingblueprints.admin.preset`| `op` | Operators / Console | Manages pre-built modality packs in the `presets/` repository. |
 | `/cb generate` | `<source> [flags]` | `craftingblueprints.admin.generate`| `op` | Operators / Console | Scans Bukkit recipes or plugins and auto-scaffolds YAML blueprints. |
+| `/cb loot test` | `<table_id> [rolls]` | `craftingblueprints.admin` | `op` | Operators / Console | Simulates world chest loot generation for calibration. |
 
 ---
 
@@ -104,7 +117,7 @@ Displays comprehensive system diagnostics:
 [CraftingBlueprints] Storage Backend: MySQL (HikariCP Active)
 [CraftingBlueprints] Database Latency: 1.42 ms | Pool: 10 total (8 idle, 2 active)
 [CraftingBlueprints] Blueprints Registered: 42 (36 singles, 4 packages, 2 mysteries)
-[CraftingBlueprints] Node Role: Primary Master Node (sync-from-files: true)
+[CraftingBlueprints] Node Role: Primary Master Node (is-master: true)
 [CraftingBlueprints] Active Profiles: 14 loaded
 [CraftingBlueprints] Cached Maps: 42 renders cached
 [CraftingBlueprints] ======================================

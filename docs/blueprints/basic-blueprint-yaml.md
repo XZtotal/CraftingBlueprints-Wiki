@@ -27,6 +27,7 @@ singles:
     # 1. Target Recipe to Unlock (Material, Custom Item, Potion, or Enchantment)
     blueprint: NETHERITE_AXE
     name: "<gradient:#FF5555:#FFAA00><bold>Ancient Netherite Battleaxe</bold></gradient>"
+    station: CRAFTING     # CRAFTING, FURNACE, BLAST_FURNACE, SMOKER, STONECUTTER, ENCHANT_TABLE, etc.
 
     # 2. Reusable Template Mixins (Optional)
     templates:
@@ -35,7 +36,7 @@ singles:
 
     # 3. Durability & Expiration Limits
     permanent: false
-    time: 86400           # Duration in seconds (or human format '24h', '7d'). 0 = no time limit
+    time: "24h"           # Human string '24h', '7d', '86400s'. Raw integers are evaluated in milliseconds!
     uses: 10              # Maximum craft count before the blueprint expires. 0 = unlimited
 
     # 4. Vault Economy Integration
@@ -59,12 +60,12 @@ singles:
         enabled: true
         width: 2               # Continuous contour outline width in pixels (1 to 8)
         color: "rainbow"       # 'rainbow', hex '#ffd700', or gradient
-        opacity: 100           # Opacity percentage (1 to 100)
+        opacity: 1.0           # Opacity scale from 0.0 (transparent) to 1.0 (fully opaque)
 
     # 7. MiniMessage Lore Description Card
     lore:
       - "<dark_gray><strikethrough>-----------------------------</strikethrough></dark_gray>"
-      - "<gray>Target Equipment:</gray> <white>{target_item}</white>"
+      - "<gray>Target Equipment:</gray> <white>{target}</white>"
       - "<gray>Remaining Forges:</gray> <yellow><bold>{uses} / 10</bold></yellow>"
       - "<gray>Licensing Time:</gray> <aqua>{time}</aqua>"
       - "<dark_gray><strikethrough>-----------------------------</strikethrough></dark_gray>"
@@ -87,18 +88,19 @@ singles:
 | Key | Type | Required? | Default | Description & Accepted Values |
 | :--- | :--- | :--- | :--- | :--- |
 | `blueprint` | String | **Yes** | — | Target Bukkit `Material` (e.g. `NETHERITE_SWORD`), `PotionType` (`SPEED`), `Enchantment` (`MENDING`), or custom item identifier (`ia:...`, `nexo:...`, `oraxen:...`). |
+| `station` | String | No | `CRAFTING` | Workstation enforcement: `CRAFTING`, `FURNACE`, `BLAST_FURNACE`, `SMOKER`, `CAMPFIRE`, `STONECUTTER`, `ENCHANT_TABLE`, `ANVIL`, `BREWING_STAND`, `SMITHING`, or `ANY`. |
 | `name` | String | No | Formatted Target | Display name supporting MiniMessage tags and gradients (`<gradient:#HEX1:#HEX2>`). |
 | `permanent` | Boolean | No | `true` | If `true`, the blueprint remains unlocked indefinitely. |
-| `time` | Integer / String | No | `0` | Expiration countdown. Accepts raw seconds (`86400`) or human durations (`45s`, `30m`, `12h`, `7d`). `0` = no time expiration. |
+| `time` | Integer / String | No | `0` | Expiration duration. Accepts human durations (`45s`, `30m`, `12h`, `7d`). Note: raw integers without units are parsed as **milliseconds** (`86400000` = 24h). `0` = no time expiration. |
 | `uses` | Integer | No | `0` | Maximum craft count allowed before the blueprint expires. `0` = unlimited crafts. |
 | `price` | Double | No | `0.0` | Vault purchase price when bought via `/cb buy <blueprint_id>`. |
 | `sell_price` | Double | No | `0.0` | Vault currency refunded when selling held blueprint via `/cb sell`. |
-| `templates` / `template` | List / String | No | `[]` | List of reusable template mixin IDs inherited by this blueprint. |
+| `templates` / `template` | List / String | No | `[]` | List of reusable template mixin IDs inherited by this blueprint (`mixins:` is an accepted alias). |
 | `item.material` | String | No | `FILLED_MAP` | Bukkit Material used when giving the physical blueprint item to a player. |
 | `item.custom_model_data` | Integer | No | `0` | CustomModelData integer tag for resource pack model overrides. |
 | `item.glowing` | Boolean | No | `false` | Adds visual enchantment shimmer without showing enchantment lore. |
 | `map.enabled` | Boolean | No | `true` | Controls whether the 128x128 map drafting renderer is active for this item. |
-| `map.theme` | String | No | `technical` | Base background theme (`technical`, `antique`, `forge`, `royal`, `runic`, `dark`, `rainbow`) or PNG filename in `images/backgrounds/`. |
+| `map.theme` | String | No | `technical` | Base background theme (`technical`, `antique`, `forge`, `royal`, `dark`, `custom`) or PNG filename in `images/backgrounds/`. |
 | `map.frame` | String | No | `bracket` | Corner geometry frame: `bracket`, `chamfer`, `diamond`, `runic`, `rosette`, `star`, or `none`. |
 | `map.badge` | String | No | Auto-detected | Top-left workstation badge: `crafting`, `anvil`, `brewing`, `smithing`, `furnace`, or `none`. |
 | `map.icon_scale` | Integer | No | `2` | Central item sprite scale factor (`1` to `4`) using pixel-art nearest-neighbor scaling. |
@@ -106,6 +108,7 @@ singles:
 | `map.item_outline.enabled` | Boolean | No | `false` | Enables procedural contour outline around the central item sprite. |
 | `map.item_outline.width` | Integer | No | `2` | Outline thickness in pixels (`1` to `8`). |
 | `map.item_outline.color` | String | No | `rainbow` | Outline color: `rainbow`, hex `#RRGGBB`, or gradient string. |
+| `map.item_outline.opacity` | Double | No | `1.0` | Outline opacity from `0.0` (transparent) to `1.0` (fully opaque). |
 | `map.title.show` | Boolean | No | `true` | Controls rendering of the bottom typography plaque banner. |
 | `map.title.text` | String | No | `%bname%` | Custom title banner text. Supports `%blueprint_name%` and `%bname%`. |
 | `map.stamp.show` | Boolean | No | `true` | Controls rendering of the top-right authentication wax seal stamp. |

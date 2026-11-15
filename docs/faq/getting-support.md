@@ -8,8 +8,8 @@ If you encounter unexpected behavior, suspect a bug, or have a feature proposal 
 
 Before opening an issue or asking for support, run through this quick checklist:
 
-* [ ] **Verify Server Engine**: Ensure you are running an official build of **Paper** or **Purpur** (1.18.2 – 1.21.x). CraftBukkit and standalone Spigot are not supported.
-* [ ] **Verify Java Version**: Minecraft 1.18.2–1.20.4 requires Java 17 or 21. Minecraft 1.20.5+ and 1.21+ strictly require **Java 21**.
+* [ ] **Verify Server Engine**: Ensure you are running an official build of **Paper** or **Purpur** (1.18.2 – 1.21.x, 26.x+). CraftBukkit and standalone Spigot are not supported.
+* [ ] **Verify Java Version**: Minecraft 1.18.2–1.20.4 requires Java 17 or 21. Minecraft 1.20.5+ and 1.21+ require **Java 21**. Paper 26.x+ requires **Java 25**.
 * [ ] **Run Dry-Run Validation**: Execute `/cb validate` to rule out syntax typos or malformed YAML indentation.
 * [ ] **Capture `/cb status`**: Run `/cb status` in console to inspect your active database backend, NMS adapter, and registered blueprint counts.
 * [ ] **Check Server Logs**: Search `logs/latest.log` for any relevant stack traces or warning banners.

@@ -8,13 +8,14 @@ This guide explores the complete in-game player journey: how players acquire blu
 
 Players encounter blueprints through multiple gameplay avenues:
 
-* **Server Economy**: Purchasing blueprints for server currency via `/cb buy <blueprint_id>`.
-* **Dungeon & World Loot**: Discovered inside Bastion Remnants, End Cities, Nether Fortresses, and Ancient Cities.
+* **Server Economy**: Purchasing blueprints for server currency via `/cb buy <blueprint_id> [--item]`. Adding `--item` delivers a physical tradeable map or scroll item instead of a direct virtual profile unlock.
+* **Dungeon & World Loot**: Discovered inside Bastion Remnants, End Cities, Trial Chambers, and Ancient Cities via the native [`loot.yml`](loot-generation.md) system.
 * **Crate & Quest Rewards**: Rewarded by quest plugins or loot crate keys.
 * **Direct Administrative Grants**: Granted by server operators or automated scripts via `/cb give <player> <id> [amount]`.
 
-!!! note "Item Ownership Protection"
-    When `item-ownership: true` is enabled in `config.yml`, physical blueprint items are permanently bound to the UUID of the recipient. If an unauthorized player attempts to hold, trade, or right-click the blueprint, an ownership warning is displayed and the unlock is blocked.
+> [!NOTE]
+> **Item Ownership Protection**  
+> When `item-ownership: true` is enabled in `config.yml`, physical blueprint items are permanently bound to the UUID of the recipient. If an unauthorized player attempts to hold, trade, or right-click the blueprint, an ownership warning is displayed and the unlock is blocked.
 
 ---
 
@@ -22,16 +23,20 @@ Players encounter blueprints through multiple gameplay avenues:
 
 When a player receives a blueprint map (`Material.FILLED_MAP`):
 
-1. **Visual Drafting Inspection**: Holding the map in either hand renders a photorealistic 128x128 pixel drafting schematic featuring the workstation badge, the central item sprite, corner Guilloché rosettes, and remaining craft counts.
-2. **Right-Click Memorization**: The player holds the blueprint in their main hand and **Right-Clicks**:
+1. **Visual Drafting Inspection**: Holding the map in either the main hand or off-hand renders a photorealistic 128x128 pixel drafting schematic featuring the workstation badge, the central item sprite, corner Guilloché rosettes, and remaining craft counts.
+2. **Right-Click Memorization**: The player holds the blueprint in hand and **Right-Clicks**:
     * A chime sound plays (`Sound.ENTITY_PLAYER_LEVELUP`) and enchanting particles appear.
     * A localized chat notification confirms the unlock:
       ```text
-      [CraftingBlueprints] You have unlocked the blueprint for Obsidian Blade Blueprint!
+      [CraftingBlueprints] You have unlocked the blueprint for Obsidian Blade!
       ```
 
     * The physical map item is consumed from the player's hand (unless configured otherwise).
     * The recipe is registered permanently or temporally into the player's account database profile.
+
+> [!TIP]
+> **Container Interaction Priority**  
+> If a player right-clicks an interactive block (such as a chest, barrel, crafting table, or furnace) while holding a blueprint, CraftingBlueprints prioritizes opening the container to prevent accidental consumption. To memorize the blueprint while looking at a container, the player must sneak (**Shift + Right-Click**).
 
 ---
 
@@ -113,3 +118,23 @@ This opens an interactive inspection menu displaying:
 * The 3x3 crafting ingredient matrix or smithing ingredients.
 * Active durability mode (Permanent, Countdown Timer, or Remaining Uses).
 * Rarity tier, catalog purchase price, and item lore.
+
+---
+
+## 7. Fast Craftability Check (`/cb cani`)
+
+Players can check whether they hold the required knowledge to craft, smelt, brew, or enchant an item at any time:
+
+```text
+# Check the item currently held in hand:
+/cb cani
+
+# Or check a specific material name:
+/cb cani diamond_chestplate
+```
+
+The plugin responds with instant, localized feedback indicating:
+* Whether the recipe is completely unrestricted (free for all players).
+* Whether the player holds a permanent unlock.
+* Remaining crafts or countdown timer if on a temporary blueprint.
+* A direct tip explaining which blueprint is missing if the recipe is locked.

@@ -17,8 +17,9 @@ To reload your language files after editing without restarting your server, exec
 /cb reload lang
 ```
 
-!!! tip "Automatic Per-Player Locale Resolution"
-    On Paper servers, CraftingBlueprints automatically detects the Minecraft client language of each connecting player (`player.locale()`). A Spanish player automatically receives Spanish feedback from `messages_es.yml`, while an English player receives English feedback from `messages_en.yml`. If a player's client language is not installed, the plugin falls back to `defaultLocaleRef`.
+> [!TIP]
+> **Automatic Per-Player Locale Resolution**  
+> On Paper servers, CraftingBlueprints automatically detects the Minecraft client language of each connecting player (`player.locale()`). A Spanish player automatically receives Spanish feedback from `messages_es.yml`, while an English player receives English feedback from `messages_en.yml`. If a player's client language is not installed, the plugin falls back to the server default locale (`messages_es.yml` or `messages_en.yml`).
 
 ---
 
@@ -93,10 +94,9 @@ When authoring blueprint lore in YAML, configuring GUI buttons, or customizing l
 
 | Placeholder | Description | Resolved Example |
 | :--- | :--- | :--- |
-| `{player}` | The username of the interacting player. | `Alex` |
+| `{player}` / `{player_name}` | The username of the interacting player. | `Alex` |
 | `{blueprint_name}` | Formatted MiniMessage display name of the blueprint. | `<gradient:#00AAFF:#00FFAA>Diamond Sword Blueprint</gradient>` |
-| `{target_item}` | Clean vanilla or custom name of the target recipe output. | `Diamond Sword` |
-| `{blueprint_target}` | Alias for `{target_item}`. | `Netherite Chestplate` |
+| `{target}` / `{blueprint_target}` | Clean vanilla or custom name of the target recipe output. | `Diamond Sword` |
 | `{uses}` | Remaining crafting uses (or `Unlimited`). | `3` or `Unlimited` |
 | `{time}` | Remaining countdown time before expiration. | `23h 45m` or `Permanent` |
 | `{price}` | Vault purchase cost in server economy currency. | `5000.0` |
@@ -114,7 +114,7 @@ Below is a production-ready lore layout demonstrating gradients, named colors, a
 ```yaml
 lore:
   - "<dark_gray><strikethrough>---------------------------------</strikethrough></dark_gray>"
-  - "<gray>Target Equipment:</gray> <white>{target_item}</white>"
+  - "<gray>Target Equipment:</gray> <white>{target}</white>"
   - "<gray>Schematic Name:</gray> {blueprint_name}"
   - "<gray>Classification:</gray> <gold><bold>{tier}</bold></gold>"
   - "<dark_gray><strikethrough>---------------------------------</strikethrough></dark_gray>"

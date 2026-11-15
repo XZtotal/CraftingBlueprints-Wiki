@@ -46,9 +46,19 @@ See our [Custom Items Guide](../blueprints/custom-items.md).
 ### Can I connect multiple servers to a shared MySQL database?
 **Yes.** CraftingBlueprints fully supports BungeeCord and Velocity networks. Follow the **Golden Rule of Multi-Server Networks**:
 
-* Designate **ONE Primary Management Node** (e.g. Hub) with `sync-from-files: true`.
-* Configure **ALL Worker Nodes** (Survival, Skyblock, Factions) with `sync-from-files: false`.
+* Designate **ONE Primary Management Node** (e.g. Hub) with `is-master: true`.
+* Configure **ALL Worker Nodes** (Survival, Skyblock, Factions) with `is-master: false`.
 When the master server reloads, it emits an atomic heartbeat ping (`cb_sync_signals`), and worker nodes automatically refresh their local cache within seconds. See our [Multi-Server Setup Guide](../storage/mysql-multiserver.md).
+
+---
+
+### Can blueprints spawn naturally in dungeon chests, Trial Chambers, and world structures?
+**Yes.** CraftingBlueprints includes a native, event-driven world loot generation engine configured in `loot.yml`. You can define weighted random pools, chance multipliers, and table mappings with wildcards (`minecraft:chests/*`, `trial_chambers/*`, archaeology, and fishing). See our [Loot Generation Guide](../mechanics/loot-generation.md).
+
+---
+
+### Can players bypass furnace smelting using hoppers?
+**No, when configured properly.** Setting `stations.smelting.track-hoppers: true` in `config.yml` records the UUID of the player who placed the hopper into its PersistentDataContainer (PDC). Automated hoppers inherit the placer's blueprint unlocks, and unowned hoppers cannot smelt restricted recipes.
 
 ---
 

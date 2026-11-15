@@ -182,3 +182,26 @@ lp group vip permission set craftingblueprints.group.vip true
 # Grant Pro recipe pack to the pro LuckPerms group
 lp group pro permission set craftingblueprints.group.pro true
 ```
+
+---
+
+## 4. Modular Group Files & Operator Enforcement
+
+### Modular Configuration (`configs/**/*.yml`)
+On large networks, keeping hundreds of group definitions in a single `config.yml` can become unwieldy. CraftingBlueprints automatically scans and loads all YAML files placed inside `plugins/CraftingBlueprints/configs/`:
+
+* Example: `configs/groups/weapons.yml`, `configs/groups/alchemy.yml`, `configs/seasonal.yml`.
+* When the same group key (e.g. `vip`) is defined across multiple files, the engine performs an atomic set-union ($A \cup B$), merging all blueprint patterns cleanly without duplicate entries.
+
+### Operator Bypass Isolation (`op-bypass: false`)
+By default, operators (`/op`) bypass all group checks. To force strict permission checks during testing without losing operator status, individual groups can specify:
+
+```yaml
+groups:
+  hardcore_trials:
+    name: "Hardcore Trials"
+    op-bypass: false    # Operators MUST hold the permission node to craft these recipes!
+    blueprints:
+      - "mace"
+      - "heavy_core"
+```

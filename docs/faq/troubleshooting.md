@@ -14,7 +14,7 @@ If blueprint items given to players appear as blank gray maps or show vanilla te
     * Custom background images must be placed in `plugins/CraftingBlueprints/images/backgrounds/`.
     * The image **must be exactly 128 x 128 pixels**.
     * The image must be in **32-bit RGBA PNG** format.
-* **Verify Cross-Server Map Re-Linking**: On BungeeCord/Velocity networks, verify that the Primary Node has `sync-from-files: true` and all Worker Nodes have `sync-from-files: false`. When players switch servers, the plugin automatically re-links items to the local server's canonical Map ID upon inventory open.
+* **Verify Cross-Server Map Re-Linking**: On BungeeCord/Velocity networks, verify that the Primary Node has `is-master: true` and all Worker Nodes have `is-master: false`. When players switch servers, the plugin automatically re-links items to the local server's canonical Map ID upon inventory open.
 * **Reload Map System**: Run `/cb reload all` to refresh the map buffer cache.
 
 ---
@@ -45,11 +45,11 @@ If the server console reports an error when loading blueprint files:
 
 If executing `/cb preset apply` or `/cb generate` results in an error:
 ```text
-[CraftingBlueprints] Command rejected: This server is configured as a Worker Node (sync-from-files: false).
+[CraftingBlueprints] Command rejected: This server is configured as a Worker Node (is-master: false).
 ```
 
 ### Cause & Solution:
-To prevent database divergence and split-brain conflicts across multi-server MySQL networks, all file generation and preset deployments **must be executed on your designated Primary Management Node** (`sync-from-files: true`).
+To prevent database divergence and split-brain conflicts across multi-server MySQL networks, all file generation and preset deployments **must be executed on your designated Primary Management Node** (`is-master: true`).
 
 * Connect to your Hub or Lobby server and execute the command there.
 * The master server will update the shared database and broadcast an atomic sync signal (`cb_sync_signals`) to all worker nodes automatically.
@@ -71,3 +71,16 @@ If automated redstone Crafter blocks are mass-producing restricted recipes:
 
 3. Run `/cb reload config`.
 4. Ensure the item being produced matches your `restrictions.restricted-items` list.
+
+---
+
+## 6. Issue: "Furnaces pause at 100% cook progress or hoppers won't smelt"
+
+If a furnace finishes cooking but refuses to deposit the item or pause indefinitely:
+
+### Diagnostic Checklist:
+1. **Ownership & Blueprints**: When a restricted recipe is cooked, the player who loaded the furnace (or who placed the feeding hopper) must hold the blueprint for that smelting output.
+2. **Hopper Ownership (`track-hoppers`)**:
+   - If `stations.smelting.track-hoppers: true`, automated hoppers inherit the placer's UUID.
+   - Hoppers naturally generated in world structures or placed by unauthorized players cannot process restricted smelt recipes.
+   - Run `/cb cani <smelted_item>` while holding the item to verify the player has access.

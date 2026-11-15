@@ -133,5 +133,5 @@ Deploying or removing presets **NEVER modifies your `config.yml`**.
 
 In multi-server MySQL networks:
 
-* Preset modifications (`apply`, `remove`, `export`) are strictly restricted to the **Primary Management Node** (`sync-from-files: true`).
-* Executing `/cb preset apply` on a Worker Node (`sync-from-files: false`) is blocked immediately with a clear localized error redirecting you to execute the command on the master server.
+* Preset modifications (`apply`, `remove`, `export`) are strictly restricted to the **Primary Management Node** (`is-master: true`).
+* Executing `/cb preset apply` on a Worker Node (`is-master: false`) is blocked immediately with a clear localized error redirecting you to execute the command on the master server.

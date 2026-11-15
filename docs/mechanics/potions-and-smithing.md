@@ -28,15 +28,17 @@ In any blueprint file (e.g. `plugins/CraftingBlueprints/blueprints/alchemy.yml`)
 singles:
   elixir_of_strength:
     blueprint: STRENGTH
+    station: BREWING_STAND
     name: "<gradient:#FF0000:#FF7700><bold>Elixir of Greater Strength Blueprint</bold></gradient>"
     permanent: true
 
+    # Option A: Map Drafting Schematic
     item:
-      material: POTION
+      material: FILLED_MAP
       glowing: true
 
     map:
-      theme: transmutation_circle
+      theme: texture_transmutation_circle
       frame: runic
       badge: brewing
 
@@ -46,6 +48,7 @@ singles:
       - ""
       - "<dark_gray>Right-click in hand to memorize the recipe.</dark_gray>"
 ```
+*(Alternatively, if you prefer an ancient physical potion bottle instead of a map schematic, set `item.material: POTION` and omit the `map:` block).*
 
 ### In-Game Brewing Interception:
 1. When a player inserts ingredients and water bottles into a Brewing Stand, the plugin evaluates the output bottles upon brewing completion.
@@ -84,6 +87,7 @@ In your blueprint file (e.g. `blueprints/netherite.yml`):
 singles:
   ancient_netherite_smithing:
     blueprint: NETHERITE_CHESTPLATE
+    station: SMITHING
     name: "<gradient:#FF5555:#FFAA00><bold>Ancient Netherite Smithing Technique</bold></gradient>"
     permanent: true
 
@@ -92,7 +96,7 @@ singles:
       glowing: true
 
     map:
-      theme: dwarven_magma
+      theme: texture_dwarven_magma
       frame: rosette
       badge: smithing
       item_outline:
@@ -152,3 +156,47 @@ When players automate smelting using hoppers feeding into Furnaces or Blast Furn
 * When `track-hoppers: true` is enabled, CraftingBlueprints records the UUID of the player who placed the hopper into its PersistentDataContainer (PDC).
 * The smelting station inherits the placer's blueprint unlocks.
 * Hoppers placed by unauthorized players (or naturally generated hoppers) cannot automatically smelt restricted items.
+
+---
+
+## 4. Smelting, Stonecutting & Enchanting Blueprints
+
+Beyond crafting tables and smithing benches, CraftingBlueprints supports declarative blueprints for every specialized workstation using the `station:` property:
+
+```yaml
+# yaml-language-server: $schema=./blueprint.schema.json
+singles:
+  # Blast Furnace Smelting Blueprint
+  titanium_blast_smelt:
+    blueprint: "smelt:iron_ingot"
+    station: BLAST_FURNACE
+    name: "<aqua><bold>High-Temp Iron Smelting Permit</bold></aqua>"
+    permanent: true
+    item:
+      material: FILLED_MAP
+    map:
+      theme: forge
+      badge: furnace
+
+  # Stonecutter Architectural Blueprint
+  ornate_chiseled_stone:
+    blueprint: "stonecut:chiseled_stone_bricks"
+    station: STONECUTTER
+    name: "<yellow>Classical Stonecutting Blueprint</yellow>"
+    permanent: true
+    item:
+      material: PAPER
+
+  # Enchantment Table Arcane License
+  mending_table_license:
+    blueprint: "enchant_table:mending"
+    station: ENCHANT_TABLE
+    name: "<light_purple><bold>Ancient Enchanting Seal: Mending</bold></light_purple>"
+    permanent: true
+    item:
+      material: BOOK
+```
+
+### Safety & Resource Integrity:
+* **Enchantment Table Cancellation**: When an enchantment is blocked because the player lacks the blueprint, the plugin guarantees that **no lapis lazuli and no experience levels** are consumed.
+* **Furnace Pause**: If an unauthorized item is smelted, the furnace safely pauses at 100% progress without deleting raw ingredients or fuel.

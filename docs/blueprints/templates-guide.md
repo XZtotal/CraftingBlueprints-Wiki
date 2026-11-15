@@ -6,7 +6,11 @@ CraftingBlueprints features an object-oriented **Template Composition Engine** (
 
 ---
 
-## 1. Defining Reusable Templates (`templates:`)
+## 1. Defining Reusable Templates (`templates:` or `mixins:`)
+
+> [!NOTE]
+> **Templates vs. Mixins Vocabulary**  
+> In CraftingBlueprints YAML configurations, `templates:` and `mixins:` are completely interchangeable aliases. Formally, a **Template** refers to the modular block or file, while **Mixin** refers to the compositional technique of combining these properties into blueprints.
 
 Templates are non-instantiated blueprint modules declared under the root `templates:` section of any YAML file in `plugins/CraftingBlueprints/blueprints/`:
 
@@ -190,3 +194,19 @@ file_default:
   extra:
     category: "admin_only"
 ```
+
+---
+
+## 6. Inspecting Resolved Compositions (`/cb export`)
+
+When using deep cascades of folder defaults, file defaults, and multiple template mixins, you may want to verify the exact final properties calculated by the plugin.
+
+CraftingBlueprints provides an administrative export command:
+
+```text
+/cb export <blueprint_id>
+```
+
+* Generates a fully flattened, resolved YAML representation of the blueprint inside `plugins/CraftingBlueprints/exports/`.
+* Displays every inherited property, overridden value, price, and visual parameter exactly as interpreted in server memory.
+* Essential for debugging complex RPG progression trees and multi-tiered templates!

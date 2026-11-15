@@ -71,9 +71,10 @@ The `restricted-items:` list supports exact identifiers, wildcard globs, regular
 
 By default, an unqualified pattern without a prefix (e.g. `diamond_sword`) matches across all workstations. You can restrict evaluation to specific crafting stations using category prefixes:
 
-* **`craft:` / `item:`**: Evaluates only standard 2x2 and 3x3 crafting workbench recipes.
-* **`potion:` / `brew:`**: Evaluates only Brewing Stand potion brewing actions.
-* **`enchant:` / `enchantment:`**: Evaluates only Anvil and Enchantment Table operations.
+* **`craft:` / `item:`**: Evaluates standard 2x2 and 3x3 crafting workbench recipes and Crafter blocks.
+* **`potion:` / `brew:`**: Evaluates Brewing Stand potion brewing actions.
+* **`enchant:` / `enchantment:`**: Evaluates Anvil item combination and enchanted book applications.
+* **`enchant_table:`**: Evaluates direct enchantment rolls at Enchantment Tables.
 * **`smelt:` / `furnace:`**: Evaluates Furnaces, Blast Furnaces, Smokers, and Campfires.
 * **`stonecut:` / `stonecutter:`**: Evaluates Stonecutter workstation recipes.
 
@@ -87,18 +88,27 @@ In `plugins/CraftingBlueprints/config.yml`:
 op-bypass: true
 ```
 
-!!! warning "Are you testing with /op?"
-    If your testing account has server operator status (`/op`), CraftingBlueprints will allow you to craft, brew, and enchant restricted recipes freely, bypassing all locks.
-    
-    To properly test recipe restrictions as a normal player:
-    
-    1. Temporarily deop yourself: `/deop <your_player_name>`
-    2. Alternatively, set `op-bypass: false` in `config.yml` and run `/cb reload config`.
+> [!WARNING]
+> **Are you testing with /op?**  
+> If your testing account has server operator status (`/op`), CraftingBlueprints will allow you to craft, brew, and enchant restricted recipes freely, bypassing all locks.
+> 
+> To properly test recipe restrictions as a normal player:
+> 
+> 1. Temporarily deop yourself: `/deop <your_player_name>`
+> 2. Alternatively, set `op-bypass: false` in `config.yml` and run `/cb reload config`.
 
-To grant bypass rights to staff members or builders without giving them full operator status, assign the LuckPerms permission:
+To grant bypass rights to staff members or builders without giving them full operator status, assign the LuckPerms bypass permissions:
 
 ```bash
-lp group moderator permission set craftingblueprints.bypass.ownership true
+# Universal bypass (crafting, smelting, enchanting, brewing, stonecutting):
+lp group moderator permission set craftingblueprints.bypass true
+
+# Or grant granular workstation bypasses:
+lp group moderator permission set craftingblueprints.craft.bypass true
+lp group moderator permission set craftingblueprints.smelt.bypass true
+lp group moderator permission set craftingblueprints.brew.bypass true
+lp group moderator permission set craftingblueprints.enchant.bypass true
+lp group moderator permission set craftingblueprints.stonecut.bypass true
 ```
 
 ---

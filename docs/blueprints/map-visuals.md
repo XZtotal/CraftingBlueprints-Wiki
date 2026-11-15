@@ -52,7 +52,7 @@ singles:
         enabled: true
         width: 2               # Thickness in pixels (1 to 8)
         color: "rainbow"       # 'rainbow', hex '#ffd700', or gradient
-        opacity: 100
+        opacity: 1.0           # Opacity scale from 0.0 (transparent) to 1.0 (fully opaque)
 
       # 6. Technical Cartesian Drafting Grid & Measurement Ticks
       grid:
@@ -171,3 +171,7 @@ You can import custom guild emblems, server logos, or hand-drawn schematics:
    ```
 
 4. Run `/cb reload blueprints` to load the image immediately without a restart!
+
+> [!NOTE]
+> **Minecraft Native Map Color Palette & Dithering**  
+> Minecraft in-game maps (`Material.FILLED_MAP`) are rendered using the game's native fixed color palette (128 base colors with 4 brightness shading levels). When using custom 32-bit RGBA PNG files, the compositor automatically applies color quantization and Floyd-Steinberg error-diffusion dithering. For optimal clarity, design your custom backgrounds with crisp contrast and avoid subtle low-contrast gradients.

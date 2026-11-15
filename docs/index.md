@@ -14,7 +14,8 @@ Whether you operate a Survival SMP looking to gate Netherite gear, an MMORPG ser
 
 * **Stunning In-Game Map Schematics**: Renders photorealistic technical blueprints directly onto standard 128x128 Minecraft maps (`Material.FILLED_MAP`) with 25 pre-calibrated background textures (magma, astral, slate, carbon weave), banknote-grade Guilloché borders, procedural item outlines, and rarity styling.
 * **Selective Whitelist Mode**: Don't want to lock every single recipe? Restrict only specific items (such as Netherite equipment, potions, or Beacons) while leaving basic wood, stone, iron, and farming tools completely natural and free.
-* **Minecraft 1.21 Crafter Protection**: Prevents redstone auto-crafters from bypassing your blueprint economy. Automated Crafter blocks that attempt to produce locked recipes are automatically intercepted and blocked cleanly.
+* **Native World Loot Injection**: Populates blueprints into dungeon chests, Bastion Remnants, End Cities, and 1.21+/26.x+ Trial Chambers via declarative [`loot.yml`](mechanics/loot-generation.md) configurations with player Luck scaling and trash replacement.
+* **Minecraft 1.21 & 26.x Crafter Protection**: Prevents redstone auto-crafters from bypassing your blueprint economy. Automated Crafter blocks that attempt to produce locked recipes are automatically intercepted and blocked cleanly.
 * **Instant Multi-Server Synchronization**: Supports both standalone embedded SQLite and high-performance MySQL with real-time heartbeat sync signals for BungeeCord and Velocity networks.
 * **Declarative YAML & Hot-Reloading**: Create hundreds of recipes cleanly using reusable templates (mixins), live file watching, and dry-run syntax validation (`/cb validate`).
 * **Custom Items SPI Interoperability**: Seamless out-of-the-box integration with ItemsAdder, Oraxen, Nexo, MMOItems, EcoItems, MythicMobs, and CustomModelData.
@@ -29,7 +30,7 @@ Whether you operate a Survival SMP looking to gate Netherite gear, an MMORPG ser
 
     ---
 
-    System prerequisites, Paper/Purpur version matrix (1.18.2–1.21.x), Java requirements, and clean 4-step setup.
+    System prerequisites, Paper/Purpur version matrix (1.18.2–1.21.x, 26.x+), Java requirements (17, 21, 25+), and clean 4-step setup.
 
 -   :material-lightning-bolt:{ .lg .middle } __[2. 3-Minute Quickstart](getting-started/quickstart.md)__
 
@@ -53,7 +54,7 @@ Whether you operate a Survival SMP looking to gate Netherite gear, an MMORPG ser
 
     ---
 
-    Selective Whitelist Mode, Shift-Click capacity math, 1.21 Crafter anti-exploit, and potion/smithing gating.
+    Selective Whitelist Mode, Shift-Click capacity math, 1.21 Crafter anti-exploit, stations, and natural chest loot injection.
 
 -   :material-view-grid:{ .lg .middle } __[6. In-Game Menus & GUIs](gui/player-menu.md)__
 

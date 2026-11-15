@@ -54,17 +54,22 @@ database-user: root
 database-password: "your_strong_password"
 
 # ------------------------------------------------------------ #
-# Declarative File Management & Synchronization
+# Cluster & Multi-Server Network Roles
+# ------------------------------------------------------------ #
+
+# Role of this server in a multi-server network (default: false -> Worker node).
+# - true (Master): Designated primary node. Loads declarative YAML blueprints, updates MySQL,
+#   executes mutating commands (/cb preset apply/remove, /cb generate), and broadcasts reload signals.
+# - false (Worker): Read-only DB node. Fetches all blueprints from the central shared database
+#   and protects against database divergence by rejecting mutating preset and scaffolding commands.
+# CRITICAL: Only ONE server in your network must be configured with is-master: true!
+is-master: false
+
+# ------------------------------------------------------------ #
+# Declarative File Management
 # ------------------------------------------------------------ #
 
 file-management:
-  # Multi-Server Golden Rule:
-  # - true: ONLY on the designated Primary Management Node (e.g. Hub/Lobby).
-  #         Imports local YAML files into the shared database and prunes deleted items.
-  # - false: On ALL Worker Nodes (Survival, Skyblock, Factions).
-  #          Worker nodes load blueprints strictly from the shared MySQL database.
-  sync-from-files: false
-
   # Directory relative to plugins/CraftingBlueprints/ where blueprint YAMLs reside.
   directory: "blueprints"
 
@@ -372,7 +377,7 @@ ux:
       name: "<red><bold>Recipe Locked</bold></red>"
       lore:
         - "<gray>Required Blueprint:</gray> <yellow>{blueprint_name}</yellow>"
-        - "<gray>Run</gray> <aqua>/cb info {blueprint_name}</aqua> <gray>to view details.</gray>"
+        - "<gray>Run</gray> <aqua>/cb info {blueprint_id}</aqua> <gray>to view details.</gray>"
 ```
 
 ---
@@ -395,59 +400,118 @@ ux:
 
 ---
 
-### 2. Multi-Server File Management (`file-management`)
+### 2. Cluster & Multi-Server Network Roles (`is-master`)
 
-!!! caution "The Golden Rule of Multi-Server Networks"
-    On networks connected to a shared MySQL database, set `sync-from-files: true` **strictly on ONE Primary Management Node** (e.g. Lobby or Admin server). On all Worker Nodes (Survival, Skyblock, Factions), set `sync-from-files: false`.
+> [!CAUTION]
+> **The Golden Rule of Multi-Server Networks**:
+> On networks connected to a shared MySQL database, set `is-master: true` **strictly on ONE Primary Management Node** (e.g. Hub, Lobby, or dedicated Admin server). On all Worker Nodes (Survival, Skyblock, Factions), set `is-master: false`.
 
-* **`sync-from-files: true` (Primary Node)**: Recursively parses local YAML files in `blueprints/`, inserts/updates them in the shared database, safely prunes deleted blueprints (`prune-deleted: true`), and emits a real-time signal ping (`cb_sync_signals`) alerting worker nodes.
-* **`sync-from-files: false` (Worker Nodes)**: Loads all blueprints directly from the shared MySQL database into memory. Worker nodes never overwrite the database with local files, eliminating race conditions.
-* **`auto-reload.debounce-delay-ms`**: Sets the delay (default: `1500ms`) to wait before hot-reloading after a file is saved on disk, ensuring editors finish writing multi-byte files.
-
----
-
-### 3. Redstone Crafter Interception (`crafter`)
-
-* **`block-restricted: true`**: In Minecraft 1.21+, redstone-powered Crafter blocks (`Material.CRAFTER`) craft automatically without player clicks. When this setting is `true`, any attempt by an automated Crafter to produce a recipe restricted in `restrictions.restricted-items` is immediately intercepted and blocked.
-* **`fail-effect: true`**: When blocked, plays the dispenser fail sound (`Sound.BLOCK_DISPENSER_FAIL`) and spawns smoke particles at the Crafter's coordinates, signaling that the automated process is locked.
-* If set to `block-restricted: false`, Crafters bypass all blueprint checks, allowing redstone factories to mass-produce locked items.
+* **`is-master: true` (Primary Node)**: Recursively parses local YAML files in `blueprints/`, inserts and updates them in the shared database, safely prunes deleted blueprints (`prune-deleted: true`), executes mutating commands (`/cb preset apply`, `/cb generate`), and emits real-time signal pings (`cb_sync_signals`) alerting worker nodes.
+* **`is-master: false` (Worker Nodes)**: Loads all blueprints directly from the shared MySQL database into memory. Worker nodes reject mutating commands to protect against database divergence and race conditions.
 
 ---
 
-### 4. Custom Item Identification (`item-matching`)
+### 3. File Management (`file-management`)
 
-Modern RPG servers use custom item frameworks where hundreds of custom weapons share the base vanilla material `DIAMOND_SWORD`. The `item-matching` SPI inspects items in order of priority:
+* **`directory`**: Directory relative to `plugins/CraftingBlueprints/` where declarative blueprint files are stored (default: `"blueprints"`).
+* **`presets-directory`**: Directory for dormant preset archives and folders (default: `"presets"`).
+* **`prune-deleted: true`**: Automatically prunes deleted YAML blueprints from the database upon reload on the Master node. In-game created blueprints are never pruned.
+* **`auto-reload.enabled: true`**: Starts an asynchronous file watcher on the `blueprints/` directory.
+* **`auto-reload.debounce-delay-ms`**: Sets the delay (default: `1500ms`) before hot-reloading after disk writes finish.
 
-1. **`itemsadder` (`ia:<namespace:id>`)**: Hooks into ItemsAdder custom stacks.
-2. **`nexo` (`nexo:<id>`)**: Hooks into Nexo custom items.
-3. **`oraxen` (`oraxen:<id>`)**: Hooks into Oraxen custom items.
-4. **`mmoitems` (`mmoitems:<TYPE>:<ID>`)**: Hooks into MMOItems equipment.
-5. **`ecoitems` (`ecoitems:<id>`)**: Reads native Paper PDC key `ecoitems:item`.
-6. **`mythicmobs` (`mythicmobs:<id>`)**: Reads native Paper PDC key `mythicmobs:type`.
-7. **`recipe-key` (`recipe:<namespace>:<key>`)**: Matches custom datapack recipes.
-8. **`custom-model-data`**: Matches by CustomModelData integers.
+---
+
+### 4. In-Game Exporter & Backups (`in-game-export`)
+
+* **`enabled: true`**: Automatically exports blueprints created via in-game commands or editor GUI into `exports/manual_blueprints.yml`.
+* **`auto-export-on-reload: true`**: Generates diagnostic text files (`minecraft_recipes.txt`, `groups_recipes.txt`, `registered_blueprints.txt`, `system_summary.txt`) in `exports/` during boot and reload.
+* **`backups.enabled: true`**: Creates rolling backups of `manual_blueprints.yml` at the configured `interval` (e.g. `1h`), keeping up to `max-count` snapshots.
+
+---
+
+### 5. Permission Groups & Recipe Inheritance (`groups`)
+
+Recipe groups grant permission to categories of recipes via `craftingblueprints.group.<id>`:
+
+* **Pattern Matching**: Group blueprint lists support exact material IDs (`iron_ingot`), regex patterns (`".*planks"`), wildcards (`"*gold*"`), potion effects (`"potion:healing.*"`), and enchantments (`"enchantment:mending"`).
+* **Multi-Parent Inheritance (`inherits`)**: Groups can inherit one or multiple parent groups (e.g., `inherits: [default, builder]`), preventing duplicate recipe definitions.
+* **Modular Configuration**: Groups can also be placed in separate files inside `configs/` for organization.
+
+---
+
+### 6. Cache & Memory Management (`cache`)
+
+* **`items.max-size`** (default: `1500`): Maximum Blueprint item instances cached in memory.
+* **`players.max-size`** (default: `500`): Maximum active player unlock profiles held in memory concurrently.
+* **`players.disconnect-grace-period-seconds`** (default: `5`): Time before an offline player's profile can be evicted.
+* **`players.orphan-scavenger-interval-seconds`** (default: `30`): Periodic cleaner pass interval.
+* **`maps.max-cached-buffers`** (default: `500`): Maximum 128x128 byte buffers cached in RAM for instant map delivery.
+
+---
+
+### 7. PlaceholderAPI Integration (`placeholderapi`)
+
+* **`query-database-on-cache-miss: false`**: Recommended for optimal TPS. If an queried profile or item is not cached, returns fallback values (`"false"`, `"0"`) immediately and schedules an async background load.
+* **`allow-sync-queries-on-main-thread: false`**: Protects the server tick rate by preventing blocking database queries during scoreboard updates.
+
+---
+
+### 8. Automated Crafter Interception (`crafter`)
+
+* **`block-restricted: true`**: In Minecraft 1.21+ and 26.x+, redstone-powered Crafter blocks (`Material.CRAFTER`) craft automatically. When enabled, any recipe requiring a blueprint that the Crafter attempts to make is blocked.
+* **`fail-effect: true`**: Spawns smoke particles and plays `Sound.BLOCK_DISPENSER_FAIL` when an automated Crafter attempt is denied.
+
+---
+
+### 9. Custom Item Identification (`item-matching`)
+
+The SPI engine inspects custom items in priority order:
+
+1. **`itemsadder` (`ia:<namespace:id>`)**
+2. **`nexo` (`nexo:<id>`)**
+3. **`oraxen` (`oraxen:<id>`)**
+4. **`mmoitems` (`mmoitems:<TYPE>:<ID>`)**
+5. **`ecoitems` (`ecoitems:<id>`)**
+6. **`mythicmobs` (`mythicmobs:<id>`)**
+7. **`recipe-key` (`recipe:<namespace>:<key>`)**
+8. **`custom-model-data` (`cmd:<MATERIAL>:<INT>`)**
+9. **`generic-pdc` (`pdc:<namespace>:<key>`)**
 
 #### `fallback-to-vanilla: true` (Economy Safety Net)
-When `true`, if a custom sword (e.g. `ia:weapons:flame_blade`) does not have its own explicit custom blueprint, but the base material (`DIAMOND_SWORD`) is restricted, the player must unlock the base Diamond Sword blueprint to craft it. This prevents players from bypassing progression by crafting custom variants.
+When `true`, if a custom item lacks an explicit custom blueprint, the player must own the base vanilla material blueprint (e.g. `DIAMOND_SWORD`) to craft it.
 
 ---
 
-### 5. Workstations & Stations (`stations`)
+### 10. Workstations & Specialized Stations (`stations`)
 
-* **`smelting.track-hoppers: true`**: Tracks the UUID of the player who placed hoppers feeding into smelting stations (Furnaces, Blast Furnaces, Smokers). Smelting only processes restricted recipes if the placing player owns the corresponding blueprint. Unowned or natural hoppers cannot smelt restricted items.
-* **`enchanting-table.cancel-if-locked: true`**: Prevents players from applying high-tier enchantments (such as Mending or Sharpness V) at an Enchantment Table unless they have unlocked the blueprint.
+* **`smelting.enabled: true`**: Intercepts Furnaces, Blast Furnaces, Smokers, and Campfires.
+* **`smelting.track-hoppers: true`**: Records the UUID of the player who placed hoppers feeding into smelting stations. Smelting only processes restricted recipes if the placing player owns the corresponding blueprint.
+* **`smelting.fail-effect: true`**: Plays fail sounds and smoke when smelting is blocked.
+* **`stonecutter.prepare-preview: true`**: Displays locked recipe overlays in the Stonecutter result slot.
+* **`enchanting-table.cancel-if-locked: true`**: Rejects applying high-tier enchantments at Enchantment Tables if the player lacks the blueprint, refunding lapis and experience levels.
 
 ---
 
-### 6. User Experience & Result Slot Previews (`ux`)
+### 11. Recipe Restrictions (`restrictions`)
+
+* **Whitelist Model**: By default, ALL standard Minecraft recipes are free.
+* **`restricted-items`**: Only patterns listed here require a blueprint. Supports prefixes like `craft:`, `smelt:`, `stonecut:`, `enchant:`, `enchant_table:`, and `potion:`. To require blueprints for all recipes, add `".*"`.
+
+---
+
+### 12. User Experience & Result Slot Previews (`ux`)
 
 #### `ux.vanilla-recipe-book`
-* **`sync-on-join` & `sync-on-unlock-expire`**: Automatically synchronizes the green vanilla Recipe Book with the player's unlocked blueprints.
-* **`hide-locked-recipes: true`**: Removes locked recipes from the client Recipe Book so players only see recipes they are certified to craft.
+* **`sync-on-join` & `sync-on-unlock-expire`**: Synchronizes the green vanilla Recipe Book with unlocked blueprints.
+* **`hide-locked-recipes: true`**: Keeps locked recipes hidden from the client Recipe Book.
 
 #### `ux.prepare-preview`
-Controls what appears in the crafting result slot when an unauthorized player arranges ingredients for a locked recipe:
+Controls what appears in the crafting result slot when an unauthorized player sets up a locked recipe:
+* **`HIDE_RESULT`**: The output slot remains completely empty.
+* **`LOCKED_OVERLAY`**: Keeps the output item icon with warning lore.
+* **`CUSTOM_ITEM`**: Replaces the slot with `locked-item` (e.g., Barrier block).
 
-* **`HIDE_RESULT`**: The output slot is completely empty.
-* **`LOCKED_OVERLAY`**: Keeps the output item icon, but appends warning lore explaining that the recipe is locked.
-* **`CUSTOM_ITEM`**: Replaces the output slot with the item defined in `locked-item` (e.g., a red Barrier block with custom model data).
+---
+
+> [!NOTE]
+> World structure and dungeon chest distribution is configured declaratively in [`loot.yml`](../mechanics/loot-generation.md).

@@ -73,7 +73,8 @@ nav:
       - Player Journey & Crafting: mechanics/player-experience.md
       - Recipe Restrictions (Whitelist Mode): mechanics/recipe-restrictions.md
       - Crafter Automation (1.21+): mechanics/crafter-support.md
-      - Potions & Smithing Upgrades: mechanics/potions-and-smithing.md
+      - Potions, Smithing & Stations: mechanics/potions-and-smithing.md
+      - World Loot & Chests (loot.yml): mechanics/loot-generation.md
   - In-Game Menus (GUIs):
       - Player Progression Menu (/cb menu): gui/player-menu.md
       - Blueprint Catalog (/cb item list): gui/catalog-menu.md

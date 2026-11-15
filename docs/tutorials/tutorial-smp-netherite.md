@@ -47,6 +47,7 @@ singles:
   ancient_netherite_smithing:
     # Target item unlocked in 3-slot Smithing Table
     blueprint: NETHERITE_CHESTPLATE
+    station: SMITHING
     name: "<gradient:#FF5555:#FFAA00><bold>Ancient Netherite Smithing Technique</bold></gradient>"
 
     # Permanent unlock: once learned, the player can upgrade Netherite indefinitely
@@ -61,7 +62,7 @@ singles:
 
     # Map visual schematic
     map:
-      theme: dwarven_magma       # Molten volcanic basalt background
+      theme: texture_dwarven_magma # Molten volcanic basalt background texture
       frame: rosette             # Regal Guilloché corner rosettes
       badge: smithing            # Workstation icon on top-left
       icon_scale: 2
@@ -92,9 +93,24 @@ Reload the blueprints to activate the new schematic:
 
 ## Step 3: Add to Bastion Chest Loot Tables
 
-You can distribute this blueprint to players via vanilla datapack loot tables or popular loot plugins.
+You can distribute this blueprint to players naturally via the plugin's native loot engine or external methods:
 
-### Option A: Via MythicDrops or CustomLoot Plugin
+### Option A: Native `loot.yml` Chest Injection (Recommended)
+In `plugins/CraftingBlueprints/loot.yml`, map the blueprint directly to bastion loot tables with a 35% chance:
+
+```yaml
+loot:
+  tables:
+    "minecraft:chests/bastion_*":
+      pools:
+        - chance: 0.35
+          entries:
+            - blueprint: "ancient_netherite_smithing"
+              weight: 15
+```
+Run `/cb reload config` to apply. Blueprints will now naturally appear in Bastion Remnant chests with zero datapacks!
+
+### Option B: Via MythicDrops or CustomLoot Plugin
 Configure the console reward command in your loot table configuration:
 
 ```yaml
@@ -102,7 +118,7 @@ commands:
   - "cb give %player% ancient_netherite_smithing 1"
 ```
 
-### Option B: Vanilla Datapack Loot Table Injection
+### Option C: Vanilla Datapack Loot Table Injection
 In your server datapack (e.g. `data/minecraft/loot_tables/chests/bastion_treasure.json`):
 
 ```json

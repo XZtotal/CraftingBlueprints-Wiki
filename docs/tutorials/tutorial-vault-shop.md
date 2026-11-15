@@ -74,7 +74,7 @@ singles:
 
     lore:
       - "<dark_gray><strikethrough>-----------------------------</strikethrough></dark_gray>"
-      - "<gray>Target Equipment:</gray> <white>{target_item}</white>"
+      - "<gray>Target Equipment:</gray> <white>{target}</white>"
       - "<gray>Tier Classification:</gray> <gold><bold>{tier}</bold></gold>"
       - "<dark_gray><strikethrough>-----------------------------</strikethrough></dark_gray>"
       - "<yellow>Purchase Price:</yellow> <green>${price}</green>"
