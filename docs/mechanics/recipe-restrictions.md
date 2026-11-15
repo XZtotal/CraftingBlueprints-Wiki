@@ -120,5 +120,5 @@ Instead:
 
 1. `config.yml` remains the authority for server-wide base restricted items.
 2. Presets deploy their required restricted items to `configs/presets/<preset_id>/restrictions.yml`.
-3. When the server boots or executes `/cb reload`, the engine automatically combines the restrictions from `config.yml` with all active preset restriction files via set union ($A \cup B$).
+3. When the server boots or executes `/cb reload`, the engine automatically combines the restrictions from `config.yml` with all active preset restriction files via set union.
 4. When you uninstall a preset (`/cb preset remove <preset_id>`), its restrictions are cleanly purged from memory upon reload with zero leftovers.

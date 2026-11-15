@@ -11,7 +11,9 @@ CraftingBlueprints features an event-driven, zero-lag **Loot Generation Engine**
 * **Vanilla Table Wildcards & Regex**: Map pools to Minecraft loot tables using exact keys, wildcards (`minecraft:chests/bastion_*`), or regular expressions.
 * **Overflow & Trash Replacement (`replace-trash-if-full`)**: If a dungeon chest generates completely full (all 27 slots occupied), the engine replaces configured low-value junk items (e.g. rotten flesh, bones, gravel) so rare blueprints are never lost.
 * **Player Luck Scaling**: Supports player Luck attribute scaling (potions, enchantments):
-  $$\text{Effective Chance} = \text{Base Chance} \times (1.0 + (\text{Player Luck} \times \text{luck-modifier}))$$
+  ```text
+  effective_chance = base_chance * (1.0 + (player_luck * luck_modifier))
+  ```
 * **Unbound Ownership**: Blueprints spawned in world loot containers are generated with unassigned ownership (`uuid: null`), allowing discovering players to claim them freely.
 
 ---
