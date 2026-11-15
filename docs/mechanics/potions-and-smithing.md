@@ -13,7 +13,6 @@ Under `restrictions.restricted-items`, add potion patterns using the `potion:` c
 
 ```yaml
 restrictions:
-  mode: "restricted-only"
   restricted-items:
     - "potion:strength.*"
     - "potion:speed.*"
@@ -66,7 +65,6 @@ In `plugins/CraftingBlueprints/config.yml`:
 
 ```yaml
 restrictions:
-  mode: "restricted-only"
   restricted-items:
     - "netherite_sword"
     - "netherite_pickaxe"

@@ -12,7 +12,6 @@ Open `plugins/CraftingBlueprints/config.yml` and ensure your target weapon is re
 
 ```yaml
 restrictions:
-  mode: "restricted-only"
   restricted-items:
     - "netherite_sword"
 ```

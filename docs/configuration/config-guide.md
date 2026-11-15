@@ -325,20 +325,16 @@ stations:
     send-fail-message: true
 
 # ------------------------------------------------------------ #
-# Recipe Restrictions & Whitelist Mode
+# Recipe Restrictions & Selective Gating
 # ------------------------------------------------------------ #
 
 restrictions:
-  # Operational mode:
-  # - 'restricted-only': Whitelist mode where ALL standard Minecraft items and recipes
-  #   are freely craftable by everyone by default!
-  #   ONLY items matching 'restricted-items' require a blueprint. (Recommended for SMP).
-  # - 'all': Universal progression mode where EVERY craftable item requires a blueprint.
-  mode: "restricted-only"
-
   # List of items, materials, potions, or enchantments that require blueprints.
+  # By default, all standard Minecraft items and recipes are completely FREE for everyone!
+  # ONLY items matching 'restricted-items' require a blueprint.
+  # To require blueprints for ALL recipes (universal progression mode), include ".*" or "*".
   # Supports exact names, wildcards (*), regular expressions (.*),
-  # and optional category prefixes (craft:, potion:, enchant:).
+  # and optional category prefixes (craft:, potion:, enchant:, smelt:, stonecut:, enchant_table:).
   restricted-items:
     - "diamond_.*"
     - "netherite_.*"

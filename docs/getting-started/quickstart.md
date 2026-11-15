@@ -120,7 +120,7 @@ The physical map item is consumed from your hand.
 Place two diamonds and a stick into the 3x3 crafting matrix. The Diamond Sword appears in the result slot and crafts normally.
 
 ### Step C: Test Whitelist Protection
-1. Open `plugins/CraftingBlueprints/config.yml` and ensure `restrictions.mode: "restricted-only"` with `diamond_.*` included in `restricted-items`.
+1. Open `plugins/CraftingBlueprints/config.yml` and ensure `diamond_.*` is included in `restrictions.restricted-items`.
 2. Either temporarily deop yourself (`/deop <your_name>`) or set `op-bypass: false` in `config.yml`.
 3. Have an unauthorized player (or test account) place the same ingredients into the crafting table: the recipe will be locked, and the player will be notified that they lack the required blueprint.
 

@@ -25,7 +25,7 @@ If players are able to craft recipes that you intended to lock:
 
 ### Diagnostic Steps:
 * **Check for Operator Bypass (`op-bypass`)**: Are you testing with a player account that has `/op`? By default, `op-bypass: true` in `config.yml` allows operators to craft freely. Run `/deop <your_player_name>` or set `op-bypass: false` in `config.yml` and run `/cb reload config`.
-* **Check your Restriction Mode**: In `config.yml`, verify `restrictions.mode: "restricted-only"`. Unlisted recipes are completely free for all players by default. Ensure your target item pattern (e.g. `diamond_.*`, `netherite_.*`, `beacon`) is explicitly listed under `restricted-items`.
+* **Check your Restriction Rules**: In `config.yml`, unlisted recipes are completely free for all players by default. Ensure your target item pattern (e.g. `diamond_.*`, `netherite_.*`, `beacon`) is explicitly listed under `restrictions.restricted-items` (or add `.*` if you want all recipes to require blueprints).
 * **Check Permission Group Grants**: Run `/lp user <player> permission check craftingblueprints.group.<id>` to verify the player has not inherited a permission group unlocking that category.
 
 ---

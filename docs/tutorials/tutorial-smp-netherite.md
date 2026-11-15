@@ -16,10 +16,7 @@ Open `plugins/CraftingBlueprints/config.yml` and ensure your server is running i
 # ------------------------------------------------------------ #
 
 restrictions:
-  # In 'restricted-only' mode, all basic wood, stone, iron, and diamond
-  # recipes remain completely free and natural for all players!
-  mode: "restricted-only"
-
+  # All basic wood, stone, iron, and diamond recipes remain completely free and natural!
   # ONLY items matching this list will require an unlocked blueprint:
   restricted-items:
     - "netherite_sword"

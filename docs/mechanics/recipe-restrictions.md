@@ -1,19 +1,17 @@
-# Recipe Restrictions (Whitelist Mode vs Universal Gating)
+# Recipe Restrictions (Selective Gating & Pattern Matching)
 
-CraftingBlueprints allows server administrators to choose between **Selective Whitelist Mode** (recommended for Survival SMP) and **Universal Progression Mode** (recommended for Hardcore RPG).
+CraftingBlueprints provides a flexible, pattern-based restriction engine that lets server administrators balance recipe progression without unnecessary complexity.
 
 ---
 
-## Operating Modes Comparison
+## How Restrictions Work
 
 Configured in `plugins/CraftingBlueprints/config.yml` under the `restrictions:` block:
 
 ```yaml
 restrictions:
-  # Mode options: 'restricted-only' or 'all'
-  mode: "restricted-only"
-
-  # Items, recipes, potions, or enchantments that require blueprints
+  # Items, recipes, potions, or enchantments that require blueprints.
+  # Unlisted items are completely FREE for all players by default!
   restricted-items:
     - "diamond_.*"
     - "netherite_.*"
@@ -25,19 +23,26 @@ restrictions:
     - "enchantment:sharpness.*"
 ```
 
-=== "Selective Whitelist Mode (mode: 'restricted-only')"
+### Selective Gating vs Universal Gating
+
+=== "Selective Gating (Default - Recommended for SMP)"
 
     * **Default for Modern SMP & Skyblock Servers**.
     * **All standard Minecraft recipes are completely FREE for all players by default!** Players can craft wooden tools, stone pickaxes, iron armor, torches, furnaces, and beds without ever touching a blueprint.
     * **ONLY items matching `restricted-items` require a blueprint.**
-    * **Why choose this mode?** It eliminates player frustration. You can introduce custom blueprints for endgame gear (such as Netherite weapons, Beacons, or Mending enchantments) while leaving standard survival crafting 100% natural and unhindered.
+    * **Why choose this?** It eliminates player frustration. You can introduce custom blueprints for endgame gear (such as Netherite weapons, Beacons, or Mending enchantments) while leaving standard survival crafting 100% natural and unhindered.
 
-=== "Universal Progression Mode (mode: 'all')"
+=== "Universal Progression Gating (Add '.*' or '*')"
 
     * **Designed for Hardcore RPG, Skyblock, and Quest Networks**.
-    * **Every single craftable item, potion, and enchantment on your server requires a blueprint** before it can be produced.
-    * Players must discover, purchase, or unlock blueprints for basic wood, stone, iron, and farming equipment step-by-step.
-    * Combine this mode with [Permission Groups](../blueprints/groups-and-packs.md#3-permission-groups-in-configyml-groups) to grant tiers of basic recipes to player ranks automatically.
+    * Simply add `".*"` or `"*"` to `restricted-items` to mandate blueprints across all items:
+      ```yaml
+      restrictions:
+        restricted-items:
+          - ".*"
+      ```
+    * **Every single craftable item, potion, and enchantment on your server will require a blueprint** before it can be produced.
+    * Combine this setup with [Permission Groups](../blueprints/groups-and-packs.md#3-permission-groups-in-configyml-groups) to grant tiers of basic recipes to player ranks automatically.
 
 ---
 
@@ -47,6 +52,7 @@ The `restricted-items:` list supports exact identifiers, wildcard globs, regular
 
 | Pattern Syntax | Category Filtered | Example Matches | Operational Behavior |
 | :--- | :--- | :--- | :--- |
+| `.*` or `*` | All | Everything | Universal progression mode; all recipes require blueprints. |
 | `beacon` | Crafting | `BEACON` | Exact material match. Case-insensitive. |
 | `enchanted_golden_apple` | Crafting | `ENCHANTED_GOLDEN_APPLE` | Locks crafting of god apples (if enabled by datapacks). |
 | `diamond_.*` | Crafting | `DIAMOND_SWORD`, `DIAMOND_CHESTPLATE`, `DIAMOND_PICKAXE`, etc. | Regex matching all equipment starting with `diamond_`. |
@@ -103,7 +109,7 @@ When you install pre-built gameplay presets using `/cb preset apply` (e.g. Hardc
 
 Instead:
 
-1. `config.yml` remains the sole authority for global operational mode (`restrictions.mode: "restricted-only"`).
+1. `config.yml` remains the authority for server-wide base restricted items.
 2. Presets deploy their required restricted items to `configs/presets/<preset_id>/restrictions.yml`.
-3. When the server boots or executes `/cb reload`, the engine automatically combines the restrictions from `config.yml` with all active preset restriction files.
+3. When the server boots or executes `/cb reload`, the engine automatically combines the restrictions from `config.yml` with all active preset restriction files via set union ($A \cup B$).
 4. When you uninstall a preset (`/cb preset remove <preset_id>`), its restrictions are cleanly purged from memory upon reload with zero leftovers.
