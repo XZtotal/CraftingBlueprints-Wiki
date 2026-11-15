@@ -88,9 +88,8 @@ singles:
 
 The player unlocks the recipe for a temporary duration measured from the exact moment of unlocking. While active, the player can craft unlimited items. When the timer expires, the recipe is automatically revoked:
 
-> [!NOTE]
-> **Time Duration Formats**  
-> String durations with units (`s`, `m`, `h`, `d`) are strongly recommended (e.g. `time: 24h`, `time: 7d`, `time: 86400s`). Raw integers without units are evaluated in **milliseconds** (e.g. `86400000` = 24 hours; setting `time: 86400` as a raw number would expire in only 86.4 seconds).
+!!! note "Time Duration Formats"
+    String durations with units (`s`, `m`, `h`, `d`) are strongly recommended (e.g. `time: 24h`, `time: 7d`, `time: 86400s`). Raw integers without units are evaluated in **milliseconds** (e.g. `86400000` = 24 hours; setting `time: 86400` as a raw number would expire in only 86.4 seconds).
 
 === "Human Duration String (Recommended)"
     ```yaml

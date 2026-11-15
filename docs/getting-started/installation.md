@@ -15,9 +15,8 @@ CraftingBlueprints is engineered specifically for modern Paper-based server soft
 | **Database** | **SQLite** (Default) or **MySQL 8.0+ / MariaDB 10.5+** | Standalone servers run on embedded SQLite with zero setup. Multi-server networks connect to MySQL via built-in HikariCP connection pooling. |
 | **Network Proxies** | Velocity, BungeeCord, Waterfall | Full support for cross-server networks via shared MySQL and real-time heartbeat sync signals. |
 
-> [!NOTE]
-> **Automated Version Abstraction Layer**  
-> CraftingBlueprints uses an internal Version Abstraction Layer. You do not need separate builds for 1.18.2, 1.20.4, 1.21.x, or 26.x+. Advanced features (such as 1.21 Crafter block interception or 1.20 3-slot Smithing Tables) activate automatically when running on compatible server versions and remain safely dormant on older versions.
+!!! note "Automated Version Abstraction Layer"
+    CraftingBlueprints uses an internal Version Abstraction Layer. You do not need separate builds for 1.18.2, 1.20.4, 1.21.x, or 26.x+. Advanced features (such as 1.21 Crafter block interception or 1.20 3-slot Smithing Tables) activate automatically when running on compatible server versions and remain safely dormant on older versions.
 
 ---
 
@@ -35,9 +34,8 @@ CraftingBlueprints is engineered specifically for modern Paper-based server soft
 
     3. **Start the Server**: Start the server to generate default configuration files, bundled templates, and sample blueprints.
        
-       > [!WARNING]
-       > **Avoid /reload**  
-       > Never use the Bukkit `/reload` or `/reload confirm` command when installing or updating plugins. A clean restart ensures that database connection pools, file watchers, and version adapters initialize safely.
+       !!! warning "Avoid /reload"
+           Never use the Bukkit `/reload` or `/reload confirm` command when installing or updating plugins. A clean restart ensures that database connection pools, file watchers, and version adapters initialize safely.
     
     4. **Verify Boot Output**: Review your server console for the startup diagnostics banner:
        ```text

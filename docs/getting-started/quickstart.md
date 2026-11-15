@@ -91,9 +91,8 @@ Apply your new file to the live server with zero downtime and zero lag:
 
 You will see immediate console confirmation that `obsidian_blade.yml` was parsed, synchronized to the database, and registered in runtime memory.
 
-> [!TIP]
-> **Automatic File Watcher**  
-> If `file-management.auto-reload.enabled: true` is active in `config.yml`, you do not even need to type `/cb reload blueprints`. The plugin detects file saves on disk and hot-reloads automatically after a short 1.5-second debounce window.
+!!! tip "Automatic File Watcher"
+    If `file-management.auto-reload.enabled: true` is active in `config.yml`, you do not even need to type `/cb reload blueprints`. The plugin detects file saves on disk and hot-reloads automatically after a short 1.5-second debounce window.
 
 ---
 
@@ -107,9 +106,8 @@ Give yourself the blueprint using the `/cb give` command:
 
 Look at your hotbar. You will receive a high-resolution in-game map (`Material.FILLED_MAP`) rendering the volcanic Dwarven Forge theme, the central Diamond Sword sprite, the Smithing Table workstation badge, and the Guilloche corner rosettes.
 
-> [!NOTE]
-> **Overflow Safety Guarantee**  
-> If your inventory happens to be completely full when running `/cb give`, CraftingBlueprints automatically drops the leftover items safely onto the ground directly at your feet, preventing silent item deletion.
+!!! note "Overflow Safety Guarantee"
+    If your inventory happens to be completely full when running `/cb give`, CraftingBlueprints automatically drops the leftover items safely onto the ground directly at your feet, preventing silent item deletion.
 
 ---
 

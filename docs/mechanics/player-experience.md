@@ -13,9 +13,8 @@ Players encounter blueprints through multiple gameplay avenues:
 * **Crate & Quest Rewards**: Rewarded by quest plugins or loot crate keys.
 * **Direct Administrative Grants**: Granted by server operators or automated scripts via `/cb give <player> <id> [amount]`.
 
-> [!NOTE]
-> **Item Ownership Protection**  
-> When `item-ownership: true` is enabled in `config.yml`, physical blueprint items are permanently bound to the UUID of the recipient. If an unauthorized player attempts to hold, trade, or right-click the blueprint, an ownership warning is displayed and the unlock is blocked.
+!!! note "Item Ownership Protection"
+    When `item-ownership: true` is enabled in `config.yml`, physical blueprint items are permanently bound to the UUID of the recipient. If an unauthorized player attempts to hold, trade, or right-click the blueprint, an ownership warning is displayed and the unlock is blocked.
 
 ---
 
@@ -34,9 +33,8 @@ When a player receives a blueprint map (`Material.FILLED_MAP`):
     * The physical map item is consumed from the player's hand (unless configured otherwise).
     * The recipe is registered permanently or temporally into the player's account database profile.
 
-> [!TIP]
-> **Container Interaction Priority**  
-> If a player right-clicks an interactive block (such as a chest, barrel, crafting table, or furnace) while holding a blueprint, CraftingBlueprints prioritizes opening the container to prevent accidental consumption. To memorize the blueprint while looking at a container, the player must sneak (**Shift + Right-Click**).
+!!! tip "Container Interaction Priority"
+    If a player right-clicks an interactive block (such as a chest, barrel, crafting table, or furnace) while holding a blueprint, CraftingBlueprints prioritizes opening the container to prevent accidental consumption. To memorize the blueprint while looking at a container, the player must sneak (**Shift + Right-Click**).
 
 ---
 

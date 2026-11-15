@@ -17,9 +17,8 @@ To reload your language files after editing without restarting your server, exec
 /cb reload lang
 ```
 
-> [!TIP]
-> **Automatic Per-Player Locale Resolution**  
-> On Paper servers, CraftingBlueprints automatically detects the Minecraft client language of each connecting player (`player.locale()`). A Spanish player automatically receives Spanish feedback from `messages_es.yml`, while an English player receives English feedback from `messages_en.yml`. If a player's client language is not installed, the plugin falls back to the server default locale (`messages_es.yml` or `messages_en.yml`).
+!!! tip "Automatic Per-Player Locale Resolution"
+    On Paper servers, CraftingBlueprints automatically detects the Minecraft client language of each connecting player (`player.locale()`). A Spanish player automatically receives Spanish feedback from `messages_es.yml`, while an English player receives English feedback from `messages_en.yml`. If a player's client language is not installed, the plugin falls back to the server default locale (`messages_es.yml` or `messages_en.yml`).
 
 ---
 

@@ -88,14 +88,13 @@ In `plugins/CraftingBlueprints/config.yml`:
 op-bypass: true
 ```
 
-> [!WARNING]
-> **Are you testing with /op?**  
-> If your testing account has server operator status (`/op`), CraftingBlueprints will allow you to craft, brew, and enchant restricted recipes freely, bypassing all locks.
-> 
-> To properly test recipe restrictions as a normal player:
-> 
-> 1. Temporarily deop yourself: `/deop <your_player_name>`
-> 2. Alternatively, set `op-bypass: false` in `config.yml` and run `/cb reload config`.
+!!! warning "Are you testing with /op?"
+    If your testing account has server operator status (`/op`), CraftingBlueprints will allow you to craft, brew, and enchant restricted recipes freely, bypassing all locks.
+    
+    To properly test recipe restrictions as a normal player:
+    
+    1. Temporarily deop yourself: `/deop <your_player_name>`
+    2. Alternatively, set `op-bypass: false` in `config.yml` and run `/cb reload config`.
 
 To grant bypass rights to staff members or builders without giving them full operator status, assign the LuckPerms bypass permissions:
 

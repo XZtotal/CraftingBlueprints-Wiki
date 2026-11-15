@@ -402,9 +402,8 @@ ux:
 
 ### 2. Cluster & Multi-Server Network Roles (`is-master`)
 
-> [!CAUTION]
-> **The Golden Rule of Multi-Server Networks**:
-> On networks connected to a shared MySQL database, set `is-master: true` **strictly on ONE Primary Management Node** (e.g. Hub, Lobby, or dedicated Admin server). On all Worker Nodes (Survival, Skyblock, Factions), set `is-master: false`.
+!!! caution "The Golden Rule of Multi-Server Networks"
+    On networks connected to a shared MySQL database, set `is-master: true` **strictly on ONE Primary Management Node** (e.g. Hub, Lobby, or dedicated Admin server). On all Worker Nodes (Survival, Skyblock, Factions), set `is-master: false`.
 
 * **`is-master: true` (Primary Node)**: Recursively parses local YAML files in `blueprints/`, inserts and updates them in the shared database, safely prunes deleted blueprints (`prune-deleted: true`), executes mutating commands (`/cb preset apply`, `/cb generate`), and emits real-time signal pings (`cb_sync_signals`) alerting worker nodes.
 * **`is-master: false` (Worker Nodes)**: Loads all blueprints directly from the shared MySQL database into memory. Worker nodes reject mutating commands to protect against database divergence and race conditions.
@@ -513,5 +512,5 @@ Controls what appears in the crafting result slot when an unauthorized player se
 
 ---
 
-> [!NOTE]
-> World structure and dungeon chest distribution is configured declaratively in [`loot.yml`](../mechanics/loot-generation.md).
+!!! note "World Loot Injection"
+    World structure and dungeon chest distribution is configured declaratively in [`loot.yml`](../mechanics/loot-generation.md).

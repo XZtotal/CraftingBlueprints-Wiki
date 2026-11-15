@@ -8,9 +8,8 @@ CraftingBlueprints features an object-oriented **Template Composition Engine** (
 
 ## 1. Defining Reusable Templates (`templates:` or `mixins:`)
 
-> [!NOTE]
-> **Templates vs. Mixins Vocabulary**  
-> In CraftingBlueprints YAML configurations, `templates:` and `mixins:` are completely interchangeable aliases. Formally, a **Template** refers to the modular block or file, while **Mixin** refers to the compositional technique of combining these properties into blueprints.
+!!! note "Templates vs. Mixins Vocabulary"
+    In CraftingBlueprints YAML configurations, `templates:` and `mixins:` are completely interchangeable aliases. Formally, a **Template** refers to the modular block or file, while **Mixin** refers to the compositional technique of combining these properties into blueprints.
 
 Templates are non-instantiated blueprint modules declared under the root `templates:` section of any YAML file in `plugins/CraftingBlueprints/blueprints/`:
 

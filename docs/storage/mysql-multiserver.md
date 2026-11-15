@@ -30,11 +30,10 @@ This guarantees that when a player unlocks a blueprint on one server, their reci
 
 ## 2. The Golden Rule of Multi-Server Networks
 
-> [!CAUTION]
-> **The Golden Rule: One Primary Node Only**
-> To prevent database divergence, split-brain conflicts, and race conditions, you must designate **strictly ONE Primary Management Node** on your entire network (typically your Hub, Lobby, or Staff server).
-> 
-> All other sub-servers (Survival, Skyblock, Factions, Prison) must operate as **Worker Nodes**.
+!!! caution "The Golden Rule: One Primary Node Only"
+    To prevent database divergence, split-brain conflicts, and race conditions, you must designate **strictly ONE Primary Management Node** on your entire network (typically your Hub, Lobby, or Staff server).
+    
+    All other sub-servers (Survival, Skyblock, Factions, Prison) must operate as **Worker Nodes**.
 
 ### Configuration Comparison:
 
