@@ -12,7 +12,7 @@ In standard Minecraft servers, players interact with crafting tables through cli
 
 ```mermaid
 flowchart LR
-    Clock["Redstone Clock / Lever"] --> Crafter["<b>Crafter Block</b><br/><i>No Human Player Session!<br/>No Unlocked Blueprints!<br/>No Permission Nodes!</i>"] --> Output["Output Container"]
+    Clock["<b>Redstone Trigger</b><br/>Clock, Pulse, or Lever"] --> Crafter["<b>Crafter Block (1.21)</b><br/><i>Autonomous Block Execution<br/>No Human Player Session!</i>"] --> Output["<b>Output Container</b><br/>Chest or Hopper"]
 ```
 
 If an automated Crafter is permitted to craft restricted recipes without blueprint verification:
@@ -28,12 +28,14 @@ If an automated Crafter is permitted to craft restricted recipes without bluepri
 CraftingBlueprints intercepts automated Crafters before any items are produced using the `CrafterRulePipeline`:
 
 ```mermaid
-flowchart LR
-    Pulse["<b>1. Redstone Pulse</b><br/>Triggers Crafter"] --> Intercept["<b>2. Crafter Interception</b><br/>Inspect output item"] --> Check{"Restricted<br/>Item?"}
-    Check -->|No| Allow["<b>Allow Craft</b><br/>Vanilla craft &amp; dispense"]
+flowchart TD
+    Pulse["<b>1. Redstone Pulse</b> — Triggers Crafter block cycle"]
+    --> Intercept["<b>2. Craft Interception</b> — Inspects recipe target item"]
+    --> Check{"Restricted<br/>Recipe?"}
+    Check -->|No| Allow["<b>Allow Craft</b><br/>Vanilla craft & dispense"]
     Check -->|Yes| Config{"crafter.<br/>block-restricted?"}
-    Config -->|true (Default)| Block["<b>DENY CRAFT</b><br/>• Cancel craft event<br/>• Retain ingredients"]
-    Config -->|false| Pass["<b>PASS CRAFT</b><br/>Autonomous redstone craft"]
+    Config -->|"true (Default)"| Block["<b>DENY CRAFT</b><br/>Cancel craft event & retain items"]
+    Config -->|false| Pass["<b>PASS CRAFT</b><br/>Autonomous craft allowed"]
 ```
 
 ### Version Abstraction Layer (VAL)

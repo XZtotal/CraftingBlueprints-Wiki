@@ -13,13 +13,11 @@ Traditional loot injection plugins often scan world chunks on generation or run 
 - **Zero World Scanners**: The engine runs zero chunk-scanning tasks, schedules no heavy world iteration threads, and causes **0 TPS degradation**.
 
 ```mermaid
-flowchart LR
-    Player["<b>Player Interacts with Container</b><br/><i>(Dungeon Chest, Vault, Archaeology)</i>"]
-    Event["<b>Bukkit LootGenerateEvent Fires</b>"]
-    Pipeline["<b>LootRulePipeline Intercepts</b><br/>1. <code>CheckLootEnabledRule</code><br/>2. <code>LootTableMatcherRule</code><br/>3. <code>LootRollEvaluator</code> (CDF roll)<br/>4. <code>BlueprintItemFactory</code><br/>5. <code>ContainerOverflowRule</code>"]
-    Loot["<b>event.getLoot() Modified</b><br/>Chest opens containing blueprint!"]
-
-    Player --> Event --> Pipeline --> Loot
+flowchart TD
+    Player["<b>1. Container Interaction</b> — Player opens dungeon chest, vault, or archaeology block"]
+    --> Event["<b>2. Loot Event Fires</b> — Bukkit <code>LootGenerateEvent</code> dispatched"]
+    --> Pipeline["<b>3. LootRulePipeline Intercepts</b> — Evaluates CDF roll, chance rules, and item factories"]
+    --> Loot["<b>4. Chest Loot Populated</b> — Container opens containing generated blueprint scroll"]
 ```
 
 ---
@@ -246,13 +244,14 @@ $$\text{Effective Chance} = 0.25 \times \left(1.0 + 2 \times 0.05\right) = 0.25 
 Minecraft containers possess finite slot capacities (e.g. single chest: 27 slots, double chest: 54 slots). If vanilla world generation completely fills a container before blueprints are evaluated, CraftingBlueprints resolves capacity conflicts using a three-tier resolution hierarchy:
 
 ```mermaid
-flowchart LR
-    CapCheck{"Capacity &lt;<br/>Max Slots?"}
-    CapCheck -->|Yes| Direct["<b>Direct Placement</b><br/>Appends to chest loot"]
+flowchart TD
+    CapCheck{"Chest Slots<br/>Available?"}
+    CapCheck -->|Yes| Direct["<b>Direct Placement</b><br/>Appends to container loot"]
     CapCheck -->|No| TrashCheck{"replace-trash-if-full:<br/>true?"}
-    TrashCheck -->|No| DropWorld["<b>Drop Naturally</b><br/>Spawns at container coords"]
-    TrashCheck -->|Yes| Scan["<b>Scan Container</b><br/>Search <code>trash-materials</code>"] --> Found{"Trash<br/>Found?"}
-    Found -->|Yes| Replace["<b>Replace Trash</b><br/>Substitutes with blueprint"]
+    TrashCheck -->|No| DropWorld["<b>Drop Naturally</b><br/>Spawns at container coordinates"]
+    TrashCheck -->|Yes| Scan["<b>Scan Container</b><br/>Search for <code>trash-materials</code>"]
+    Scan --> Found{"Trash<br/>Found?"}
+    Found -->|Yes| Replace["<b>Replace Trash</b><br/>Substitutes trash item with blueprint"]
     Found -->|No| DropWorld
 ```
 

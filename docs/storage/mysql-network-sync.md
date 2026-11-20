@@ -10,23 +10,21 @@ In a distributed network topology, backend server instances are categorized into
 
 ```mermaid
 flowchart TD
-    Proxy["<b>Velocity / BungeeCord Proxy Gateway</b>"]
+    Proxy["<b>Velocity / BungeeCord Network Proxy</b>"]
 
-    subgraph Cluster["High-Traffic Server Network Cluster"]
+    subgraph Nodes["High-Traffic Server Network Cluster"]
         direction LR
         Hub["<b>Master Node (Hub-01)</b><br/><code>is-master: true</code><br/>File Watcher Active"]
-        DB[("<b>Shared MySQL Cluster</b><br/><code>craftingblueprints</code>")]
-        Surv["<b>Worker Node 1 (Survival-01)</b><br/><code>is-master: false</code>"]
-        Sky["<b>Worker Node 2 (Skyblock-01)</b><br/><code>is-master: false</code>"]
-
-        Hub -->|Writes Blueprints &amp; Signals| DB
-        DB -->|Real-Time Sync| Surv
-        DB -->|Real-Time Sync| Sky
+        Surv["<b>Worker 1 (Survival-01)</b><br/><code>is-master: false</code>"]
+        Sky["<b>Worker 2 (Skyblock-01)</b><br/><code>is-master: false</code>"]
     end
 
-    Proxy --> Hub
-    Proxy --> Surv
-    Proxy --> Sky
+    DB[("<b>Shared MySQL Database Cluster</b><br/><code>craftingblueprints</code>")]
+
+    Proxy --> Hub & Surv & Sky
+    Hub -->|Writes Blueprints & Signals| DB
+    Surv -->|Polls Real-Time Sync| DB
+    Sky -->|Polls Real-Time Sync| DB
 ```
 
 ---

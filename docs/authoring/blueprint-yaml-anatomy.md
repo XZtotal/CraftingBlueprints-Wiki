@@ -189,13 +189,11 @@ flowchart LR
 To eliminate boilerplate repetition across large networks, CraftingBlueprints provides a two-level defaults cascading engine:
 
 ```mermaid
-flowchart LR
-    D1["<b>Root <code>blueprints/</code> Default</b><br/><code>default:</code> block applied server-wide"]
-    D2["<b>Subfolder Default</b><br/><code>weapons/default:</code> block"]
-    D3["<b>File Default</b><br/><code>file_default:</code> block in active YAML"]
-    D4["<b>Local Blueprint Definition</b><br/>Explicit keys declared directly on blueprint"]
-
-    D1 --> D2 --> D3 --> D4
+flowchart TD
+    D1["<b>1. Root Directory Default</b> — <code>default:</code> block in root <code>blueprints/</code> applied server-wide"]
+    --> D2["<b>2. Subfolder Default</b> — Cascading <code>default:</code> block inside category folder (e.g. <code>weapons/</code>)"]
+    --> D3["<b>3. File Default</b> — <code>file_default:</code> block applied to all blueprints within active YAML"]
+    --> D4["<b>4. Local Blueprint Definition</b> — Explicit keys declared directly on blueprint (highest precedence)"]
 ```
 
 ### 1. Folder Defaults (`default:`)

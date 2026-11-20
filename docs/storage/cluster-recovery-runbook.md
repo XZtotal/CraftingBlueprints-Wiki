@@ -103,6 +103,7 @@ Run a diff check to pinpoint exactly which files are missing or modified:
 Sample output:
 ```text
 Cluster File Difference Report:
+
 - MISSING: images/backgrounds/forge.png (48.2 KB)
 - MISSING: images/stamps/master_stamp.png (12.4 KB)
 - MODIFIED: blueprints/weapons/excalibur.yml (1.2 KB)

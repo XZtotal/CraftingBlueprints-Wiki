@@ -9,8 +9,8 @@ Whether you run an SMP economy that requires consumable crafting licenses, an RP
 ## The Four Durability Modalities
 
 ```mermaid
-flowchart LR
-    Root["<b>Blueprint Lifecycle</b>"]
+flowchart TD
+    Root["<b>Blueprint Lifecycle Modalities</b>"]
     Root --> P["<b>Permanent Blueprint</b><br/>• <code>permanent: true</code><br/>• Infinite crafts (never expires)"]
     Root --> T["<b>Timed Blueprint</b><br/>• <code>duration: 7d</code><br/>• Locks at expiration timestamp"]
     Root --> F["<b>Finite Uses Blueprint</b><br/>• <code>uses: 10</code><br/>• Decrements on craft (locks at 0)"]
@@ -209,8 +209,12 @@ Allows players to quickly test whether they have permission and active charges t
 When a blueprint expires (whether through charge depletion or timer expiration), CraftingBlueprints executes an atomic three-step lifecycle revocation:
 
 ```mermaid
-flowchart LR
-    Event["<b>Expiration Event</b>"] --> E1["<b>1. Memory Invalidate</b><br/>Marked expired in <code>PlayerDB</code>"] --> E2["<b>2. Async Storage</b><br/>Persists state to database"] --> E3["<b>3. Recipe Packet</b><br/>Dispatches removal packet"] --> E4["<b>4. Notification</b><br/>MiniMessage expiration sound"]
+flowchart TD
+    Event["<b>Blueprint Expiration Event Triggered</b>"]
+    --> E1["<b>1. Memory Invalidation</b> — Marked expired in <code>PlayerDB</code> cache in $\mathcal{O}(1)$"]
+    --> E2["<b>2. Async Storage Write</b> — Persists updated expiration state to SQLite / MySQL"]
+    --> E3["<b>3. Recipe Book Packet</b> — Dispatches client recipe undiscovery packet"]
+    --> E4["<b>4. Notification</b> — Plays MiniMessage expiration sound and chat warning"]
 ```
 
 1. **In-Memory Cache & Storage Update**:

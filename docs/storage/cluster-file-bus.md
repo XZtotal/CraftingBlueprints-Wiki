@@ -16,18 +16,17 @@ Traditional multi-server setups rely on external file distribution workarounds, 
 * **Shared Docker Volumes**: Only function when all servers run on the exact same physical host machine, preventing horizontal scaling across cloud providers or dedicated servers.
 * **rsync Cron Scripts**: Require external SSH key management, cron maintenance, and lack reactive event-driven synchronization, leading to race conditions where players join before files transfer.
 
+### Traditional Fragile Architecture
 ```mermaid
-flowchart TD
-    subgraph Trad["Traditional Fragile Architecture (NFS / Cron / Manual Copies)"]
-        direction LR
-        M1["Master Node (Local Assets)"] -.->|rsync / NFS Share (Latency &amp; Outages)| W1["Worker Node 1 (Stale Disk / Missing Textures!)"]
-    end
+flowchart LR
+    M1["<b>Master Node</b><br/>Local Assets Only"] -.->|"rsync / NFS Share: High Latency & Outages"| W1["<b>Worker Nodes</b><br/>Stale Disk & Missing Textures"]
+```
 
-    subgraph Bus["CraftingBlueprints Zero-NFS Architecture (Native Database Bus)"]
-        direction LR
-        M2["Master Node (<code>/cb bus push</code>)"] -->|UPSERT BLOB + SHA-256| DB["MySQL Database (<code>cb_cluster_files</code>)"]
-        DB -->|SHA-256 Manifest Sync &amp; Delta Fetch| W2["Worker Nodes (100% Identical Assets)"]
-    end
+### CraftingBlueprints Zero-NFS Architecture
+```mermaid
+flowchart LR
+    M2["<b>Master Node</b><br/><code>/cb bus push</code>"] -->|"UPSERT BLOB + SHA-256"| DB[("<b>MySQL Database</b><br/><code>cb_cluster_files</code>")]
+    DB -->|"SHA-256 Manifest Sync & Delta Fetch"| W2["<b>Worker Nodes</b><br/>100% Identical Assets"]
 ```
 
 ---
@@ -230,6 +229,7 @@ Performs a pre-flight comparison between the local filesystem and the remote `cb
 **Example Diff Output:**
 ```text
 Cluster File Difference Report:
+
 - MISSING: images/backgrounds/forge.png (48.2 KB)
 - MODIFIED: blueprints/weapons/excalibur.yml (1.2 KB)
 - UNTRACKED: blueprints/test_scrap.yml (0.4 KB)

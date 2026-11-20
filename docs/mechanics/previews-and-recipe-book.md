@@ -13,8 +13,10 @@ When a player places ingredients into a Crafting Table (`PrepareItemCraftEvent`)
 If the player has not unlocked the recipe or has exhausted their craft uses, the result slot dynamically updates to reflect the locked state:
 
 ```mermaid
-flowchart LR
-    Arr["<b>1. Arrange Ingredients</b><br/>In workstation grid"] --> Serv["<b>2. PreparePreviewService</b><br/>Real-time recipe interception"] --> Check{"Has Blueprint<br/>for Output?"}
+flowchart TD
+    Arr["<b>1. Arrange Ingredients</b> — Player places materials in workstation grid"]
+    --> Serv["<b>2. Preview Interception</b> — PreparePreviewService evaluates recipe in real time"]
+    --> Check{"Has Blueprint<br/>for Output?"}
     Check -->|Yes| Show["<b>Display Output</b><br/>Vanilla result item ready to craft"]
     Check -->|No| Ghost["<b>Show Ghost / Barrier Slot</b><br/>Item locked with warning lore"]
 ```
@@ -77,12 +79,10 @@ Minecraft's client-side recipe book (the green knowledge book icon in crafting t
 CraftingBlueprints provides **Incremental Diff-Based Recipe Book Synchronization**:
 
 ```mermaid
-flowchart LR
+flowchart TD
     Event["<b>Blueprint Unlock / Rank Change</b>"]
-    Diff["<b>Calculate Incremental Diff</b><br/><code>gained = new - old</code><br/><code>lost = old - new</code>"]
-    Packet["<b>Dispatch Single Batched Packet</b><br/><code>ClientboundUpdateRecipesPacket</code><br/><i>Zero network flood / Zero client relog</i>"]
-
-    Event --> Diff --> Packet
+    --> Diff["<b>Calculate Incremental Diff</b><br/><code>gained = new - old</code> | <code>lost = old - new</code>"]
+    --> Packet["<b>Dispatch Single Batched Packet</b><br/><code>ClientboundUpdateRecipesPacket</code> (zero network flood)"]
 ```
 
 ### Incremental Diffs (Zero Per-Tick Lag)

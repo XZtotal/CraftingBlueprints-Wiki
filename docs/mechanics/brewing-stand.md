@@ -13,12 +13,15 @@ In vanilla Minecraft, the `BrewEvent` fires when a 20-second brewing cycle finis
 Unlike player inventory clicks, `BrewEvent` is an automated block cycle that does not provide a player reference. To evaluate player blueprints accurately, CraftingBlueprints employs a persistent metadata tracking engine:
 
 ```mermaid
-flowchart LR
-    Ing["<b>1. Ingredient Placed</b><br/>Slot 3 PDC Owner Tagged"] --> Cycle["<b>2. 20s Brew Cycle</b><br/>Active Lock in RAM"] --> Event["<b>3. BrewEvent Fires</b>"] --> Check{"Restricted<br/>Potion?"}
+flowchart TD
+    Ing["<b>1. Ingredient Placed</b> — Top slot 3 stamped with player PDC owner tag"]
+    --> Cycle["<b>2. 20-Second Brew Cycle</b> — Active lock maintained in RAM"]
+    --> Event["<b>3. BrewEvent Fires</b>"]
+    --> Check{"Restricted<br/>Potion?"}
     Check -->|No| Allow["<b>Allow Brew</b><br/>Bottles convert normally"]
     Check -->|Yes| OwnerCheck{"Owner Has<br/>Blueprint?"}
     OwnerCheck -->|Yes| Convert["<b>Convert Bottle</b><br/>Deduct uses from profile"]
-    OwnerCheck -->|No| Cancel["<b>CANCEL BREW!</b><br/>• Refund top ingredient item<br/>• Base potion bottles safe"]
+    OwnerCheck -->|No| Cancel["<b>CANCEL BREW!</b><br/>Refund top ingredient, base bottles safe"]
 ```
 
 1. **Station Type**: Classified internally as `POTION_TYPE` (Type ID `2`).

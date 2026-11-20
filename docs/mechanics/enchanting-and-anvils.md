@@ -14,12 +14,14 @@ CraftingBlueprints intercepts both stations using dedicated rule pipelines, intr
 When a player places a tool or armor piece into an Enchanting Table with lapis lazuli, the table presents three randomized enchantment offerings.
 
 ```mermaid
-flowchart LR
-    GUI["<b>1. Table GUI</b><br/>Player selects offering #3"] --> Pipeline["<b>2. Pipeline</b><br/>EnchantTableRulePipeline"] --> Check{"Requires<br/>Blueprint?"}
-    Check -->|No| Vanilla["<b>Enchant Allowed</b><br/>Vanilla EXP &amp; Lapis consumed"]
+flowchart TD
+    GUI["<b>1. Enchanting Table GUI</b> — Player selects offering #3"]
+    --> Pipeline["<b>2. EnchantTableRulePipeline Intercepts</b>"]
+    --> Check{"Requires<br/>Blueprint?"}
+    Check -->|No| Vanilla["<b>Enchant Allowed</b><br/>Vanilla EXP & Lapis consumed"]
     Check -->|Yes| BPCheck{"Player Has<br/>Blueprint?"}
-    BPCheck -->|Yes| Apply["<b>Apply Enchant</b><br/>Deduct 1 Blueprint Use"]
-    BPCheck -->|No| Cancel["<b>Cancel Event!</b><br/>ZERO XP &amp; Lapis lost"]
+    BPCheck -->|Yes| Apply["<b>Apply Enchant</b><br/>Deduct 1 blueprint use"]
+    BPCheck -->|No| Cancel["<b>Cancel Event</b><br/>Zero XP & Lapis consumed"]
 ```
 
 ### Safe Cancellation Guarantee

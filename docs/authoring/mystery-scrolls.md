@@ -128,13 +128,11 @@ pool:
 When a player acquires an Arcane Mystery Scroll, the rolling workflow is smooth, tactile, and secure:
 
 ```mermaid
-flowchart LR
-    Hold["<b>Player Holds Scroll in Main Hand</b>"]
-    Click["<b>Right-Click Trigger</b><br/>• Decrement 1 scroll from stack<br/>• Cancel block placement"]
-    Roll["<b>CDF Random Sampling</b><br/>• Binary search in $\mathcal{O}(\log N)$<br/>• Select winning blueprint"]
-    Unlock["<b>Atomic Reward Unlock</b><br/>• Write knowledge to <code>PlayerDB</code><br/>• Sync client recipe book<br/>• Level chime &amp; particles"]
-
-    Hold --> Click --> Roll --> Unlock
+flowchart TD
+    Hold["<b>1. Player Holds Scroll</b> — Held in main hand with active mystery scroll PDC"]
+    --> Click["<b>2. Right-Click Trigger</b> — Decrements 1 scroll from stack and cancels block placement"]
+    --> Roll["<b>3. CDF Random Sampling</b> — Fast binary search in $\mathcal{O}(\log N)$ selects winning blueprint"]
+    --> Unlock["<b>4. Atomic Reward Unlock</b> — Writes knowledge to <code>PlayerDB</code>, syncs recipe book, plays chime"]
 ```
 
 1. **Anti-Dupe Validation**: CraftingBlueprints verifies that the item in hand carries the persistent NBT identifier `MYSTERY_TYPE` and consumes exactly 1 item before triggering the roll.

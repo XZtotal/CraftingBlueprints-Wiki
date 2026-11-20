@@ -93,12 +93,13 @@ The `/cb cani` ("Can I?") command verifies whether you have the necessary bluepr
 Hold the target item (or blueprint voucher) in your main hand and execute `/cb cani`. The engine checks your player data against the restriction rules and outputs one of five explicit statuses:
 
 ```mermaid
-flowchart LR
-    Exec["<b>Execute /cb cani</b><br/>(Held item)"] --> Check{"Recipe<br/>Restricted?"}
+flowchart TD
+    Exec["<b>Player Executes /cb cani</b><br/>(Held item in hand)"]
+    --> Check{"Recipe<br/>Restricted?"}
     Check -->|No| Free["<b>Display Unrestricted</b><br/>Free to craft for all players"]
     Check -->|Yes| BPCheck{"Has Blueprint<br/>or Group?"}
-    BPCheck -->|Yes| CanCraft["<b>Display Unlocked</b><br/>Shows remaining uses &amp; time"]
-    BPCheck -->|No| Locked["<b>Display Locked</b><br/>Shows required blueprint or rank"]
+    BPCheck -->|Yes| CanCraft["<b>Display Unlocked</b><br/>Shows remaining uses & duration"]
+    BPCheck -->|No| Locked["<b>Display Locked</b><br/>Shows required blueprint or permission node"]
 ```
 
 #### Status Feedback Examples:

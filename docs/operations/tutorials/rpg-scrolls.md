@@ -5,27 +5,29 @@ In RPG, MMORPG, and faction servers, blueprints can serve as **consumable crafti
 This tutorial demonstrates how to use **Reusable Templates (Mixins)** to create 3-use glowing parchment scrolls for elemental RPG weapons, and how usage depletion enforces progression balance.
 
 ```mermaid
-flowchart LR
-    subgraph Template["blueprints/templates/scroll_template.yml"]
-        T1["• <code>uses: 3</code> (Finite durability)"]
-        T2["• <code>permanent: false</code>"]
-        T3["• <code>station: [CRAFTING_TABLE, ANVIL]</code>"]
+flowchart TD
+    subgraph S1["1. Template Definition (templates/scroll_template.yml)"]
+        direction LR
+        T1["<code>uses: 3</code>"]
+        T2["<code>permanent: false</code>"]
+        T3["<code>station: [CRAFTING_TABLE, ANVIL]</code>"]
     end
 
-    subgraph Blueprint["blueprints/weapons.yml"]
-        B1["<code>singles:</code>"]
-        B2["  <code>infernal_blade:</code>"]
-        B3["    <code>templates: [rpg_scroll]</code>"]
-        B4["    <code>blueprint: NETHERITE_SWORD</code>"]
+    subgraph S2["2. Blueprint Specification (blueprints/weapons.yml)"]
+        direction LR
+        B1["<code>singles: infernal_blade</code>"]
+        B2["<code>templates: [rpg_scroll]</code>"]
+        B3["<code>blueprint: NETHERITE_SWORD</code>"]
     end
 
-    subgraph Item["In-Game Physical Scroll"]
-        I1["Hold scroll in main hand"]
+    subgraph S3["3. In-Game Physical Item Execution"]
+        direction LR
+        I1["Player holds scroll in hand"]
         I2["Right-click to redeem"]
         I3["Grants 3 craft uses of Infernal Blade"]
     end
 
-    Template --> Blueprint --> Item
+    S1 --> S2 --> S3
 ```
 
 ---

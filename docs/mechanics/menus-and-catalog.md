@@ -41,10 +41,11 @@ In standard Minecraft GUI plugins, pressing the `ESC` key or accidentally closin
 CraftingBlueprints introduces **Stack-Based Navigation** and **ESC Restoration** via `MenuSessionManager`:
 
 ```mermaid
-flowchart LR
-    Cmd["<b>/cb menu</b>"] --> Cat["<b>Category View</b>"]
-    Cat --> Detail["<b>Recipe Detail View</b>"]
-    Detail -->|Accidental ESC Key| Restore["<b>Restores Previous Active Menu</b><br/><i>(Zero State Desync via /cb return)</i>"]
+flowchart TD
+    Cmd["<b>1. Command Executed</b> — Player runs <code>/cb menu</code>"]
+    --> Cat["<b>2. Category Selection</b> — Navigates to category grid view"]
+    --> Detail["<b>3. Recipe Detail View</b> — Inspects blueprint requirements"]
+    -->|Accidental ESC Key Pressed| Restore["<b>4. ESC Restoration</b> — <code>/cb return</code> restores exact previous GUI without desync"]
 ```
 
 ## Admin Blueprint Catalog (`/cb item list`)
@@ -74,10 +75,10 @@ Administrators and developers can browse, inspect, and modify all registered ser
 To maintain production stability on version-controlled networks, CraftingBlueprints enforces strict **Source Immutability Rules**:
 
 ```mermaid
-flowchart LR
+flowchart TD
     Check{"Is blueprint defined in<br/><code>blueprints/*.yml</code>?"}
-    Check -->|Yes (is_file_managed: true)| ReadOnly["<b>Read-Only Record</b><br/>Edits in-game REJECTED<br/><i>(Must edit YAML file)</i>"]
-    Check -->|No (is_file_managed: false)| Mutable["<b>Mutable Record</b><br/>Full in-game CRUD permitted<br/><i>(Persists to database &amp; export)</i>"]
+    Check -->|Yes: is_file_managed = true| ReadOnly["<b>Read-Only Record</b><br/>Edits in-game REJECTED (must edit YAML file)"]
+    Check -->|No: is_file_managed = false| Mutable["<b>Mutable Record</b><br/>Full in-game CRUD permitted (persists to DB)"]
 ```
 
 1. **File-Managed Blueprints (`is_file_managed: true`)**:

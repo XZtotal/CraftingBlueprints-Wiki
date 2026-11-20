@@ -157,12 +157,13 @@ On large servers with 100+ players, scoreboards and TAB plugins evaluate placeho
 CraftingBlueprints implements a multi-tier cache shielding architecture to guarantee **solid 20.0 TPS**:
 
 ```mermaid
-flowchart LR
-    Req["<b>Placeholder Request</b><br/><code>%craftingblueprints_unlocked_count%</code>"] --> CacheCheck{"In Memory<br/>Cache?"}
+flowchart TD
+    Req["<b>Placeholder Request</b><br/><code>%craftingblueprints_unlocked_count%</code>"]
+    --> CacheCheck{"In Memory<br/>Cache?"}
     CacheCheck -->|Yes| Fast["<b>Instant Return</b><br/>$\mathcal{O}(1)$ PlayerDB cache query"]
     CacheCheck -->|No| LoadCheck{"Background SQL<br/>Active?"}
-    LoadCheck -->|Yes| Placeholder["<b>Non-Blocking Return</b><br/>Returns <code>...</code> / <code>0</code> (Zero lag)"]
-    LoadCheck -->|No| Trigger["<b>Trigger Async DB Load</b><br/>Fetches row &amp; warms cache"] --> Placeholder
+    LoadCheck -->|Yes| Placeholder["<b>Non-Blocking Return</b><br/>Returns <code>...</code> / <code>0</code> (zero lag)"]
+    LoadCheck -->|No| Trigger["<b>Trigger Async DB Load</b><br/>Fetches row & warms cache"] --> Placeholder
 ```
 
 #### Cache Tuning Settings (`config.yml`):

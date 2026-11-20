@@ -63,11 +63,13 @@ To compile against the CraftingBlueprints public event suite, add `crafting-blue
 Every blueprint interaction fires synchronous, strongly-typed Bukkit events extending `org.bukkit.event.Event`:
 
 ```mermaid
-flowchart LR
+flowchart TD
     Event["<b>org.bukkit.event.Event</b>"]
-    Event --> Unlock["<b>BlueprintUnlockEvent</b><br/><i>(Cancellable)</i>"] --> Buy["<b>BlueprintBuyEvent</b><br/><i>(Cancellable)</i>"]
-    Event --> Use["<b>BlueprintUseEvent</b><br/><i>(Cancellable)</i>"] --> Sell["<b>BlueprintSellEvent</b><br/><i>(Cancellable)</i>"]
-    Event --> Expire["<b>BlueprintExpireEvent</b><br/><i>(Non-cancellable)</i>"]
+    Event --> Unlock["<b>BlueprintUnlockEvent</b> (Cancellable)"]
+    Event --> Use["<b>BlueprintUseEvent</b> (Cancellable)"]
+    Event --> Buy["<b>BlueprintBuyEvent</b> (Cancellable)"]
+    Event --> Sell["<b>BlueprintSellEvent</b> (Cancellable)"]
+    Event --> Expire["<b>BlueprintExpireEvent</b> (Non-cancellable)"]
 ```
 
 ---

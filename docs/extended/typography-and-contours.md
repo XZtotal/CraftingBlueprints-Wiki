@@ -93,14 +93,12 @@ Dark basalt or intricately textured map backgrounds can cause dark item sprites 
 CraftingBlueprints Extended solves this with the **`ItemOutlineRenderer` Euclidean Dilation Engine**:
 
 ```mermaid
-flowchart LR
-    S1["<b>1. Alpha Scan</b><br/>Locate boundary pixels<br/>(α &gt; 30)"]
-    S2["<b>2. Circular Dilation</b><br/>Apply Euclidean radius<br/><code>R = T + 0.45</code>"]
-    S3["<b>3. Outline Render</b><br/>Generate smooth continuous<br/>outer contour"]
-    S4["<b>4. Distance Falloff</b><br/>Blend radial opacity<br/>and falloff ramp"]
-    S5["<b>5. Sprite Blit</b><br/>Original sprite drawn<br/>untouched on top"]
-
-    S1 --> S2 --> S3 --> S4 --> S5
+flowchart TD
+    S1["<b>1. Alpha Scan</b> — Identifies non-transparent boundary pixels (α &gt; 30)"]
+    --> S2["<b>2. Circular Dilation</b> — Computes Euclidean neighborhood radius <code>R = T + 0.45</code>"]
+    --> S3["<b>3. Outline Render</b> — Generates continuous anti-aliased outer contour"]
+    --> S4["<b>4. Distance Falloff</b> — Computes radial opacity gradient falloff"]
+    --> S5["<b>5. Sprite Blit</b> — Blits original sprite crisp and untouched on top"]
 ```
 
 ### Outline Configuration Block

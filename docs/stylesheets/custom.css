@@ -1,8 +1,7 @@
 /* ==========================================================================
    CraftingBlueprints Documentation Custom Stylesheet
    - Table cell padding (left & right: 0.5rem)
-   - Centered Mermaid diagrams with optimized responsive layout
-   - Compact typography for Mermaid diagrams
+   - Centered Mermaid diagrams with clean natural typography
    ========================================================================== */
 
 /* 1. Table cell padding */
@@ -12,7 +11,7 @@
     padding-right: 0.5rem !important;
 }
 
-/* 2. Centered Mermaid diagrams */
+/* 2. Centered Mermaid diagrams container */
 .mermaid,
 div.mermaid,
 pre.mermaid {
@@ -20,7 +19,7 @@ pre.mermaid {
     justify-content: center !important;
     align-items: center !important;
     text-align: center !important;
-    margin: 2rem auto !important;
+    margin: 1.5rem auto !important;
     width: 100% !important;
     overflow-x: auto !important;
 }
@@ -35,19 +34,7 @@ div.mermaid > svg {
     height: auto !important;
 }
 
-/* 3. Smaller, refined typography for Mermaid diagrams */
-.mermaid text,
-.mermaid .label,
-.mermaid .nodeLabel,
-.mermaid .edgeLabel,
-.mermaid .cluster-label,
-.mermaid tspan,
-.mermaid div {
-    font-size: 0.8rem !important;
-    line-height: 1.35 !important;
-}
-
-/* Rounded node borders for a modern visual polish */
+/* Rounded node borders for modern aesthetic */
 .mermaid .node rect,
 .mermaid .node polygon {
     rx: 6px !important;

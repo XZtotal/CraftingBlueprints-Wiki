@@ -64,8 +64,10 @@ groups:
 CraftingBlueprints models group hierarchies as a **Directed Acyclic Graph (DAG)**. When a group inherits from another, an edge is formed from child to parent:
 
 ```mermaid
-flowchart LR
-    pro["<b>pro</b><br/>Master: Netherite, Strength, Mending"] -->|inherits| vip["<b>vip</b><br/>Adventurer: Diamond Weapons, Speed Potions"] -->|inherits| default["<b>default</b><br/>Novice: Wood, Stone, Iron"]
+flowchart TD
+    pro["<b>pro</b><br/>Master: Netherite, Strength, Mending"]
+    -->|inherits| vip["<b>vip</b><br/>Adventurer: Diamond Weapons, Speed Potions"]
+    -->|inherits| default["<b>default</b><br/>Novice: Wood, Stone, Iron"]
 ```
 
 ### Mathematical Set Union

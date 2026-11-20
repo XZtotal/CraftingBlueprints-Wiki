@@ -51,21 +51,23 @@ is-master: false
 
 The primary limitation of traditional SQLite implementations in Minecraft plugins is the `database is locked` error (`SQLiteBusyException`). In standard rollback-journal mode, any write transaction locks the entire database file, causing read operations from player inventory clicks or join checks to fail or stall the server tick loop.
 
+### Traditional Rollback Journal (Blocking)
+```mermaid
+flowchart LR
+    W1["<b>Write Worker</b>"] -->|"Exclusive File Lock"| DB1[("<b>craftingblueprints.db</b><br/>Exclusive Lock Held")]
+    R1["<b>100+ Concurrent Readers</b><br/><i>(Player Joins / GUI Clicks)</i>"] -.->|"READ BLOCKED!<br/>SQLiteBusyException"| DB1
+```
+
+### CraftingBlueprints WAL Architecture (Non-Blocking Concurrency)
 CraftingBlueprints completely eliminates this limitation by configuring SQLite in **Write-Ahead Logging (WAL)** mode backed by high-performance PRAGMAs:
 
 ```mermaid
 flowchart TD
-    subgraph Trad["Traditional Rollback Journal (Blocking)"]
+    subgraph WAL["CraftingBlueprints High-Concurrency WAL Architecture"]
         direction LR
-        W1["Write Worker"] -->|Exclusive Lock on Whole File| DB1["Database File (craftingblueprints.db)"]
-        R1["100+ Concurrent Readers"] -.->|READ BLOCKED! SQLiteBusyException| DB1
-    end
-
-    subgraph WAL["CraftingBlueprints WAL Architecture (High-Performance Non-Blocking Concurrency)"]
-        direction LR
-        W2["Write Worker"] -->|Appends Writes| WALFile[".db-wal Journal"]
-        WALFile -->|Background Checkpoint| DB2["craftingblueprints.db<br/><i>(Never Locked)</i>"]
-        Readers["100+ Concurrent Readers<br/><i>(Player Joins / GUI Clicks)</i>"] -->|Point-in-Time Snapshot via .db-shm| DB2
+        W2["<b>Write Worker</b>"] -->|Appends Writes| WALFile["<b>.db-wal Journal</b>"]
+        WALFile -->|Background Checkpoint| DB2[("<b>craftingblueprints.db</b><br/><i>(Never Locked)</i>")]
+        Readers["<b>100+ Concurrent Readers</b><br/><i>(Player Joins / GUI Clicks)</i>"] -->|Point-in-Time Snapshot via .db-shm| DB2
     end
 ```
 

@@ -25,17 +25,18 @@ The following matrix summarizes the 7 intercepted workstation domains, their cor
 All workstation interactions are processed through modular **Event Rule Pipelines**. Rather than executing arbitrary business logic inside monolithic Bukkit listener classes, every event is evaluated against a deterministic sequence of rules:
 
 ```mermaid
-flowchart LR
-    Start["<b>Interaction</b><br/>Player / Redstone"] --> R1["<b>1. UserLoaded</b><br/>Profile in RAM?"]
-    R1 --> R2["<b>2. Claims Check</b><br/>WorldGuard / GP"]
-    R2 --> R3["<b>3. Bypass Check</b><br/>Has bypass perm?"]
-    R3 --> R4["<b>4. Restriction Check</b><br/>Is item restricted?"]
-    R4 --> R5["<b>5. Blueprint Validation</b><br/>Has blueprint &amp; uses?"]
-    R5 --> R6["<b>6. Deduction</b><br/>Atomic item craft"]
+flowchart TD
+    Start["<b>Interaction Triggered</b> (Player or Redstone)"]
+    --> R1["<b>1. UserLoaded Check</b> — Profile cached in RAM?"]
+    --> R2["<b>2. Claims Check</b> — WorldGuard / GriefPrevention allowed?"]
+    --> R3["<b>3. Bypass Check</b> — Has administrator bypass permission?"]
+    --> R4["<b>4. Restriction Check</b> — Is target item restricted?"]
+    --> R5["<b>5. Blueprint Validation</b> — Player owns valid blueprint with charges?"]
+    --> R6["<b>6. Atomic Execution</b> — Deduct craft use & dispense item"]
 
-    R1 -.->|Not Loaded| Warn["Block &amp; Warn"]
+    R1 -.->|Not Loaded| Warn["Block & Warn"]
     R2 -.->|Protected| Abort["Silent Abort"]
-    R3 -.->|Has Bypass| Pass["Allow Action"]
+    R3 -.->|Has Bypass| Pass["Allow Craft"]
     R4 -.->|Unrestricted| Pass
     R5 -.->|Missing/0 Uses| Deny["Cancel Event"]
 ```

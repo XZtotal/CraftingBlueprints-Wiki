@@ -1,4 +1,4 @@
-// Intercept attachShadow to ensure Mermaid SVGs inside shadow root are centered and styled with compact font size
+// Intercept attachShadow to ensure Mermaid SVGs inside shadow root are centered horizontally
 (function () {
   const origAttachShadow = Element.prototype.attachShadow;
   Element.prototype.attachShadow = function (init) {
@@ -21,17 +21,13 @@
             align-items: center !important;
             text-align: center !important;
             width: 100% !important;
-            margin: 1.8rem auto !important;
+            margin: 1.5rem auto !important;
           }
           svg {
             display: block !important;
             margin: 0 auto !important;
             max-width: 100% !important;
             height: auto !important;
-          }
-          text, .label, .nodeLabel, .edgeLabel, .cluster-label, tspan {
-            font-size: 12px !important;
-            font-family: var(--md-text-font, inherit) !important;
           }
         `;
         shadowRoot.appendChild(style);
