@@ -7,15 +7,17 @@ In modern Minecraft networks, CraftingBlueprints is designed to interoperate sea
 3. **Channel 3 (PersistentDataContainer / PDC)**: Read and verify immutable NBT tags stamped directly into physical blueprint items without executing console commands.
 
 ```mermaid
-flowchart TD
-    Model["<b>CraftingBlueprints Model</b><br/>ID, Target, Duration, Uses, Permanence<br/>price, sell_price, extra sandbox"]
-    PDC["<b>PersistentDataContainer (PDC) Serialization</b><br/>Root Tag: <code>craftment-blueprints:craftment-blueprints</code>"]
-    Items["<b>In-Game Items</b><br/>Tradeable physical scrolls, bundles &amp; maps"]
-    Storage["<b>Database Storage</b><br/>SQLite BLOB / MySQL JSON column"]
+flowchart LR
+    Model["<b>CraftingBlueprints Model</b><br/>ID, Target, Duration, Uses,<br/>Permanence, price, sell_price"]
+    PDC["<b>PDC Serialization</b><br/>Root Tag:<br/><code>craftment-blueprints:craftment-blueprints</code>"]
+    subgraph Targets["Storage &amp; Runtime Entities"]
+        direction TB
+        Items["<b>In-Game Items</b><br/>Tradeable physical scrolls, bundles &amp; maps"]
+        Storage["<b>Database Storage</b><br/>SQLite BLOB / MySQL JSON column"]
+    end
 
     Model --> PDC
-    PDC --> Items
-    PDC --> Storage
+    PDC --> Targets
 ```
 
 ---

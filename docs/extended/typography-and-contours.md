@@ -24,9 +24,9 @@ CraftingBlueprints Extended completely eliminates typography banding using a nor
 $$T(x, y) = \frac{M[y \pmod 4][x \pmod 4] + 0.5}{16}$$
 
 ```mermaid
-flowchart TD
+flowchart LR
     subgraph Dither["Bayer 4×4 Spatial Dithering Ramp"]
-        direction TB
+        direction LR
         S1["<b>Pure Color Stop (C1)</b><br/>100% Cyan"]
         S2["<b>75% Stippling</b><br/>75% Cyan / 25% Mint"]
         S3["<b>50% Balanced Stippling</b><br/>50% Cyan / 50% Mint"]
@@ -93,12 +93,12 @@ Dark basalt or intricately textured map backgrounds can cause dark item sprites 
 CraftingBlueprints Extended solves this with the **`ItemOutlineRenderer` Euclidean Dilation Engine**:
 
 ```mermaid
-flowchart TD
-    S1["<b>1. Alpha Threshold Scan</b><br/>Locate sprite boundary pixels (α &gt; 30)"]
-    S2["<b>2. Circular Dilation Kernel</b><br/>Apply Euclidean radius <code>R = T + 0.45</code>"]
-    S3["<b>3. Outline Generation</b><br/>Render smooth, continuous outer contour"]
-    S4["<b>4. Distance Attenuation</b><br/>Blend radial opacity and falloff"]
-    S5["<b>5. Sprite Blitting</b><br/>Original sprite drawn untouched on top"]
+flowchart LR
+    S1["<b>1. Alpha Scan</b><br/>Locate boundary pixels<br/>(α &gt; 30)"]
+    S2["<b>2. Circular Dilation</b><br/>Apply Euclidean radius<br/><code>R = T + 0.45</code>"]
+    S3["<b>3. Outline Render</b><br/>Generate smooth continuous<br/>outer contour"]
+    S4["<b>4. Distance Falloff</b><br/>Blend radial opacity<br/>and falloff ramp"]
+    S5["<b>5. Sprite Blit</b><br/>Original sprite drawn<br/>untouched on top"]
 
     S1 --> S2 --> S3 --> S4 --> S5
 ```

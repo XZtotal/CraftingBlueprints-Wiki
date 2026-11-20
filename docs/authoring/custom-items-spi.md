@@ -31,11 +31,11 @@ You can target custom items directly in the `blueprint:` field or in recipe rest
 When a player places items into a workstation, CraftingBlueprints resolves potential candidate identifiers in descending order of specificity:
 
 ```mermaid
-flowchart TD
-    T1["<b>Tier 1: Plugin Exact Hooks</b> (Priority: 100–90)<br/>ItemsAdder, Nexo, Oraxen, MMOItems, EcoItems, Mythic"]
-    T2["<b>Tier 2: Recipe Key Provider</b> (Priority: 80)<br/>Bukkit Keyed Recipes (Datapacks &amp; Custom Crafting)"]
-    T3["<b>Tier 3: CustomModelData &amp; Material Tag Matcher</b> (Priority: 70)<br/>Matches <code>material:custom_model_data</code>"]
-    T4["<b>Tier 4: Vanilla Namespaced Fallback</b> (Priority: 10)<br/>Standard Minecraft Items (<code>minecraft:diamond_sword</code>)"]
+flowchart LR
+    T1["<b>Tier 1: Plugin Exact Hooks</b><br/>(Priority: 100–90)<br/>ItemsAdder, Nexo, Oraxen,<br/>MMOItems, EcoItems, Mythic"]
+    T2["<b>Tier 2: Recipe Key Provider</b><br/>(Priority: 80)<br/>Bukkit Keyed Recipes<br/>(Datapacks &amp; Custom)"]
+    T3["<b>Tier 3: CustomModelData &amp; Tag</b><br/>(Priority: 70)<br/>Matches<br/><code>material:custom_model_data</code>"]
+    T4["<b>Tier 4: Vanilla Fallback</b><br/>(Priority: 10)<br/>Standard Minecraft Items<br/>(<code>minecraft:diamond_sword</code>)"]
 
     T1 -->|If not matched| T2
     T2 -->|If not matched| T3

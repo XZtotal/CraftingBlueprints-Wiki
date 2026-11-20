@@ -57,13 +57,13 @@ CraftingBlueprints completely eliminates this limitation by configuring SQLite i
 flowchart TD
     subgraph Trad["Traditional Rollback Journal (Blocking)"]
         direction LR
-        W1["Write Worker"] -->|Blocks Entire File| DB1["Database File"]
-        R1["Readers"] -.->|READ BLOCKED!| DB1
+        W1["Write Worker"] -->|Exclusive Lock on Whole File| DB1["Database File (craftingblueprints.db)"]
+        R1["100+ Concurrent Readers"] -.->|READ BLOCKED! SQLiteBusyException| DB1
     end
 
-    subgraph WAL["CraftingBlueprints WAL Architecture (Non-Blocking Concurrency)"]
-        direction TD
-        W2["Write Worker"] -->|Appends Writes| WALFile[".db-wal Log"]
+    subgraph WAL["CraftingBlueprints WAL Architecture (High-Performance Non-Blocking Concurrency)"]
+        direction LR
+        W2["Write Worker"] -->|Appends Writes| WALFile[".db-wal Journal"]
         WALFile -->|Background Checkpoint| DB2["craftingblueprints.db<br/><i>(Never Locked)</i>"]
         Readers["100+ Concurrent Readers<br/><i>(Player Joins / GUI Clicks)</i>"] -->|Point-in-Time Snapshot via .db-shm| DB2
     end

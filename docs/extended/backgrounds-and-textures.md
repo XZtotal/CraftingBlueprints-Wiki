@@ -42,9 +42,9 @@ For server milestones, mythic crate jackpots, and supreme seasonal rewards, Craf
 These canvases are generated using **2D Continuous Gradient Meshes** emitting a full spectral rainbow that transitions smoothly into a velvety, pitch-free obsidian focal socket ($r \le 22\text{ px}$) to ensure central item sprites remain razor-sharp:
 
 ```mermaid
-flowchart TD
+flowchart LR
     subgraph Arch["Rainbow Gradient Architecture"]
-        direction TB
+        direction LR
         P["<b>Outer Perimeter</b><br/>16 Chromatic Spectral Control Nodes<br/><i>(Gold → Rose → Magenta → Violet → Cyan → Lime)</i>"]
         M["<b>Mid-Field</b><br/>Saturated Jewel Tones"]
         C["<b>Central Socket Sanctuary</b><br/>Deep Velvety Obsidian Void<br/><i>(Zero Noise / Zero Grid / Supreme Sprite Contrast)</i>"]

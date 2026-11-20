@@ -83,7 +83,7 @@ Minecraft's client-side recipe book (the green knowledge book icon in crafting t
 CraftingBlueprints provides **Incremental Diff-Based Recipe Book Synchronization**:
 
 ```mermaid
-flowchart TD
+flowchart LR
     Event["<b>Blueprint Unlock / Rank Change</b>"]
     Diff["<b>Calculate Incremental Diff</b><br/><code>gained = new - old</code><br/><code>lost = old - new</code>"]
     Packet["<b>Dispatch Single Batched Packet</b><br/><code>ClientboundUpdateRecipesPacket</code><br/><i>Zero network flood / Zero client relog</i>"]

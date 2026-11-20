@@ -13,11 +13,11 @@ Traditional loot injection plugins often scan world chunks on generation or run 
 - **Zero World Scanners**: The engine runs zero chunk-scanning tasks, schedules no heavy world iteration threads, and causes **0 TPS degradation**.
 
 ```mermaid
-flowchart TD
+flowchart LR
     Player["<b>Player Interacts with Container</b><br/><i>(Dungeon Chest, Vault, Archaeology)</i>"]
     Event["<b>Bukkit LootGenerateEvent Fires</b>"]
-    Pipeline["<b>LootRulePipeline Intercepts</b><br/>1. <code>CheckLootEnabledRule</code><br/>2. <code>LootTableMatcherRule</code><br/>3. <code>LootRollEvaluator</code> (CDF weighted roll)<br/>4. <code>BlueprintItemFactory</code><br/>5. <code>ContainerOverflowRule</code>"]
-    Loot["<b>event.getLoot() List Modified</b><br/>Chest opens containing blueprint!"]
+    Pipeline["<b>LootRulePipeline Intercepts</b><br/>1. <code>CheckLootEnabledRule</code><br/>2. <code>LootTableMatcherRule</code><br/>3. <code>LootRollEvaluator</code> (CDF roll)<br/>4. <code>BlueprintItemFactory</code><br/>5. <code>ContainerOverflowRule</code>"]
+    Loot["<b>event.getLoot() Modified</b><br/>Chest opens containing blueprint!"]
 
     Player --> Event --> Pipeline --> Loot
 ```

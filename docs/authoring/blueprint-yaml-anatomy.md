@@ -163,17 +163,20 @@ If the `item:` block or `item.material` is omitted:
 - **Mystery Scrolls**: Defaults to `SPONGE`.
 
 ```mermaid
-flowchart TD
+flowchart LR
     subgraph Item["Standard Edition Physical Item Structure"]
         direction TB
         M["<b>Material:</b> <code>NETHER_STAR</code>"]
         C["<b>CustomModelData:</b> <code>3001</code>"]
         G["<b>Enchantment Glint:</b> <code>true</code>"]
-        subgraph PDC["PersistentDataContainer (PDC)"]
-            P1["<code>craftment-blueprints:craftment-blueprints</code>"]
-            P2["<code>craftingblueprints:tier = "LEGENDARY"</code>"]
-        end
     end
+    subgraph PDC["PersistentDataContainer (PDC Tags)"]
+        direction TB
+        P1["<code>craftment-blueprints:craftment-blueprints</code>"]
+        P2["<code>craftingblueprints:tier = 'LEGENDARY'</code>"]
+    end
+
+    Item --- PDC
 ```
 
 !!! tip "Custom Resource Packs & ItemsAdder / Nexo"
@@ -186,7 +189,7 @@ flowchart TD
 To eliminate boilerplate repetition across large networks, CraftingBlueprints provides a two-level defaults cascading engine:
 
 ```mermaid
-flowchart TD
+flowchart LR
     D1["<b>Root <code>blueprints/</code> Default</b><br/><code>default:</code> block applied server-wide"]
     D2["<b>Subfolder Default</b><br/><code>weapons/default:</code> block"]
     D3["<b>File Default</b><br/><code>file_default:</code> block in active YAML"]

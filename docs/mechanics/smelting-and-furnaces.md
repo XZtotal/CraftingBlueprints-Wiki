@@ -103,12 +103,12 @@ On automated survival servers, players often attempt to bypass progression using
 To eliminate this vulnerability, CraftingBlueprints implements **Hopper Ownership Tracking** (`stations.smelting.track-hoppers: true`):
 
 ```mermaid
-flowchart TD
-    Player["<b>Unranked Player</b><br/>Places Hopper (Tagged with Unranked UUID)"]
-    Feed["<b>Feeds Locked Ore into Furnace</b>"]
-    Inherit["<b>Furnace Inherits Hopper's Ownership!</b>"]
-    Eval["<b>Smelt Attempt Evaluated Against Unranked Profile</b>"]
-    Pause["<b>No Blueprint! Smelting Paused at 100%</b><br/><i>Hopper bypass exploit completely mitigated</i>"]
+flowchart LR
+    Player["<b>Unranked Player</b><br/>Places Hopper<br/>(Tagged with UUID)"]
+    Feed["<b>Feeds Locked Ore</b><br/>into Furnace"]
+    Inherit["<b>Furnace Inherits</b><br/>Hopper's Ownership!"]
+    Eval["<b>Smelt Attempt Evaluated</b><br/>Against Unranked Profile"]
+    Pause["<b>Smelting Paused at 100%</b><br/><i>Hopper exploit completely mitigated</i>"]
 
     Player --> Feed --> Inherit --> Eval --> Pause
 ```

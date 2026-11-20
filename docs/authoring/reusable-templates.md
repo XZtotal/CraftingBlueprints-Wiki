@@ -158,12 +158,12 @@ When CraftingBlueprints compiles a blueprint, it merges configurations using a s
 $$\text{Folder Defaults} \;\longrightarrow\; \text{File Defaults} \;\longrightarrow\; \text{Inherited Templates (Left-to-Right)} \;\longrightarrow\; \text{Blueprint Local Config}$$
 
 ```mermaid
-flowchart TD
-    F["<b>1. Inherited Folder Defaults (<code>default:</code>)</b><br/>Cascaded from root <code>blueprints/</code> down to current subfolder"]
-    File["<b>2. File Defaults (<code>file_default:</code>)</b><br/>Specific to the active YAML file"]
-    T["<b>3. Template Mixins (<code>templates: [T1, T2, ... TN]</code>)</b><br/>Evaluated sequentially from left to right"]
-    L["<b>4. Local Blueprint Definition</b><br/>Explicit keys declared directly on the blueprint"]
-    Mem["<b>Final Compiled Blueprint in Memory</b>"]
+flowchart LR
+    F["<b>1. Folder Defaults</b><br/><code>default:</code> block<br/>cascaded from root"]
+    File["<b>2. File Defaults</b><br/><code>file_default:</code> block<br/>in active YAML"]
+    T["<b>3. Template Mixins</b><br/><code>templates: [T1..TN]</code><br/>left-to-right cascade"]
+    L["<b>4. Local Definition</b><br/>Explicit keys declared<br/>directly on blueprint"]
+    Mem["<b>Compiled Blueprint</b><br/>Final in-memory state<br/>bound to workstations"]
 
     F --> File --> T --> L --> Mem
 ```

@@ -67,6 +67,7 @@ extra_javascript:
 
 extra_css:
   - https://unpkg.com/katex@0/dist/katex.min.css
+  - stylesheets/custom.css
 
 nav:
   - Home: index.md

@@ -9,15 +9,22 @@ This tutorial guides you through configuring a **zero-NFS, high-performance Mast
 ```mermaid
 flowchart TD
     Proxy["<b>Velocity / BungeeCord Network Proxy</b>"]
-    Hub["<b>Hub-01 (Master)</b><br/>• Writes blueprints to MySQL<br/>• Broadcasts reload signals"]
-    Surv["<b>Survival-01 (Worker)</b><br/>• Reads blueprints from MySQL<br/>• In-memory local ItemDB"]
-    Sky["<b>Skyblock-01 (Worker)</b><br/>• Reads blueprints from MySQL<br/>• In-memory local ItemDB"]
-    DB[("<b>Shared MySQL Database Cluster</b><br/><code>craftingblueprints</code>")]
 
-    Proxy --> Hub & Surv & Sky
-    Hub -->|Writes Signals| DB
-    DB -->|Polls Signals| Surv
-    DB -->|Polls Signals| Sky
+    subgraph Cluster["Multi-Server Paper / Purpur Network Cluster"]
+        direction LR
+        Hub["<b>Hub-01 (Master)</b><br/>• Writes blueprints to MySQL<br/>• Broadcasts reload signals"]
+        DB[("<b>Shared MySQL Cluster</b><br/><code>craftingblueprints</code>")]
+        Surv["<b>Survival-01 (Worker)</b><br/>• Reads blueprints from MySQL<br/>• In-memory local ItemDB"]
+        Sky["<b>Skyblock-01 (Worker)</b><br/>• Reads blueprints from MySQL<br/>• In-memory local ItemDB"]
+
+        Hub -->|Writes Signals| DB
+        DB -->|Polls Signals| Surv
+        DB -->|Polls Signals| Sky
+    end
+
+    Proxy --> Hub
+    Proxy --> Surv
+    Proxy --> Sky
 ```
 
 ---

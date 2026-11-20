@@ -128,11 +128,11 @@ pool:
 When a player acquires an Arcane Mystery Scroll, the rolling workflow is smooth, tactile, and secure:
 
 ```mermaid
-flowchart TD
+flowchart LR
     Hold["<b>Player Holds Scroll in Main Hand</b>"]
-    Click["<b>Right-Click Trigger</b><br/>• Decrement 1 scroll from stack<br/>• Cancel interaction event to prevent block placement"]
-    Roll["<b>CDF Random Sampling</b><br/>• Binary search random roll in $\mathcal{O}(\log N)$<br/>• Select winning blueprint from pool"]
-    Unlock["<b>Atomic Reward Unlock</b><br/>• Write unlocked knowledge to <code>PlayerDB</code><br/>• Sync client recipe book<br/>• Play level chime and firework particles"]
+    Click["<b>Right-Click Trigger</b><br/>• Decrement 1 scroll from stack<br/>• Cancel block placement"]
+    Roll["<b>CDF Random Sampling</b><br/>• Binary search in $\mathcal{O}(\log N)$<br/>• Select winning blueprint"]
+    Unlock["<b>Atomic Reward Unlock</b><br/>• Write knowledge to <code>PlayerDB</code><br/>• Sync client recipe book<br/>• Level chime &amp; particles"]
 
     Hold --> Click --> Roll --> Unlock
 ```
