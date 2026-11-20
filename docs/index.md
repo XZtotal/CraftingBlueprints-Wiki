@@ -1,98 +1,132 @@
 # CraftingBlueprints Documentation
 
-Welcome to the official documentation for **CraftingBlueprints**, an enterprise-grade Paper/Purpur plugin designed to transform recipe progression, economy balance, and custom crafting across modern Minecraft networks.
+**CraftingBlueprints** is an enterprise-grade recipe restriction, progression gating, and physical schematic engine engineered for modern Paper and Purpur Minecraft servers (1.18.2 through 1.21.x and 26.x+). 
+
+It bridges game balance, economy sinks, and immersive RPG progression by giving server administrators complete declarative control over what players can craft, smelt, brew, and forge across every in-game workstation.
 
 ---
 
 ## What is CraftingBlueprints?
 
-By default, Minecraft allows players to craft any unlocked recipe automatically. **CraftingBlueprints** introduces a true schematic progression system: players must discover, purchase, or earn physical or virtual **Blueprints** to craft specific weapons, armor, tools, or custom items.
+In vanilla Minecraft, players instantly unlock and craft recipes as soon as materials touch their inventory. This bypasses server economies, collapses RPG progression tiers, and trivializes endgame gear acquisition.
 
-Whether you operate a Survival SMP looking to gate Netherite gear, an MMORPG server with limited-use ancient forge scrolls, or a Skyblock network with tiered crafting licenses, CraftingBlueprints gives you absolute control over your server's crafting meta.
-
-### Why Choose CraftingBlueprints?
-
-* **Stunning In-Game Map Schematics**: Renders photorealistic technical blueprints directly onto standard 128x128 Minecraft maps (`Material.FILLED_MAP`) with 25 pre-calibrated background textures (magma, astral, slate, carbon weave), banknote-grade Guilloché borders, procedural item outlines, and rarity styling.
-* **Selective Whitelist Mode**: Don't want to lock every single recipe? Restrict only specific items (such as Netherite equipment, potions, or Beacons) while leaving basic wood, stone, iron, and farming tools completely natural and free.
-* **Native World Loot Injection**: Populates blueprints into dungeon chests, Bastion Remnants, End Cities, and 1.21+/26.x+ Trial Chambers via declarative [`loot.yml`](mechanics/loot-generation.md) configurations with player Luck scaling and trash replacement.
-* **Minecraft 1.21 & 26.x Crafter Protection**: Prevents redstone auto-crafters from bypassing your blueprint economy. Automated Crafter blocks that attempt to produce locked recipes are automatically intercepted and blocked cleanly.
-* **Instant Multi-Server Synchronization**: Supports both standalone embedded SQLite and high-performance MySQL with real-time heartbeat sync signals for BungeeCord and Velocity networks.
-* **Declarative YAML & Hot-Reloading**: Create hundreds of recipes cleanly using reusable templates (mixins), live file watching, and dry-run syntax validation (`/cb validate`).
-* **Custom Items SPI Interoperability**: Seamless out-of-the-box integration with ItemsAdder, Oraxen, Nexo, MMOItems, EcoItems, MythicMobs, and CustomModelData.
+CraftingBlueprints transforms crafting into an intentional, unlockable discipline:
+* **Selective Restriction**: Keep wood, stone, iron, and farming tools 100% free while gating elite gear (Netherite weapons, Beacons, Mending enchantments, Strength II potions) behind physical blueprints or permission groups.
+* **Physical & Virtual Blueprints**: Distribute blueprints as tradeable, physical in-game items (parchment scrolls, books, custom models) with finite craft uses or temporal durations, or grant them virtually via permission nodes.
+* **Workstation Interception**: Enforces restrictions across 7 distinct crafting workstations—including the Minecraft 1.21 redstone-powered Crafter block, Brewing Stands, Furnaces, and Anvils—with complete anti-exploit and hopper injection protection.
+* **Multi-Server Network Architecture**: Built from the ground up for high-traffic networks running Velocity or BungeeCord, offering instant MySQL synchronization and a database-backed zero-NFS cluster file distribution bus.
 
 ---
 
-## 10-Module Navigation
+## Product Tiers Matrix
+
+CraftingBlueprints is architected into two editions sharing the identical high-performance progression engine and zero-lag event pipeline:
+
+| Capability / Feature | Standard Edition | Extended Edition |
+| :--- | :---: | :---: |
+| **Recipe Restriction Engine** (Selective & Universal `.*`) | :white_check_mark: Included | :white_check_mark: Included |
+| **7 Intercepted Workstations** (Crafter, Anvil, Brewing, Smelting, etc.) | :white_check_mark: Included | :white_check_mark: Included |
+| **Physical Blueprint Items** (`PAPER`, `BOOK`, CustomModelData, PDC Tags) | :white_check_mark: Included | :white_check_mark: Included |
+| **Hierarchical Permission Groups & DAG Cycle Detection** | :white_check_mark: Included | :white_check_mark: Included |
+| **1-Click Modality Presets & Scaffolder** (`/cb preset`, `/cb generate`) | :white_check_mark: Included | :white_check_mark: Included |
+| **Multi-Server MySQL Synchronization & Cluster File Bus** | :white_check_mark: Included | :white_check_mark: Included |
+| **Custom Items SPI** (ItemsAdder, Nexo, Oraxen, MMOItems, EcoItems) | :white_check_mark: Included | :white_check_mark: Included |
+| **Vault Economy & PlaceholderAPI Integration** | :white_check_mark: Included | :white_check_mark: Included |
+| **Technical Map Drafting Engine** (`map:` configuration block) | :x: *(Physical Items only)* | :white_check_mark: Included |
+| **25 Procedural Background Textures** (Blueprint, Slate, Forge, Royal) | :x: | :white_check_mark: Included |
+| **Banknote-Grade Guilloché Rosettes & Security Frames** | :x: | :white_check_mark: Included |
+| **Wax Seal Status Stamps & Infinity Badges** ($\infty$, Plaque, Seal) | :x: | :white_check_mark: Included |
+| **Bayer 4x4 Dithered Typography & Procedural Item Contours** | :x: | :white_check_mark: Included |
+| **Custom 128x128 RGBA PNG Background Rendering** | :x: | :white_check_mark: Included |
+
+> [!NOTE]
+> **Transparent Preset Compatibility**  
+> All pre-built presets and scaffolded blueprint files include pre-calibrated `map:` visual blocks. On **Standard Edition**, these visual blocks are safely and transparently ignored by the loader—blueprints function 100% identically in game balance and mechanics as standard physical items.
+
+---
+
+## Core Feature Highlights
+
+### 1. Selective Restriction Engine
+CraftingBlueprints is **permissive by default**. Standard recipes craft without interruption unless explicitly targeted in `restrictions.restricted-items`. Restrict exact items (`beacon`), wildcard patterns (`diamond_*`), regular expressions (`netherite_.*`), or specific workstation prefixes (`potion:strength.*`, `smelt:ancient_debris`).
+
+### 2. 7 Intercepted Workstations
+Unlike basic craft-cancellation plugins, CraftingBlueprints intercepts the entire crafting lifecycle across 7 production environments:
+1. **Crafting Tables & 2x2 Grids**: Real-time recipe blocking and shift-craft capacity calculation.
+2. **Minecraft 1.21 Crafter Blocks**: Redstone-triggered automated crafting interception with fail particles and sound feedback.
+3. **Furnaces, Blast Furnaces, Smokers & Campfires**: Smelting restriction with persistent tile container owner tracking and hopper anti-exploit guards.
+4. **Stonecutters**: Stone block slicing recipe restrictions.
+5. **Anvils**: Differential enchantment and repair level validation.
+6. **Enchanting Tables**: Enchantment tier restrictions.
+7. **Brewing Stands**: Potion alchemy interception with persistent tile PDC bottle tracking and ingredient refunding.
+
+### 3. Zero-NFS Cluster File Distribution Bus
+For multi-server networks, CraftingBlueprints provides a database-backed file synchronization bus (`cb_cluster_files`). Deploy blueprints, modular configurations, or visual assets on your **Master Node**, and every **Worker Node** automatically mirrors changes over MySQL without configuring shared network storage or manual file copying.
+
+### 4. Locked Output Previews & Vanilla Recipe Book Sync
+Players immediately understand their progression boundaries:
+* **Visual Overlays**: Displays red barrier overlays (`LOCKED_OVERLAY`) or custom lore hints in workstation output slots when an unlearned recipe is placed on the grid.
+* **Recipe Book Synchronization**: Automatically removes restricted recipes from the vanilla Minecraft Recipe Book until unlocked, preventing player confusion.
+
+### 5. 1-Click Modality Presets (`/cb preset`)
+Eliminate the "blank-page problem." Deploy fully balanced, pre-configured progression suites for **Hardcore SMP**, **RPG Tiers**, **Skyblock Co-op**, or **OP Prison** in seconds with built-in economy scaling and zero modification to your global `config.yml`.
+
+---
+
+## Documentation Roadmap Navigator
+
+Explore the comprehensive customer manual structured across the 7 Core Pillars:
 
 <div class="grid cards" markdown>
 
--   :material-rocket-launch:{ .lg .middle } __[1. Installation & Setup](getting-started/installation.md)__
+-   :material-rocket-launch:{ .lg .middle } __[1. Getting Started](getting-started/installation.md)__
 
     ---
 
-    System prerequisites, Paper/Purpur version matrix (1.18.2–1.21.x, 26.x+), Java requirements (17, 21, 25+), and clean 4-step setup.
+    System prerequisites (Java 17+, Paper 1.18.2–1.21.x/26.x), 3-step installation, 1-Click presets (`/cb preset`), and authoring your first blueprint in 3 minutes.
 
--   :material-lightning-bolt:{ .lg .middle } __[2. 3-Minute Quickstart](getting-started/quickstart.md)__
-
-    ---
-
-    Create, validate, grant, and craft your very first custom blueprint on a live server in 3 simple steps.
-
--   :material-cog:{ .lg .middle } __[3. Configuration Guide](configuration/config-guide.md)__
+-   :material-shield-lock:{ .lg .middle } __[2. Progression Gating & Rules](progression/recipe-restrictions.md)__
 
     ---
 
-    Exhaustive, line-by-line breakdown of every key in `config.yml`: restrictions, stations, crafter, and file management.
+    Pattern-based recipe restrictions, category prefixes (`craft:`, `smelt:`, `potion:`), hierarchical permission groups with DAG cycle checks, OP isolation rules, and modular `configs/`.
 
--   :material-book-open-page-variant:{ .lg .middle } __[4. Blueprint Authoring](blueprints/basic-blueprint-yaml.md)__
-
-    ---
-
-    Complete YAML reference: property tables, templates, durability modes, groups, and custom item matching.
-
--   :material-shield-lock:{ .lg .middle } __[5. Gameplay Mechanics](mechanics/recipe-restrictions.md)__
+-   :material-book-open-page-variant:{ .lg .middle } __3. Blueprint Authoring (Core)__
 
     ---
 
-    Selective Whitelist Mode, Shift-Click capacity math, 1.21 Crafter anti-exploit, stations, and natural chest loot injection.
+    Declarative YAML syntax (`singles:`, `packages:`, `mysteries:`), `default:` cascading, timed durations, craft use limits, reusable templates, and IDE schema validation (`blueprint.schema.json`).
 
--   :material-view-grid:{ .lg .middle } __[6. In-Game Menus & GUIs](gui/player-menu.md)__
-
-    ---
-
-    Player dashboard (`/cb menu`), server catalog (`/cb item list`), return stack (`/cb return`), and live editor.
-
--   :material-console:{ .lg .middle } __[7. Commands & Permissions](commands-permissions/commands-reference.md)__
+-   :material-palette:{ .lg .middle } __4. Extended Edition (Map Drafting)__
 
     ---
 
-    Exhaustive reference for `/cb` commands, quantity safety bounds, and copy-paste LuckPerms configurations.
+    *Extended Edition exclusive*: photorealistic 128x128 map drafting, 25 procedural textures, Guilloché rosettes, wax seal status stamps, and dithered gradients.
 
--   :material-database-sync:{ .lg .middle } __[8. Database & Networks](storage/mysql-multiserver.md)__
-
-    ---
-
-    Standalone SQLite setup and multi-server MySQL synchronization enforcing the Master/Worker Golden Rule.
-
--   :material-package-variant-closed:{ .lg .middle } __[9. Presets & Scaffolder](presets/using-presets.md)__
+-   :material-hammer-wrench:{ .lg .middle } __5. Workstations & Player Experience__
 
     ---
 
-    1-Click Modality Presets (`/cb preset`) and automatic recipe scaffolding from Bukkit and plugins (`/cb generate`).
+    Interception rules across 7 workstations, 1.21 Crafter automation, hopper anti-exploit guards, locked preview slots, personal progression menus (`/cb menu`), and `/cb return`.
 
--   :material-school:{ .lg .middle } __[10. Cookbook & Tutorials](tutorials/tutorial-smp-netherite.md)__
+-   :material-server-network:{ .lg .middle } __6. Storage & Network Clusters__
 
     ---
 
-    Step-by-step tutorials: SMP Netherite gating, 3-use magic scrolls, Vault shop setup, and crate distribution.
+    Standalone SQLite with WAL mode, multi-server MySQL synchronization, Master vs. Worker node architecture, cluster file distribution bus (`/cb cluster`), and failover recovery runbooks.
+
+-   :material-tune:{ .lg .middle } __7. Operations, Reference & Tutorials__
+
+    ---
+
+    Natural chest loot injection (`loot.yml`), comprehensive command & LuckPerms permission references, Vault economy, PlaceholderAPI identifiers, step-by-step tutorials, and diagnostic tools (`/cb status`, `/cb validate`).
 
 </div>
 
 ---
 
-## Community & Issue Tracker
+## Operational Health & Quick Help
 
-Need assistance, found an edge case, or have a feature proposal?
-
-* Browse our [Frequently Asked Questions](faq/faq.md) and [Troubleshooting Guide](faq/troubleshooting.md).
-* Submit an issue on the [Official GitHub Issue Tracker](https://github.com/XZtotal/CraftingBlueprints-Wiki/issues).
+* **Run Diagnostics**: Type `/cb status` in your server console to review active engine adapters, database latency, and loaded blueprint counts.
+* **Validate Configurations**: Run `/cb validate` at any time to verify YAML syntax, check for ID collisions, and preview lint warnings without altering the live server state.
+* **Troubleshooting**: Visit our [Troubleshooting Guide](operations/troubleshooting-runbook.md) or submit an issue on the [Official GitHub Issue Tracker](https://github.com/XZtotal/CraftingBlueprints-Wiki/issues).

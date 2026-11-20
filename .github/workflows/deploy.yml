@@ -40,9 +40,26 @@ jobs:
           python -m pip install --upgrade pip
           pip install zensical
 
+      - name: Security & Leaked Tooling Audit
+        run: |
+          python -c "
+          import sys, pathlib
+          forbidden = ['/cb testing', 'Plugwright', 'DevStudio', 'VirtualChestGui', 'MockPlayer']
+          docs = pathlib.Path('docs')
+          errors = []
+          for f in docs.rglob('*.md'):
+              text = f.read_text(encoding='utf-8')
+              for term in forbidden:
+                  if term in text:
+                      errors.append(f'{f}: contains forbidden term \"{term}\"')
+          if errors:
+              print('\n'.join(errors))
+              sys.exit(1)
+          "
+
       - name: Build site with Zensical
         run: |
-          zensical build --clean
+          python -m zensical build --clean --strict
 
       - name: Upload GitHub Pages Artifact
         uses: actions/upload-pages-artifact@v3

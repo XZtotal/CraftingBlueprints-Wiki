@@ -62,44 +62,62 @@ extra_javascript:
 
 nav:
   - Home: index.md
-  - Getting Started:
+
+  - 1. Getting Started:
       - Installation & Requirements: getting-started/installation.md
-      - Quickstart (First Blueprint): getting-started/quickstart.md
-  - General Configuration:
-      - Configuration Guide (config.yml): configuration/config-guide.md
-      - Messages, Colors & MiniMessage: configuration/messages-and-colors.md
-  - Blueprint Authoring:
-      - YAML Structure & Fields: blueprints/basic-blueprint-yaml.md
-      - Durability, Limits & Uses: blueprints/durability-and-uses.md
-      - Reusable Templates (Mixins): blueprints/templates-guide.md
-      - Blueprint Packs & Groups: blueprints/groups-and-packs.md
-      - Map Schematics & Visuals: blueprints/map-visuals.md
-      - Custom Items & CustomModelData: blueprints/custom-items.md
-  - In-Game Gameplay:
-      - Player Journey & Crafting: mechanics/player-experience.md
-      - Recipe Restrictions (Whitelist Mode): mechanics/recipe-restrictions.md
-      - Crafter Automation (1.21+): mechanics/crafter-support.md
-      - Potions, Smithing & Stations: mechanics/potions-and-smithing.md
-      - World Loot & Chests (loot.yml): mechanics/loot-generation.md
-  - In-Game Menus (GUIs):
-      - Player Progression Menu (/cb menu): gui/player-menu.md
-      - Blueprint Catalog (/cb item list): gui/catalog-menu.md
-      - In-Game Editor (/cb item edit): gui/in-game-editor.md
-  - Commands & Permissions:
-      - Command Reference: commands-permissions/commands-reference.md
-      - LuckPerms & Permissions Guide: commands-permissions/luckperms-guide.md
-  - Database & Networks:
-      - Standalone Setup (SQLite): storage/sqlite-setup.md
-      - Multi-Server Network (MySQL): storage/mysql-multiserver.md
-  - Presets & Scaffolder:
-      - Pre-Built Presets (/cb preset): presets/using-presets.md
-      - Auto-Scaffolder (/cb generate): presets/auto-scaffolder.md
-  - Tutorials & Cookbook:
-      - Gating Netherite Gear (SMP): tutorials/tutorial-smp-netherite.md
-      - Magic 3-Use Scrolls (RPG): tutorials/tutorial-rpg-scrolls.md
-      - Blueprint Economy (Vault): tutorials/tutorial-vault-shop.md
-      - Crates & Quest Rewards: tutorials/tutorial-crates-and-quests.md
-  - FAQ & Support:
-      - Frequently Asked Questions: faq/faq.md
-      - Troubleshooting Common Issues: faq/troubleshooting.md
-      - Reporting Bugs & Getting Help: faq/getting-support.md
+      - Fast-Track Presets (/cb preset): getting-started/presets-quickstart.md
+      - Quickstart (Your First Blueprint): getting-started/first-blueprint.md
+
+  - 2. Progression Gating & Rules:
+      - Recipe Restriction Engine: progression/recipe-restrictions.md
+      - Hierarchical Permission Groups: progression/permission-groups.md
+      - Modular Configurations (configs/): progression/modular-configs.md
+
+  - 3. Blueprint Authoring (Core):
+      - Declarative YAML Anatomy: authoring/blueprint-yaml-anatomy.md
+      - Durability, Limits & Expiration: authoring/durability-and-limits.md
+      - Reusable Templates (Mixins): authoring/reusable-templates.md
+      - Blueprint Packs & Packages: authoring/blueprint-packages.md
+      - Mystery Scrolls & Crate Rolls: authoring/mystery-scrolls.md
+      - Custom Items & Third-Party SPI: authoring/custom-items-spi.md
+      - IDE IntelliSense & Validation: authoring/ide-schema-validation.md
+
+  - 4. Extended Edition (Map Drafting):
+      - Drafting Engine Overview: extended/drafting-overview.md
+      - Textures, Gradients & Custom PNGs: extended/backgrounds-and-textures.md
+      - Frames, Rosettes & Status Stamps: extended/frames-and-stamps.md
+      - Typography & Item Contours: extended/typography-and-contours.md
+
+  - 5. Workstations & Mechanics:
+      - Workstations Interception Matrix: mechanics/workstations-matrix.md
+      - Crafting Table & Shift-Craft Math: mechanics/crafting-table.md
+      - 1.21 Crafter Block Automation: mechanics/crafter-automation.md
+      - Smelting Stations & Hopper Tracking: mechanics/smelting-and-furnaces.md
+      - Stonecutter Recipe Gating: mechanics/stonecutter.md
+      - Enchanting Tables & Anvil Rules: mechanics/enchanting-and-anvils.md
+      - Brewing Stands & Potion Alchemy: mechanics/brewing-stand.md
+      - Locked Previews & Recipe Book Sync: mechanics/previews-and-recipe-book.md
+      - In-Game Menus & Catalog: mechanics/menus-and-catalog.md
+
+  - 6. Storage & Network Clusters:
+      - Standalone Setup (SQLite): storage/sqlite-storage.md
+      - Multi-Server MySQL Synchronization: storage/mysql-network-sync.md
+      - Cluster File Distribution Bus: storage/cluster-file-bus.md
+      - Cluster Recovery & Failover Runbook: storage/cluster-recovery-runbook.md
+
+  - 7. Operations & Reference:
+      - World Loot & Chest Injection: operations/world-loot-tables.md
+      - Player Command Guide: operations/player-commands.md
+      - Admin Operations & Scaffolding: operations/admin-commands.md
+      - LuckPerms Guide & OP Isolation: operations/luckperms-permissions.md
+      - Diagnostics & Recipe Exports: operations/diagnostics-and-exports.md
+      - Economy, Placeholders & PDC Tags: operations/integrations-papi-pdc.md
+      - Developer API & Bukkit Events: operations/developer-api.md
+      - Production Tutorials:
+          - Gating Netherite Gear (SMP): operations/tutorials/smp-netherite.md
+          - RPG Magic Forge Scrolls: operations/tutorials/rpg-scrolls.md
+          - Multi-Server Cluster Deployment: operations/tutorials/network-cluster.md
+          - Custom Items (ItemsAdder/Nexo): operations/tutorials/custom-gear.md
+      - Incident Troubleshooting Runbooks: operations/troubleshooting-runbook.md
+      - FAQ & Support Guidelines: operations/faq-and-support.md
+
