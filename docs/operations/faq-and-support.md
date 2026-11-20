@@ -80,10 +80,10 @@ CraftingBlueprints maintains an in-memory runtime cache for all active blueprint
 If you encounter unexpected behavior or suspect a bug, our development team is ready to investigate. To ensure swift resolution, please follow these reporting guidelines.
 
 ### Official Issue Tracker
-Submit all bug reports and feature proposals to our official GitHub repository:
+Submit all bug reports, documentation corrections, and feature proposals to our official GitHub repository:
 
-- **Repository**: [`XZtotal/CraftingBlueprints`](https://github.com/XZtotal/CraftingBlueprints)
-- **Tracker**: [GitHub Issues](https://github.com/XZtotal/CraftingBlueprints/issues)
+- **Repository**: [`XZtotal/CraftingBlueprints-Wiki`](https://github.com/XZtotal/CraftingBlueprints-Wiki)
+- **Tracker**: [GitHub Issues](https://github.com/XZtotal/CraftingBlueprints-Wiki/issues)
 
 ---
 
