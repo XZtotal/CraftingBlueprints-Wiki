@@ -38,3 +38,67 @@ div.mermaid > svg {
     rx: 6px !important;
     ry: 6px !important;
 }
+
+/* 3. Theme Gallery 2-Column Responsive Grid */
+.theme-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 1.5rem !important;
+    margin: 1.5rem 0 2rem 0 !important;
+}
+
+@media (max-width: 680px) {
+    .theme-grid {
+        grid-template-columns: 1fr !important;
+    }
+}
+
+.theme-card {
+    background: var(--md-code-bg-color, rgba(0, 0, 0, 0.25));
+    border: 1px solid var(--md-default-fg-color--lightest, rgba(255, 255, 255, 0.1));
+    border-radius: 8px;
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    box-sizing: border-box;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.theme-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+    border-color: var(--md-accent-fg-color, #00e5ff);
+}
+
+.theme-card img {
+    width: 100% !important;
+    max-width: 320px !important;
+    height: auto !important;
+    border-radius: 6px !important;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.45) !important;
+    margin: 0 auto 0.85rem auto !important;
+    display: block !important;
+}
+
+.theme-card h4 {
+    margin: 0.25rem 0 0.25rem 0 !important;
+    font-size: 1.15rem !important;
+    font-weight: 700 !important;
+}
+
+.theme-card code {
+    font-size: 0.9rem !important;
+    padding: 0.15rem 0.6rem !important;
+    border-radius: 4px !important;
+    margin-bottom: 0.5rem !important;
+    display: inline-block !important;
+}
+
+.theme-card p {
+    font-size: 0.88rem !important;
+    margin: 0.2rem 0 0 0 !important;
+    color: var(--md-default-fg-color--light, #a0aec0) !important;
+    line-height: 1.45 !important;
+}

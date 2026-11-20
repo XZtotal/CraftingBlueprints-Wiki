@@ -1,5 +1,5 @@
-!!! important "CraftingBlueprints Extended Exclusive Feature"
-    Custom Guilloché security frames, bespoke corner geometry overrides, custom stamp text, and temporal clock capsules require **CraftingBlueprints Extended**. On the Standard Edition, blueprints render maps cleanly using built-in theme presets (`map.theme: <name>`). See [Map Blueprints & Themes](../authoring/map-themes.md).
+!!! tip "Supporter Feature (Extended Edition)"
+    Custom Guilloché security frames, bespoke corner geometry overrides, custom stamp text, and temporal clock capsules are exclusive to **CraftingBlueprints Extended** (Supporter Edition). On the free base edition, blueprints render maps cleanly using built-in theme presets (`map: { theme: <name> }`). See [Map Blueprints & Themes](../authoring/map-themes.md).
 
 # Frames, Rosettes, Seals & Status Stamps
 

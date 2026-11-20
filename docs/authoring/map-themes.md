@@ -2,10 +2,10 @@
 
 CraftingBlueprints allows physical blueprint items to be rendered directly onto in-game Minecraft maps (`Material.FILLED_MAP`). Rather than handing players ordinary paper or generic icons, players hold tactile, photorealistic technical schematics complete with architectural grids, coordinate crosshairs, ornamental borders, and wax authentication seals.
 
-**Crucially, in-game map blueprints are supported in both CraftingBlueprints Standard Edition and Extended Edition.**
+**Crucially, in-game map blueprints are 100% supported in the free base version of CraftingBlueprints.**
 
-* **Standard Edition (Theme Presets)**: You can render blueprints on in-game maps by applying any of the **26 pre-calibrated theme presets** (`map: { theme: <name> }`). Themes automatically configure harmonious backgrounds, borders, grids, badges, and wax seals with zero manual graphic design.
-* **Extended Edition (Deep Technical Drafting)**: Unlocks layer-by-layer granular customization, including importing custom $128\times128$ PNG backgrounds, custom Guilloché mathematical rosettes, custom stamp text, and Bayer $4\times 4$ dithered typography gradients.
+* **Base Edition (Free for Everyone)**: You can render blueprints on in-game maps by applying any of the built-in theme presets (`map: { theme: <name> }`). Themes automatically configure harmonious backgrounds, borders, grids, badges, and wax seals with zero manual graphic design.
+* **Extended Edition (Supporter Upgrade)**: Created for users who wish to support the ongoing development of the project, unlocking deep cosmetic customization such as importing custom $128\times128$ PNG backgrounds, mathematical Guilloché rosettes, custom stamp text, and Bayer $4\times 4$ dithered typography gradients.
 
 ---
 
@@ -85,19 +85,19 @@ flowchart LR
     R["<b>RARE</b><br/>Technical"]
     E["<b>EPIC</b><br/>Simple Amethyst / Amethyst"]
     L["<b>LEGENDARY</b><br/>Simple Royal / Royal"]
-    M["<b>MYTHIC</b><br/>Rainbow Astral"]
+    M["<b>MYTHIC</b><br/>Rainbow Astral / Rainbow Variants"]
 
     C --> U --> R --> E --> L --> M
 ```
 
-| Rarity Tier | Recommended Theme | Alternative Presets | Visual Style & Atmosphere |
-| :--- | :--- | :--- | :--- |
-| **Common** | `steel` | `technical_slate`, `dark` | Dark industrial slate, clean bracket frame, high contrast white lettering, minimal box stamp. |
-| **Uncommon** | `verdigris` | `emerald`, `verdigris_botanical` | Oxidized copper and deep forest patina, chamfer frame, spring-green accents. |
-| **Rare** | `technical` | `lapis`, `frost` | Classic cyanotype engineering blueprint, drafting grid with measurement ticks, blue wax seal. |
-| **Epic** | `simple_amethyst` | `amethyst`, `void_grimoire`, `crimson` | Arcane runic violet, enchanted purple wax seal, subtle mysticism and anvil iconography. |
-| **Legendary** | `simple_royal` | `royal`, `gold`, `imperial_gold` | Gilded amber and gold, ornamental rosette frame, gold wax seal, prestige radiance. |
-| **Mythic** | `rainbow_astral` | `rainbow`, `rainbow_holofoil`, `rainbow_aurora` | Celestial deep void canvas, chromatic rainbow star border, radiant contour glow. |
+| Rarity Tier | Recommended Theme | Visual Style & Atmosphere |
+| :--- | :--- | :--- |
+| **Common** | `steel` | Dark industrial slate, clean bracket frame, high contrast white lettering, minimal box stamp. |
+| **Uncommon** | `verdigris` | Oxidized copper and deep forest patina, chamfer frame, spring-green accents. |
+| **Rare** | `technical` | Classic cyanotype engineering blueprint, drafting grid with measurement ticks, blue wax seal. |
+| **Epic** | `simple_amethyst` / `amethyst` | Arcane runic violet, enchanted purple wax seal, subtle mysticism and anvil iconography. |
+| **Legendary** | `simple_royal` / `royal` | Gilded amber and gold, ornamental rosette frame, gold wax seal, prestige radiance. |
+| **Mythic** | `rainbow_astral` / `rainbow` *(or any rainbow variant)* | Celestial deep void canvas, chromatic rainbow star border, radiant contour glow. |
 
 ### Production Tier Configuration Example
 Here is a complete, copy-paste production file demonstrating how to organize server tiers using reusable templates and theme presets:
@@ -179,7 +179,7 @@ singles:
 
 ---
 
-## 4. Complete Visual Theme Gallery (26 Themes)
+## 4. Complete Visual Theme Gallery
 
 Every theme below is rendered using the exact same item (`DIAMOND_SWORD`) to allow direct visual comparison of canvas colors, border styles, drafting grids, and authentication seals.
 
@@ -187,16 +187,65 @@ Every theme below is rendered using the exact same item (`DIAMOND_SWORD`) to all
 
 These themes are calibrated for standard RPG item progression, providing balanced contrast and instant visual recognition across item tiers.
 
-| Preview | Theme & Identifiers | Aesthetic Parameters | Recommended In-Game Use |
-| :---: | :--- | :--- | :--- |
-| ![Steel Theme](../assets/images/themes/th_steel_diamond_sword.png){ width="160" } | **Steel**<br/>`theme: steel`<br/>*Aliases:* `common`, `tier_common`, `technical_slate` | • **Canvas:** Deep slate `#101010`<br/>• **Frame:** Bracket `#cbd5e1`<br/>• **Grid:** Charcoal `#2F2E2E` (ticks & reticle)<br/>• **Stamp:** White Box `[INF]` | **Common Tier**: Stone/Iron equipment, apprentice tools, basic permits. |
-| ![Verdigris Theme](../assets/images/themes/th_verdigris_diamond_sword.png){ width="160" } | **Verdigris**<br/>`theme: verdigris`<br/>*Aliases:* `uncommon`, `tier_uncommon`, `verdigris_botanical` | • **Canvas:** Forest patina `#0c261c`<br/>• **Frame:** Chamfer `#34d399`<br/>• **Title:** Emerald green<br/>• **Stamp:** Green Box `[INF]` | **Uncommon Tier**: Copper/Bronze gear, bows, utility tools, herbalism. |
-| ![Technical Theme](../assets/images/themes/th_technical_diamond_sword.png){ width="160" } | **Technical**<br/>`theme: technical`<br/>*Aliases:* `blueprint`, `cyanotype` | • **Canvas:** Cyanotype navy `#122a54`<br/>• **Frame:** Diamond `#38bdf8`<br/>• **Grid:** Full drafting grid & coordinate ticks<br/>• **Stamp:** Blue Wax Seal `(∞)` | **Rare Tier**: Diamond equipment, Redstone mechanisms, Crafter schematics. |
-| ![Lapis Theme](../assets/images/themes/th_lapis_diamond_sword.png){ width="160" } | **Lapis**<br/>`theme: lapis`<br/>*Aliases:* `rare`, `tier_rare`, `nautical_astrolabe` | • **Canvas:** Deep oceanic navy `#0e1c3a`<br/>• **Frame:** Diamond `#60a5fa`<br/>• **Title:** Aqua blue<br/>• **Stamp:** Cobalt Wax Seal `(∞)` | **Rare Tier Alternative**: Nautical exploration, Tridents, Turtle master gear. |
-| ![Simple Amethyst Theme](../assets/images/themes/th_simple_amethyst_diamond_sword.png){ width="160" } | **Simple Amethyst**<br/>`theme: simple_amethyst`<br/>*Aliases:* `runic`, `mystery`, `arcane` | • **Canvas:** Deep runic violet `#360647`<br/>• **Frame:** Runic `#A46BDC`<br/>• **Grid:** Violet `#460857`<br/>• **Stamp:** Purple Wax Seal `(∞)` | **Epic Tier**: Enchantment schematics, potion brewing, arcane mystery scrolls. |
-| ![Amethyst Theme](../assets/images/themes/th_amethyst_diamond_sword.png){ width="160" } | **Amethyst**<br/>`theme: amethyst`<br/>*Aliases:* `epic`, `tier_epic`, `void_grimoire` | • **Canvas:** Void grimoire `#1c183c`<br/>• **Frame:** Runic `#c084fc`<br/>• **Badge:** Anvil icon<br/>• **Outline:** Magenta glow contour (`#D416FF`) | **Epic Tier Elite**: Master anvil forging, Netherite upgrades, grimoires. |
-| ![Simple Royal Theme](../assets/images/themes/th_simple_royal_diamond_sword.png){ width="160" } | **Simple Royal**<br/>`theme: simple_royal`<br/>*Aliases:* `royal_blue` | • **Canvas:** Royal amber `#2B280D`<br/>• **Frame:** Rosette `#facc15`<br/>• **Outline:** Gilded aura `#BBC01B`<br/>• **Stamp:** Gold Wax Seal `(∞)` | **Legendary Tier**: Sovereign armor, royal armory bundles, high-value weapons. |
-| ![Royal Theme](../assets/images/themes/th_royal_diamond_sword.png){ width="160" } | **Royal**<br/>`theme: royal`<br/>*Aliases:* `legendary`, `tier_legendary`, `gold`, `imperial_gold` | • **Canvas:** Imperial gold texture `#28200c`<br/>• **Frame:** Ornate Rosette `#facc15`<br/>• **Badge:** Smithing icon<br/>• **Outline:** Gold radiance (`#ECF15B`) | **Legendary Tier Elite**: Server boss relics, custom artifacts, royal crown gear. |
+<div class="theme-grid">
+
+  <div class="theme-card">
+    <img src="../assets/images/themes/th_steel_diamond_sword.png" alt="Steel Theme" />
+    <h4>Steel</h4>
+    <code>theme: steel</code>
+    <p>Dark industrial slate canvas with clean bracket corners and crisp white stamp.</p>
+  </div>
+
+  <div class="theme-card">
+    <img src="../assets/images/themes/th_verdigris_diamond_sword.png" alt="Verdigris Theme" />
+    <h4>Verdigris</h4>
+    <code>theme: verdigris</code>
+    <p>Oxidized copper patina canvas with chamfer borders and emerald green accents.</p>
+  </div>
+
+  <div class="theme-card">
+    <img src="../assets/images/themes/th_technical_diamond_sword.png" alt="Technical Theme" />
+    <h4>Technical</h4>
+    <code>theme: technical</code>
+    <p>Classic cyanotype engineering blueprint with full drafting grid and coordinate ticks.</p>
+  </div>
+
+  <div class="theme-card">
+    <img src="../assets/images/themes/th_lapis_diamond_sword.png" alt="Lapis Theme" />
+    <h4>Lapis</h4>
+    <code>theme: lapis</code>
+    <p>Deep oceanic navy background with geometric diamond frame and cobalt seal.</p>
+  </div>
+
+  <div class="theme-card">
+    <img src="../assets/images/themes/th_simple_amethyst_diamond_sword.png" alt="Simple Amethyst Theme" />
+    <h4>Simple Amethyst</h4>
+    <code>theme: simple_amethyst</code>
+    <p>Deep runic violet canvas with arcane border geometry and purple wax seal.</p>
+  </div>
+
+  <div class="theme-card">
+    <img src="../assets/images/themes/th_amethyst_diamond_sword.png" alt="Amethyst Theme" />
+    <h4>Amethyst</h4>
+    <code>theme: amethyst</code>
+    <p>Void grimoire texture with anvil badge, runic frame, and vibrant magenta glow contour.</p>
+  </div>
+
+  <div class="theme-card">
+    <img src="../assets/images/themes/th_simple_royal_diamond_sword.png" alt="Simple Royal Theme" />
+    <h4>Simple Royal</h4>
+    <code>theme: simple_royal</code>
+    <p>Royal dark amber canvas with golden rosette frame, gold wax seal, and gilded aura.</p>
+  </div>
+
+  <div class="theme-card">
+    <img src="../assets/images/themes/th_royal_diamond_sword.png" alt="Royal Theme" />
+    <h4>Royal</h4>
+    <code>theme: royal</code>
+    <p>Imperial gold texture with ornate rosette geometry, smithing badge, and golden radiance.</p>
+  </div>
+
+</div>
 
 ---
 
@@ -204,16 +253,65 @@ These themes are calibrated for standard RPG item progression, providing balance
 
 The Mythic collection features chromatic multi-color star frames and iridescent aura contours designed for pinnacle endgame achievements.
 
-| Preview | Theme & Identifiers | Aesthetic Parameters | Recommended In-Game Use |
-| :---: | :--- | :--- | :--- |
-| ![Rainbow Astral Theme](../assets/images/themes/th_rainbow_astral_diamond_sword.png){ width="160" } | **Rainbow Astral**<br/>`theme: rainbow_astral` | • **Canvas:** Celestial void `#05141c`<br/>• **Frame:** Star (Rainbow chromatic cycling)<br/>• **Badge:** Crafting table<br/>• **Outline:** Dynamic rainbow contour | **Mythic Tier Primary**: Universal endgame weapons, omni-tools, supreme rewards. |
-| ![Simple Rainbow Theme](../assets/images/themes/th_simple_rainbow_diamond_sword.png){ width="160" } | **Simple Rainbow**<br/>`theme: simple_rainbow` | • **Canvas:** Obsidian dark `#0e1222`<br/>• **Frame:** Star (Rainbow chromatic border)<br/>• **Stamp:** Cyan Box `[INF]`<br/>• **Outline:** Dynamic rainbow contour | **Mythic Tier Clean**: Clean dark aesthetic with vibrant rainbow accents. |
-| ![Rainbow Theme](../assets/images/themes/th_rainbow_diamond_sword.png){ width="160" } | **Rainbow**<br/>`theme: rainbow`<br/>*Aliases:* `mythic`, `tier_mythic` | • **Canvas:** Procedural prism gradient<br/>• **Frame:** Star (Rainbow border)<br/>• **Stamp:** Cyan Wax Seal `(∞)`<br/>• **Outline:** Rainbow edge glow | **Mythic Tier Classic**: Full-canvas chromatic brilliance, crate jackpot prizes. |
-| ![Rainbow Holofoil Theme](../assets/images/themes/th_rainbow_holofoil_diamond_sword.png){ width="160" } | **Rainbow Holofoil**<br/>`theme: rainbow_holofoil`<br/>*Aliases:* `holofoil`, `mythic_holofoil` | • **Frame:** Prismatic foil `#00f5ff` to `#f43f5e`<br/>• **Canvas:** Shimmering holographic foil<br/>• **Outline:** Rainbow contour | **Collectible / Event Tier**: Limited-edition event items, holographic trading cards. |
-| ![Rainbow Aurora Theme](../assets/images/themes/th_rainbow_aurora_diamond_sword.png){ width="160" } | **Rainbow Aurora**<br/>`theme: rainbow_aurora`<br/>*Aliases:* `aurora`, `mythic_aurora` | • **Canvas:** Northern lights sky `#38bdf8`<br/>• **Frame:** Star border with aurora tint<br/>• **Outline:** Rainbow contour | **Celestial Tier**: Flying mounts, Elytras, celestial staves, winter holiday drops. |
-| ![Rainbow Nebula Theme](../assets/images/themes/th_rainbow_nebula_diamond_sword.png){ width="160" } | **Rainbow Nebula**<br/>`theme: rainbow_nebula`<br/>*Aliases:* `nebula`, `mythic_nebula` | • **Canvas:** Cosmic interstellar lavender `#c084fc`<br/>• **Frame:** Star border with violet glow<br/>• **Outline:** Rainbow contour | **Cosmic Tier**: Dimensional portal keys, End City conqueror schematics. |
-| ![Rainbow Bismuth Theme](../assets/images/themes/th_rainbow_bismuth_diamond_sword.png){ width="160" } | **Rainbow Bismuth**<br/>`theme: rainbow_bismuth`<br/>*Aliases:* `bismuth`, `mythic_bismuth` | • **Canvas:** Crystalline stepped hopper crystals<br/>• **Frame:** Diamond `#f472b6`<br/>• **Stamp:** Gold Wax Seal `(∞)` | **Crystal / Gem Tier**: Custom jewelcrafting, socketed gear, alchemy elixirs. |
-| ![Rainbow Moire Theme](../assets/images/themes/th_rainbow_moire_diamond_sword.png){ width="160" } | **Rainbow Moire**<br/>`theme: rainbow_moire`<br/>*Aliases:* `moire`, `mythic_moire` | • **Canvas:** Optical wave interference pattern<br/>• **Frame:** Star border with teal accent `#2dd4bf`<br/>• **Outline:** Rainbow contour | **Temporal / Arcane Tier**: Time-warp gear, warp scrolls, dimension keys. |
+<div class="theme-grid">
+
+  <div class="theme-card">
+    <img src="../assets/images/themes/th_rainbow_astral_diamond_sword.png" alt="Rainbow Astral Theme" />
+    <h4>Rainbow Astral</h4>
+    <code>theme: rainbow_astral</code>
+    <p>Deep space void canvas with crafting badge and chromatic rainbow cycling star border.</p>
+  </div>
+
+  <div class="theme-card">
+    <img src="../assets/images/themes/th_simple_rainbow_diamond_sword.png" alt="Simple Rainbow Theme" />
+    <h4>Simple Rainbow</h4>
+    <code>theme: simple_rainbow</code>
+    <p>Clean obsidian dark canvas framed by vibrant chromatic rainbow star borders.</p>
+  </div>
+
+  <div class="theme-card">
+    <img src="../assets/images/themes/th_rainbow_diamond_sword.png" alt="Rainbow Theme" />
+    <h4>Rainbow</h4>
+    <code>theme: rainbow</code>
+    <p>Full-canvas procedural prism gradient with dynamic rainbow star frame and edge glow.</p>
+  </div>
+
+  <div class="theme-card">
+    <img src="../assets/images/themes/th_rainbow_holofoil_diamond_sword.png" alt="Rainbow Holofoil Theme" />
+    <h4>Rainbow Holofoil</h4>
+    <code>theme: rainbow_holofoil</code>
+    <p>Shimmering holographic foil canvas with cyan-to-rose chromatic gradient frame.</p>
+  </div>
+
+  <div class="theme-card">
+    <img src="../assets/images/themes/th_rainbow_aurora_diamond_sword.png" alt="Rainbow Aurora Theme" />
+    <h4>Rainbow Aurora</h4>
+    <code>theme: rainbow_aurora</code>
+    <p>Northern lights sky canvas with celestial cyan tints and vibrant rainbow contour.</p>
+  </div>
+
+  <div class="theme-card">
+    <img src="../assets/images/themes/th_rainbow_nebula_diamond_sword.png" alt="Rainbow Nebula Theme" />
+    <h4>Rainbow Nebula</h4>
+    <code>theme: rainbow_nebula</code>
+    <p>Cosmic interstellar lavender canvas with violet glow accents and rainbow contour.</p>
+  </div>
+
+  <div class="theme-card">
+    <img src="../assets/images/themes/th_rainbow_bismuth_diamond_sword.png" alt="Rainbow Bismuth Theme" />
+    <h4>Rainbow Bismuth</h4>
+    <code>theme: rainbow_bismuth</code>
+    <p>Crystalline stepped bismuth hopper crystal canvas with diamond frame geometry.</p>
+  </div>
+
+  <div class="theme-card">
+    <img src="../assets/images/themes/th_rainbow_moire_diamond_sword.png" alt="Rainbow Moire Theme" />
+    <h4>Rainbow Moire</h4>
+    <code>theme: rainbow_moire</code>
+    <p>Optical wave interference pattern with seafoam teal star border and rainbow glow.</p>
+  </div>
+
+</div>
 
 ---
 
@@ -221,36 +319,78 @@ The Mythic collection features chromatic multi-color star frames and iridescent 
 
 These presets capture specific environmental and gameplay themes, such as desert ruins, subterranean forges, frozen glaciers, or nether blood altars.
 
-| Preview | Theme & Identifiers | Aesthetic Parameters | Recommended In-Game Use |
-| :---: | :--- | :--- | :--- |
-| ![Forge Theme](../assets/images/themes/th_forge_diamond_sword.png){ width="160" } | **Forge**<br/>`theme: forge`<br/>*Aliases:* `dwarven`, `dwarven_forge` | • **Canvas:** Volcanic iron `#1e1e24`<br/>• **Frame:** Chamfer blazing orange `#f97316`<br/>• **Stamp:** Ember Wax Seal `#ea580c` | Blast Furnace schematics, fiery weapons, heavy blacksmithing. |
-| ![Desert Theme](../assets/images/themes/th_desert_diamond_sword.png){ width="160" } | **Desert**<br/>`theme: desert`<br/>*Aliases:* `antique`, `parchment`, `sandstone`, `cartography` | • **Canvas:** Weathered parchment `#bcac84`<br/>• **Frame:** Chamfer earth-brown `#705634`<br/>• **Stamp:** Antique Gold Wax Seal `#c49a45` | Ancient ruins, archaeology brushes, treasure maps, RPG scrolls. |
-| ![Frost Theme](../assets/images/themes/th_frost_diamond_sword.png){ width="160" } | **Frost**<br/>`theme: frost`<br/>*Aliases:* `glacial` | • **Canvas:** Arctic glacial blue `#103542`<br/>• **Frame:** Diamond ice-cyan `#22d3ee`<br/>• **Stamp:** Cyan Wax Seal | Ice magic, snowy biome loot, frost walker gear. |
-| ![Crimson Theme](../assets/images/themes/th_crimson_diamond_sword.png){ width="160" } | **Crimson**<br/>`theme: crimson`<br/>*Aliases:* `blood_forge` | • **Canvas:** Nether crimson `#361618`<br/>• **Frame:** Runic blood-red `#ef4444`<br/>• **Stamp:** Crimson Wax Seal | Nether fortress loot, blood magic, berserker axes. |
-| ![Dark Theme](../assets/images/themes/th_dark_diamond_sword.png){ width="160" } | **Dark**<br/>`theme: dark`<br/>*Aliases:* `dark_fantasy`, `carbon`, `slate` | • **Canvas:** Minimal charcoal `#14151a`<br/>• **Frame:** Chamfer steel-gray `#94a3b8`<br/>• **Stamp:** Slate Gray Box `[INF]` | Stealth equipment, assassin daggers, OP Prison permits. |
-| ![Emerald Theme](../assets/images/themes/th_emerald_diamond_sword.png){ width="160" } | **Emerald**<br/>`theme: emerald`<br/>*Aliases:* `botanical` | • **Canvas:** Deep emerald `#122e1c`<br/>• **Frame:** Chamfer vibrant green `#34d399`<br/>• **Stamp:** Emerald Wax Seal | Village trade blueprints, farming gear, nature alchemy. |
-| ![Astral Theme](../assets/images/themes/th_astral_diamond_sword.png){ width="160" } | **Astral**<br/>`theme: astral` | • **Canvas:** Deep space void `#05141c`<br/>• **Frame:** Star border cyan `#67e8f9`<br/>• **Stamp:** Cyan Wax Seal | Star charting, Beacon upgrades, Elytra forging. |
-| ![Gold Theme](../assets/images/themes/th_gold_diamond_sword.png){ width="160" } | **Gold**<br/>`theme: gold` *(Resolves to Royal)* | • **Canvas:** Imperial gold texture<br/>• **Frame:** Ornate Rosette `#facc15`<br/>• **Stamp:** Gold Wax Seal | Guild master rewards, luxury casino prizes. |
-| ![Antique Theme](../assets/images/themes/th_antique_diamond_sword.png){ width="160" } | **Antique**<br/>`theme: antique` *(Resolves to Desert)* | • **Canvas:** Weathered parchment `#bcac84`<br/>• **Frame:** Chamfer earth-brown `#705634`<br/>• **Stamp:** Wax Seal `#c49a45` | Ancient civilization relics, dungeon library discoveries. |
-| ![Runic Theme](../assets/images/themes/th_runic_diamond_sword.png){ width="160" } | **Runic**<br/>`theme: runic` *(Resolves to Simple Amethyst)* | • **Canvas:** Runic purple `#360647`<br/>• **Frame:** Runic violet `#A46BDC`<br/>• **Stamp:** Purple Wax Seal | Enchanting permits, mysterious scrolls, spell catalysts. |
+<div class="theme-grid">
+
+  <div class="theme-card">
+    <img src="../assets/images/themes/th_forge_diamond_sword.png" alt="Forge Theme" />
+    <h4>Forge</h4>
+    <code>theme: forge</code>
+    <p>Volcanic iron canvas with blazing orange chamfer border and fiery wax seal.</p>
+  </div>
+
+  <div class="theme-card">
+    <img src="../assets/images/themes/th_desert_diamond_sword.png" alt="Desert Theme" />
+    <h4>Desert</h4>
+    <code>theme: desert</code>
+    <p>Weathered antique parchment with warm earth-brown chamfer borders and antique seal.</p>
+  </div>
+
+  <div class="theme-card">
+    <img src="../assets/images/themes/th_frost_diamond_sword.png" alt="Frost Theme" />
+    <h4>Frost</h4>
+    <code>theme: frost</code>
+    <p>Arctic glacial blue canvas with frozen cyan diamond geometry and icy wax seal.</p>
+  </div>
+
+  <div class="theme-card">
+    <img src="../assets/images/themes/th_crimson_diamond_sword.png" alt="Crimson Theme" />
+    <h4>Crimson</h4>
+    <code>theme: crimson</code>
+    <p>Nether blood forge canvas with fiery red runic borders and crimson wax seal.</p>
+  </div>
+
+  <div class="theme-card">
+    <img src="../assets/images/themes/th_dark_diamond_sword.png" alt="Dark Theme" />
+    <h4>Dark</h4>
+    <code>theme: dark</code>
+    <p>Minimal stealth charcoal canvas with slate gray chamfer borders and subtle box stamp.</p>
+  </div>
+
+  <div class="theme-card">
+    <img src="../assets/images/themes/th_emerald_diamond_sword.png" alt="Emerald Theme" />
+    <h4>Emerald</h4>
+    <code>theme: emerald</code>
+    <p>Lush forest emerald canvas with spring green chamfer borders and emerald seal.</p>
+  </div>
+
+  <div class="theme-card">
+    <img src="../assets/images/themes/th_astral_diamond_sword.png" alt="Astral Theme" />
+    <h4>Astral</h4>
+    <code>theme: astral</code>
+    <p>Celestial deep space void canvas with cyan star border, crafting badge, and cyan seal.</p>
+  </div>
+
+</div>
 
 ---
 
-## 5. Standard Edition vs. Extended Edition Boundaries
+## 5. Free Base Edition vs. Extended Supporter Edition
 
-To keep administrative workflows simple and predictable, CraftingBlueprints cleanly delineates what is possible in the Standard Edition versus the Extended Edition:
+CraftingBlueprints is developed with a clear philosophy: **the core plugin and all gameplay progression features are 100% free and accessible for everyone**. All built-in map themes, workstation tracking, recipe restrictions, and database sync will always remain completely free in the base edition.
 
-| Capability | Standard Edition | Extended Edition | Documentation Reference |
+The **Extended Edition** is available for server administrators and community members who want to **support the ongoing development of the project**, unlocking advanced artistic and cosmetic customization:
+
+| Capability | Base Edition (Free for Everyone) | Extended Edition (Supporter Upgrade) | Documentation Reference |
 | :--- | :---: | :---: | :--- |
-| **In-game Map Rendering** (`images-on-maps: true`) | :white_check_mark: Supported | :white_check_mark: Supported | This page |
-| **26 Built-In Theme Presets** (`theme: <name>`) | :white_check_mark: Supported | :white_check_mark: Supported | This page |
+| **In-game Map Rendering** (`images-on-maps: true`) | :white_check_mark: 100% Free | :white_check_mark: Included | This page |
+| **All Built-In Theme Presets** (`theme: <name>`) | :white_check_mark: 100% Free | :white_check_mark: Included | This page |
 | **Automated Durability Stamps** (Uses, Time, $\infty$) | :white_check_mark: Preset Styles | :white_check_mark: Fully Customizable | [Durability & Limits](durability-and-limits.md) |
-| **Flyweight Map ID Optimization** (Zero world bloat) | :white_check_mark: Supported | :white_check_mark: Supported | [Storage Overview](../storage/sqlite-storage.md) |
-| **Custom 128x128 PNG Backgrounds** (`background_image`) | :x: | :white_check_mark: Supported | [Extended Backgrounds](../extended/backgrounds-and-textures.md) |
-| **Algorithmic Guilloché Security Rosettes** | :x: | :white_check_mark: Supported | [Extended Frames](../extended/frames-and-stamps.md) |
-| **Bayer 4x4 Typography Gradient Shading** | :x: | :white_check_mark: Supported | [Extended Typography](../extended/typography-and-contours.md) |
-| **Procedural Item Outline Glows** (`outline_color`) | :x: *(Theme preset defaults)* | :white_check_mark: Granular Math | [Extended Contours](../extended/typography-and-contours.md) |
-| **Bespoke Wax Seal Text & Temporal Capsules** | :x: *(Preset defaults)* | :white_check_mark: Fully Customizable | [Extended Stamps](../extended/frames-and-stamps.md) |
+| **Flyweight Map ID Optimization** (Zero world bloat) | :white_check_mark: 100% Free | :white_check_mark: Included | [Storage Overview](../storage/sqlite-storage.md) |
+| **Custom 128x128 PNG Backgrounds** (`background_image`) | :x: | :white_check_mark: Supporter Feature | [Extended Backgrounds](../extended/backgrounds-and-textures.md) |
+| **Algorithmic Guilloché Security Rosettes** | :x: | :white_check_mark: Supporter Feature | [Extended Frames](../extended/frames-and-stamps.md) |
+| **Bayer 4x4 Typography Gradient Shading** | :x: | :white_check_mark: Supporter Feature | [Extended Typography](../extended/typography-and-contours.md) |
+| **Procedural Item Outline Glows** (`outline_color`) | :x: *(Theme preset defaults)* | :white_check_mark: Supporter Feature | [Extended Contours](../extended/typography-and-contours.md) |
+| **Bespoke Wax Seal Text & Temporal Capsules** | :x: *(Preset defaults)* | :white_check_mark: Supporter Feature | [Extended Stamps](../extended/frames-and-stamps.md) |
 
 ---
 
@@ -288,7 +428,7 @@ Validate your theme configurations without restarting your server:
 /cb validate
 ```
 
-If a blueprint declares an invalid or mistyped theme name (e.g. `theme: stel`), the validator warns you immediately and suggests the closest valid theme (e.g. `steel`). Blueprints safely fall back to the default `technical` theme if an unknown key is entered.
+If a blueprint declares an invalid or mistyped theme name, the validator warns you immediately and suggests the closest valid theme. Blueprints safely fall back to the default `technical` theme if an unknown key is entered.
 
 To reload updated configurations in real-time:
 

@@ -1,11 +1,13 @@
-!!! important "CraftingBlueprints Extended Exclusive Feature"
-    Deep technical drafting customization (custom 128x128 PNG backgrounds, bespoke Guilloché security frames, custom wax seals, temporal capsules, and Bayer gradient typography) requires **CraftingBlueprints Extended**. On the Standard Edition, blueprints render maps cleanly using built-in theme presets (`map.theme: <name>`). See [Map Blueprints & Themes](../authoring/map-themes.md).
+!!! tip "Core Map Blueprints are 100% Free"
+    CraftingBlueprints is designed to be free for everyone: complete in-game map rendering with built-in theme presets (`map.theme: <name>`) is fully included in the free base edition. See [Map Blueprints & Themes](../authoring/map-themes.md).
+    
+    The **Extended Edition** is created for users who wish to **support the ongoing development of the project**, unlocking deep cosmetic and mathematical drafting customization (custom 128x128 PNG backgrounds, bespoke Guilloché security frames, custom wax seals, temporal capsules, and Bayer gradient typography).
 
 # Technical Drafting Engine Overview
 
 In **CraftingBlueprints Extended**, physical blueprint items can be customized beyond built-in theme presets into fully bespoke, layer-by-layer architectural schematics rendered directly onto in-game Minecraft maps (`Material.FILLED_MAP`).
 
-While **CraftingBlueprints Standard Edition** includes 26 pre-calibrated themes (Steel, Verdigris, Technical, Amethyst, Royal, Rainbow Astral, etc.), the **Extended Edition** gives server creators absolute mathematical and artistic control over each visual layer: custom background textures, custom 128×128 PNG graphics, Guilloché algorithmic rosettes, temporal clock stamps, and dithered typography.
+While the **free base version** includes a rich collection of pre-calibrated themes (Steel, Verdigris, Technical, Amethyst, Royal, Rainbow Astral, etc.), the **Extended Edition** gives supporters and server creators absolute mathematical and artistic control over each visual layer: custom background textures, custom 128×128 PNG graphics, Guilloché algorithmic rosettes, temporal clock stamps, and dithered typography.
 
 ---
 

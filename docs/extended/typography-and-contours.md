@@ -1,5 +1,5 @@
-!!! important "CraftingBlueprints Extended Exclusive Feature"
-    Bayer 4x4 dithered multi-color typography gradients, custom linear gradient angles, and procedural item contour glows require **CraftingBlueprints Extended**. On the Standard Edition, blueprints render maps cleanly using built-in theme presets (`map.theme: <name>`). See [Map Blueprints & Themes](../authoring/map-themes.md).
+!!! tip "Supporter Feature (Extended Edition)"
+    Bayer 4x4 dithered multi-color typography gradients, custom linear gradient angles, and procedural item contour glows are exclusive to **CraftingBlueprints Extended** (Supporter Edition). On the free base edition, blueprints render maps cleanly using built-in theme presets (`map: { theme: <name> }`). See [Map Blueprints & Themes](../authoring/map-themes.md).
 
 # Typography & Item Contours
 

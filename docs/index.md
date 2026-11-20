@@ -19,30 +19,34 @@ CraftingBlueprints transforms crafting into an intentional, unlockable disciplin
 
 ---
 
-## Product Tiers Matrix
+## Project Philosophy & Editions
 
-CraftingBlueprints is architected into two editions sharing the identical high-performance progression engine and zero-lag event pipeline:
+A guiding principle of CraftingBlueprints is that **the plugin is designed to be 100% free for everyone**. All core gameplay mechanics—including recipe restrictions, all 7 workstation interceptions, automated Crafter blocking, multi-server MySQL synchronization, cluster file distribution, and full in-game map blueprint rendering with all built-in themes—**will always remain completely free and fully accessible in the base version**.
 
-| Capability / Feature | Standard Edition | Extended Edition |
+The **Extended Edition** exists exclusively for server administrators and community members who want to **support the ongoing development of the project**. As a token of gratitude for supporters, Extended unlocks deep cosmetic drafting enhancements (such as importing custom 128×128 PNG backgrounds, mathematical Guilloché security rosettes, custom stamp text, and Bayer 4×4 dithered typography gradients).
+
+### Edition Comparison Matrix
+
+| Capability / Feature | Base Edition (Free for Everyone) | Extended Edition (Supporter) |
 | :--- | :---: | :---: |
-| **Recipe Restriction Engine** (Selective & Universal `.*`) | :white_check_mark: Included | :white_check_mark: Included |
-| **7 Intercepted Workstations** (Crafter, Anvil, Brewing, Smelting, etc.) | :white_check_mark: Included | :white_check_mark: Included |
-| **Physical Blueprint Items** (`PAPER`, `BOOK`, CustomModelData, PDC Tags) | :white_check_mark: Included | :white_check_mark: Included |
-| **Hierarchical Permission Groups & DAG Cycle Detection** | :white_check_mark: Included | :white_check_mark: Included |
-| **1-Click Modality Presets & Scaffolder** (`/cb preset`, `/cb generate`) | :white_check_mark: Included | :white_check_mark: Included |
-| **Multi-Server MySQL Synchronization & Cluster File Bus** | :white_check_mark: Included | :white_check_mark: Included |
-| **Custom Items SPI** (ItemsAdder, Nexo, Oraxen, MMOItems, EcoItems) | :white_check_mark: Included | :white_check_mark: Included |
-| **Vault Economy & PlaceholderAPI Integration** | :white_check_mark: Included | :white_check_mark: Included |
-| **In-Game Map Rendering** (`Material.FILLED_MAP` via `images-on-maps`) | :white_check_mark: Included | :white_check_mark: Included |
-| **Theme Presets Registry** (26 built-in themes: Steel, Royal, Amethyst, Rainbow...) | :white_check_mark: Included (`map.theme:`) | :white_check_mark: Included |
-| **Granular Layer-by-Layer Customization** (Custom frames, stamps, contours) | :x: *(Preset themes only)* | :white_check_mark: Included |
-| **Custom 128x128 RGBA PNG Backgrounds** (`images/backgrounds/`) | :x: | :white_check_mark: Included |
-| **Banknote-Grade Guilloché Rosettes & Security Frames** | :x: | :white_check_mark: Included |
-| **Custom Status Stamps & Infinity Badges** ($\infty$, Plaque, Seal overrides) | :x: *(Theme defaults only)* | :white_check_mark: Full Customization |
-| **Bayer 4x4 Dithered Typography & Procedural Item Contours** | :x: | :white_check_mark: Included |
+| **Complete Recipe Restriction Engine** (Selective & Universal `.*`) | :white_check_mark: 100% Free | :white_check_mark: Included |
+| **All 7 Workstation Interceptions** (Crafter, Anvil, Brewing, Smelting, etc.) | :white_check_mark: 100% Free | :white_check_mark: Included |
+| **Physical Blueprint Items** (`PAPER`, `BOOK`, CustomModelData, PDC Tags) | :white_check_mark: 100% Free | :white_check_mark: Included |
+| **Hierarchical Permission Groups & DAG Cycle Detection** | :white_check_mark: 100% Free | :white_check_mark: Included |
+| **1-Click Modality Presets & Scaffolder** (`/cb preset`, `/cb generate`) | :white_check_mark: 100% Free | :white_check_mark: Included |
+| **Multi-Server MySQL Synchronization & Cluster File Bus** | :white_check_mark: 100% Free | :white_check_mark: Included |
+| **Custom Items SPI** (ItemsAdder, Nexo, Oraxen, MMOItems, EcoItems) | :white_check_mark: 100% Free | :white_check_mark: Included |
+| **Vault Economy & PlaceholderAPI Integration** | :white_check_mark: 100% Free | :white_check_mark: Included |
+| **In-Game Map Rendering** (`Material.FILLED_MAP` via `images-on-maps`) | :white_check_mark: 100% Free | :white_check_mark: Included |
+| **Theme Presets Registry** (All built-in themes: Steel, Verdigris, Technical, Royal, etc.) | :white_check_mark: 100% Free (`map: theme`) | :white_check_mark: Included |
+| **Granular Layer-by-Layer Customization** (Custom frames, stamps, contours) | :x: *(Preset themes only)* | :white_check_mark: Supporter Feature |
+| **Custom 128x128 RGBA PNG Backgrounds** (`images/backgrounds/`) | :x: | :white_check_mark: Supporter Feature |
+| **Banknote-Grade Guilloché Rosettes & Security Frames** | :x: | :white_check_mark: Supporter Feature |
+| **Custom Status Stamps & Infinity Badges** ($\infty$, Plaque, Seal text overrides) | :x: *(Theme defaults only)* | :white_check_mark: Supporter Feature |
+| **Bayer 4x4 Dithered Typography & Procedural Item Contours** | :x: | :white_check_mark: Supporter Feature |
 
-!!! tip "Core Map Support with Themes"
-    In **CraftingBlueprints Standard Edition**, you can render blueprints on in-game maps (`Material.FILLED_MAP`) by simply enabling `images-on-maps: true` and applying any of the 26 pre-calibrated themes (e.g. `map: { theme: steel }`). Deep granular customization of each individual visual layer, custom PNG backgrounds, and bespoke Guilloché security frames are unlocked in **CraftingBlueprints Extended**.
+!!! tip "Full Map Support Included in the Base Version"
+    You do **not** need the Extended Edition to have beautiful in-game map blueprints! In the free base version, simply enable `images-on-maps: true` in your `config.yml` and apply any of the built-in themes (e.g. `map: steel` or `map: { theme: royal }`). Every core progression and aesthetic feature is fully unlocked and ready to use.
 
 ---
 

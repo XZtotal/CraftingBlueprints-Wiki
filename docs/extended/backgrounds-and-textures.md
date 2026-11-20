@@ -1,5 +1,5 @@
-!!! important "CraftingBlueprints Extended Exclusive Feature"
-    Custom 128x128 PNG backgrounds, bespoke procedural background generation, and direct color tint overrides require **CraftingBlueprints Extended**. On the Standard Edition, blueprints render maps cleanly using built-in theme presets (`map.theme: <name>`). See [Map Blueprints & Themes](../authoring/map-themes.md).
+!!! tip "Supporter Feature (Extended Edition)"
+    Custom 128x128 PNG backgrounds, bespoke procedural background generation, and direct color tint overrides are exclusive to **CraftingBlueprints Extended** (Supporter Edition). On the free base edition, blueprints render maps cleanly using built-in theme presets (`map: { theme: <name> }`). See [Map Blueprints & Themes](../authoring/map-themes.md).
 
 # Textures, Gradients & Custom 128x128 PNGs
 
