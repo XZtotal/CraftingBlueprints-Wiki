@@ -28,20 +28,12 @@ If an automated Crafter is permitted to craft restricted recipes without bluepri
 CraftingBlueprints intercepts automated Crafters before any items are produced using the `CrafterRulePipeline`:
 
 ```mermaid
-flowchart TD
-    Pulse["<b>Redstone Pulse Triggers Crafter</b>"]
-    Intercept["<b>Crafter Interception</b><br/>Inspect output item"]
-    Check{"Is item in<br/><code>restricted-items</code>?"}
-    Allow["<b>Allow Craft</b><br/>Vanilla craft &amp; dispense speed"]
-    Config{"Check config:<br/><code>crafter.block-restricted</code>"}
-    Block["<b>DENY CRAFT</b><br/>• Cancel craft event<br/>• Play fail particles &amp; sound<br/>• Retain ingredients in matrix"]
-    Pass["<b>PASS CRAFT</b><br/>Allow redstone autonomous operation"]
-
-    Pulse --> Intercept --> Check
-    Check -->|No| Allow
-    Check -->|Yes| Config
-    Config -->|true (Default)| Block
-    Config -->|false| Pass
+flowchart LR
+    Pulse["<b>1. Redstone Pulse</b><br/>Triggers Crafter"] --> Intercept["<b>2. Crafter Interception</b><br/>Inspect output item"] --> Check{"Restricted<br/>Item?"}
+    Check -->|No| Allow["<b>Allow Craft</b><br/>Vanilla craft &amp; dispense"]
+    Check -->|Yes| Config{"crafter.<br/>block-restricted?"}
+    Config -->|true (Default)| Block["<b>DENY CRAFT</b><br/>• Cancel craft event<br/>• Retain ingredients"]
+    Config -->|false| Pass["<b>PASS CRAFT</b><br/>Autonomous redstone craft"]
 ```
 
 ### Version Abstraction Layer (VAL)

@@ -104,11 +104,8 @@ Standard Bukkit `canvas.drawImage(...)` calculates Euclidean color distance on e
 ### The 3-State Non-Blocking Pipeline:
 
 ```mermaid
-flowchart TD
-    Worker["<b>Worker Thread Pool (Async Compositor)</b><br/>• Renders 7 modular visual layers<br/>• Precomputes color quantization & Floyd-Steinberg<br/>• Output: Native <code>byte[16384]</code> palette buffer"]
-    Main["<b>Main Server Thread (FlyweightPaletteRenderer)</b><br/>• Blits precomputed <code>byte[16384]</code> directly to canvas<br/>• Execution time: <b>&lt; 0.02 ms</b> per tick<br/>• ZERO CPU lag spikes or tick stutter"]
-
-    Worker -->|Cached in LRU Memory (~8 MB)| Main
+flowchart LR
+    Worker["<b>Worker Thread Pool (Async Compositor)</b><br/>• Renders 7 modular visual layers<br/>• Precomputes quantization &amp; Floyd-Steinberg<br/>• Output: Native <code>byte[16384]</code> palette buffer"] -->|Cached in LRU Memory (~8 MB)| Main["<b>Main Server Thread (FlyweightPaletteRenderer)</b><br/>• Blits <code>byte[16384]</code> directly to canvas<br/>• Execution time: <b>&lt; 0.02 ms</b> per tick<br/>• ZERO CPU lag spikes or tick stutter"]
 ```
 
 - **Non-Blocking Guarantee**: All image loading, layer blending, procedural geometry, and color dithering execute strictly on asynchronous background worker threads.

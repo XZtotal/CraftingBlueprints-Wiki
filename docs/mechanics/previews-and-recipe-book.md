@@ -13,16 +13,10 @@ When a player places ingredients into a Crafting Table (`PrepareItemCraftEvent`)
 If the player has not unlocked the recipe or has exhausted their craft uses, the result slot dynamically updates to reflect the locked state:
 
 ```mermaid
-flowchart TD
-    Arr["<b>Player Arranges Ingredients in Workstation</b>"]
-    Serv["<b>PreparePreviewService Intercepts</b>"]
-    Check{"Has Blueprint for Result Item?"}
-    Show["<b>Display Output</b><br/>Vanilla result item ready to craft"]
-    Ghost["<b>Show Ghost / Barrier Slot</b><br/>Item visible with lock lore &amp; red cross"]
-
-    Arr --> Serv --> Check
-    Check -->|Yes| Show
-    Check -->|No| Ghost
+flowchart LR
+    Arr["<b>1. Arrange Ingredients</b><br/>In workstation grid"] --> Serv["<b>2. PreparePreviewService</b><br/>Real-time recipe interception"] --> Check{"Has Blueprint<br/>for Output?"}
+    Check -->|Yes| Show["<b>Display Output</b><br/>Vanilla result item ready to craft"]
+    Check -->|No| Ghost["<b>Show Ghost / Barrier Slot</b><br/>Item locked with warning lore"]
 ```
 
 ### Preview Modes

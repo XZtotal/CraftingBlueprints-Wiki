@@ -61,7 +61,6 @@ singles:
     lore:
       - "<gray>Station:</gray> <aqua>Blast Furnace Only</aqua>"
       - "<gray>Unlocks refining of raw mythril into pure ingots.</gray>"
-```mermaid
 ```
 
 ---
@@ -73,17 +72,10 @@ Unlike crafting tables which close when a player walks away, smelting workstatio
 CraftingBlueprints tracks container ownership using **Persistent Data Containers (PDC)** attached directly to the tile entity:
 
 ```mermaid
-flowchart TD
-    Interact["<b>Player Places or Interacts With Furnace</b>"]
-    Write["<b>Write UUID to Tile PDC</b><br/><code>craftingblueprints:furnace_owner</code>"]
-    Eval["<b>Smelt Attempt Evaluated Against Stored Owner</b>"]
-    Check{"Blueprint Found &amp; Valid?"}
-    Complete["<b>Complete Smelt Iteration</b><br/>Deduct 1 Blueprint Use"]
-    Pause["<b>Pause Cooking at 100%</b><br/>Preserve Input Ore &amp; Fuel without loss"]
-
-    Interact --> Write --> Eval --> Check
-    Check -->|Yes| Complete
-    Check -->|No| Pause
+flowchart LR
+    Interact["<b>1. Player Interacts</b><br/>Places ore / fuel in furnace"] --> Write["<b>2. Tag Tile PDC</b><br/><code>craftingblueprints:furnace_owner</code>"] --> Eval["<b>3. Smelt Attempt</b><br/>Evaluated against stored owner"] --> Check{"Blueprint<br/>Found &amp; Valid?"}
+    Check -->|Yes| Complete["<b>Complete Smelt</b><br/>Deduct 1 Blueprint Use"]
+    Check -->|No| Pause["<b>Pause at 100%</b><br/>Preserve ore &amp; fuel safely"]
 ```
 
 ### Ownership Synchronization Points

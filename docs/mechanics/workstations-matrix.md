@@ -25,31 +25,19 @@ The following matrix summarizes the 7 intercepted workstation domains, their cor
 All workstation interactions are processed through modular **Event Rule Pipelines**. Rather than executing arbitrary business logic inside monolithic Bukkit listener classes, every event is evaluated against a deterministic sequence of rules:
 
 ```mermaid
-flowchart TD
-    Start["<b>Workstation Interaction</b><br/><i>(Player Click / Redstone Trigger)</i>"]
-    R1["<b>1. CheckUserLoadedRule</b><br/>Profile loaded in memory?"]
-    R2["<b>2. Claim / Protection Check</b><br/>WorldGuard / GriefPrevention allowed?"]
-    R3["<b>3. CraftBypassRule</b><br/>Player has bypass permission?"]
-    R4["<b>4. RestrictionEngine Check</b><br/>Is target item restricted?"]
-    R5["<b>5. Blueprint Validation</b><br/>Player has blueprint &amp; remaining uses?"]
-    R6["<b>6. Transaction Deduction</b><br/>Deduct craft uses &amp; deliver item"]
+flowchart LR
+    Start["<b>Interaction</b><br/>Player / Redstone"] --> R1["<b>1. UserLoaded</b><br/>Profile in RAM?"]
+    R1 --> R2["<b>2. Claims Check</b><br/>WorldGuard / GP"]
+    R2 --> R3["<b>3. Bypass Check</b><br/>Has bypass perm?"]
+    R3 --> R4["<b>4. Restriction Check</b><br/>Is item restricted?"]
+    R4 --> R5["<b>5. Blueprint Validation</b><br/>Has blueprint &amp; uses?"]
+    R5 --> R6["<b>6. Deduction</b><br/>Atomic item craft"]
 
-    Warn["<b>Block &amp; Warn</b><br/>Notify profile still loading"]
-    Abort["<b>Silent Abort</b><br/>0 uses deducted, cancel event"]
-    Allow["<b>Allow Action</b><br/>Standard vanilla execution"]
-    Deny["<b>Cancel Event</b><br/>Show locked lore, play fail FX"]
-
-    Start --> R1
-    R1 -->|Not Loaded| Warn
-    R1 -->|Loaded| R2
-    R2 -->|Cancelled| Abort
-    R2 -->|Allowed| R3
-    R3 -->|Has Bypass| Allow
-    R3 -->|Normal Player| R4
-    R4 -->|Unrestricted| Allow
-    R4 -->|Restricted| R5
-    R5 -->|Missing / 0 Uses| Deny
-    R5 -->|Valid / Unlocked| R6
+    R1 -.->|Not Loaded| Warn["Block &amp; Warn"]
+    R2 -.->|Protected| Abort["Silent Abort"]
+    R3 -.->|Has Bypass| Pass["Allow Action"]
+    R4 -.->|Unrestricted| Pass
+    R5 -.->|Missing/0 Uses| Deny["Cancel Event"]
 ```
 
 ### Event Priority & Protection Plugin Interoperability

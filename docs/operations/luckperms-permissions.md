@@ -176,23 +176,14 @@ op-bypass: false
    If an operator joins a server with `op-bypass: false`, they cannot craft restricted recipes like Netherite Armor or Mending unless they have specifically learned the blueprint in-game or have been assigned the explicit permission node. Commands like `/cb cani` will accurately report that the recipe is locked!
 
 ```mermaid
-flowchart TD
-    Attempt["<b>Player Attempts to Craft Restricted Item</b>"]
-    OpCheck{"Is player a<br/>Server Operator?"}
-    OpAllow["<b>Bypass Allowed</b><br/>Standard op bypass"]
-    PermCheck{"Has <code>craftingblueprints.bypass</code><br/>or wildcard node?"}
-    PermAllow["<b>Bypass Allowed</b><br/>Zero uses deducted"]
-    GroupCheck{"Has permission node for<br/>granting Group or Blueprint?"}
-    CraftAllow["<b>Allow Craft</b><br/>Deduct 1 Craft Use"]
-    Deny["<b>DENY CRAFT</b><br/>Cancel interaction &amp; display lock"]
-
-    Attempt --> OpCheck
-    OpCheck -->|Yes| OpAllow
-    OpCheck -->|No| PermCheck
-    PermCheck -->|Yes| PermAllow
-    PermCheck -->|No| GroupCheck
-    GroupCheck -->|Yes| CraftAllow
-    GroupCheck -->|No| Deny
+flowchart LR
+    Attempt["<b>Player Attempts Craft</b>"] --> OpCheck{"Server<br/>Operator?"}
+    OpCheck -->|Yes| OpAllow["<b>Bypass Allowed</b><br/>Standard op bypass"]
+    OpCheck -->|No| PermCheck{"Has Bypass<br/>Permission?"}
+    PermCheck -->|Yes| PermAllow["<b>Bypass Allowed</b><br/>Zero uses deducted"]
+    PermCheck -->|No| GroupCheck{"Has Group or<br/>Blueprint Node?"}
+    GroupCheck -->|Yes| CraftAllow["<b>Allow Craft</b><br/>Deduct 1 Craft Use"]
+    GroupCheck -->|No| Deny["<b>DENY CRAFT</b><br/>Cancel event &amp; show lock"]
 ```
 
 ---

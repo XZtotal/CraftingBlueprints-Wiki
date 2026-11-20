@@ -27,17 +27,8 @@ On servers with finite-use blueprints (e.g. an RPG scroll granting 3 crafts of a
 To solve this, CraftingBlueprints implements an exact mathematical capacity model (`ShiftCraftCalculator`) that evaluates **three independent bounds** before executing a shift-craft transaction:
 
 ```mermaid
-flowchart TD
-    Init["<b>Shift-Craft Attempt Initiated</b>"]
-    B1["<b>1. Grid Matrix Bound</b><br/><code>N_matrix = min(stacks)</code>"]
-    B2["<b>2. Space Bound</b><br/><code>N_fits</code>"]
-    B3["<b>3. Blueprint Use Bound</b><br/><code>N_uses = U (finite)</code>"]
-    Calc["<b>Calculated Craft Yield</b><br/><code>N_craft = min(N_matrix, N_fits, N_uses)</code>"]
-    Exec["<b>Atomic Transaction Execution</b><br/>Deduct <code>N_craft</code> uses &amp; produce <code>N_craft</code> items"]
-
-    Init --> B1 & B2 & B3
-    B1 & B2 & B3 --> Calc
-    Calc --> Exec
+flowchart LR
+    Init["<b>Shift-Craft Attempt</b>"] --> Bounds["<b>1. Capacity Bounds Evaluation</b><br/>• <code>N_matrix</code> = min ingredient stacks in grid<br/>• <code>N_fits</code> = available inventory slots<br/>• <code>N_uses</code> = finite blueprint uses remaining"] --> Calc["<b>2. Yield Calculation</b><br/><code>N_craft = min(N_matrix, N_fits, N_uses)</code>"] --> Exec["<b>3. Atomic Transaction</b><br/>Deduct <code>N_craft</code> uses &amp; deliver <code>N_craft</code> items"]
 ```
 
 ### 1. Grid Matrix Bound ($N_{\text{matrix}}$)

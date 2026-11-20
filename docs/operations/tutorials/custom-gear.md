@@ -7,18 +7,9 @@ In naive progression systems, gating a custom ruby sword unintentionally locks *
 CraftingBlueprints solves this through the **`ItemIdentifierProvider` Service Provider Interface (SPI)**, providing clean, collision-free blueprint gating for custom gear.
 
 ```mermaid
-flowchart TD
-    Craft["<b>Craft Matrix Produces Output Item</b>"]
-    SPI["<b>Inspect via ItemIdentifierProvider SPI</b>"]
-    IA["<b>ItemsAdder</b><br/><code>ia:namespace:id</code>"]
-    Nexo["<b>Nexo</b><br/><code>nexo:id</code>"]
-    Oraxen["<b>Oraxen</b><br/><code>oraxen:id</code>"]
-    MMO["<b>MMOItems</b><br/><code>mmoitems:type:id</code>"]
-    Check["<b>Match Against Gated Blueprint</b>"]
-
-    Craft --> SPI
-    SPI --> IA & Nexo & Oraxen & MMO
-    IA & Nexo & Oraxen & MMO --> Check
+flowchart LR
+    Craft["<b>Craft Matrix Produces Output</b>"] --> SPI["<b>ItemIdentifierProvider SPI</b>"]
+    SPI --> Hook["<b>Custom Item Provider</b><br/>• ItemsAdder (<code>ia:id</code>)<br/>• Nexo (<code>nexo:id</code>)<br/>• Oraxen (<code>oraxen:id</code>)<br/>• MMOItems (<code>mmoitems:type:id</code>)"] --> Check["<b>Match Against Gated Blueprint</b>"]
 ```
 
 ---

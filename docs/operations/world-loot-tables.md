@@ -246,22 +246,14 @@ $$\text{Effective Chance} = 0.25 \times \left(1.0 + 2 \times 0.05\right) = 0.25 
 Minecraft containers possess finite slot capacities (e.g. single chest: 27 slots, double chest: 54 slots). If vanilla world generation completely fills a container before blueprints are evaluated, CraftingBlueprints resolves capacity conflicts using a three-tier resolution hierarchy:
 
 ```mermaid
-flowchart TD
-    CapCheck{"Is container capacity<br/>&lt; Max Slots?"}
-    Direct["<b>Direct Item Placement</b><br/>Appends to event loot"]
-    TrashCheck{"Is <code>replace-trash-if-full: true</code>?"}
-    Scan["<b>Scan Container Loot</b><br/>Look for <code>trash-materials</code>"]
-    DropWorld["<b>Drop Item Naturally</b><br/>Spawns at container coordinates"]
-    FoundCheck{"Trash Found?"}
-    Replace["<b>Replace Trash</b><br/>Substitutes trash item with blueprint"]
-
-    CapCheck -->|Yes| Direct
-    CapCheck -->|No| TrashCheck
-    TrashCheck -->|Yes| Scan
-    TrashCheck -->|No| DropWorld
-    Scan --> FoundCheck
-    FoundCheck -->|Yes| Replace
-    FoundCheck -->|No| DropWorld
+flowchart LR
+    CapCheck{"Capacity &lt;<br/>Max Slots?"}
+    CapCheck -->|Yes| Direct["<b>Direct Placement</b><br/>Appends to chest loot"]
+    CapCheck -->|No| TrashCheck{"replace-trash-if-full:<br/>true?"}
+    TrashCheck -->|No| DropWorld["<b>Drop Naturally</b><br/>Spawns at container coords"]
+    TrashCheck -->|Yes| Scan["<b>Scan Container</b><br/>Search <code>trash-materials</code>"] --> Found{"Trash<br/>Found?"}
+    Found -->|Yes| Replace["<b>Replace Trash</b><br/>Substitutes with blueprint"]
+    Found -->|No| DropWorld
 ```
 
 1. **Direct Placement**: If the container has vacant slots remaining, the blueprint item is directly appended to the container's generated loot list.

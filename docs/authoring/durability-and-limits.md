@@ -9,14 +9,12 @@ Whether you run an SMP economy that requires consumable crafting licenses, an RP
 ## The Four Durability Modalities
 
 ```mermaid
-flowchart TD
-    Root["<b>Blueprint Lifecycle Modalities</b>"]
-    P["<b>Permanent Blueprint</b><br/>• <code>permanent: true</code><br/>• Infinite crafts<br/>• Never expires"]
-    T["<b>Timed Blueprint</b><br/>• <code>duration: 7d</code><br/>• Real-time countdown<br/>• Locks at timestamp"]
-    F["<b>Finite Uses Blueprint</b><br/>• <code>uses: 10</code><br/>• Decrements on craft<br/>• Locks at 0 uses"]
-    H["<b>Hybrid Blueprint</b><br/>• <code>duration: 3d</code> + <code>uses: 5</code><br/>• Locks on first condition reached"]
-
-    Root --> P & T & F & H
+flowchart LR
+    Root["<b>Blueprint Lifecycle</b>"]
+    Root --> P["<b>Permanent Blueprint</b><br/>• <code>permanent: true</code><br/>• Infinite crafts (never expires)"]
+    Root --> T["<b>Timed Blueprint</b><br/>• <code>duration: 7d</code><br/>• Locks at expiration timestamp"]
+    Root --> F["<b>Finite Uses Blueprint</b><br/>• <code>uses: 10</code><br/>• Decrements on craft (locks at 0)"]
+    Root --> H["<b>Hybrid Blueprint</b><br/>• <code>duration: 3d</code> + <code>uses: 5</code><br/>• Locks on first condition reached"]
 ```
 
 ---
@@ -211,14 +209,8 @@ Allows players to quickly test whether they have permission and active charges t
 When a blueprint expires (whether through charge depletion or timer expiration), CraftingBlueprints executes an atomic three-step lifecycle revocation:
 
 ```mermaid
-flowchart TD
-    Event["<b>Blueprint Expiration Event</b>"]
-    E1["<b>1. Memory Invalidation</b><br/>Marked expired in <code>PlayerDB.cache</code> in $\mathcal{O}(1)$"]
-    E2["<b>2. Async Storage Write</b><br/>Persists updated state to SQLite / MySQL"]
-    E3["<b>3. Recipe Book Packet</b><br/>Dispatches recipe undiscovery packet to client"]
-    E4["<b>4. Player Notification</b><br/>MiniMessage expiration sound and message"]
-
-    Event --> E1 & E2 & E3 & E4
+flowchart LR
+    Event["<b>Expiration Event</b>"] --> E1["<b>1. Memory Invalidate</b><br/>Marked expired in <code>PlayerDB</code>"] --> E2["<b>2. Async Storage</b><br/>Persists state to database"] --> E3["<b>3. Recipe Packet</b><br/>Dispatches removal packet"] --> E4["<b>4. Notification</b><br/>MiniMessage expiration sound"]
 ```
 
 1. **In-Memory Cache & Storage Update**:

@@ -13,14 +13,12 @@ CraftingBlueprints intercepts the stonecutter through the `StonecutterRulePipeli
 When a player opens a Stonecutter and places an input block into slot 0:
 
 ```mermaid
-flowchart TD
-    Step1["<b>Input Slot (0)</b><br/>Stone Block"] --> Step2["<b>Select Recipe Button</b><br/>Slab / Stairs / Bricks"]
-    Step2 --> Pipeline["<b>StonecutterRulePipeline</b>"]
-    Pipeline --> Check{"Requires Blueprint?"}
+flowchart LR
+    Step1["<b>1. Input Slot (0)</b><br/>Stone Block"] --> Step2["<b>2. Select Recipe</b><br/>Slab / Stairs / Bricks"] --> Pipeline["<b>3. StonecutterPipeline</b>"] --> Check{"Requires<br/>Blueprint?"}
     Check -->|No| Allow["<b>Allow Slicing Instantly</b><br/>Unrestricted for all players"]
-    Check -->|Yes| BPCheck{"Player Has Blueprint &amp; Uses?"}
+    Check -->|Yes| BPCheck{"Player Has<br/>Blueprint &amp; Uses?"}
     BPCheck -->|Yes| Produce["<b>Produce Item</b><br/>Deduct 1 Craft Use"]
-    BPCheck -->|No| Deny["<b>Cancel Click</b><br/>Display Locked Item Notification"]
+    BPCheck -->|No| Deny["<b>Cancel Click</b><br/>Display Locked Notification"]
 ```
 
 1. **Station Type**: Classified internally as `STONECUT_TYPE` (Type ID `4`).

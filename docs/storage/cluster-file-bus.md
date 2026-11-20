@@ -20,13 +20,13 @@ Traditional multi-server setups rely on external file distribution workarounds, 
 flowchart TD
     subgraph Trad["Traditional Fragile Architecture (NFS / Cron / Manual Copies)"]
         direction LR
-        M1["Master Node<br/><i>(Local Assets)</i>"] -.->|rsync / NFS Share<br/>Latency &amp; Outages| W1["Worker Node 1<br/><i>(Stale Disk / Missing Textures!)</i>"]
+        M1["Master Node (Local Assets)"] -.->|rsync / NFS Share (Latency &amp; Outages)| W1["Worker Node 1 (Stale Disk / Missing Textures!)"]
     end
 
     subgraph Bus["CraftingBlueprints Zero-NFS Architecture (Native Database Bus)"]
-        direction TD
-        M2["Master Node<br/><code>/cb bus push</code>"] -->|UPSERT BLOB + SHA-256| DB["MySQL Database<br/><code>cb_cluster_files</code>"]
-        DB -->|SHA-256 Manifest Sync<br/>Automatic Delta Fetch| W2["Worker Nodes<br/><i>(100% Identical Assets)</i>"]
+        direction LR
+        M2["Master Node (<code>/cb bus push</code>)"] -->|UPSERT BLOB + SHA-256| DB["MySQL Database (<code>cb_cluster_files</code>)"]
+        DB -->|SHA-256 Manifest Sync &amp; Delta Fetch| W2["Worker Nodes (100% Identical Assets)"]
     end
 ```
 

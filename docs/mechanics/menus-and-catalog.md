@@ -74,13 +74,10 @@ Administrators and developers can browse, inspect, and modify all registered ser
 To maintain production stability on version-controlled networks, CraftingBlueprints enforces strict **Source Immutability Rules**:
 
 ```mermaid
-flowchart TD
-    Check["<b>Blueprint Source Check</b><br/>Is blueprint defined in <code>blueprints/*.yml</code>?<br/>(<code>is_file_managed: true</code>)"]
-    ReadOnly["<b>Read-Only Record</b><br/>Edits in-game REJECTED<br/><i>(Must edit YAML file)</i>"]
-    Mutable["<b>Mutable Record</b><br/>Full in-game CRUD permitted<br/><i>(Persists to database &amp; export)</i>"]
-
-    Check -->|Yes| ReadOnly
-    Check -->|No| Mutable
+flowchart LR
+    Check{"Is blueprint defined in<br/><code>blueprints/*.yml</code>?"}
+    Check -->|Yes (is_file_managed: true)| ReadOnly["<b>Read-Only Record</b><br/>Edits in-game REJECTED<br/><i>(Must edit YAML file)</i>"]
+    Check -->|No (is_file_managed: false)| Mutable["<b>Mutable Record</b><br/>Full in-game CRUD permitted<br/><i>(Persists to database &amp; export)</i>"]
 ```
 
 1. **File-Managed Blueprints (`is_file_managed: true`)**:
