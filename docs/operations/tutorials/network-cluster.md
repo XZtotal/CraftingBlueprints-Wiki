@@ -147,6 +147,7 @@ cluster-file-sync:
 Now deploy an entire progression system on the Master node and verify that it synchronizes to all Workers automatically.
 
 ### 1. Boot Servers in Sequence
+
 1. Start the **Hub Server (Master)**. Check console to confirm MySQL tables are created and `is-master: true` is acknowledged.
 2. Start **Survival** and **Skyblock** (Workers). Check console to confirm `sync-on-startup: true` executes.
 
@@ -158,6 +159,7 @@ On the **Hub Server**, deploy the built-in RPG progression pack:
 ```
 
 The Master node executes the following operations in less than 500 ms:
+
 1. Generates 34 declarative blueprints and 5 tiered templates in `blueprints/presets/rpg_tiers/`.
 2. Writes restriction files to `configs/presets/rpg_tiers/`.
 3. Copies map background textures into `images/presets/rpg_tiers/`.
@@ -199,6 +201,7 @@ Pending Deltas: 0 files
 ```
 
 ### 5. Verify Cross-Server Player Progression
+
 1. On the **Hub Server**, give a test blueprint to Steve:
    ```bash
    /cb give Steve rpg_t1_apprentice_sword

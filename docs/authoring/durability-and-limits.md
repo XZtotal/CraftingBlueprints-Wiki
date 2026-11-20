@@ -92,6 +92,7 @@ Example Scenario:
 
 !!! important "Anti-Exploit Station Tracking"
     Usage charges are deducted across all production workstations:
+    
     - **Crafting Table & 2x2 Player Inventory**: Deducted per crafted output item.
     - **1.21 Crafter Block**: Deducted when the redstone pulse successfully dispatches the finished item.
     - **Furnaces, Blast Furnaces & Smokers**: Deducted upon extraction of the smelted item.

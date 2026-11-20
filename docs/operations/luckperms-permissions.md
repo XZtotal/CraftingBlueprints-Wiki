@@ -163,6 +163,7 @@ op-bypass: false
 
 1. **Explicit Permission Registration (`PermissionDefault.FALSE`)**:  
    All non-default blueprint groups (`craftingblueprints.group.vip`, `craftingblueprints.group.pro`, `craftingblueprints.group.tier2`, etc.) are registered dynamically with `PermissionDefault.FALSE`.
+
 2. **Strict Operator Isolation**:  
    When `op-bypass: false`, the engine evaluates:
    ```kotlin
@@ -170,6 +171,7 @@ op-bypass: false
    player.isPermissionSet("craftingblueprints.group.<id>") && player.hasPermission("craftingblueprints.group.<id>")
    ```
    Operators (`isOp == true`) do **NOT** automatically inherit group permissions merely by virtue of their OP status or wildcard `*` permissions (`ops-have-all-permissions: true` in LuckPerms).
+
 3. **Preventing Misleading Test Results**:  
    If an operator joins a server with `op-bypass: false`, they cannot craft restricted recipes like Netherite Armor or Mending unless they have specifically learned the blueprint in-game or have been assigned the explicit permission node. Commands like `/cb cani` will accurately report that the recipe is locked!
 
@@ -210,6 +212,7 @@ LuckPerms includes a real-time permission inspector that logs every check perfor
 ```
 
 ### Method 2: Testing with an Alt Account (Non-OP)
+
 1. Join your server using a standard, non-operator test account.
 2. Ensure the account only has the `default` LuckPerms group.
 3. Test crafting basic recipes (should succeed) versus restricted items (should be blocked with particles and error sounds).

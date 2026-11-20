@@ -84,6 +84,7 @@ The capacity model guarantees two non-negotiable player experience invariants:
 
 1. **No Blueprint Use Bypasses**:  
    If a player has 2 uses remaining on their `netherite_ingot` blueprint and shift-clicks a grid with 16 ancient debris and 16 gold ingots, the engine crafts **exactly 2 netherite ingots**, deducts 2 uses, and decrements 2 items from each grid slot. The remaining 14 ingredients remain safely untouched in the crafting grid.
+
 2. **Zero Inventory Overflow or Voiding**:  
    If a player's inventory can only accommodate 12 arrows before reaching full capacity, shift-clicking a recipe that produces 4 arrows per craft will execute exactly $N_{\text{fits}} = \lfloor 12 / 4 \rfloor = 3$ crafts (12 arrows total). Surplus ingredients remain in the grid, preventing items from spilling onto the floor or being voided.
 
@@ -112,6 +113,7 @@ The **Smithing Table** (`SmithItemEvent` and `PrepareSmithingEvent`) is unified 
 ### Slot Evaluation (Minecraft 1.20+)
 
 In modern Minecraft (1.20+), the Smithing Table utilizes three input slots:
+
 * **Slot 0**: Smithing Template (`netherite_upgrade_smithing_template`, armor trims)
 * **Slot 1**: Base Item (e.g. `diamond_chestplate`, `diamond_pickaxe`)
 * **Slot 2**: Addition Material (e.g. `netherite_ingot`, amethyst shard)
@@ -121,6 +123,7 @@ In modern Minecraft (1.20+), the Smithing Table utilizes three input slots:
 ### Shift-Smithing Capacity Model
 
 Smithing tables support shift-click operations:
+
 1. **Input Slot Bound**:
    $$N_{\text{smith\_inputs}} = \min \{ \text{stack.amount} \mid \text{stack} \in \text{InputSlots}, \text{stack.type} \neq \text{AIR} \}$$
 2. **Net Smith Iterations**:

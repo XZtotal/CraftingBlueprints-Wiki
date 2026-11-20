@@ -11,6 +11,7 @@ With JSON Schema integrated into your development environment, modern code edito
 You don't need to manually hunt down or download schema files:
 
 On every server startup, CraftingBlueprints automatically extracts the latest `blueprint.schema.json` into:
+
 1. `plugins/CraftingBlueprints/blueprint.schema.json`
 2. `plugins/CraftingBlueprints/blueprints/blueprint.schema.json`
 
@@ -84,7 +85,8 @@ IntelliJ IDEA Ultimate and Community editions feature native JSON Schema support
 
 1. Open **Settings / Preferences** (`Ctrl + Alt + S` on Windows/Linux, `Cmd + ,` on macOS).
 2. Navigate to:  
-   **Languages & Frameworks $\longrightarrow$ Schemas and DTDs $\longrightarrow$ JSON Schema Mappings**.
+   **Languages & Frameworks → Schemas and DTDs → JSON Schema Mappings**.
+
 3. Click the **`+` (Add)** icon to create a new mapping:
    - **Name**: `CraftingBlueprints Schema`
    - **Schema file or URL**: Browse and select `plugins/CraftingBlueprints/blueprint.schema.json` (or relative path `./blueprint.schema.json`).
@@ -103,6 +105,7 @@ With schema validation active in your IDE, you gain:
 
 ### 1. Instant Autocompletion (`Ctrl + Space`)
 Pressing `Ctrl + Space` anywhere in your blueprint file displays valid keys, sub-blocks, and allowable values:
+
 - Root keys: `singles`, `packages`, `mysteries`, `templates`, `default`, `file_default`.
 - Single properties: `blueprint`, `name`, `lore`, `permanent`, `uses`, `time`, `price`, `sell_price`, `station`, `item`, `extra`.
 - Station enums: `CRAFTING_TABLE`, `BLAST_FURNACE`, `SMOKER`, `FURNACE`, `STONECUTTER`, `BREWING_STAND`, `ANVIL`, `ENCHANTING_TABLE`, `ANY`.

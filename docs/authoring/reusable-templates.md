@@ -106,6 +106,7 @@ singles:
 ```
 
 In `titan_greatsword`, the blueprint inherits:
+
 1. `material: NETHER_STAR`, `custom_model_data: 5002`, and `glowing: true` from `visual_legendary_relic`.
 2. `price: 35000.0`, `sell_price: 8750.0`, `tier: "LEGENDARY"`, and `required_guild_rank: "GRANDMASTER"` from `tier_legendary_economy`.
 3. `permanent: false`, `uses: 3`, and `time: 0` from `usage_three_crafts`.
@@ -133,10 +134,13 @@ plugins/CraftingBlueprints/blueprints/
 
 1. **Global Templates (Root Scope)**:
    Any template declared in a `.yml` file at the root of `blueprints/` is globally visible to every blueprint across all directories.
+
 2. **Folder-Scoped Templates**:
    A template declared inside a subfolder (e.g. `blueprints/weapons/`) is visible **only** to files inside `blueprints/weapons/` and any of its child folders (e.g. `weapons/legendary/`). It is completely invisible to sibling folders like `armor/` or `potions/`.
+
 3. **Template Shadowing (Nearest-Ancestor Resolution)**:
    If a template with the same name is declared at both the root level and inside a subfolder, blueprints inside that subfolder resolve the **nearest ancestor definition**. The subfolder template shadows the global template.
+
 4. **Out-of-Scope Warning**:
    If a blueprint references a template declared in a sibling or inaccessible folder, the loader ignores the invalid reference and emits an informative warning during `/cb validate`:
    ```text
@@ -228,6 +232,7 @@ singles:
 ```
 
 #### Final Compiled State:
+
 - `blueprint`: `NETHERITE_SWORD` (from local definition)
 - `price`: `45000.0` (local override replaced default `5000.0`)
 - `item.material`: `NETHER_STAR` (template replaced default `PAPER`)

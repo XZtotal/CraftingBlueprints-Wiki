@@ -143,6 +143,7 @@ CraftingBlueprints enforces a strict architectural design limit of **$\le 24$ bl
 ```
 
 ### Why the 24-Item Limit Exists:
+
 1. **Inventory GUI Ergonomics**: In interactive inspection menus (`/cb menu` and `/cb item info`), packages render their contents in clean, readable chest slots without requiring messy multi-page pagination for a single bundle.
 2. **Extended Map Graphics Precision**: On CraftingBlueprints Extended, packages render an architectural portfolio grid displaying miniature $16\times16$ Minecraft item sprites. A $6\times4$ grid cleanly fills the central $128\times128$ map canvas while leaving appropriate margins for headers and title plaques.
 3. **Overflow Handling**: If a package accidentally contains more than 24 blueprints, the first 23 items are rendered normally, and the 24th slot displays an enameled `+N` overflow badge indicating additional contents.
@@ -168,6 +169,7 @@ To grant a package to a player:
 Steve receives the physical `Master Blacksmith Equipment Pack` item in his inventory.
 
 ### Right-Click Redemption Mechanics:
+
 1. **Hand Interaction**: Steve holds the package in his main hand and right-clicks.
 2. **Consumption**: The package item is safely decremented by 1 from his inventory stack.
 3. **Atomic Unlock**: All bundled blueprints are simultaneously written to Steve's profile in `PlayerDB`.

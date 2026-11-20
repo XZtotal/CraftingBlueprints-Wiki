@@ -1,6 +1,7 @@
 # Enchanting Tables & Anvil Rules
 
 High-tier enchantments (`SHARPNESS V`, `PROTECTION IV`, `MENDING`, `SILK_TOUCH`) represent the peak of player gear progression. In Minecraft, enchantments are acquired through two distinct stations:
+
 1. **Enchanting Tables** (direct arcane enchanting using bookshelves and lapis lazuli).
 2. **Anvils** (combining equipment, applying enchanted books, repairing durability, and renaming items).
 
@@ -42,6 +43,7 @@ When a player places a tool or armor piece into an Enchanting Table with lapis l
 In vanilla Bukkit, cancelling an enchantment event incorrectly can result in players losing their lapis lazuli or experience levels without receiving the enchantment.
 
 CraftingBlueprints guarantees **absolute zero resource loss**:
+
 * If a player lacks the blueprint for any enchantment that would be applied by the selected offering, the event is cleanly cancelled.
 * **0 Experience Levels are consumed.**
 * **0 Lapis Lazuli is consumed.**
@@ -73,6 +75,7 @@ The **Anvil** (`InventoryType.ANVIL`) allows players to combine two items (e.g. 
 In an anvil, the first slot contains the **base item**, and the second slot contains the **sacrifice item** (or enchanted book).
 
 CraftingBlueprints evaluates enchantments **differentially**:
+
 * Let $L_{\text{first}}$ be the level of an enchantment already present on the base item.
 * Let $L_{\text{result}}$ be the level of that enchantment on the resulting item.
 * **Blueprint Verification Rule**: A blueprint check and use deduction is triggered **if and only if**:

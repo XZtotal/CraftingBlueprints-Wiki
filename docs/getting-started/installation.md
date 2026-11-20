@@ -109,6 +109,7 @@ Execute the status command from your server console or as an operator:
 ```
 
 This diagnostic report provides real-time verification of all core subsystems:
+
 * **Engine & Version Adapter**: Confirms the active Paper version and corresponding capability adapter (`Adapter_v1_21_R1`, `Adapter_v1_20_R3`, or `Adapter_v1_18_R2`).
 * **Storage Backend**: Confirms connection health (`SQLite (Connected)` or `MySQL (HikariCP Active)`), connection pool statistics, and round-trip query latency.
 * **Blueprint Metrics**: Reports total loaded blueprints across `singles`, `packages`, and `mysteries`.
@@ -129,6 +130,7 @@ This verifies that the configuration loader, group inheritance engine, and restr
 ## Next Steps
 
 Now that CraftingBlueprints is installed and running:
+
 * **Fast-Track Onboarding**: Deploy balanced, production-ready recipe suites in 30 seconds using [1-Click Presets](presets-quickstart.md).
 * **Hands-On Quickstart**: Author, grant, and craft your very first custom blueprint in under 3 minutes with our [First Blueprint Tutorial](first-blueprint.md).
 * **Learn Progression Gating**: Understand how to gate endgame equipment using the [Recipe Restriction Engine](../progression/recipe-restrictions.md).

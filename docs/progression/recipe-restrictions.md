@@ -130,10 +130,13 @@ Every crafting attempt passes through the `RestrictionEngine` before any player 
 
 1. **Crafting Tables & Inventories**:
    If `!RestrictionEngine.isBlueprintRequired(item, CRAFT_TYPE)`, the recipe passes immediately with **zero performance overhead**. No database queries, group lookups, or use deduction cycles occur.
+
 2. **Automated 1.21 Crafter Blocks**:
    Redstone crafters producing unrestricted items (such as iron blocks, paper, or bread) operate at vanilla speeds without permission checks. Only restricted recipes trigger redstone lockouts.
+
 3. **Brewing Stands**:
    When a brewing cycle finishes, only output bottles matching restricted potion types consume player blueprint uses. Unrestricted water bottles and basic potions brew freely.
+
 4. **Anvils**:
    When combining items or applying books in an anvil, the engine checks whether any resulting enchantment is restricted. If the player already possesses that enchantment level on the base item, no blueprint check is triggered.
 

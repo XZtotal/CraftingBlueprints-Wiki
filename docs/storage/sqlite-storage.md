@@ -81,15 +81,18 @@ PRAGMA busy_timeout = 5000;
 ```
 
 ### 1. `PRAGMA journal_mode = WAL;` (Write-Ahead Logging)
+
 * **Mechanics**: Instead of modifying the database file directly or writing to a rollback journal, writes are sequentially appended to a companion file (`craftingblueprints.db-wal`).
 * **Concurrency Guarantee**: **Readers never block writers, and writers never block readers.** While a background thread writes player profile saves, concurrent threads can read blueprint recipes, menu catalogs, and permissions without waiting.
 
 ### 2. `PRAGMA synchronous = NORMAL;` (I/O Optimization)
+
 * **Mechanics**: In `NORMAL` mode, the database engine syncs to disk at critical WAL checkpoint intervals rather than on every single commit.
 * **Performance Gain**: Reduces filesystem `fsync()` system calls by over 70%, drastically decreasing disk write latency on solid-state drives (SSDs) and NVMe storage during high player activity bursts.
 * **Durability Guarantee**: Fully crash-resistant against application crashes and server process terminations.
 
 ### 3. `PRAGMA busy_timeout = 5000;` (Contention Buffer)
+
 * **Mechanics**: If a transaction encounters a transient lock contention during a WAL checkpoint, SQLite will not immediately throw a `database is locked` exception.
 * **Resolution**: The connection handler pauses and retries automatically for up to **5,000 milliseconds (5 seconds)**. In practice, internal write tasks complete within 1–3 milliseconds, ensuring zero interrupted user transactions.
 
@@ -196,6 +199,7 @@ sqlite-database-path: "run/shared/craftingblueprints.db"
 ```
 
 ### Resolution Rules:
+
 * **Absolute Path**: If the path begins with a drive letter (Windows: `C:\...`) or root slash (Linux: `/mnt/storage/...`), CraftingBlueprints uses that exact path.
 * **Relative Path**: If a relative path is provided, it is resolved relative to the server directory (e.g., `run/shared/craftingblueprints.db`), allowing multiple local test servers (1.20.4 and 1.21.x) to test against a unified database file.
 

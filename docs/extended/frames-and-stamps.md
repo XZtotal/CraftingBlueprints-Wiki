@@ -66,23 +66,27 @@ Status stamps (Layer 7) are anchored in the top-right corner, immediately commun
 
 ### 1. Imperial Wax Seal (`wax_seal`)
 An authentic, circular pixel-art royal wax seal featuring a double seal border, an embossed center emblem, and a soft 3D ambient drop shadow:
+
 - Configurable text ($\le 4$ characters, e.g. `"ROYAL"`, `"SEAL"`, `"GUILD"`).
 - Dynamic color relief: Derives highlights and crease shadows automatically from any hex color.
 
 ### 2. Temporal Capsule Stamp (`clock`)
 Specifically designed for timed blueprints (`time > 0`):
+
 - **Visual Design**: Sleek rounded stadium capsule badge ($H = 12\text{ px}$) with dark slate backing.
 - **Analog Clock Icon**: Displays a miniature $7\times 8$ pixel-art pocket watch with accent hands at 3:00.
 - **Formatted Duration**: Automatically formats milliseconds or seconds into human-readable strings (`"24h"`, `"7d"`, `"30m"`).
 
 ### 3. Lemniscate Infinity Badge (`inf2`)
 The iconic hallmark of permanent blueprints. Permanent blueprints automatically render the `inf2` stamp:
+
 - **Bold 3D Wax Relief ($15\times 7\text{ px}$)**: Wide horizontal aspect ratio with open loop apertures and tangible carved wax depth.
 - **Tonal Facet Shading**: The upper facet of the infinity symbol is rendered with a subtle tint of the text color itself (`deriveTopShade`), ensuring crisp contrast without clashing with the outer seal color.
 - **Trigger Tokens**: Automatically triggered when `permanent: true`, or explicitly set via `text: "inf2"` or `text: "∞"`.
 
 ### 4. Limited Uses Plaque & Box (`uses_seal`, `box`)
 For usage-limited blueprints (`uses > 0`):
+
 - Displays remaining charges in high contrast: `+5`, `+3`, `+1`.
 - Crisp 1px bordered slate backing with drop shadow for instant legibility at $128 \times 128$.
 
@@ -120,6 +124,7 @@ singles:
 
 ### Partial Stamp Inheritance
 When you declare a `stamp:` block with only a few properties (e.g. only setting `outline:` or custom `x` / `y` coordinates), CraftingBlueprints **automatically preserves theme preset defaults**:
+
 - Omitted `border_color` strictly inherits your active theme's preset accent color.
 - Omitted `style` auto-resolves to `clock` (for timed items), `box` (for use items), or `wax_seal` (for permanent items).
 - Omitted `text` auto-resolves to formatted duration, craft count, or `inf2`.

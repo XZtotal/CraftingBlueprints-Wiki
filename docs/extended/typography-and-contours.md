@@ -10,6 +10,7 @@ The nameplate banner (Layer 6) and central item silhouette contour (Layer 3) ens
 ## The Color Banding Problem on Minecraft Maps
 
 Minecraft maps are constrained to an indexed palette of only 128 colors. When naive rendering engines interpolate RGB text gradients (such as fading from `#00AAFF` Cyan to `#00FFAA` Mint):
+
 - The math produces intermediate RGB shades that do not exist in Minecraft's map palette.
 - Nearest-neighbor color snapping quantizes adjacent shades to the same flat color or muddy brownish-gray blocks.
 - **The Result**: Disjointed color steps, harsh letter-by-letter banding, and dirty typography.
@@ -36,6 +37,7 @@ $$T(x, y) = \frac{M[y \pmod 4][x \pmod 4] + 0.5}{16}$$
 ```
 
 ### How It Works:
+
 1. Between each pair of color stops $C_k$ and $C_{k+1}$ across the text span, the engine evaluates local progress $f \in [0.0, 1.0]$.
 2. For each character pixel $(x, y)$, if $f > T(x, y)$, it paints pure $C_{k+1}$; otherwise, it paints pure $C_k$.
 3. **Pure Palette Guarantee**: Every single rendered pixel corresponds to a pure, saturated palette color. Muddy gray midpoints are mathematically banished.
@@ -73,6 +75,7 @@ singles:
 | **Spread / Dispersion** | `:<spread>` | `1.0` | Controls the concentration of the color transition across the text bounding box. |
 
 #### Dispersion Values (`spread`):
+
 - `spread = 1.0` (Default): Standard full-width transition across the text width.
 - `spread < 1.0` (e.g. `0.5`): **Concentrated**: Transition is tightly focused in the center of the text, leaving solid outer bounds.
 - `spread > 1.0` (e.g. `1.5`, `2.0`): **Expanded**: Transition extends wider than the text bounding box, creating a softer, gradual color fusion.
@@ -131,6 +134,7 @@ singles:
 
 ### Polar Angular Rainbow Halos (`color: "rainbow"`)
 When `color: "rainbow"` is selected, the outline evaluates the polar angle $\theta = \text{atan2}(y - c_y, x - c_x)$ relative to the sprite centroid, wrapping an 8-stop circular rainbow halo around the item:
+
 - **Left**: Electric Cyan
 - **Top**: Solar Gold
 - **Right**: Starfire Rose

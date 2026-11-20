@@ -19,6 +19,7 @@ In standard Minecraft servers, players interact with crafting tables through cli
 ```
 
 If an automated Crafter is permitted to craft restricted recipes without blueprint verification:
+
 1. **Progression Collapse**: A single player could unlock a blueprint, build a Crafter contraption, and supply an entire faction or server network with endgame gear.
 2. **Exploit Bypasses**: Players who have not earned or purchased blueprints could simply funnel raw materials into a Crafter to bypass the restriction engine entirely.
 3. **Finite Uses Invalidation**: Crafters have no concept of player durability limits, rendering use-limited blueprints (`uses: 5`) obsolete.
@@ -63,12 +64,14 @@ CraftingBlueprints intercepts automated Crafters before any items are produced u
 The `CrafterCraftEvent` exists only in Paper/Bukkit API 1.21 and higher. Referencing this event directly on multi-version servers (such as 1.18.2 or 1.20.4) would trigger fatal `NoClassDefFoundError` crashes on server startup.
 
 CraftingBlueprints resolves this via a decoupled **Version Abstraction Layer (VAL)**:
+
 * **Paper 1.21+ (`supportsCrafterBlock = true`)**: The engine loads native Crafter event adapters (`CrafterAdapterImpl`) that hook directly into the server's redstone event dispatching pipeline.
 * **Paper 1.18.2 – 1.20.4 (`supportsCrafterBlock = false`)**: The engine automatically binds a lightweight `NoOpCrafterAdapter`. The plugin boots cleanly across all legacy versions with zero memory footprint and zero missing class warnings.
 
 ### Performance on Redstone Clocks
 
 Redstone contraptions often trigger Crafters multiple times per second (e.g. 1-tick or 4-tick redstone clocks). To ensure zero server tick lag:
+
 * **Fast Recipe Matching**: Unrestricted items (such as iron blocks, paper, gold nuggets, or bread) are validated via high-speed hash lookups and permitted instantly.
 * **Cached Reflection Handles**: On multi-version fallbacks, all internal method handles (`getResult`, `getRecipe`, `getBlock`, `setCancelled`) are cached once at startup, eliminating per-tick reflection overhead.
 
@@ -82,14 +85,17 @@ Because an inanimate Crafter block cannot authenticate as a player or hold bluep
 
 1. **Restricted Recipes (Blocked)**:  
    If an item matches `restrictions.restricted-items` (e.g. `craft:netherite_chestplate`, `craft:diamond_sword`, `craft:beacon`), the craft is **strictly cancelled**. The Crafter refuses to cycle, leaving all ingredients safely inside the block's inventory.
+
 2. **Unrestricted Recipes (Allowed)**:  
    Basic materials, utility blocks, and intermediate components that do not match `restricted-items` (e.g., crafting copper ingots into copper blocks, wheat into bread, or iron ingots into iron bars) craft at full vanilla speeds.
+
 3. **Universal Unlocks (Allowed)**:  
    If a recipe is configured in `default-unlocked-blueprints` (recipes unlocked for all players by default), Crafters are permitted to assemble it automatically.
 
 ### Audio & Visual Feedback (`fail-effect`)
 
 When a Crafter attempts to assemble a restricted recipe, it provides immediate physical feedback in the game world:
+
 * **Sound Feedback**: A mechanical dispenser click sound (`Sound.BLOCK_DISPENSER_FAIL` at volume 1.0, pitch 1.2) alerts nearby players that the craft was rejected.
 * **Visual Particles**: Dark smoke particles (`Particle.SMOKE`) emit from the center of the Crafter block $(x+0.5, y+0.5, z+0.5)$, visually indicating that the machine is blocked by a progression rule.
 * **Ingredient Safety**: Ingredients are never voided, dropped, or duplicated. The matrix remains in its exact state.

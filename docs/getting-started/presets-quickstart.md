@@ -9,6 +9,7 @@ The fastest way to evaluate, balance, and launch CraftingBlueprints on a product
 A common challenge for server administrators deploying progression gating plugins is the initial time investment: configuring 50 to 150 individual recipe restrictions, blueprint YAML files, permission groups, and economy prices before seeing the plugin in action.
 
 CraftingBlueprints solves this through the `/cb preset` subsystem:
+
 1. **Immediate Playability**: Deploy complete, thematic progression trees in a single command.
 2. **Mathematically Balanced**: Every preset features pre-balanced economy pricing, crafting durability, and permission tiers designed for specific server gameplay styles.
 3. **Safe Inactive Staging**: Presets stored in `presets/` remain completely inert until explicitly applied with `--confirm`.
@@ -29,7 +30,7 @@ CraftingBlueprints ships with 4 pre-compiled, production-ready modality packs ac
 | `hardcore_smp` | **Hardcore SMP Survival** | `4` | **42 Total**<br>• 36 Singles<br>• 4 Packages<br>• 2 Mysteries | **Selective Equipment Gating**: Basic wood, stone, and leather are unrestricted. The `default` group unlocks basic iron gear; the `veteran` group unlocks utility tools. High-tier Diamond, Netherite, Mending, and combat potions require physical blueprints discoverable via dungeon chests or trading. |
 | `rpg_tiers` | **RPG Progression Tiers** | `5` | **34 Total**<br>• 28 Singles<br>• 4 Packages<br>• 2 Mysteries | **Tiered Gear Progression (T1 to T5)**: Establishes a classic MMO progression curve from Apprentice to Mythic. Unlocks basic tools in `default`, intermediate armors in `warrior`, and restricts rare artifacts, enchanted weaponry, and master alchemical scrolls behind tiered blueprints. |
 | `skyblock_coop` | **Skyblock Co-op & Automation** | `4` | **28 Total**<br>• 22 Singles<br>• 4 Packages<br>• 2 Mysteries | **Island Resource & Automation Gating**: Island basics, farming crops, and basic redstone are free. Progression restricts Diamond/Netherite tools, Beacons, Shulker Boxes, and automated redstone components behind team-unlocked blueprints. |
-| `prison_ranks` | **OP Prison Ranks & Pickaxes** | `4` | **26 Total**<br>• 22 Singles<br>• 2 Packages<br>• 2 Mysteries | **Rank-Linked Mining Upgrades**: Designed for rank-up economies (`default` $\to$ `rank_b` $\to$ `rank_c` $\to$ `rank_prestigious`). Gates progressively higher efficiency pickaxes, Fortune tools, Beacons, and mining drill schematics behind in-game prestige milestones. |
+| `prison_ranks` | **OP Prison Ranks & Pickaxes** | `4` | **26 Total**<br>• 22 Singles<br>• 2 Packages<br>• 2 Mysteries | **Rank-Linked Mining Upgrades**: Designed for rank-up economies (`default` → `rank_b` → `rank_c` → `rank_prestigious`). Gates progressively higher efficiency pickaxes, Fortune tools, Beacons, and mining drill schematics behind in-game prestige milestones. |
 
 ---
 
@@ -54,6 +55,7 @@ Before modifying any files, execute a dry-run to preview the impact of the prese
 ```
 
 The dry-run simulates the installation and reports:
+
 * Number of blueprint files and definitions created.
 * Number of templates loaded.
 * Groups and recipe restrictions scheduled for registration.
@@ -119,6 +121,7 @@ plugins/CraftingBlueprints/
 ```
 
 When a preset is applied:
+
 1. Blueprint files are written to `blueprints/presets/<id>/`.
 2. Permission groups and recipe restrictions are written to `configs/presets/<id>/`.
 3. The engine performs an in-memory **Set Union** ($A \cup B$) between `config.yml` and the modular files in `configs/presets/<id>/`.
@@ -135,6 +138,7 @@ If you want to remove an applied preset, CraftingBlueprints provides a complete,
 ```
 
 ### Uninstallation Workflow:
+
 1. **Target Identification**: Identifies all files associated with the preset in `blueprints/presets/<id>/`, `configs/presets/<id>/`, and `images/presets/<id>/`.
 2. **Disk Cleanup**: Safely removes the corresponding preset subdirectories from disk.
 3. **Database Purge**: Prunes the preset's blueprints from the central database and broadcasts a reload signal to Worker nodes.

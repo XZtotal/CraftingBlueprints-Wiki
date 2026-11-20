@@ -50,6 +50,7 @@ In Minecraft, creating a new map item via standard Bukkit APIs (`Bukkit.createMa
 
 ### The Problem of Naive Map Generation
 On an active server with hundreds of players crafting or trading blueprints:
+
 - Granting 5,000 diamond sword blueprints naively generates 5,000 separate `map_*.dat` files.
 - Each file consumes disk I/O, leading to severe world save bloat and backup bottlenecks.
 
@@ -66,10 +67,13 @@ Player 3 (Diamond Sword BP) ──┘                                           
 
 1. **Deterministic Visual Signature (`VisualKey`)**:
    Every unique visual configuration computes a normalized `VisualKey` combining its domain type, target material, theme, corner geometry, badge, and watermark.
+
 2. **Canonical MapView Reuse**:
    Exactly **one** Bukkit `MapView` is allocated per unique `VisualKey`. Whether 1 player or 10,000 players possess the Diamond Sword Blueprint, they all share Map ID `#104`.
+
 3. **Zero World Bloat**:
    World save data remains lightweight, cleanly bounded, and completely immune to map explosion.
+
 4. **Local Registry State**:
    All active mappings are saved in `plugins/CraftingBlueprints/data/map_registry.json`.
 
@@ -113,6 +117,7 @@ On multi-server networks (Velocity, BungeeCord, MySQL synchronization), local Ma
 CraftingBlueprints injects the blueprint's canonical `VisualKey` into the item's `PersistentDataContainer` (PDC).
 
 When a player changes servers or opens an inventory:
+
 1. The engine reads the `visual_key` from the item's PDC.
 2. It queries the local server's `BlueprintMapRegistry` for the canonical Map ID on that specific server.
 3. If the item's local Map ID doesn't match the local server's canonical ID, it updates the item's `MapMeta` in-place.
@@ -122,5 +127,6 @@ When a player changes servers or opens an inventory:
 Custom Bukkit map renderers are volatile in-memory objects that vanilla Minecraft forgets when chunks unload or servers restart.
 
 CraftingBlueprints Extended includes an automated **Lifecycle & Container Event Restoration Engine**:
+
 - **Chests, Barrels & Shulker Boxes**: Opening any container automatically restores active renderers to stored maps.
 - **Item Frames & Glow Item Frames**: Blueprints mounted on walls retain their photorealistic rendering permanently across server reboots.

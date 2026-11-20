@@ -64,6 +64,7 @@ templates:
 ```
 
 ### Template Highlights:
+
 - **`uses: 3`**: Limits total crafting output to 3 items before the blueprint is revoked.
 - **`permanent: false`**: Declares this recipe as consumable.
 - **`item.custom_model_data: 2001`**: Maps to custom 3D scroll textures in your server resource pack.
@@ -152,7 +153,8 @@ Check your active profile via `/cb info`:
 ```
 The info panel confirms that `infernal_blade` is known with `3` uses remaining.
 
-### 4. Execute the First Craft (3 $\to$ 2)
+### 4. Execute the First Craft (3 → 2)
+
 1. Open a Crafting Table.
 2. Place 1 Stick and 2 Diamonds to arrange the Diamond Sword recipe.
 3. The result slot displays the unlocked Diamond Sword.
@@ -162,12 +164,14 @@ The info panel confirms that `infernal_blade` is known with `3` uses remaining.
    [CraftingBlueprints] Craft authorized! (2 uses remaining)
    ```
 
-### 5. Execute Second and Third Crafts (2 $\to$ 1 $\to$ 0)
-1. Craft the sword a second time $\to$ `1 use remaining`.
-2. Craft the sword a third time $\to$ `0 uses remaining (Blueprint consumed!)`.
+### 5. Execute Second and Third Crafts (2 → 1 → 0)
+
+1. Craft the sword a second time → `1 use remaining`.
+2. Craft the sword a third time → `0 uses remaining (Blueprint consumed!)`.
 3. The blueprint is now automatically removed from your player profile.
 
 ### 6. Attempt the Fourth Craft (Lock Enforcement)
+
 1. Place diamonds and stick in the matrix for a fourth sword.
 2. The result slot immediately switches to the locked barrier indicator:
    ```

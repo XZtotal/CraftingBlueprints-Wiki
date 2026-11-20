@@ -30,6 +30,7 @@ This tutorial walks you through setting up a complete end-game progression loop:
 ## Prerequisites
 
 Before starting, ensure you have:
+
 1. CraftingBlueprints installed and running on Paper, Purpur, or compatible fork (1.18.2 – 1.21.x).
 2. Administrative permissions (`craftingblueprints.admin.*` or OP).
 3. Access to edit server files under `plugins/CraftingBlueprints/`.
@@ -144,6 +145,7 @@ singles:
 ```
 
 ### Anatomy Breakdown:
+
 - **`default:` Block**: Sets `permanent: true`, physical item material (`NETHERITE_UPGRADE_SMITHING_TEMPLATE`), and glowing enchantment glint across all blueprints in this file.
 - **`singles:`**: Defines distinct blueprints for each piece of equipment.
 - **`extra:`**: Tags each scroll with `tier: "MYTHIC"` in the item's PersistentDataContainer for trade or auction engines.
@@ -199,6 +201,7 @@ loot:
 ```
 
 ### Loot Injection Mechanics:
+
 - **`chance: 0.45`**: 45% of opened Bastion chests will roll for blueprints.
 - **`rolls: { min: 1, max: 2 }`**: When successful, the chest yields 1 or 2 blueprint items.
 - **Cumulative Distribution Function (CDF)**: Higher weights (`25` for boots vs `10` for chestplate) make the chestplate the rarest and most coveted prize.
@@ -231,12 +234,14 @@ Test the Bastion chest drop rate across 100 simulated chests without having to e
 Review the console or chat output. You should observe roughly 45 chests containing blueprints, with boots/helmets appearing more frequently than chestplates according to configured weights.
 
 ### 4. Test Locked Smithing Interception
+
 1. Switch to a non-OP survival player account (or ensure `op-bypass: false`).
 2. Open a Smithing Table with a Diamond Chestplate, a Netherite Ingot, and an Upgrade Template.
 3. Observe that the result slot is blocked with a locked preview indicator.
 4. Execute `/cb cani netherite_chestplate`. The chat reports that you lack the required blueprint.
 
 ### 5. Test Scroll Redemption & Unlocking
+
 1. Grant yourself the blueprint scroll:
    ```bash
    /cb give Steve smp_netherite_chestplate

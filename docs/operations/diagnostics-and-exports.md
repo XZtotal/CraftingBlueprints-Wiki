@@ -57,10 +57,13 @@ Before deploying changes or following a configuration reload, `/cb validate` sca
 
 1. **Fatal YAML Syntax Errors**:
    Malformed indentation, unescaped characters, or illegal tabs. The validator pinpoints the exact file, line number, and column so you can fix it immediately without crashing your server.
+
 2. **Version Incompatibility Warnings**:
    Identifies recipes or materials that do not exist in the current Minecraft version (e.g. attempting to load 1.21 `MACE` or `HEAVY_CORE` on a 1.20.4 Paper server).
+
 3. **First-Win Collision Warnings**:
    Reports when two different files declare the identical blueprint ID (e.g. `kits/beginner.yml` vs `weapons/swords.yml`). Under the First-Win rule, the alphabetically earlier file takes priority.
+
 4. **Visual Linting & Typo Suggestions**:
    Uses Levenshtein edit-distance algorithms to suggest corrections for misspelled frame styles, badge types, or background themes (e.g. suggesting `rosette` for `roseta`).
 
@@ -78,6 +81,7 @@ Managing dozens of recipe tiers, permission groups, and custom items can make it
 Generating full text dumps of every server recipe, group hierarchy, and custom item inventory can involve thousands of string allocations. 
 
 To preserve 20.0 TPS:
+
 - All file operations are dispatched to asynchronous background threads (`runTaskAsynchronously`).
 - The exporter uses high-throughput buffered UTF-8 writers (`OutputStreamWriter`).
 - The Minecraft main thread and server tick loop are never blocked.
@@ -136,6 +140,7 @@ plugins/CraftingBlueprints/exports/
 
 ### 1. `minecraft_recipes.txt`
 Dumps every recipe registered in the Bukkit/Paper runtime, categorized into 11 distinct sections:
+
 - **Shaped Recipes**: Grid matrix, ingredients, result amount, and namespaced keys.
 - **Shapeless Recipes**: Ingredient lists and outputs.
 - **Furnace / Smelting Recipes**: Smelting inputs, cooking times, and experience rewards.
@@ -187,6 +192,7 @@ Unlocked Blueprints (157 total):
 
 ### 3. `registered_blueprints.txt`
 Provides a complete inventory of every blueprint item loaded by the plugin, whether declared in YAML files or created manually in-game:
+
 - **Single Blueprints**: Target item, display title, source origin (`YAML File` vs `In-Game / DB`), rarity tier, economy buy/sell prices, and permission nodes.
 - **Package Blueprints**: Bundle display title, source origin, and list of all contained blueprint IDs.
 - **Mystery Blueprints**: Pool size, contained rewards, and roll probability weights.
@@ -199,12 +205,14 @@ Provides a complete inventory of every blueprint item loaded by the plugin, whet
 A comprehensive technical audit report designed for server administrators and technical support bundles.
 
 #### Metrics Included:
+
 - **Server Environment**: Java runtime version, operating system, server build version.
 - **Database Configuration**: Engine type (MySQL/SQLite), connection status, pool statistics, and server UUID.
 - **Restriction Engine Coverage**: Total restricted rules, total craftable vanilla materials, potion types, and enchantments.
 - **Progression Coverage Audit**:
   $$\text{Coverage Percentage} = \frac{\text{Unique Recipes in Groups}}{\text{Total Server Recipes}} \times 100$$
   Displays what percentage of all server recipes are currently unlocked across configured groups.
+
 - **JVM Memory & Cache Metrics**: Free memory, total memory, active blueprint count in RAM, and quantized map buffers.
 
 ---
@@ -212,6 +220,7 @@ A comprehensive technical audit report designed for server administrators and te
 ## Technical Support & Auditing Best Practices
 
 When opening a support request or reporting a bug on the official issue tracker:
+
 1. Run `/cb export all` to refresh your reports.
 2. Run `/cb status` and take a screenshot of your health dashboard.
 3. Attach `exports/system_summary.txt` and `exports/groups_recipes.txt` to your support bundle.

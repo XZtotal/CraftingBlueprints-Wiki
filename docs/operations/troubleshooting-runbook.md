@@ -9,6 +9,7 @@ This troubleshooting guide is structured as **five incident runbooks** covering 
 ## Diagnostic Runbook 1: YAML Syntax & Indentation Errors
 
 ### Symptoms
+
 - Server console logs BoostedYAML parsing exceptions during startup or upon executing `/cb reload`.
 - Blueprints in a specific YAML file are missing from `/cb menu` and `/cb item list`.
 - Error logs contain messages such as:
@@ -18,6 +19,7 @@ This troubleshooting guide is structured as **five incident runbooks** covering 
   ```
 
 ### Root Cause Analysis
+
 1. **Tab Indentation**: YAML syntax forbids ASCII tab characters (`\t`). A text editor accidentally inserted a tab instead of spaces.
 2. **Missing Colon**: A property key is missing its trailing colon (e.g. `permanent true` instead of `permanent: true`).
 3. **Mismatched List Indentation**: List dashes (`-`) are aligned incorrectly with parent mapping keys.
@@ -59,6 +61,7 @@ Once corrected, reload the engine without restarting the server:
 ## Diagnostic Runbook 2: SQLite "Database is Locked" Exceptions
 
 ### Symptoms
+
 - Server console outputs SQL exceptions when players disconnect or unlock blueprints:
   ```text
   org.sqlite.SQLiteException: [SQLITE_BUSY] The database file is locked (database table is locked)
@@ -67,6 +70,7 @@ Once corrected, reload the engine without restarting the server:
 - Player blueprint progress occasionally fails to persist across server restarts.
 
 ### Root Cause Analysis
+
 1. **Journal Mode Contention**: By default, legacy SQLite operates in `DELETE` or `ROLLBACK` journal mode, which acquires an exclusive file lock during write transactions, blocking all concurrent read threads.
 2. **Slow Storage or Network Mount**: The SQLite database file resides on a slow HDD, an external USB drive, or a network-attached filesystem (NFS/SMB) that introduces write latency.
 3. **Antivirus or Backup Scanning**: An external process (such as Windows Defender or a scheduled backup script) holds an open OS file handle on `craftingblueprints.db`.
@@ -105,10 +109,12 @@ Ensure `plugins/CraftingBlueprints/` is stored on a local high-speed SSD or NVMe
 ## Diagnostic Runbook 3: Operator Bypass Confusion
 
 ### Symptoms
+
 - Server operators (OPs) test crafting a restricted recipe and find it is completely unlocked, leading them to believe the restriction engine is broken.
 - Conversely, operators report being unable to craft recipes or seeing contradictory outputs from `/cb cani`.
 
 ### Root Cause Analysis
+
 1. **Wildcard OP Permissions**: On Paper servers, operators are automatically granted the wildcard node `*`. This grants `craftingblueprints.admin.bypass`, which permits crafting all restricted recipes without possessing blueprints.
 2. **`op-bypass` Configuration State**: The setting `op-bypass` in `config.yml` controls whether server operators ignore recipe restrictions.
 
@@ -134,6 +140,7 @@ If operators inherit the `*` permission via LuckPerms, explicitly negate the byp
 
 #### Step 3: Test with a Non-OP Account
 For definitive verification:
+
 1. Temporarily remove OP: `/deop YourUsername`.
 2. Execute `/cb cani <item>` to inspect actual permissions.
 3. Test crafting in a 3x3 grid.
@@ -143,10 +150,12 @@ For definitive verification:
 ## Diagnostic Runbook 4: Automated Hopper & Furnace Smelting Exploits
 
 ### Symptoms
+
 - Players without smelting blueprints use hoppers to funnel raw iron, gold, or ancient debris into furnaces placed by other players, bypassing smelting restrictions.
 - Locked smelting items produce smelted outputs into output hoppers without requiring player interaction.
 
 ### Root Cause Analysis
+
 1. In Minecraft, block entities (Furnaces, Blast Furnaces, Smokers) can be automated via redstone and hoppers without an active player inventory click event.
 2. The furnace tile was placed before CraftingBlueprints was installed, or tile ownership tracking was not configured.
 
@@ -156,6 +165,7 @@ For definitive verification:
 CraftingBlueprints stamps an immutable tile metadata tag (`craftingblueprints:owner`) into the furnace block entity when placed by a player. The furnace operates under the crafting rights of its registered owner.
 
 Inspect the owner of any workstation block:
+
 1. Stand looking directly at the furnace.
 2. Execute:
    ```bash
@@ -180,6 +190,7 @@ furnaces:
 ```
 
 #### Step 3: Test Hopper Enforcement
+
 1. Place a hopper pointing into the top of a blast furnace.
 2. Drop raw ancient debris into the hopper as an unpermitted player.
 3. Observe that the item remains in the hopper or is rejected, and the blast furnace does not ignite.
@@ -189,10 +200,12 @@ furnaces:
 ## Diagnostic Runbook 5: Blank Maps or Broken Textures (Extended Edition)
 
 ### Symptoms
+
 - Blueprints in player inventories render as empty vanilla ocean/land maps, green fields, or missing magenta-and-black textures.
 - Custom background images or frame borders configured in `map:` are missing on Worker servers.
 
 ### Root Cause Analysis
+
 1. **`images-on-maps` Disabled**: The map drafting compositor is toggled off in `config.yml`.
 2. **Missing PNG Assets on Worker Disks**: The Master server configured custom background PNGs in `images/backgrounds/`, but the image files were never synchronized to Worker nodes.
 3. **Invalid Image Dimensions**: Custom textures are not exactly 128×128 pixels, or use unsupported color palettes (CMYK instead of sRGB/RGBA).
@@ -208,6 +221,7 @@ extended:
 
 #### Step 2: Verify Image Resolution & Color Space
 Check all custom PNG images placed under `plugins/CraftingBlueprints/images/`:
+
 - **Dimensions**: Must be exactly **128 × 128 pixels**.
 - **Color Format**: **sRGB / 32-bit RGBA** (with standard 8-bit alpha channel). Non-standard color profiles cause Java `ImageIO` to fail silently.
 

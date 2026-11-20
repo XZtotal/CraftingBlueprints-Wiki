@@ -37,9 +37,11 @@ Awards physical blueprint items to online players. Ideal for quest rewards, dona
 ```
 
 #### Operational Safeguards & Input Sanitization:
+
 - **Quantity Bounds**: The `amount` parameter is strictly bounded:
   $$1 \le \text{amount} \le 2304$$
   Values $\le 0$, non-numeric characters, or quantities exceeding a full player inventory ($36 \text{ slots} \times 64 = 2304$) are rejected immediately.
+
 - **Physical Leftover Preservation (Anti-Loss Protection)**:
   When invoking `inventory.addItem(...)`, any items that cannot fit into the target player's inventory are captured in the leftovers map. The engine **never deletes overflowing items silently**; instead, all unplaced `ItemStack` instances are spawned directly at `player.location` in the world via `world.dropItem(...)` and an inventory full notice is returned.
 
@@ -101,6 +103,7 @@ Performs an in-memory compilation and dry-run syntax audit of every file inside 
 ```
 
 #### Key Capabilities:
+
 - **Zero Database Modification**: Executes strictly in-memory. Database records and active player caches remain untouched.
 - **First-Win Collision Reporting**: Detects duplicate IDs across files and reports which file takes priority under alphabetical traversal.
 - **Typo Suggestions**: Uses Levenshtein distance algorithms to suggest corrections for misspelled frame styles, badge types, and background themes.
@@ -153,6 +156,7 @@ The `/cb item` command suite provides administrative inspection and duplication 
 
 #### File-Managed Immutability Invariant:
 Blueprints defined in YAML configuration files (`blueprints/`) have their `is_file_managed` flag set to `true`.
+
 - In `/cb item list`, file-managed blueprints display a prominent **`[⚡ Archivo]`** badge in their lore.
 - Commands that attempt to modify file-managed blueprints in-game (`/cb item edit`, `/cb item edit-name`, `/cb item edit-lore`, `/cb item delete`) are **strictly blocked**.
 - To customize a file-managed blueprint, edit its YAML file directly or use `/cb item duplicate` to create an unmanaged copy.

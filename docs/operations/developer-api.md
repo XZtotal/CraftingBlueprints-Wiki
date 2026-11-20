@@ -260,7 +260,9 @@ To guarantee that third-party listeners never stall server performance or cause 
 
 1. **Primary Server Thread Dispatch Contract**:
    All cancellable player events (`BlueprintUnlockEvent`, `BlueprintUseEvent`, `BlueprintBuyEvent`, `BlueprintSellEvent`) are dispatched strictly on the primary server thread (`Bukkit.isPrimaryThread()`). Third-party listeners can safely manipulate inventories, play sounds, or interact with Bukkit APIs without scheduling sync tasks.
+
 2. **Alien Method Call & Deadlock Prevention**:
    Neither `BlueprintUnlockEvent` nor `BlueprintUseEvent` is ever fired while holding internal database locks (`user.lock`). Event pre-validation and cancellation checks execute **before** acquiring domain locks, preventing thread stalls and lock-order inversion deadlocks.
+
 3. **Atomic Batch Unlock Operations**:
    When a player opens a blueprint pack (`PackageItem`), the engine evaluates `BlueprintUnlockEvent` for every recipe in the package **before** committing any state changes. If a third-party listener cancels even one recipe in the package, the entire package redemption is aborted cleanly with zero partial knowledge applied or item duplication.

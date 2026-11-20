@@ -7,6 +7,7 @@ CraftingBlueprints features a modular configuration architecture that allows ser
 ## Architectural Motivation
 
 On large Minecraft servers, maintaining a single monolithic `config.yml` containing hundreds of permission groups and recipe restrictions leads to operational friction:
+
 * **Merge Conflicts**: Multiple administrators editing `config.yml` simultaneously can overwrite settings or break YAML formatting.
 * **Modality Stacking**: Installing an SMP progression pack alongside an RPG magic scroll pack risks overwriting existing server groups.
 * **Cluttered Version Control**: Reviewing Git diffs on a 2,000-line configuration file is error-prone.

@@ -107,6 +107,7 @@ Evict only the memory caches for affected files (images, recipes, loot, configs)
 Directly overwriting an image or blueprint file while a map rendering worker thread or recipe parser is reading it causes corrupted reads, partial image frames, or `FileNotFoundException`.
 
 Worker nodes implement atomic swap semantics:
+
 1. Write the payload to a temporary file in the same directory: `filename.tmp.<uuid>`.
 2. Flush and synchronize to disk.
 3. Perform an atomic filesystem replacement using `StandardCopyOption.ATOMIC_MOVE`.
@@ -129,6 +130,7 @@ Once files are mirrored to disk, Worker nodes do not execute a crude full-plugin
 
 ### 1. Strict Path Traversal Defense (`validateRelativePath`)
 To prevent malicious or malformed database records from executing Arbitrary File Overwrites (Zip-Slip traversal attacks outside `plugins/CraftingBlueprints/`), all incoming paths undergo five strict security validations:
+
 * Forbid leading slashes (`/` or `\`).
 * Forbid absolute paths, drive letters (`C:`, `D:`), and UNC network shares.
 * Forbid relative directory navigation tokens (`..` or `.` path segments).
@@ -140,6 +142,7 @@ Any path failing these checks is immediately blocked with a security console ale
 
 ### 2. MySQL Packet Overflow Defense
 MySQL servers enforce a `max_allowed_packet` size (commonly 16MB or 64MB).
+
 * Files exceeding `cluster-file-sync.max-file-size-mb` are rejected before upload.
 * Text-based files (YAML, JSON, TXT) larger than 2 KB are transparently compressed using **GZIP**, reducing packet size by up to 85%.
 

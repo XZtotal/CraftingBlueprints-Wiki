@@ -83,6 +83,7 @@ When the plugin resolves recipes for group $G$, it computes the complete mathema
 $$\text{Recipes}(G) = \text{DirectRecipes}(G) \cup \bigcup_{P \in \text{Parents}(G)} \text{Recipes}(P)$$
 
 This guarantees:
+
 1. **Zero Redundancy**: You never need to duplicate basic recipes in higher-tier groups.
 2. **Instant $O(1)$ Lookup**: Resolved recipes are compiled into a high-speed in-memory hash set, ensuring zero TPS impact during crafting attempts.
 
@@ -99,6 +100,7 @@ If a server administrator accidentally configures a circular inheritance loop (f
 ```
 
 The engine employs a **Depth-First Search (DFS) with 3-Color State Tracking** (Unvisited, Visiting, Visited):
+
 1. When traversing ancestors, any node encountered in the `Visiting` state indicates a cycle.
 2. The engine logs a clear diagnostic warning:
    ```text
@@ -139,6 +141,7 @@ CraftingBlueprints solves this through the **Operator Isolation Rule**:
     Server operators (`player.isOp`) and administrators with wildcard permissions (`*` or LuckPerms `ops-have-all-permissions: true`) **do NOT automatically inherit progression groups** merely by being OP.
 
 ### How It Works:
+
 1. **Explicit Permission Registration**: Non-default progression groups are registered with `PermissionDefault.FALSE`.
 2. **Strict Permission Check**: When `op-bypass: false` is configured in `config.yml`, the engine verifies whether the permission node `craftingblueprints.group.<id>` has been **explicitly assigned** to the player profile (`isPermissionSet && hasPermission`). Wildcard fallback is explicitly ignored for progression groups.
 3. **Realistic Testing**: When an administrator executes `/cb cani netherite_sword` or crafts in a workbench, the test reflects their actual assigned progression tier rather than granting every recipe on the server.
@@ -166,6 +169,7 @@ When the administrator finishes testing, they can toggle OP bypass back to `true
 ## Diagnostic Exports (`groups_recipes.txt`)
 
 To audit exactly which recipes each permission group unlocks:
+
 1. Run the export command:
    ```text
    /cb export groups

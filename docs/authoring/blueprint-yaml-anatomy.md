@@ -157,6 +157,7 @@ item:
 ### Material Fallback Defaults
 
 If the `item:` block or `item.material` is omitted:
+
 - **Single Blueprints**: Defaults to `PAPER`.
 - **Package Blueprints**: Defaults to `BOOK`.
 - **Mystery Scrolls**: Defaults to `SPONGE`.
@@ -260,6 +261,7 @@ Never restart your production server or guess syntax validity. Use the non-destr
 ```
 
 ### What `/cb validate` Performs:
+
 1. **Recursive Syntax Verification**: Checks all `.yml` files in `blueprints/` for proper YAML formatting and indentation.
 2. **Material & Recipe Resolution**: Verifies that every `blueprint:` target exists on your server version and detects typos.
 3. **Collision Detection**: Confirms that blueprint IDs are unique across all files and folders.

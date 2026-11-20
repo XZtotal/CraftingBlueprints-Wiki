@@ -9,6 +9,7 @@ Every incident scenario follows Site Reliability Engineering (SRE) standard form
 ## Incident Scenario 1: Dual-Master Conflict (Split-Brain Hazard)
 
 ### Observable Symptoms
+
 * The server console on one or more backend instances continuously logs high-priority warnings:
   ```text
   [CraftingBlueprints] CONFLICT: Multiple Master nodes detected!
@@ -54,6 +55,7 @@ On the designated true Master server, force a clean database sync:
 
 ### Post-Incident Validation
 Run `/cb status` on the Master and several Worker nodes:
+
 * The Master node must display: `Role: Master (Primary File Publisher)`.
 * All other nodes must display: `Role: Worker (Read-Only Mirror)`.
 * Zero conflict alerts appear in server logs.
@@ -63,6 +65,7 @@ Run `/cb status` on the Master and several Worker nodes:
 ## Incident Scenario 2: Worker Node Missing Textures / Desync
 
 ### Observable Symptoms
+
 * Players on a Worker server report pink-and-black checkered missing texture squares on custom map blueprints.
 * Console logs report missing image assets:
   ```text
@@ -72,6 +75,7 @@ Run `/cb status` on the Master and several Worker nodes:
 
 ### Root Cause Analysis
 A Worker node failed to mirror files from `cb_cluster_files` due to one of the following:
+
 1. `cluster-file-sync.sync-on-startup` was disabled (`false`), and the server booted while offline from the database.
 2. A network timeout caused the Worker to miss a `CLUSTER_FILES_SYNC` heartbeat signal ping.
 3. Disk write permissions prevented `WorkerMirrorConsumer` from writing to `plugins/CraftingBlueprints/images/`.
@@ -119,6 +123,7 @@ The pull routine automatically triggers `LazyImageLoader.clear()` and refreshes 
 ## Incident Scenario 3: Checksum Mismatch & Download Abort
 
 ### Observable Symptoms
+
 * The server console on a Worker node emits a corrupted download alert:
   ```text
   [CraftingBlueprints] Checksum mismatch for 'images/presets/rpg/frame.png':
@@ -129,6 +134,7 @@ The pull routine automatically triggers `LazyImageLoader.clear()` and refreshes 
 
 ### Root Cause Analysis
 During a delta pull, the binary payload streamed from MySQL did not match the expected SHA-256 hash. Common causes:
+
 1. An unstable network connection interrupted the JDBC BLOB stream mid-transfer.
 2. An administrator manually edited or truncated raw BLOB data inside the `cb_cluster_files` table using an external SQL GUI (e.g. phpMyAdmin or HeidiSQL).
 
@@ -162,6 +168,7 @@ Local Mirror State: IN SYNC (142/142 matching)
 ## Incident Scenario 4: MySQL Packet Overflow (`PacketTooBigException`)
 
 ### Observable Symptoms
+
 * When executing `/cb cluster files push` or during server boot on the Master node, the push fails with a JDBC exception:
   ```text
   com.mysql.cj.jdbc.exceptions.PacketTooBigException:
@@ -219,6 +226,7 @@ The files will upload cleanly without packet rejection.
 ## Incident Scenario 5: Master Node Disaster Recovery & Failover
 
 ### Observable Symptoms
+
 * The dedicated Master server (e.g. `Hub-01`) experiences catastrophic hardware failure, operating system crash, or data loss.
 * Administrators cannot deploy presets, edit blueprint YAML files, or broadcast cluster updates.
 

@@ -45,6 +45,7 @@ Opens the primary interactive blueprint catalog (`PlayerInfoMenu`), categorizing
 ```
 
 #### Menu Capabilities:
+
 - **Station Categories**: Filter recipes across Crafting Tables, Furnaces/Smokers/Blast Furnaces, Stonecutters, Brewing Stands, and Enchanting Tables.
 - **Durability Indicators**: Displays whether each blueprint is **Permanent**, **Timed** (with live duration countdown), or **Usage-Limited** (remaining crafts).
 - **Inspect on Click**: Left-clicking any unlocked entry opens its recipe preview displaying crafting matrix ingredients.
@@ -117,14 +118,19 @@ Hold the target item (or blueprint voucher) in your main hand and execute `/cb c
 
 - **Unrestricted Recipe**:
   `<green>✔</green> <white>The recipe for <yellow>Iron Pickaxe</yellow> is unrestricted. You can craft it freely!</white>`
+
 - **Permanent Knowledge**:
   `<green>✔</green> <white>You have permanently unlocked the blueprint for <aqua>Diamond Chestplate</aqua>.</white>`
+
 - **Time-Limited Knowledge**:
   `<green>✔</green> <white>You can craft <aqua>Speed II Potion</aqua> for another <yellow>3 hours, 42 minutes</yellow>.</white>`
+
 - **Craft-Limited Uses**:
   `<green>✔</green> <white>You have <yellow>3 crafts</yellow> remaining for <aqua>Netherite Sword</aqua>.</white>`
+
 - **Timed & Uses Combined**:
   `<green>✔</green> <white>You can craft <aqua>Mace</aqua> for another <yellow>1 day</yellow> (<yellow>5 crafts</yellow> remaining).</white>`
+
 - **Missing Blueprint**:
   `<red>✖</red> <white>You do not possess the required blueprint to craft <red>Netherite Chestplate</red>.</white>`
 
@@ -143,6 +149,7 @@ Inspects the comprehensive recipe preview, economy price, remaining durability, 
 ```
 
 #### Information Displayed:
+
 - **Interactive Recipe Grid**: Visualizes the exact 3x3 crafting grid, brewing stand slots, or furnace input required.
 - **Acquisition Information**: Displays where the blueprint can be acquired (world dungeon loot, mob drops, economy shop).
 - **Durability Bounds**: Shows permanent status, finite craft counts, or duration clock.
@@ -163,6 +170,7 @@ Allows players to purchase blueprint access or physical blueprint items directly
 ```
 
 #### Purchase Modes:
+
 1. **Direct Unlock (Default)**:
    - Deducts the configured `price:` from your Vault economy balance.
    - Immediately binds the recipe knowledge to your account in the database.
@@ -186,6 +194,7 @@ Players can liquidate physical blueprints found in world dungeons, trial chamber
 ```
 
 #### How Selling Works:
+
 1. Hold the physical blueprint item in your **main hand**.
 2. Run `/cb sell`.
 3. The engine verifies that:
@@ -208,8 +217,10 @@ Inspects the original author, crafter, or owner bound to the blueprint item in y
 ```
 
 #### Ownership Semantics:
+
 - **Player-Crafted / Bound Blueprint**:
   `<gray>This blueprint is owned by: <gold>Steve</gold></gray>`
+
 - **Natural World Loot / Unbound Blueprint**:
   `<gray>This blueprint has no bound owner and can be claimed by anyone.</gray>`
 

@@ -72,6 +72,7 @@ Players purchase blueprints using the `/cb buy` command:
 - **Physical Item Delivery (`--item`)**: Supplying `--item` deducts `price` and deposits a physical, unredeemed blueprint item directly into the player's inventory. If the inventory is full, the transaction is rejected to prevent item loss.
 
 #### Purchase Execution Logic:
+
 1. Validates that `<blueprint_id>` exists in the blueprint registry.
 2. Reads `price`. If `price <= 0`, aborts: `<red>This blueprint is not available for purchase.</red>`.
 3. Checks if the player already owns the blueprint permanently. If so, aborts: `<red>You already own this blueprint permanently.</red>`.
@@ -197,6 +198,7 @@ placeholderapi:
 ```
 
 #### Performance Guarantees:
+
 1. **`ReadOnlyPlaceholderCache` (Volatile TTL Cache)**: Snapshots resolved for offline players are stored in an isolated, volatile cache with a 15-second TTL. This completely prevents memory leaks and ensures offline profiles never contaminate `PlayerDB.cache`.
 2. **Negative Caching (Tombstones)**: If a requested blueprint ID or player UUID does not exist, a tombstone sentinel is recorded for 10 seconds. Typos or deleted blueprints will not flood MySQL or SQLite with redundant lookups.
 3. **Single Resolution Pass**: Internal lookups resolve blueprint references in a single pass, eliminating duplicate database inquiries.

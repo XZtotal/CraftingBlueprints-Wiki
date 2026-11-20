@@ -172,10 +172,12 @@ jdbc:mysql://<host>:<port>/<database>?useSSL=false&allowPublicKeyRetrieval=true&
 ## Quick-Relog Race Condition Safety
 
 In a proxy network (BungeeCord/Velocity), players frequently switch between servers using `/server`, `/hub`, or portal commands. During a server switch:
+
 1. The player disconnects from the source server (`PlayerQuitEvent`).
 2. Concurrently (often within 50 milliseconds), the player connects to the target server (`PlayerJoinEvent`).
 
 Without strict concurrency controls, this creates two catastrophic race conditions:
+
 * **Torn Read**: The target server queries the database before the source server has finished persisting remaining craft counts, causing lost item durability.
 * **Double Spend**: A player exploits the 50ms window to craft expensive recipes on both servers simultaneously.
 
@@ -196,10 +198,12 @@ CraftingBlueprints eliminates cross-server desynchronization using an atomic pla
 ```
 
 ### 1. `SOFT` Eviction vs. `IMMINENT` Eviction
+
 * **`SOFT` Eviction (Grace Period: 5s)**: When a player disconnects normally from a server, their profile is retained in RAM for 5 seconds (`cache.players.disconnect-grace-period-seconds`). If the player quickly reconnects to the *same* server (e.g. after a client crash or timeout), eviction is cancelled instantly, avoiding unnecessary database round-trips.
 * **`IMMINENT` Eviction (Zero-Grace Override: 0s)**: When the player switches to a *different* network server, the target server records a claim in `cb_requests`. The source server detects this claim, **instantly cancels the 5-second grace period (0ms delay)**, pushes modified data to MySQL immediately, and evicts the player profile.
 
 ### 2. Distributed Reservation Locks (`cb_reservations`)
+
 * When a server loads a player, it inserts an active lease into `cb_reservations`.
 * **Lock Retention Invariant**: The source server retains its reservation lock *until* all in-memory changes are fully written to `cb_player_data`. Only after the write is confirmed does it delete the reservation.
 * **Lock-Gated Loading**: If a target server attempts to load a player whose reservation is still held by another server, the player is kept in `LOADING` state, and workstation rules (`CheckCraftUserLoadedRule`) momentarily intercept crafting until the handover completes cleanly.

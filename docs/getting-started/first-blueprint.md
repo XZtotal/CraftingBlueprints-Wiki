@@ -155,12 +155,14 @@ A glowing paper item titled **Diamond Sword Schematic** will appear in your inve
 
 ### 4. Unlock the Blueprint
 Hold the schematic in your main hand and **right-click**.
+
 * You will hear an experience chime.
 * A message confirms: `Unlocked blueprint: Diamond Sword Schematic!`
 * The schematic is registered to your persistent player profile.
 
 ### 5. Forge the Sword
 Re-open the Crafting Table with two Diamonds and a Stick.
+
 * The Diamond Sword now appears normally in the output slot.
 * Click to retrieve your crafted weapon!
 

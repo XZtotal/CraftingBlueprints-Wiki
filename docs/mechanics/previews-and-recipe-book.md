@@ -51,6 +51,7 @@ ux:
 ### Placeholder Support
 
 The `locked-item` display name and lore support dynamic placeholders:
+
 * `{blueprint_name}` (or `<blueprint_name>`): Resolves to the human-readable display name of the required blueprint.
 * `{blueprint_id}` (or `<blueprint_id>`): Resolves to the canonical blueprint identifier, allowing players to type `/cb info {blueprint_id}` to inspect how to obtain it.
 
@@ -102,6 +103,7 @@ CraftingBlueprints provides **Incremental Diff-Based Recipe Book Synchronization
 ### Incremental Diffs (Zero Per-Tick Lag)
 
 Unlike naive synchronization plugins that re-index hundreds of recipes every second, `RecipeBookSyncService` operates strictly on **minimal diffs**:
+
 * **On Server Startup**: The engine builds an $O(1)$ bidirectional index of all server crafting recipes (`Bukkit.recipeIterator()`).
 * **On Player Login**: As soon as the player's profile finishes loading, the engine compares their unlocked blueprints against their active recipe book and dispatches a single batched synchronization packet.
 * **On Blueprint Lifecycle Events**:
@@ -111,6 +113,7 @@ Unlike naive synchronization plugins that re-index hundreds of recipes every sec
   $$\text{gained} = \text{newGroupBlueprints} - \text{oldGroupBlueprints}$$
   $$\text{lost} = \text{oldGroupBlueprints} - \text{newGroupBlueprints}$$
   And synchronizes only the differential delta.
+
 * **Discovery Guard (`PlayerRecipeDiscoverEvent`)**: If `hide-locked-recipes: true` is configured, vanilla natural recipe discoveries (e.g. picking up iron for the first time) are cancelled for recipes that require locked blueprints.
 
 ---

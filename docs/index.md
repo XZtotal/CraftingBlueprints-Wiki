@@ -11,6 +11,7 @@ It bridges game balance, economy sinks, and immersive RPG progression by giving 
 In vanilla Minecraft, players instantly unlock and craft recipes as soon as materials touch their inventory. This bypasses server economies, collapses RPG progression tiers, and trivializes endgame gear acquisition.
 
 CraftingBlueprints transforms crafting into an intentional, unlockable discipline:
+
 * **Selective Restriction**: Keep wood, stone, iron, and farming tools 100% free while gating elite gear (Netherite weapons, Beacons, Mending enchantments, Strength II potions) behind physical blueprints or permission groups.
 * **Physical & Virtual Blueprints**: Distribute blueprints as tradeable, physical in-game items (parchment scrolls, books, custom models) with finite craft uses or temporal durations, or grant them virtually via permission nodes.
 * **Workstation Interception**: Enforces restrictions across 7 distinct crafting workstations—including the Minecraft 1.21 redstone-powered Crafter block, Brewing Stands, Furnaces, and Anvils—with complete anti-exploit and hopper injection protection.
@@ -51,6 +52,7 @@ CraftingBlueprints is **permissive by default**. Standard recipes craft without 
 
 ### 2. 7 Intercepted Workstations
 Unlike basic craft-cancellation plugins, CraftingBlueprints intercepts the entire crafting lifecycle across 7 production environments:
+
 1. **Crafting Tables & 2x2 Grids**: Real-time recipe blocking and shift-craft capacity calculation.
 2. **Minecraft 1.21 Crafter Blocks**: Redstone-triggered automated crafting interception with fail particles and sound feedback.
 3. **Furnaces, Blast Furnaces, Smokers & Campfires**: Smelting restriction with persistent tile container owner tracking and hopper anti-exploit guards.
@@ -64,6 +66,7 @@ For multi-server networks, CraftingBlueprints provides a database-backed file sy
 
 ### 4. Locked Output Previews & Vanilla Recipe Book Sync
 Players immediately understand their progression boundaries:
+
 * **Visual Overlays**: Displays red barrier overlays (`LOCKED_OVERLAY`) or custom lore hints in workstation output slots when an unlearned recipe is placed on the grid.
 * **Recipe Book Synchronization**: Automatically removes restricted recipes from the vanilla Minecraft Recipe Book until unlocked, preventing player confusion.
 

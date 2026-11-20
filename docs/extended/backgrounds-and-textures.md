@@ -59,12 +59,16 @@ These canvases are generated using **2D Continuous Gradient Meshes** emitting a 
 
 1. **Holographic Foil (`rainbow_holofoil`)**:  
    Physical $45^\circ$ trading-card *Secret Rare* holographic diffraction sheen with micro-stardust glitter flecks, transitioning from brilliant metallic rainbow reflection to dark iridescent titanium.
+
 2. **Deep Astral Nebula (`rainbow_nebula`)**:  
    Multi-octave cosmic gas clouds, interstellar dust filaments, and naturally twinkling star constellations.
+
 3. **Celestial Aurora (`rainbow_aurora`)**:  
    Fluid, undulating curtains of atmospheric rainbow light flowing inward from all four canvas borders.
+
 4. **Guilloché Moiré (`rainbow_moire`)**:  
    Banknote-grade wave interference ribbons flowing across the canvas in silky rainbow harmonics.
+
 5. **Prismatic Bismuth (`rainbow_bismuth`)**:  
    Natural gemstone crystal growth facets radiating multi-color bismuth iridescence.
 
@@ -106,6 +110,7 @@ singles:
 
 ### Transparency & Underlay Color Tinting
 When your custom PNG contains transparent or semi-transparent pixels:
+
 1. The canvas is filled with `background_color` (hex or named color).
 2. The PNG is alpha-composited on top.
 3. The configured color shines naturally through transparent areas, allowing a single PNG stencil to be reused across different server tiers (e.g. Blue for Rare, Gold for Legendary).

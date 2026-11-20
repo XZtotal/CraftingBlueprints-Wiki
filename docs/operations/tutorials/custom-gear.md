@@ -73,6 +73,7 @@ Rather than writing dozens of YAML blueprints by hand, use the built-in auto-sca
 ```
 
 ### Scaffolder Parameters:
+
 - **`itemsadder:weapons`**: Scans the ItemsAdder registry for items categorized under weapons (or recipe outputs matching `itemsadder`).
 - **`--price-scale 1.5`**: Scales base estimated crafting costs by 150% to establish calibrated Vault economy values.
 - **`--out custom/ia_weapons.yml`**: Writes the generated blueprints to `blueprints/custom/ia_weapons.yml`.
@@ -157,11 +158,13 @@ Reload the plugin to apply changes:
 Verify that custom items are gated without affecting base vanilla items.
 
 ### 1. Test Vanilla Diamond Sword Crafting (Unrestricted)
+
 1. Open a standard Crafting Table as a non-OP player who has not unlocked any blueprints.
 2. Place 1 Stick and 2 Diamonds in the grid to craft a standard vanilla `minecraft:diamond_sword`.
 3. **Result**: The vanilla sword crafts freely without restriction!
 
 ### 2. Test Custom Excalibur Crafting (Gated)
+
 1. Arrange the custom crafting recipe for Excalibur in the Crafting Table (as configured in ItemsAdder).
 2. **Result**: The output slot is locked! Hovering reveals:
    ```
@@ -170,6 +173,7 @@ Verify that custom items are gated without affecting base vanilla items.
 3. Attempting to click the output item is rejected, and ingredients remain in the grid.
 
 ### 3. Grant & Study Custom Blueprint
+
 1. Grant the blueprint:
    ```bash
    /cb give Steve excalibur_blueprint
