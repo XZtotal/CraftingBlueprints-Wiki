@@ -33,15 +33,16 @@ CraftingBlueprints is architected into two editions sharing the identical high-p
 | **Multi-Server MySQL Synchronization & Cluster File Bus** | :white_check_mark: Included | :white_check_mark: Included |
 | **Custom Items SPI** (ItemsAdder, Nexo, Oraxen, MMOItems, EcoItems) | :white_check_mark: Included | :white_check_mark: Included |
 | **Vault Economy & PlaceholderAPI Integration** | :white_check_mark: Included | :white_check_mark: Included |
-| **Technical Map Drafting Engine** (`map:` configuration block) | :x: *(Physical Items only)* | :white_check_mark: Included |
-| **25 Procedural Background Textures** (Blueprint, Slate, Forge, Royal) | :x: | :white_check_mark: Included |
+| **In-Game Map Rendering** (`Material.FILLED_MAP` via `images-on-maps`) | :white_check_mark: Included | :white_check_mark: Included |
+| **Theme Presets Registry** (26 built-in themes: Steel, Royal, Amethyst, Rainbow...) | :white_check_mark: Included (`map.theme:`) | :white_check_mark: Included |
+| **Granular Layer-by-Layer Customization** (Custom frames, stamps, contours) | :x: *(Preset themes only)* | :white_check_mark: Included |
+| **Custom 128x128 RGBA PNG Backgrounds** (`images/backgrounds/`) | :x: | :white_check_mark: Included |
 | **Banknote-Grade Guilloché Rosettes & Security Frames** | :x: | :white_check_mark: Included |
-| **Wax Seal Status Stamps & Infinity Badges** ($\infty$, Plaque, Seal) | :x: | :white_check_mark: Included |
+| **Custom Status Stamps & Infinity Badges** ($\infty$, Plaque, Seal overrides) | :x: *(Theme defaults only)* | :white_check_mark: Full Customization |
 | **Bayer 4x4 Dithered Typography & Procedural Item Contours** | :x: | :white_check_mark: Included |
-| **Custom 128x128 RGBA PNG Background Rendering** | :x: | :white_check_mark: Included |
 
-!!! note "Transparent Preset Compatibility"
-    All pre-built presets and scaffolded blueprint files include pre-calibrated `map:` visual blocks. On **Standard Edition**, these visual blocks are safely and transparently ignored by the loader—blueprints function 100% identically in game balance and mechanics as standard physical items.
+!!! tip "Core Map Support with Themes"
+    In **CraftingBlueprints Standard Edition**, you can render blueprints on in-game maps (`Material.FILLED_MAP`) by simply enabling `images-on-maps: true` and applying any of the 26 pre-calibrated themes (e.g. `map: { theme: steel }`). Deep granular customization of each individual visual layer, custom PNG backgrounds, and bespoke Guilloché security frames are unlocked in **CraftingBlueprints Extended**.
 
 ---
 

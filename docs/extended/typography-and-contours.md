@@ -1,5 +1,5 @@
 !!! important "CraftingBlueprints Extended Exclusive Feature"
-    The technical drafting engine, procedural Guilloché frames, custom background textures, status stamps, and gradient typography described on this page require **CraftingBlueprints Extended**. On the Standard Edition, blueprints function as standard physical items without custom map graphics.
+    Bayer 4x4 dithered multi-color typography gradients, custom linear gradient angles, and procedural item contour glows require **CraftingBlueprints Extended**. On the Standard Edition, blueprints render maps cleanly using built-in theme presets (`map.theme: <name>`). See [Map Blueprints & Themes](../authoring/map-themes.md).
 
 # Typography & Item Contours
 

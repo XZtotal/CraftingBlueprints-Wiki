@@ -1,37 +1,44 @@
 !!! important "CraftingBlueprints Extended Exclusive Feature"
-    The technical drafting engine, procedural Guilloché frames, custom background textures, status stamps, and gradient typography described on this page require **CraftingBlueprints Extended**. On the Standard Edition, blueprints function as standard physical items without custom map graphics.
+    Deep technical drafting customization (custom 128x128 PNG backgrounds, bespoke Guilloché security frames, custom wax seals, temporal capsules, and Bayer gradient typography) requires **CraftingBlueprints Extended**. On the Standard Edition, blueprints render maps cleanly using built-in theme presets (`map.theme: <name>`). See [Map Blueprints & Themes](../authoring/map-themes.md).
 
 # Technical Drafting Engine Overview
 
-In **CraftingBlueprints Extended**, physical blueprint items are transformed into photorealistic, high-resolution architectural schematics rendered directly onto in-game Minecraft maps (`Material.FILLED_MAP`).
+In **CraftingBlueprints Extended**, physical blueprint items can be customized beyond built-in theme presets into fully bespoke, layer-by-layer architectural schematics rendered directly onto in-game Minecraft maps (`Material.FILLED_MAP`).
 
-Rather than displaying static, generic paper icons, players hold tactile, custom-drafted blueprints featuring engineering grids, isometric measurement scales, procedural banknote security borders, authentic wax seals, and dithered gradient typography.
+While **CraftingBlueprints Standard Edition** includes 26 pre-calibrated themes (Steel, Verdigris, Technical, Amethyst, Royal, Rainbow Astral, etc.), the **Extended Edition** gives server creators absolute mathematical and artistic control over each visual layer: custom background textures, custom 128×128 PNG graphics, Guilloché algorithmic rosettes, temporal clock stamps, and dithered typography.
 
 ---
 
-## The Visual Transformation
+## The Visual Progression
 
 ```mermaid
 flowchart LR
-    subgraph Standard["Standard Edition (Physical Item)"]
+    subgraph StandardItem["Standard (Physical Item)"]
         direction TB
-        S1["<b>Material:</b> <code>PAPER</code>"]
-        S2["<b>Name:</b> Netherite Chestplate"]
-        S3["<b>Lore:</b> Crafting Schematic"]
-        S4["<i>Standard inventory sprite</i>"]
+        S1["<b>Material:</b> <code>PAPER</code> / <code>BOOK</code>"]
+        S2["CustomModelData / Glint"]
+        S3["Standard inventory item"]
     end
 
-    subgraph Extended["Extended Edition (Map Drafting)"]
+    subgraph StandardMap["Standard (Theme Presets)"]
         direction TB
-        E1["<b>Material:</b> <code>FILLED_MAP</code> (128×128)"]
-        E2["• 25 Procedural Textures"]
-        E3["• Isometric Drafting Grid"]
-        E4["• Guilloché Security Frame"]
-        E5["• Wax Seal / Status Stamp"]
-        E6["• Bayer Dithered Typography"]
+        M1["<b>Material:</b> <code>FILLED_MAP</code>"]
+        M2["26 Pre-calibrated Themes"]
+        M3["Coordinated Palettes & Seals"]
+        M4["Zero configuration required"]
     end
 
-    Standard ==>|Upgrades To| Extended
+    subgraph ExtendedMap["Extended (Deep Drafting)"]
+        direction TB
+        E1["<b>Material:</b> <code>FILLED_MAP</code>"]
+        E2["Custom 128×128 PNGs"]
+        E3["Algorithmic Guilloché Frames"]
+        E4["Bayer 4×4 Typography Gradients"]
+        E5["Custom Stamp Text & Clocks"]
+    end
+
+    StandardItem -->|images-on-maps: true| StandardMap
+    StandardMap -->|Extended Edition| ExtendedMap
 ```
 
 When held in a player's hand, placed in an Item Frame on a workshop wall, or inspected in a chest, Extended blueprints render custom $128\times128$ pixel art with zero client-side resource packs required.
@@ -44,14 +51,14 @@ Map drafting is enabled globally in your `plugins/CraftingBlueprints/config.yml`
 
 ```yaml
 # ==============================================================================
-# EXTENDED EDITION - ADVANCED MAP GRAPHICS & DRAFTING ENGINE
+# MAP GRAPHICS & DRAFTING ENGINE
 # ==============================================================================
 # Renders physical blueprints as technical architectural schematics on maps.
 images-on-maps: true
 ```
 
 ### Transparent Fallback
-If a blueprint defines a `map:` configuration block but the server runs CraftingBlueprints Standard Edition, the loader safely and transparently ignores the `map:` block. The blueprint functions normally as a physical item without errors.
+If a blueprint file declares advanced Extended parameters (such as `background_image`, `frame_color`, or bespoke stamp styles) on a server running CraftingBlueprints Standard Edition, the loader safely falls back to the configured theme preset. Blueprints continue to render cleanly without errors or broken textures.
 
 ---
 

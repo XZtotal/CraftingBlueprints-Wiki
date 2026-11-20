@@ -87,6 +87,7 @@ nav:
       - Declarative YAML Anatomy: authoring/blueprint-yaml-anatomy.md
       - Durability, Limits & Expiration: authoring/durability-and-limits.md
       - Reusable Templates (Mixins): authoring/reusable-templates.md
+      - Map Blueprints & Themes: authoring/map-themes.md
       - Blueprint Packs & Packages: authoring/blueprint-packages.md
       - Mystery Scrolls & Crate Rolls: authoring/mystery-scrolls.md
       - Custom Items & Third-Party SPI: authoring/custom-items-spi.md

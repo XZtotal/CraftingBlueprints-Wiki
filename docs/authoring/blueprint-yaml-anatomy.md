@@ -246,12 +246,13 @@ file_default:
 
 ---
 
-## Looking for Visual Map Graphics?
+## Looking for In-Game Map Graphics?
 
-!!! note "Extended Edition Technical Drafting Engine"
-    If you are running **CraftingBlueprints Extended**, blueprints can render directly on in-game maps (`Material.FILLED_MAP`) with procedural Guilloché security frames, 25 background textures, status seals, and dithered gradient typography.
-
-    See the [Technical Drafting Engine Overview](../extended/drafting-overview.md) to explore map rendering capabilities.
+!!! tip "Map Blueprints & Theme Presets (Standard & Extended)"
+    CraftingBlueprints allows rendering blueprints as high-resolution architectural schematics directly on in-game Minecraft maps (`Material.FILLED_MAP`).
+    
+    * **Standard Edition**: Choose from **26 pre-calibrated themes** (`map: { theme: steel }`) to give each blueprint tier an authentic look (Steel, Verdigris, Technical, Amethyst, Royal, Rainbow Astral). Explore the [Map Blueprints & Themes Guide](map-themes.md) for full configuration steps, tier recommendations, and a complete visual gallery.
+    * **Extended Edition**: Unlocks deep, layer-by-layer technical drafting customization (custom background PNGs, bespoke Guilloché security frames, custom wax seals, temporal capsules, and Bayer gradient typography). See the [Technical Drafting Engine Overview](../extended/drafting-overview.md).
 
 ---
 
