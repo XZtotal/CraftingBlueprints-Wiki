@@ -17,9 +17,9 @@ flowchart TD
     Ing["<b>1. Ingredient Placed</b><br/>Top slot 3 stamped with player PDC tag"]
     Cycle["<b>2. 20s Brew Cycle</b><br/>Active lock maintained in RAM"]
     Event["<b>3. BrewEvent Fires</b>"]
-    Check{"Restricted<br/>Potion?"}
+    Check{"Restricted Potion?"}
     Allow["<b>Allow Brew</b><br/>Bottles convert normally"]
-    OwnerCheck{"Owner Has<br/>Blueprint?"}
+    OwnerCheck{"Owner Has Blueprint?"}
     Convert["<b>Convert Bottle</b><br/>Deduct uses from profile"]
     Cancel["<b>CANCEL BREW!</b><br/>Refund ingredient, base bottles safe"]
 

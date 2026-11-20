@@ -249,12 +249,12 @@ Minecraft containers possess finite slot capacities (e.g. single chest: 27 slots
 
 ```mermaid
 flowchart TD
-    CapCheck{"Chest Slots<br/>Available?"}
+    CapCheck{"Chest Slots Available?"}
     Direct["<b>Direct Placement</b><br/>Appends to container loot"]
-    TrashCheck{"replace-trash-if-full:<br/>true?"}
+    TrashCheck{"replace-trash-if-full: true?"}
     DropWorld["<b>Drop Naturally</b><br/>Spawns at container coords"]
     Scan["<b>Scan Container</b><br/>Search for <code>trash-materials</code>"]
-    Found{"Trash<br/>Found?"}
+    Found{"Trash Found?"}
     Replace["<b>Replace Trash</b><br/>Substitutes trash item with blueprint"]
 
     CapCheck -->|Yes| Direct

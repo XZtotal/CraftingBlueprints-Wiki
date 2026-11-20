@@ -1,5 +1,52 @@
-// Intercept attachShadow to ensure Mermaid SVGs inside shadow root are centered horizontally
+// Intercept mermaid to set custom flowchart wrappingWidth and center SVGs
 (function () {
+  // 1. Intercept mermaid.initialize & updateSiteConfig
+  function patchMermaid(m) {
+    if (!m) return;
+    if (m.mermaidAPI && m.mermaidAPI.updateSiteConfig) {
+      m.mermaidAPI.updateSiteConfig({
+        flowchart: {
+          wrappingWidth: 360,
+          minNodeWidth: 160
+        }
+      });
+    }
+    if (m.initialize && !m._isPatched) {
+      const origInit = m.initialize;
+      m.initialize = function (config) {
+        config = config || {};
+        config.flowchart = config.flowchart || {};
+        config.flowchart.wrappingWidth = 360;
+        config.flowchart.minNodeWidth = 160;
+        const res = origInit.call(this, config);
+        if (m.mermaidAPI && m.mermaidAPI.updateSiteConfig) {
+          m.mermaidAPI.updateSiteConfig({
+            flowchart: {
+              wrappingWidth: 360,
+              minNodeWidth: 160
+            }
+          });
+        }
+        return res;
+      };
+      m._isPatched = true;
+    }
+  }
+
+  let _mermaid = window.mermaid;
+  if (_mermaid) {
+    patchMermaid(_mermaid);
+  }
+  Object.defineProperty(window, "mermaid", {
+    get() { return _mermaid; },
+    set(val) {
+      _mermaid = val;
+      patchMermaid(_mermaid);
+    },
+    configurable: true
+  });
+
+  // 2. Intercept attachShadow for horizontal centering
   const origAttachShadow = Element.prototype.attachShadow;
   Element.prototype.attachShadow = function (init) {
     const shadowRoot = origAttachShadow.call(this, { ...init, mode: "open" });
@@ -27,6 +74,11 @@
             display: block !important;
             margin-left: auto !important;
             margin-right: auto !important;
+          }
+          .node rect,
+          .node polygon {
+            rx: 6px !important;
+            ry: 6px !important;
           }
         `;
         shadowRoot.appendChild(style);

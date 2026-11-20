@@ -159,9 +159,9 @@ CraftingBlueprints implements a multi-tier cache shielding architecture to guara
 ```mermaid
 flowchart TD
     Req["<b>Placeholder Request</b><br/><code>%craftingblueprints_unlocked_count%</code>"]
-    CacheCheck{"In Memory<br/>Cache?"}
+    CacheCheck{"In Memory Cache?"}
     Fast["<b>Instant Return</b><br/>$\mathcal{O}(1)$ PlayerDB cache query"]
-    LoadCheck{"Background SQL<br/>Active?"}
+    LoadCheck{"Background SQL Active?"}
     Placeholder["<b>Non-Blocking Return</b><br/>Returns <code>...</code> / <code>0</code> (zero lag)"]
     Trigger["<b>Trigger Async DB Load</b><br/>Fetches row &amp; warms cache"]
 

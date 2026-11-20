@@ -31,9 +31,9 @@ CraftingBlueprints intercepts automated Crafters before any items are produced u
 flowchart TD
     Pulse["<b>1. Redstone Pulse</b><br/>Triggers Crafter block cycle"]
     Intercept["<b>2. Craft Interception</b><br/>Inspects recipe target item"]
-    Check{"Restricted<br/>Recipe?"}
+    Check{"Restricted Recipe?"}
     Allow["<b>Allow Craft</b><br/>Vanilla craft &amp; dispense"]
-    Config{"crafter.<br/>block-restricted?"}
+    Config{"crafter.block-restricted?"}
     Block["<b>DENY CRAFT</b><br/>Cancel craft event &amp; retain items"]
     Pass["<b>PASS CRAFT</b><br/>Autonomous craft allowed"]
 
