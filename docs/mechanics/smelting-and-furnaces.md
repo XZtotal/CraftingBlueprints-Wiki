@@ -61,39 +61,29 @@ singles:
     lore:
       - "<gray>Station:</gray> <aqua>Blast Furnace Only</aqua>"
       - "<gray>Unlocks refining of raw mythril into pure ingots.</gray>"
+```mermaid
 ```
-
-If a player attempts to smelt this item in a standard `FURNACE`, the process pauses and notifies the player that a `BLAST_FURNACE` is required.
 
 ---
 
-## Persistent Furnace Block Tracker (`FurnaceBlockTracker`)
+## Persistent Tile Ownership Model
 
-In vanilla Minecraft, the `FurnaceSmeltEvent` triggers when an item finishes cooking. However, unlike inventory clicks, `FurnaceSmeltEvent` does **not** provide a player reference.
+Unlike crafting tables which close when a player walks away, smelting workstations (Furnaces, Blast Furnaces, Smokers, and Campfires) are asynchronous tile entities operating independently over time.
 
-To identify which player initiated the smelt, CraftingBlueprints attaches persistent metadata directly to the furnace's tile entity using the `PersistentDataContainer` (PDC):
+CraftingBlueprints tracks container ownership using **Persistent Data Containers (PDC)** attached directly to the tile entity:
 
-* **PDC Key**: `craftingblueprints:furnace_owner`
-* **Data Type**: `PersistentDataType.STRING` (Player UUID)
-* **Persistence Guarantee**: Saved directly into chunk NBT via `state.update(true, false)`, surviving chunk unloads, player logouts, and complete server reboots.
+```mermaid
+flowchart TD
+    Interact["<b>Player Places or Interacts With Furnace</b>"]
+    Write["<b>Write UUID to Tile PDC</b><br/><code>craftingblueprints:furnace_owner</code>"]
+    Eval["<b>Smelt Attempt Evaluated Against Stored Owner</b>"]
+    Check{"Blueprint Found &amp; Valid?"}
+    Complete["<b>Complete Smelt Iteration</b><br/>Deduct 1 Blueprint Use"]
+    Pause["<b>Pause Cooking at 100%</b><br/>Preserve Input Ore &amp; Fuel without loss"]
 
-```
-                  Player Places or Interacts With Furnace
-                                     │
-                                     ▼
-                Write UUID to Tile PersistentDataContainer
-                   (craftingblueprints:furnace_owner)
-                                     │
-                                     ▼
-            ┌──────────────────────────────────────────────────┐
-            │ Persistent Across Chunk Unloads & Server Reboots │
-            └────────────────────────┬─────────────────────────┘
-                                     │
-                                     ▼
-                        FurnaceSmeltEvent Triggers
-                                     │
-                                     ▼
-              Read furnace_owner PDC ──► Verify Player Blueprints
+    Interact --> Write --> Eval --> Check
+    Check -->|Yes| Complete
+    Check -->|No| Pause
 ```
 
 ### Ownership Synchronization Points
@@ -112,21 +102,15 @@ On automated survival servers, players often attempt to bypass progression using
 
 To eliminate this vulnerability, CraftingBlueprints implements **Hopper Ownership Tracking** (`stations.smelting.track-hoppers: true`):
 
-```
-       [ Unranked Player ] ──► Places Hopper (Tagged with Unranked UUID)
-                                         │
-                                         ▼
-                            Feeds Locked Ore into Furnace
-                                         │
-                                         ▼
-                    Furnace Inherits Hopper's Ownership!
-                                         │
-                                         ▼
-                        Smelt Attempt Evaluated Against
-                              Unranked Player Profile
-                                         │
-                                         ▼
-                       No Blueprint! Smelting Paused at 100%!
+```mermaid
+flowchart TD
+    Player["<b>Unranked Player</b><br/>Places Hopper (Tagged with Unranked UUID)"]
+    Feed["<b>Feeds Locked Ore into Furnace</b>"]
+    Inherit["<b>Furnace Inherits Hopper's Ownership!</b>"]
+    Eval["<b>Smelt Attempt Evaluated Against Unranked Profile</b>"]
+    Pause["<b>No Blueprint! Smelting Paused at 100%</b><br/><i>Hopper bypass exploit completely mitigated</i>"]
+
+    Player --> Feed --> Inherit --> Eval --> Pause
 ```
 
 ### Hopper Protection Rules
@@ -135,9 +119,9 @@ To eliminate this vulnerability, CraftingBlueprints implements **Hopper Ownershi
 2. **Ownership Inheritance**: When a hopper transfers items into a furnace, the furnace updates its ownership to match the hopper's owner.
 3. **Unowned Hoppers**: If an unowned hopper (such as a naturally generated hopper in a dungeon or minecart with hopper) attempts to insert materials, the furnace's owner tag is cleared. Unowned furnaces cannot process restricted recipes.
 4. **Smelt Freeze Guarantee**: When a smelt is cancelled due to missing blueprints:
-   * The cooking progress pauses at 100% without consuming fuel or raw input.
-   * No output item is created or dropped.
-   * If `fail-effect: true`, the furnace emits smoke particles and a fail sound to alert the operator.
+    * The cooking progress pauses at 100% without consuming fuel or raw input.
+    * No output item is created or dropped.
+    * If `fail-effect: true`, the furnace emits smoke particles and a fail sound to alert the operator.
 
 ---
 
@@ -190,6 +174,7 @@ To verify whether an item requires a blueprint for smelting:
   Required Blueprint: netherite_smelting
   Unlocked: YES (Remaining Uses: 12)
   ```
+
 * **Output for Locked Players**:
   ```text
   Item: Netherite Scrap (Smelting)

@@ -63,18 +63,11 @@ Open your project's `.vscode/settings.json` (or global user settings) and add th
 }
 ```
 
-```
-┌────────────────────────────────────────────────────────┐
-│               Visual Studio Code Editor                │
-├────────────────────────────────────────────────────────┤
-│  1  singles:                                           │
-│  2    infernal_blade:                                  │
-│  3      blueprint: NETHERITE_SWORD                     │
-│  4      permaneent: true   <~~~ Red squiggly line      │
-│         ^^^^^^^^^^^^                                   │
-│         Property 'permaneent' is not allowed.          │
-│         Did you mean 'permanent'?                      │
-└────────────────────────────────────────────────────────┘
+```yaml
+singles:
+  infernal_blade:
+    blueprint: NETHERITE_SWORD
+    permaneent: true   # ❌ Schema Warning: Property 'permaneent' is not allowed. Did you mean 'permanent'?
 ```
 
 ---
@@ -88,13 +81,14 @@ IntelliJ IDEA Ultimate and Community editions feature native JSON Schema support
    **Languages & Frameworks → Schemas and DTDs → JSON Schema Mappings**.
 
 3. Click the **`+` (Add)** icon to create a new mapping:
-   - **Name**: `CraftingBlueprints Schema`
-   - **Schema file or URL**: Browse and select `plugins/CraftingBlueprints/blueprint.schema.json` (or relative path `./blueprint.schema.json`).
-   - **Schema version**: `JSON Schema version 7`.
+    - **Name**: `CraftingBlueprints Schema`
+    - **Schema file or URL**: Browse and select `plugins/CraftingBlueprints/blueprint.schema.json` (or relative path `./blueprint.schema.json`).
+    - **Schema version**: `JSON Schema version 7`.
 4. Under **File path pattern**, add:
    ```text
    plugins/CraftingBlueprints/blueprints/**/*.yml
    ```
+
 5. Click **Apply** and **OK**.
 
 ---

@@ -16,25 +16,20 @@ Players open their personal progression dashboard by running:
 
 *(Permission: `craftingblueprints.menu` — Enabled by default for all players).*
 
-```
-+---------------------------------------------------------------+
-|  CraftingBlueprints - My Unlocked Blueprints       [Page 1/3] |
-+---------------------------------------------------------------+
-| [Sword]  [Pickaxe]  [Plate]  [Alloy]  [Potion]  [Scroll] ...  |
-|                                                               |
-|                                                               |
-+---------------------------------------------------------------+
-| [ < Prev ]              [ Close ]                  [ Next > ] |
-+---------------------------------------------------------------+
-```
+| Navigation / Action | GUI Control / Slot | Functionality |
+| :--- | :--- | :--- |
+| **Header Bar** | Page Title | Displays active catalog page, total pages, and unlock count |
+| **Item Grid (Rows 1–4)** | Blueprint Icons | Unlocked recipes: checkmark icon; Locked recipes: barrier or preview icon |
+| **Bottom Controls** | `[< Prev]` / `[Next >]` | Fast asynchronous pagination |
+| **Bottom Center** | `[Search]` | Opens MiniMessage query prompt for real-time name filtering |
 
 ### Dashboard Features
 
 1. **Categorized Blueprint Display**: Displays all blueprints unlocked by the player, including personal unlocks and hierarchical group permissions (`craftingblueprints.group.<id>`).
 2. **Real-Time Status Badges**:
-   * **Permanent Unlocks**: Displayed with a green checkmark or permanent infinity ($\infty$) badge.
-   * **Timed Unlocks**: Shows a live countdown timer until expiration (e.g., `Expires in: 2d 14h`).
-   * **Finite Uses**: Displays remaining craft iterations (e.g., `Remaining Uses: 4`).
+    * **Permanent Unlocks**: Displayed with a green checkmark or permanent infinity ($\infty$) badge.
+    * **Timed Unlocks**: Shows a live countdown timer until expiration (e.g., `Expires in: 2d 14h`).
+    * **Finite Uses**: Displays remaining craft iterations (e.g., `Remaining Uses: 4`).
 3. **Interactive Inspection**: Left-clicking any blueprint item opens the detailed recipe view, showing the crafting matrix ingredients and the target station required.
 
 ---
@@ -45,53 +40,27 @@ In standard Minecraft GUI plugins, pressing the `ESC` key or accidentally closin
 
 CraftingBlueprints introduces **Stack-Based Navigation** and **ESC Restoration** via `MenuSessionManager`:
 
-```
-                 Player Navigates Menus
-  /cb menu ──► [Category View] ──► [Recipe Detail View]
-                                            │
-                                  Accidental ESC Key!
-                                            │
-                                            ▼
-                               Inventory Closes to World
-                                            │
-                                            ▼
-                           Player types: /cb return
-                                            │
-                                            ▼
-                          Directly Restores Recipe Detail View!
+```mermaid
+flowchart LR
+    Cmd["<b>/cb menu</b>"] --> Cat["<b>Category View</b>"]
+    Cat --> Detail["<b>Recipe Detail View</b>"]
+    Detail -->|Accidental ESC Key| Restore["<b>Restores Previous Active Menu</b><br/><i>(Zero State Desync via /cb return)</i>"]
 ```
 
-### Return Resolution Hierarchy
+## Admin Blueprint Catalog (`/cb item list`)
 
-When a player or administrator executes `/cb return`:
+Administrators and developers can browse, inspect, and modify all registered server blueprints using the paginated catalog:
 
-1. **If an inventory is actively open**: The engine pops and opens the parent menu from the player's LIFO (Last-In, First-Out) `navigationStack`.
-2. **If no inventory is currently open** (e.g. after pressing `ESC`): The engine restores `lastClosedMenu`, immediately reopening the exact page and browsing position the player was viewing.
-3. **Fallback**: If `lastClosedMenu` has already been restored, the engine pops the next ancestor menu from `navigationStack`.
-
-!!! tip "Convenient Editing Workflows"
-    Administrators editing multi-tiered package blueprints or mystery scroll reward pools can freely exit to chat to check coordinates or copy item names, then execute `/cb return` to jump directly back to their editing session.
-
----
-
-## Administrative Blueprint Catalog (`/cb item list`)
-
-Administrators with the `craftingblueprints.item.list` permission can inspect all registered blueprints across the entire server network in a paginated GUI:
-
-```text
+```
 /cb item list
 ```
 
-```
-+---------------------------------------------------------------+
-|  Blueprint Catalog                                 [Page 1/5] |
-+---------------------------------------------------------------+
-| [obsidian_blade]  [netherite_pack]  [strength_potion]  ...    |
-| (File-Managed)    (File-Managed)    (Manual)                  |
-+---------------------------------------------------------------+
-| [ < Prev ]              [ Close ]                  [ Next > ] |
-+---------------------------------------------------------------+
-```
+| Navigation / Action | GUI Control / Slot | Functionality |
+| :--- | :--- | :--- |
+| **Header Bar** | Page Title | Displays active catalog page, total pages, and unlock count |
+| **Item Grid (Rows 1–4)** | Blueprint Icons | Unlocked recipes: checkmark icon; Locked recipes: barrier or preview icon |
+| **Bottom Controls** | `[< Prev]` / `[Next >]` | Fast asynchronous pagination |
+| **Bottom Center** | `[Close]` | Closes catalog GUI safely |
 
 ### Catalog Interactions
 
@@ -104,33 +73,26 @@ Administrators with the `craftingblueprints.item.list` permission can inspect al
 
 To maintain production stability on version-controlled networks, CraftingBlueprints enforces strict **Source Immutability Rules**:
 
-```
-                              Blueprint Source Check
-                                         │
-                    ┌────────────────────┴────────────────────┐
-                    │ Is blueprint defined in blueprints/*.yml│
-                    │       (is_file_managed: true)           │
-                    └────────┬───────────────────────┬────────┘
-                             │ YES                   │ NO
-                             ▼                       ▼
-               ┌───────────────────────────┐ ┌───────────────────────────┐
-               │ FILE-MANAGED (IMMUTABLE)  │ │ MANUAL (EDITABLE IN-GAME) │
-               ├───────────────────────────┤ ├───────────────────────────┤
-               │ - Displays [File] badge   │ │ - Created via in-game GUI │
-               │ - In-game edits BLOCKED   │ │ - Edits saved to          │
-               │ - Edit via YAML file only │ │   exports/manual_blueprints │
-               └───────────────────────────┘ └───────────────────────────┘
+```mermaid
+flowchart TD
+    Check["<b>Blueprint Source Check</b><br/>Is blueprint defined in <code>blueprints/*.yml</code>?<br/>(<code>is_file_managed: true</code>)"]
+    ReadOnly["<b>Read-Only Record</b><br/>Edits in-game REJECTED<br/><i>(Must edit YAML file)</i>"]
+    Mutable["<b>Mutable Record</b><br/>Full in-game CRUD permitted<br/><i>(Persists to database &amp; export)</i>"]
+
+    Check -->|Yes| ReadOnly
+    Check -->|No| Mutable
 ```
 
 1. **File-Managed Blueprints (`is_file_managed: true`)**:
-   * Any blueprint loaded from YAML files in `blueprints/` or modular packs in `configs/` is marked as **File-Managed**.
-   * Attempting to modify properties (such as price, durability, or ingredients) inside in-game modifier menus is strictly blocked with:
+    * Any blueprint loaded from YAML files in `blueprints/` or modular packs in `configs/` is marked as **File-Managed**.
+    * Attempting to modify properties (such as price, durability, or ingredients) inside in-game modifier menus is strictly blocked with:
      ```text
      warning.item.file_managed_immutable: "This blueprint is managed by a configuration file and cannot be modified in-game."
      ```
-   * This guarantees that in-game operator clicks cannot corrupt or overwrite configuration files tracked in Git or cluster file synchronization.
+
+    * This guarantees that in-game operator clicks cannot corrupt or overwrite configuration files tracked in Git or cluster file synchronization.
 2. **Manual Blueprints (`is_file_managed: false`)**:
-   * Blueprints created dynamically in-game via `/cb item` can be edited freely through the GUI and are stored in `exports/manual_blueprints.yml`.
+    * Blueprints created dynamically in-game via `/cb item` can be edited freely through the GUI and are stored in `exports/manual_blueprints.yml`.
 
 ---
 
@@ -146,6 +108,7 @@ Administrators can duplicate an existing blueprint to create tiered variants (e.
   ```text
   /cb item duplicate netherite_sword_master netherite_sword_apprentice
   ```
+
 * The engine creates a clean clone of the source configuration under the new identifier, allowing administrators to modify durability, prices, or templates independently without manual copy-pasting.
 
 ---
@@ -158,6 +121,7 @@ To prevent players from extracting decorative icons, navigation arrows, or previ
    ```text
    ItemPDT(ItemManager.MENU_TYPE)
    ```
+
 2. **Click & Drag Cancellation**: `InventoryListener` intercepts clicks on non-input slots and cancels the event immediately.
 3. **Autonomous Purge Listener**: If an item bearing `MENU_TYPE` is detected outside an active menu GUI (on a player cursor, in their inventory, dropped on the ground, or stored in a chest/shulker), the engine immediately zeroes the item amount (`amount = 0`) and purges it from the world.
 

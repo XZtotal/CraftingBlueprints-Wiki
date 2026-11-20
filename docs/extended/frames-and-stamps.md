@@ -11,17 +11,14 @@ The architectural border (Layer 5) and status stamp (Layer 7) frame the blueprin
 
 Frames establish the structure of the schematic. Configured via `map.frame`, the engine renders precision corner ornaments and border insets:
 
-```
-┌───────┐                                                       ┌───────┐
-│Bracket│ Hairline L-bracket with vertex stud (Industrial SMP)  │Chamfer│ 45° chamfered notch (Exploration)
-└───────┘                                                       └───────┘
-┌───────┐                                                       ┌───────┐
-│Diamond│ Precision rhombus jewel stud (Prestige Gear)          │ Runic │ Gothic alchemical relief (Arcane Magic)
-└───────┘                                                       └───────┘
-┌───────┐                                                       ┌───────┐
-│Rosette│ Currency-grade Guilloché rosette (Imperial Sovereign) │ Star  │ 4-point nexus star + Iridescent rail (Mythic)
-└───────┘                                                       └───────┘
-```
+| Corner Style | Geometry & Visual Description | Theme Archetype |
+| :--- | :--- | :--- |
+| **`bracket`** | Hairline L-bracket with precision vertex stud | Industrial SMP / High-Tech |
+| **`chamfer`** | 45° chamfered notch with diagonal bevel | Wilderness Exploration |
+| **`diamond`** | Precision rhombus jewel stud with specular highlight | Prestige Gear / Luxury Economy |
+| **`runic`** | Gothic alchemical relief with etched runes | Arcane Magic / Dark Fantasy |
+| **`rosette`** | Currency-grade Guilloché rosette with fine lathe waves | Imperial Sovereign / Royal |
+| **`star`** | 4-point nexus star with iridescent border rail | Mythic & Celestial Artifacts |
 
 | Frame Style | Inset & Linework | Architectural Description | Default Palette |
 | :--- | :--- | :--- | :--- |
@@ -53,16 +50,11 @@ $$x(t) = (R - r)\cos(t) + d\cos\left(\frac{R - r}{r} t\right), \quad y(t) = (R -
 
 Status stamps (Layer 7) are anchored in the top-right corner, immediately communicating the blueprint's durability mode:
 
-```
-┌────────────────────────────────────────────────────────────────────────┐
-│                   Authentication Status Stamps                         │
-├───────────────────┬───────────────────┬────────────────────────────────┤
-│ 1. Wax Seal       │ 2. Clock Capsule  │ 3. Lemniscate Infinity (inf2)  │
-│ (wax_seal)        │ (clock)           │ (inf2)                         │
-│ Gilded wax seal   │ Formatted duration│ 3D carved wax relief           │
-│ with 3D shadow    │ pill with clock   │ permanent lifetime stamp       │
-└───────────────────┴───────────────────┴────────────────────────────────┘
-```
+| Stamp Type | Key | Visual Appearance | Lifetime Semantics |
+| :--- | :--- | :--- | :--- |
+| **Wax Seal** | `wax_seal` | Gilded wax seal with 3D drop shadow | Default physical authentication |
+| **Clock Capsule** | `clock` | Formatted duration pill with miniature clock icon | Timed blueprints (`duration: 7d`) |
+| **Lemniscate Infinity** | `inf2` | 3D carved wax relief displaying $\infty$ symbol | Permanent lifetime blueprints |
 
 ### 1. Imperial Wax Seal (`wax_seal`)
 An authentic, circular pixel-art royal wax seal featuring a double seal border, an embossed center emblem, and a soft 3D ambient drop shadow:

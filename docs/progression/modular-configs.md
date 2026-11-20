@@ -14,7 +14,7 @@ On large Minecraft servers, maintaining a single monolithic `config.yml` contain
 
 CraftingBlueprints solves this by introducing the **`configs/`** directory.
 
-```
+```	ext
 plugins/CraftingBlueprints/
 ├── config.yml                  # Base server settings (Database, Performance, Base Groups)
 └── configs/                    # Modular configuration overrides
@@ -35,8 +35,8 @@ When the server starts or when an administrator executes `/cb reload`:
 1. **Recursive Discovery**: The engine recursively scans the `plugins/CraftingBlueprints/configs/` directory, including all nested subdirectories (such as `configs/presets/<id>/`).
 2. **Arbitrary File Naming**: Files **do not require specific names** (such as `groups.yml` or `restrictions.yml`). Any file ending in `.yml` or `.yaml` is inspected.
 3. **Smart Section Detection**: The loader checks each discovered file for the presence of:
-   * A `groups:` mapping.
-   * A `restrictions:` mapping (or root `restricted-items:` list).
+    * A `groups:` mapping.
+    * A `restrictions:` mapping (or root `restricted-items:` list).
 
 Files without these sections are safely ignored without logging warnings.
 

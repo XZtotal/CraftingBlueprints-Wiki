@@ -12,22 +12,15 @@ CraftingBlueprints intercepts the stonecutter through the `StonecutterRulePipeli
 
 When a player opens a Stonecutter and places an input block into slot 0:
 
-```
-    [ Input Slot (0) ] ──► [ Select Recipe Button ] ──► [ Result Slot (1) ]
-         Stone Block               Slab / Stairs               Stone Bricks
-                                         │
-                                         ▼
-                            StonecutterRulePipeline
-                                         │
-                    ┌────────────────────┴────────────────────┐
-                    │ Requires Blueprint?                     │
-                    ▼ YES                                     ▼ NO
-     ┌───────────────────────────────┐         ┌───────────────────────────────┐
-     │ Player Has Blueprint & Uses?  │         │ Allow Slicing Instantly       │
-     ├───────────────────────────────┤         │ (Unrestricted for all players)│
-     │ YES: Produce Item & Use -1    │         └───────────────────────────────┘
-     │ NO:  Cancel Click & Show Lore │
-     └───────────────────────────────┘
+```mermaid
+flowchart TD
+    Step1["<b>Input Slot (0)</b><br/>Stone Block"] --> Step2["<b>Select Recipe Button</b><br/>Slab / Stairs / Bricks"]
+    Step2 --> Pipeline["<b>StonecutterRulePipeline</b>"]
+    Pipeline --> Check{"Requires Blueprint?"}
+    Check -->|No| Allow["<b>Allow Slicing Instantly</b><br/>Unrestricted for all players"]
+    Check -->|Yes| BPCheck{"Player Has Blueprint &amp; Uses?"}
+    BPCheck -->|Yes| Produce["<b>Produce Item</b><br/>Deduct 1 Craft Use"]
+    BPCheck -->|No| Deny["<b>Cancel Click</b><br/>Display Locked Item Notification"]
 ```
 
 1. **Station Type**: Classified internally as `STONECUT_TYPE` (Type ID `4`).
@@ -99,11 +92,11 @@ $$\text{Blocks Sliced} = \min(N_{\text{input}}, N_{\text{fits}}, N_{\text{uses}}
 * A player places **64 Stone Blocks** into the Stonecutter and selects **Stone Slabs** (which yields 2 slabs per stone block).
 * The player has a finite blueprint with **3 uses remaining**.
 * When shift-clicking the result slot:
-  * The engine calculates $N_{\text{uses}} = 3$.
-  * Exactly **3 stone blocks** are consumed from slot 0.
-  * Exactly **6 stone slabs** are delivered into the player's inventory.
-  * Exactly **3 uses** are deducted from the blueprint.
-  * The remaining **61 stone blocks** remain safely in slot 0.
+    * The engine calculates $N_{\text{uses}} = 3$.
+    * Exactly **3 stone blocks** are consumed from slot 0.
+    * Exactly **6 stone slabs** are delivered into the player's inventory.
+    * Exactly **3 uses** are deducted from the blueprint.
+    * The remaining **61 stone blocks** remain safely in slot 0.
 
 ---
 
@@ -144,6 +137,7 @@ To test whether a player or rank can slice a specific block:
   Required Blueprint: master_masonry
   Unlocked: YES (Remaining Uses: Unlimited)
   ```
+
 * **Locked Player**:
   ```text
   Item: Deepslate Bricks (Stonecutter)

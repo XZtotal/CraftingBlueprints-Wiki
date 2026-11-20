@@ -24,38 +24,32 @@ The following matrix summarizes the 7 intercepted workstation domains, their cor
 
 All workstation interactions are processed through modular **Event Rule Pipelines**. Rather than executing arbitrary business logic inside monolithic Bukkit listener classes, every event is evaluated against a deterministic sequence of rules:
 
-```
-                      Workstation Interaction (Player / Redstone)
-                                          │
-                                          ▼
-                         ┌─────────────────────────────────┐
-                         │   1. CheckUserLoadedRule        │ ──[Not Loaded]──► Block & Warn
-                         └────────────────┬────────────────┘
-                                          │ [Loaded]
-                                          ▼
-                         ┌─────────────────────────────────┐
-                         │   2. Claim / Protection Check   │ ──[Cancelled]──► Silent Abort
-                         └────────────────┬────────────────┘                  (0 uses deducted)
-                                          │ [Allowed]
-                                          ▼
-                         ┌─────────────────────────────────┐
-                         │   3. CraftBypassRule            │ ──[Has Bypass]─► Allow Action
-                         └────────────────┬────────────────┘
-                                          │ [Normal Player]
-                                          ▼
-                         ┌─────────────────────────────────┐
-                         │   4. RestrictionEngine Check    │ ──[Unrestricted]► Allow Action
-                         └────────────────┬────────────────┘
-                                          │ [Restricted]
-                                          ▼
-                         ┌─────────────────────────────────┐
-                         │   5. Blueprint Validation       │ ──[Missing / 0]► Cancel Event
-                         └────────────────┬────────────────┘                  (Refund / Particles)
-                                          │ [Valid / Unlocked]
-                                          ▼
-                         ┌─────────────────────────────────┐
-                         │   6. Transaction Deduction      │ ──► Deduct Craft Uses
-                         └─────────────────────────────────┘     Produce Item Output
+```mermaid
+flowchart TD
+    Start["<b>Workstation Interaction</b><br/><i>(Player Click / Redstone Trigger)</i>"]
+    R1["<b>1. CheckUserLoadedRule</b><br/>Profile loaded in memory?"]
+    R2["<b>2. Claim / Protection Check</b><br/>WorldGuard / GriefPrevention allowed?"]
+    R3["<b>3. CraftBypassRule</b><br/>Player has bypass permission?"]
+    R4["<b>4. RestrictionEngine Check</b><br/>Is target item restricted?"]
+    R5["<b>5. Blueprint Validation</b><br/>Player has blueprint &amp; remaining uses?"]
+    R6["<b>6. Transaction Deduction</b><br/>Deduct craft uses &amp; deliver item"]
+
+    Warn["<b>Block &amp; Warn</b><br/>Notify profile still loading"]
+    Abort["<b>Silent Abort</b><br/>0 uses deducted, cancel event"]
+    Allow["<b>Allow Action</b><br/>Standard vanilla execution"]
+    Deny["<b>Cancel Event</b><br/>Show locked lore, play fail FX"]
+
+    Start --> R1
+    R1 -->|Not Loaded| Warn
+    R1 -->|Loaded| R2
+    R2 -->|Cancelled| Abort
+    R2 -->|Allowed| R3
+    R3 -->|Has Bypass| Allow
+    R3 -->|Normal Player| R4
+    R4 -->|Unrestricted| Allow
+    R4 -->|Restricted| R5
+    R5 -->|Missing / 0 Uses| Deny
+    R5 -->|Valid / Unlocked| R6
 ```
 
 ### Event Priority & Protection Plugin Interoperability
@@ -98,6 +92,7 @@ To eliminate race conditions where a player connects and immediately interacts w
    ```text
    warning.wait_for_craft: "Your profile data is still synchronizing. Please wait a moment before crafting."
    ```
+
 4. As soon as the asynchronous database handshake completes (typically within 10–50 milliseconds), full workstation access is automatically restored.
 
 !!! tip "No Crafting Duplication or Bypasses"

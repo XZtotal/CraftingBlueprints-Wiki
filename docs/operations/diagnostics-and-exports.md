@@ -16,21 +16,17 @@ The `/cb status` command generates a comprehensive diagnostic summary of the loc
 /cb status
 ```
 
-```
-┌────────────────────────────────────────────────────────┐
-│             CraftingBlueprints System Status           │
-├────────────────────────────────────────────────────────┤
-│ Server ID:      e89f2a1b-4cd3-49fa-9871-38290f84ac12   │
-│ Node Role:      Master (is-master: true)               │
-│ DB Engine:      MySQL (Ping: 3ms | Pool: 2/10)         │
-│ File Watcher:   Enabled (blueprints/ | 1500ms debounce)│
-│ Cached Items:   148 total (142 file-managed, 6 manual) │
-│ In-Game Export: Active (exports/manual_blueprints.yml) │
-│ Map Buffers:    16 cached / 128 max (256 KB JVM)       │
-│ Network Nodes:  3 active (Hub-01, Survival-01, Sky-01) │
-│ Cluster Health: OK (Zero split-brain master conflicts) │
-└────────────────────────────────────────────────────────┘
-```
+| Component / Metric | Status / Value | Operational Notes |
+| :--- | :--- | :--- |
+| **Server ID** | `e89f2a1b-4cd3-49fa-9871-38290f84ac12` | Unique node cluster instance |
+| **Node Role** | `Master` (`is-master: true`) | Primary file watcher &amp; signal coordinator |
+| **DB Engine** | `MySQL` (Ping: 3ms \| Pool: 2/10) | Low-latency cluster pool |
+| **File Watcher** | `Enabled` (`blueprints/` \| 1500ms debounce) | Automatic hot-reload pipeline |
+| **Cached Items** | `148 total` (142 file-managed, 6 manual) | Fast $\mathcal{O}(1)$ in-memory index |
+| **In-Game Export** | `Active` (`exports/manual_blueprints.yml`) | Automated YAML synchronization |
+| **Map Buffers** | `16 cached / 128 max` (256 KB JVM) | Flyweight palette LRU memory |
+| **Network Nodes** | `3 active` (`Hub-01`, `Survival-01`, `Sky-01`)| Synchronized cluster workers |
+| **Cluster Health** | `OK` | Zero split-brain master conflicts |
 
 #### Key Diagnostic Metrics:
 

@@ -162,17 +162,18 @@ If the `item:` block or `item.material` is omitted:
 - **Package Blueprints**: Defaults to `BOOK`.
 - **Mystery Scrolls**: Defaults to `SPONGE`.
 
-```
-┌────────────────────────────────────────────────────────┐
-│              Standard Edition Physical Item            │
-├────────────────────────────────────────────────────────┤
-│  Material: NETHER_STAR                                 │
-│  CustomModelData: 3001                                 │
-│  Enchantment Glint: true                               │
-│  PersistentDataContainer (PDC):                        │
-│    - craftment-blueprints:craftment-blueprints         │
-│    - craftingblueprints:tier = "LEGENDARY"             │
-└────────────────────────────────────────────────────────┘
+```mermaid
+flowchart TD
+    subgraph Item["Standard Edition Physical Item Structure"]
+        direction TB
+        M["<b>Material:</b> <code>NETHER_STAR</code>"]
+        C["<b>CustomModelData:</b> <code>3001</code>"]
+        G["<b>Enchantment Glint:</b> <code>true</code>"]
+        subgraph PDC["PersistentDataContainer (PDC)"]
+            P1["<code>craftment-blueprints:craftment-blueprints</code>"]
+            P2["<code>craftingblueprints:tier = "LEGENDARY"</code>"]
+        end
+    end
 ```
 
 !!! tip "Custom Resource Packs & ItemsAdder / Nexo"
@@ -184,17 +185,14 @@ If the `item:` block or `item.material` is omitted:
 
 To eliminate boilerplate repetition across large networks, CraftingBlueprints provides a two-level defaults cascading engine:
 
-```
-[ Root blueprints/ default: ]
-             │
-             ▼
-[ Subfolder (weapons/) default: ]
-             │
-             ▼
-[ File file_default: ]
-             │
-             ▼
-[ Local Blueprint Definition ]
+```mermaid
+flowchart TD
+    D1["<b>Root <code>blueprints/</code> Default</b><br/><code>default:</code> block applied server-wide"]
+    D2["<b>Subfolder Default</b><br/><code>weapons/default:</code> block"]
+    D3["<b>File Default</b><br/><code>file_default:</code> block in active YAML"]
+    D4["<b>Local Blueprint Definition</b><br/>Explicit keys declared directly on blueprint"]
+
+    D1 --> D2 --> D3 --> D4
 ```
 
 ### 1. Folder Defaults (`default:`)

@@ -103,27 +103,20 @@ blueprints:
 
 Packages feature two distinct tiers of properties:
 
-```
-┌────────────────────────────────────────────────────────┐
-│               Container-Level Properties               │
-│  name, lore, item (BOOK/BUNDLE), price, sell_price     │
-│  Governs the physical item held in hand or sold in shop│
-└──────────────────────────┬─────────────────────────────┘
-                           │ Unlocked via Right-Click
-                           ▼
-┌────────────────────────────────────────────────────────┐
-│             Sub-Item Properties (blueprints:)          │
-│  blueprint, permanent, uses, time, station             │
-│  Governs the individual crafting knowledge unlocked    │
-└────────────────────────────────────────────────────────┘
+```mermaid
+flowchart TD
+    Container["<b>Container-Level Properties</b><br/><code>name</code>, <code>lore</code>, <code>item</code> (BOOK/BUNDLE), <code>price</code>, <code>sell_price</code><br/><i>Governs physical package item held in hand or sold in shop</i>"]
+    SubItems["<b>Sub-Item Properties (<code>blueprints:</code>)</b><br/><code>blueprint</code>, <code>permanent</code>, <code>uses</code>, <code>time</code>, <code>station</code><br/><i>Governs individual crafting knowledge unlocked upon redemption</i>"]
+
+    Container -->|Unlocked via Right-Click| SubItems
 ```
 
 1. **Container-Level Properties**:
-   - `name:`, `lore:`, `item:`, `price:`, `sell_price:`, and `extra:` govern the physical package item when held by a player or traded in shops.
-   - Dynamic placeholder `{blueprints_count}` automatically renders the total number of blueprints bundled inside.
+    - `name:`, `lore:`, `item:`, `price:`, `sell_price:`, and `extra:` govern the physical package item when held by a player or traded in shops.
+    - Dynamic placeholder `{blueprints_count}` automatically renders the total number of blueprints bundled inside.
 2. **Sub-Item Properties**:
-   - Each item in `blueprints:` dictates what crafting access is unlocked upon redemption.
-   - Once opened, the package item is consumed from the player's inventory, and each contained blueprint is registered into their progression profile.
+    - Each item in `blueprints:` dictates what crafting access is unlocked upon redemption.
+    - Once opened, the package item is consumed from the player's inventory, and each contained blueprint is registered into their progression profile.
 
 ---
 
@@ -131,16 +124,12 @@ Packages feature two distinct tiers of properties:
 
 CraftingBlueprints enforces a strict architectural design limit of **$\le 24$ blueprints** per package:
 
-```
-┌────────────────────────────────────────────────────────┐
-│             Package Portfolio Display (6x4)            │
-├────────────────────────────────────────────────────────┤
-│  [BP 1 ]  [BP 2 ]  [BP 3 ]  [BP 4 ]  [BP 5 ]  [BP 6 ]  │
-│  [BP 7 ]  [BP 8 ]  [BP 9 ]  [BP 10]  [BP 11]  [BP 12]  │
-│  [BP 13]  [BP 14]  [BP 15]  [BP 16]  [BP 17]  [BP 18]  │
-│  [BP 19]  [BP 20]  [BP 21]  [BP 22]  [BP 23]  [BP 24]  │
-└────────────────────────────────────────────────────────┘
-```
+| Slot Range | Blueprint Item Identifiers | Unlocked Knowledge |
+| :---: | :--- | :--- |
+| **Row 1 (1–6)** | `[BP 1]` `[BP 2]` `[BP 3]` `[BP 4]` `[BP 5]` `[BP 6]` | Primary weapons and tools |
+| **Row 2 (7–12)** | `[BP 7]` `[BP 8]` `[BP 9]` `[BP 10]` `[BP 11]` `[BP 12]` | Armor sets and shields |
+| **Row 3 (13–18)** | `[BP 13]` `[BP 14]` `[BP 15]` `[BP 16]` `[BP 17]` `[BP 18]` | Alchemical brews and potions |
+| **Row 4 (19–24)** | `[BP 19]` `[BP 20]` `[BP 21]` `[BP 22]` `[BP 23]` `[BP 24]` | Masterwork relics and enchants |
 
 ### Why the 24-Item Limit Exists:
 

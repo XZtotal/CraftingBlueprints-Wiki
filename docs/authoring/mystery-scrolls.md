@@ -127,32 +127,14 @@ pool:
 
 When a player acquires an Arcane Mystery Scroll, the rolling workflow is smooth, tactile, and secure:
 
-```
-┌─────────────────────────────────┐
-│ Player holds Scroll in Main Hand│
-└────────────────┬────────────────┘
-                 │ Right-Click
-                 ▼
-┌─────────────────────────────────┐
-│ Hand Interaction & Anti-Dupe    │
-│ - Decrements 1 scroll from stack│
-│ - Cancels event to prevent place│
-└────────────────┬────────────────┘
-                 │
-                 ▼
-┌─────────────────────────────────┐
-│ CDF Random Sampling             │
-│ - Evaluates random roll in O(log N)
-│ - Selects winning blueprint     │
-└────────────────┬────────────────┘
-                 │
-                 ▼
-┌─────────────────────────────────┐
-│ Atomic Reward Unlock            │
-│ - Writes knowledge to PlayerDB  │
-│ - Syncs client recipe book      │
-│ - Plays level chime & particles │
-└─────────────────────────────────┘
+```mermaid
+flowchart TD
+    Hold["<b>Player Holds Scroll in Main Hand</b>"]
+    Click["<b>Right-Click Trigger</b><br/>• Decrement 1 scroll from stack<br/>• Cancel interaction event to prevent block placement"]
+    Roll["<b>CDF Random Sampling</b><br/>• Binary search random roll in $\mathcal{O}(\log N)$<br/>• Select winning blueprint from pool"]
+    Unlock["<b>Atomic Reward Unlock</b><br/>• Write unlocked knowledge to <code>PlayerDB</code><br/>• Sync client recipe book<br/>• Play level chime and firework particles"]
+
+    Hold --> Click --> Roll --> Unlock
 ```
 
 1. **Anti-Dupe Validation**: CraftingBlueprints verifies that the item in hand carries the persistent NBT identifier `MYSTERY_TYPE` and consumes exactly 1 item before triggering the roll.

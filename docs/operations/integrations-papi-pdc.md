@@ -6,25 +6,16 @@ In modern Minecraft networks, CraftingBlueprints is designed to interoperate sea
 2. **Channel 2 (PlaceholderAPI Expansion)**: Expose real-time player unlocks, remaining uses, expiration timers, and metadata to scoreboards, TAB lists, and custom menus.
 3. **Channel 3 (PersistentDataContainer / PDC)**: Read and verify immutable NBT tags stamped directly into physical blueprint items without executing console commands.
 
-```
-                           ┌────────────────────────────────────────┐
-                           │        CraftingBlueprints Model        │
-                           │  - ID, Target, Time, Uses, Permanence  │
-                           │  - price, sell_price, extra sandbox    │
-                           └───────────────────┬────────────────────┘
-                                               │
-         ┌─────────────────────────────────────┼─────────────────────────────────────┐
-         ▼                                     ▼                                     ▼
-┌──────────────────┐                 ┌──────────────────┐                  ┌──────────────────┐
-│ CANAL 1: VAULT   │                 │  CANAL 2: PAPI   │                  │   CANAL 3: PDC   │
-│ Direct Economy   │                 │  PlaceholderAPI  │                  │  PersistentData  │
-│  Transactions    │                 │    Expansion     │                  │    Container     │
-└────────┬─────────┘                 └────────┬─────────┘                  └────────┬─────────┘
-         │                                     │                                     │
-         ▼                                     ▼                                     ▼
- /cb buy <id> [--item]                DeluxeMenus, TrMenu,                  zAuctionHouse, Trade,
- /cb sell (hand item)                 Scoreboards, TAB,                     ShopGUI+ (NBT Match),
- External Shop Menus                  BetonQuest, ActionBars                Skript, Custom Plugins
+```mermaid
+flowchart TD
+    Model["<b>CraftingBlueprints Model</b><br/>ID, Target, Duration, Uses, Permanence<br/>price, sell_price, extra sandbox"]
+    PDC["<b>PersistentDataContainer (PDC) Serialization</b><br/>Root Tag: <code>craftment-blueprints:craftment-blueprints</code>"]
+    Items["<b>In-Game Items</b><br/>Tradeable physical scrolls, bundles &amp; maps"]
+    Storage["<b>Database Storage</b><br/>SQLite BLOB / MySQL JSON column"]
+
+    Model --> PDC
+    PDC --> Items
+    PDC --> Storage
 ```
 
 ---
@@ -93,12 +84,12 @@ Players can liquidate physical blueprint scrolls or vouchers for server currency
 
 - **Permission**: `craftingblueprints.sell` (granted by default).
 - **Execution Workflow**:
-  1. Inspects the `ItemStack` held in the player's main hand.
-  2. Verifies that the item is an authentic CraftingBlueprints item via its PersistentDataContainer tag.
-  3. Resolves the blueprint definition and retrieves `sell_price`. If `sell_price <= 0`, aborts: `<red>This item cannot be sold.</red>`.
-  4. Fires `BlueprintSellEvent`.
-  5. Removes 1 unit of the item from the main hand.
-  6. Deposits funds via `economy.depositPlayer(player, sell_price)` and sends transaction details.
+    1. Inspects the `ItemStack` held in the player's main hand.
+    2. Verifies that the item is an authentic CraftingBlueprints item via its PersistentDataContainer tag.
+    3. Resolves the blueprint definition and retrieves `sell_price`. If `sell_price <= 0`, aborts: `<red>This item cannot be sold.</red>`.
+    4. Fires `BlueprintSellEvent`.
+    5. Removes 1 unit of the item from the main hand.
+    6. Deposits funds via `economy.depositPlayer(player, sell_price)` and sends transaction details.
 
 ---
 
@@ -163,26 +154,21 @@ On large servers with 100+ players, scoreboards and TAB plugins evaluate placeho
 
 CraftingBlueprints implements a multi-tier cache shielding architecture to guarantee **solid 20.0 TPS**:
 
-```
-                       Placeholder Evaluation Requested
-                                      │
-                         Is entity in memory cache?
-                                      │
-                     ┌────────────────┴────────────────┐
-                     │ YES                             │ NO
-                     ▼                                 ▼
-         Return value in O(1)              Query database on miss?
-                                                       │
-                                      ┌────────────────┴────────────────┐
-                                      │ FALSE (Default)                 │ TRUE
-                                      ▼                                 ▼
-                            Return fallback ("")             Is Primary Server Thread?
-                            Schedule async load                         │
-                                                       ┌────────────────┴────────────────┐
-                                                       │ YES                             │ NO
-                                                       ▼                                 ▼
-                                             Return fallback ("")             Resolve query async
-                                             Queue async snapshot             Write to TTL Cache
+```mermaid
+flowchart TD
+    Req["<b>Placeholder Evaluation Requested</b><br/><code>%craftingblueprints_unlocked_count%</code>"]
+    CacheCheck{"Is entity in<br/>memory cache?"}
+    Fast["<b>Fast Instant Return</b><br/>$\mathcal{O}(1)$ query from <code>PlayerDB</code> memory cache"]
+    LoadCheck{"Check: Is background<br/>SQL fetch active?"}
+    Placeholder["<b>Return Non-Blocking Placeholder</b><br/><code>...</code> / <code>0</code><br/><i>(Prevents main thread lag spikes)</i>"]
+    Trigger["<b>Trigger Async DB Load</b><br/>Fetch record &amp; populate cache"]
+
+    Req --> CacheCheck
+    CacheCheck -->|Yes| Fast
+    CacheCheck -->|No| LoadCheck
+    LoadCheck -->|Yes| Placeholder
+    LoadCheck -->|No| Trigger
+    Trigger --> Placeholder
 ```
 
 #### Cache Tuning Settings (`config.yml`):
@@ -226,10 +212,11 @@ Every blueprint item carries the root identification tag:
     "mapinfo": 128
   }
   ```
-  - `type`: Blueprint category integer (`0` = Single, `1` = Package, `2` = Mystery).
-  - `id`: Canonical blueprint identifier.
-  - `uuid`: Bound player UUID (or `null` if unbound tradeable scroll).
-  - `mapinfo`: Extended Edition map ID mapping.
+
+    - `type`: Blueprint category integer (`0` = Single, `1` = Package, `2` = Mystery).
+    - `id`: Canonical blueprint identifier.
+    - `uuid`: Bound player UUID (or `null` if unbound tradeable scroll).
+    - `mapinfo`: Extended Edition map ID mapping.
 
 ---
 
@@ -320,14 +307,14 @@ singles:
 ### Supported Lore Variables
 
 1. **System Metadata**:
-   - `{id}`: Blueprint identifier (`dragon_slayer_blade`).
-   - `{blueprint_target}` / `{target}`: Target recipe or item (`minecraft:diamond_sword`).
-   - `{permanent}`: Localized permanence boolean (`true`/`false`).
-   - `{time}`: Formatted duration string (e.g. `2d 12h`).
-   - `{uses}`: Configured or remaining craft uses (`5`).
-   - `{price}`: Formatted Vault purchase price.
-   - `{sell_price}`: Formatted Vault buyback price.
+    - `{id}`: Blueprint identifier (`dragon_slayer_blade`).
+    - `{blueprint_target}` / `{target}`: Target recipe or item (`minecraft:diamond_sword`).
+    - `{permanent}`: Localized permanence boolean (`true`/`false`).
+    - `{time}`: Formatted duration string (e.g. `2d 12h`).
+    - `{uses}`: Configured or remaining craft uses (`5`).
+    - `{price}`: Formatted Vault purchase price.
+    - `{sell_price}`: Formatted Vault buyback price.
 2. **Arbitrary Extra Attributes**:
-   - Any key declared under `extra:` resolves dynamically (case-insensitive), such as `{tier}`, `{required_level}`, or `{category}`.
+    - Any key declared under `extra:` resolves dynamically (case-insensitive), such as `{tier}`, `{required_level}`, or `{category}`.
 3. **Safety Fallback**:
-   - If an unconfigured placeholder `{unknown}` appears in the lore, the engine preserves the string without throwing exceptions or corrupting item lore.
+    - If an unconfigured placeholder `{unknown}` appears in the lore, the engine preserves the string without throwing exceptions or corrupting item lore.

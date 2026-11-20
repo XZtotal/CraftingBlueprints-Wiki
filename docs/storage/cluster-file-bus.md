@@ -16,25 +16,18 @@ Traditional multi-server setups rely on external file distribution workarounds, 
 * **Shared Docker Volumes**: Only function when all servers run on the exact same physical host machine, preventing horizontal scaling across cloud providers or dedicated servers.
 * **rsync Cron Scripts**: Require external SSH key management, cron maintenance, and lack reactive event-driven synchronization, leading to race conditions where players join before files transfer.
 
-```
-  Traditional Fragile Architecture (NFS / Cron / Manual Copies):
-  ┌─────────────────┐       rsync / NFS Share       ┌─────────────────┐
-  │   MASTER NODE   ├ - - - - - - - - - - - - - - -►│  WORKER NODE 1  │ ◄── [MISSING PNG TEXTURES!]
-  │ (Local Assets)  │     (Lag, Latency, Outages)   │ (Stale Disk)    │
-  └─────────────────┘                               └─────────────────┘
+```mermaid
+flowchart TD
+    subgraph Trad["Traditional Fragile Architecture (NFS / Cron / Manual Copies)"]
+        direction LR
+        M1["Master Node<br/><i>(Local Assets)</i>"] -.->|rsync / NFS Share<br/>Latency &amp; Outages| W1["Worker Node 1<br/><i>(Stale Disk / Missing Textures!)</i>"]
+    end
 
-  CraftingBlueprints Zero-NFS Architecture (Native Database Bus):
-  ┌─────────────────┐       UPSERT (BLOB + SHA-256) ┌─────────────────┐
-  │   MASTER NODE   ├──────────────────────────────►│    DATABASE     │
-  │ (Local Assets)  │                               │cb_cluster_files │
-  └─────────────────┘                               └────────┬────────┘
-                                                             │ Two-Phase Delta Sync
-                                                             ▼ (Zero Waste)
-                                                    ┌─────────────────┐
-                                                    │  WORKER NODES   │
-                                                    │ (100% Bit-Parity│
-                                                    │   Local Disk)   │
-                                                    └─────────────────┘
+    subgraph Bus["CraftingBlueprints Zero-NFS Architecture (Native Database Bus)"]
+        direction TD
+        M2["Master Node<br/><code>/cb bus push</code>"] -->|UPSERT BLOB + SHA-256| DB["MySQL Database<br/><code>cb_cluster_files</code>"]
+        DB -->|SHA-256 Manifest Sync<br/>Automatic Delta Fetch| W2["Worker Nodes<br/><i>(100% Identical Assets)</i>"]
+    end
 ```
 
 ---
@@ -69,37 +62,26 @@ The following files and folders are **strictly node-local**. They are **never up
 
 Transferring megabytes of binary data across MySQL connections on every reload would cause network congestion. Worker nodes execute a **Two-Phase Selective Synchronization Protocol** that transfers data only when a file has actually changed.
 
-```
-Phase 1: Lightweight Manifest Fetch
-Worker Node  ──────────────────────────────────────────► MySQL Database
-             SELECT file_path, sha256, file_size
-Worker Node  ◄────────────────────────────────────────── Manifest Result (~few KB)
+```mermaid
+sequenceDiagram
+    autonumber
+    participant W as Worker Node
+    participant DB as MySQL Database (cb_cluster_files)
+    participant Disk as Worker Local Disk
 
-Phase 2: Local Verification & Delta Partitioning
-Worker compares remote hashes against local disk:
-  • D_add: Remote files missing on Worker local disk
-  • D_mod: Remote files whose SHA-256 does not match local disk
-  • D_del: Local files in tracked directories missing from remote manifest
+    Note over W,DB: Phase 1: Lightweight Manifest Fetch
+    W->>DB: SELECT file_path, sha256, file_size
+    DB-->>W: Manifest Result (~few KB)
 
-Phase 3: Selective Delta Download
-If (D_add ∪ D_mod is empty):
-  Worker completes immediately (0 bytes transferred, 0 I/O wasted!)
-Else:
-  Worker Node ─────────────────────────────────────────► MySQL Database
-              SELECT file_path, content WHERE file IN (D_add ∪ D_mod)
-  Worker Node ◄───────────────────────────────────────── Stream of modified BLOBs
+    Note over W,Disk: Phase 2: Local Verification & Delta Partitioning
+    W->>Disk: Compare remote hashes against local disk
+    Disk-->>W: Partition into D_add, D_mod, D_del
 
-Phase 4: Atomic Disk Replacement
-For each downloaded file:
-  1. Write payload to target.tmp.<uuid>
-  2. Cryptographically verify uncompressed SHA-256 checksum
-  3. Execute Files.move(temp, target, ATOMIC_MOVE, REPLACE_EXISTING)
-
-Phase 5: Safe Local Pruning (if prune-deleted: true)
-Safely delete local files in D_del (strictly shielding CANONICAL_PROTECTED_PATTERNS).
-
-Phase 6: Targeted Cache Invalidation
-Evict only the memory caches for affected files (images, recipes, loot, configs).
+    Note over W,DB: Phase 3: Targeted Delta Fetch & Sync
+    W->>DB: Batch SELECT file_content WHERE file_path IN (...)
+    DB-->>W: Binary file contents (BLOBs)
+    W->>Disk: Atomically write new & modified assets
+    W->>Disk: Prune obsolete files (D_del)
 ```
 
 ### Atomic Disk Replacement (`writeAtomic`)

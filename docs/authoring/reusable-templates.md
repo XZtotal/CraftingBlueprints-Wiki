@@ -117,7 +117,7 @@ In `titan_greatsword`, the blueprint inherits:
 
 To keep large configuration repositories organized and avoid accidental naming collisions across departments, templates follow **downward lexical scoping**:
 
-```
+```	ext
 plugins/CraftingBlueprints/blueprints/
 ├── global_templates.yml             <-- Global Scope: Visible everywhere
 ├── weapons/
@@ -157,34 +157,15 @@ When CraftingBlueprints compiles a blueprint, it merges configurations using a s
 
 $$\text{Folder Defaults} \;\longrightarrow\; \text{File Defaults} \;\longrightarrow\; \text{Inherited Templates (Left-to-Right)} \;\longrightarrow\; \text{Blueprint Local Config}$$
 
-```
-┌────────────────────────────────────────────────────────┐
-│ 1. Inherited Folder Defaults (default:)                │
-│    Cascaded from root blueprints/ down to folder       │
-└──────────────────────────┬─────────────────────────────┘
-                           │
-                           ▼
-┌────────────────────────────────────────────────────────┐
-│ 2. File Defaults (file_default:)                       │
-│    Specific to the current YAML file                   │
-└──────────────────────────┬─────────────────────────────┘
-                           │
-                           ▼
-┌────────────────────────────────────────────────────────┐
-│ 3. Template Mixins (templates: [T1, T2, ... TN])       │
-│    Evaluated sequentially from left to right           │
-└──────────────────────────┬─────────────────────────────┘
-                           │
-                           ▼
-┌────────────────────────────────────────────────────────┐
-│ 4. Local Blueprint Definition                          │
-│    Explicit keys declared directly on the blueprint    │
-└──────────────────────────┬─────────────────────────────┘
-                           │
-                           ▼
-┌────────────────────────────────────────────────────────┐
-│           Final Compiled Blueprint in Memory           │
-└────────────────────────────────────────────────────────┘
+```mermaid
+flowchart TD
+    F["<b>1. Inherited Folder Defaults (<code>default:</code>)</b><br/>Cascaded from root <code>blueprints/</code> down to current subfolder"]
+    File["<b>2. File Defaults (<code>file_default:</code>)</b><br/>Specific to the active YAML file"]
+    T["<b>3. Template Mixins (<code>templates: [T1, T2, ... TN]</code>)</b><br/>Evaluated sequentially from left to right"]
+    L["<b>4. Local Blueprint Definition</b><br/>Explicit keys declared directly on the blueprint"]
+    Mem["<b>Final Compiled Blueprint in Memory</b>"]
+
+    F --> File --> T --> L --> Mem
 ```
 
 ### Field-Specific Merge Rules

@@ -8,14 +8,14 @@ This 3-minute hands-on tutorial walks you through creating, validating, granting
 
 We will restrict the crafting of the **Diamond Sword** (`DIAMOND_SWORD`) so that players cannot forge it without first unlocking a physical schematic item.
 
-```
-┌─────────────────────────────────┐       ┌─────────────────────────────────┐
-│        Player Inventory         │       │          Crafting Table         │
-│                                 │       │                                 │
-│  [Blueprint: Diamond Sword]     │ ────> │  [Diamond]                      │ ────>  [Diamond Sword]
-│  (Right-click to learn/consume) │       │  [Diamond]                      │        (Crafted!)
-│                                 │       │  [Stick  ]                      │
-└─────────────────────────────────┘       └─────────────────────────────────┘
+```mermaid
+flowchart LR
+    Inv["<b>Player Inventory</b><br/>• Blueprint: Diamond Sword<br/><i>(Right-click to learn)</i>"]
+    Table["<b>Crafting Table</b><br/>• Diamond<br/>• Diamond<br/>• Stick"]
+    Sword["<b>Diamond Sword</b><br/><i>(Successfully Crafted!)</i>"]
+
+    Inv -->|Right-Click Unlock| Table
+    Table -->|Craft| Sword
 ```
 
 ---
@@ -128,6 +128,7 @@ Place two Diamonds and a Stick into a Crafting Table.
   ```text
   You do not have the required blueprint to craft Diamond Sword!
   ```
+
 * **Anti-Exploit Protection**: The ingredients are not consumed, and the sword cannot be shift-crafted.
 
 ### 2. Check Progression Status (`/cb cani`)

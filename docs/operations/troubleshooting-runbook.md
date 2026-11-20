@@ -67,6 +67,7 @@ Once corrected, reload the engine without restarting the server:
   org.sqlite.SQLiteException: [SQLITE_BUSY] The database file is locked (database table is locked)
       at org.sqlite.core.DB.execute(DB.java:860)
   ```
+
 - Player blueprint progress occasionally fails to persist across server restarts.
 
 ### Root Cause Analysis
@@ -171,6 +172,7 @@ Inspect the owner of any workstation block:
    ```bash
    /cb owner
    ```
+
 3. The chat displays the registered owner UUID and username.
 
 #### Step 2: Enable Hopper Rejection Guards

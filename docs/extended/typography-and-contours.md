@@ -23,17 +23,18 @@ CraftingBlueprints Extended completely eliminates typography banding using a nor
 
 $$T(x, y) = \frac{M[y \pmod 4][x \pmod 4] + 0.5}{16}$$
 
-```
-┌────────────────────────────────────────────────────────┐
-│             Bayer 4x4 Dithered Text Matrix             │
-├────────────────────────────────────────────────────────┤
-│  Letter 'T':                                           │
-│  [■] Pure Cyan Stop (C1)                               │
-│  [▩] 75% Cyan / 25% Mint Stippling                     │
-│  [▦] 50% Cyan / 50% Mint Stippling                     │
-│  [▧] 25% Cyan / 75% Mint Stippling                     │
-│  [□] Pure Mint Stop (C2)                               │
-└────────────────────────────────────────────────────────┘
+```mermaid
+flowchart TD
+    subgraph Dither["Bayer 4×4 Spatial Dithering Ramp"]
+        direction TB
+        S1["<b>Pure Color Stop (C1)</b><br/>100% Cyan"]
+        S2["<b>75% Stippling</b><br/>75% Cyan / 25% Mint"]
+        S3["<b>50% Balanced Stippling</b><br/>50% Cyan / 50% Mint"]
+        S4["<b>25% Stippling</b><br/>25% Cyan / 75% Mint"]
+        S5["<b>Pure Color Stop (C2)</b><br/>100% Mint"]
+
+        S1 --> S2 --> S3 --> S4 --> S5
+    end
 ```
 
 ### How It Works:
@@ -91,16 +92,15 @@ Dark basalt or intricately textured map backgrounds can cause dark item sprites 
 
 CraftingBlueprints Extended solves this with the **`ItemOutlineRenderer` Euclidean Dilation Engine**:
 
-```
-┌────────────────────────────────────────────────────────┐
-│             Euclidean Contour Dilation Kernel          │
-├────────────────────────────────────────────────────────┤
-│  1. Scans central item sprite (alpha > 30).           │
-│  2. Applies circular dilation kernel R = T + 0.45.     │
-│  3. Renders smooth, unbroken outline around sprite.    │
-│  4. Blends opacity and radial distance falloff.        │
-│  5. Original sprite is drawn untouched on top.         │
-└────────────────────────────────────────────────────────┘
+```mermaid
+flowchart TD
+    S1["<b>1. Alpha Threshold Scan</b><br/>Locate sprite boundary pixels (α &gt; 30)"]
+    S2["<b>2. Circular Dilation Kernel</b><br/>Apply Euclidean radius <code>R = T + 0.45</code>"]
+    S3["<b>3. Outline Generation</b><br/>Render smooth, continuous outer contour"]
+    S4["<b>4. Distance Attenuation</b><br/>Blend radial opacity and falloff"]
+    S5["<b>5. Sprite Blitting</b><br/>Original sprite drawn untouched on top"]
+
+    S1 --> S2 --> S3 --> S4 --> S5
 ```
 
 ### Outline Configuration Block

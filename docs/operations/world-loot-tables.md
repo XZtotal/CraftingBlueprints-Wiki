@@ -12,33 +12,14 @@ Traditional loot injection plugins often scan world chunks on generation or run 
 - **Lazy Evaluation**: In Minecraft, container loot tables are generated *lazily* only when a player physically opens an unopened chest, interacts with an ominous vault, brushes a block, or catches a fish. CraftingBlueprints calculates rolls solely at the exact instant of interaction.
 - **Zero World Scanners**: The engine runs zero chunk-scanning tasks, schedules no heavy world iteration threads, and causes **0 TPS degradation**.
 
-```
-                        ┌────────────────────────────────────────┐
-                        │     Player Interacts with Container    │
-                        │   (Dungeon Chest, Vault, Archaeology)  │
-                        └───────────────────┬────────────────────┘
-                                            │
-                                            ▼ Fires
-                        ┌────────────────────────────────────────┐
-                        │      Bukkit LootGenerateEvent          │
-                        └───────────────────┬────────────────────┘
-                                            │
-                                            ▼ Intercepts
- ┌──────────────────────────────────────────┴──────────────────────────────────────────┐
- │                                 LootRulePipeline                                    │
- │                                                                                     │
- │  1. CheckLootEnabledRule    Verify master toggle: loot.enabled == true              │
- │  2. LootTableMatcherRule    Match event table key against compiled regex patterns   │
- │  3. LootRollEvaluator       Evaluate chance & CDF weighted roll (with Luck factor) │
- │  4. BlueprintItemFactory    Resolve blueprint from ItemDB & construct unbound item  │
- │  5. ContainerOverflowRule   Append to loot, replace trash, or drop naturally        │
- └──────────────────────────────────────────┬──────────────────────────────────────────┘
-                                            │
-                                            ▼ Modifies
-                        ┌────────────────────────────────────────┐
-                        │         event.getLoot() List           │
-                        │   (Chest opens containing blueprint!)  │
-                        └────────────────────────────────────────┘
+```mermaid
+flowchart TD
+    Player["<b>Player Interacts with Container</b><br/><i>(Dungeon Chest, Vault, Archaeology)</i>"]
+    Event["<b>Bukkit LootGenerateEvent Fires</b>"]
+    Pipeline["<b>LootRulePipeline Intercepts</b><br/>1. <code>CheckLootEnabledRule</code><br/>2. <code>LootTableMatcherRule</code><br/>3. <code>LootRollEvaluator</code> (CDF weighted roll)<br/>4. <code>BlueprintItemFactory</code><br/>5. <code>ContainerOverflowRule</code>"]
+    Loot["<b>event.getLoot() List Modified</b><br/>Chest opens containing blueprint!"]
+
+    Player --> Event --> Pipeline --> Loot
 ```
 
 ---
@@ -242,6 +223,7 @@ CraftingBlueprints avoids naive random selection algorithms that produce statist
 1. Let a pool have entries $E_1, E_2, \dots, E_N$ with relative weights $W_1, W_2, \dots, W_N$.
 2. The cumulative weight array $C$ is computed such that:
    $$C_k = \sum_{i=1}^k W_i \quad \text{for } 1 \le k \le N$$
+
 3. When rolling the pool, a uniform pseudo-random integer $r$ is drawn from $[1, C_N]$.
 4. The winning entry index $k$ is resolved via **binary search** (`Arrays.binarySearch`), executing in $O(\log N)$ time complexity.
 
@@ -263,25 +245,23 @@ $$\text{Effective Chance} = 0.25 \times \left(1.0 + 2 \times 0.05\right) = 0.25 
 
 Minecraft containers possess finite slot capacities (e.g. single chest: 27 slots, double chest: 54 slots). If vanilla world generation completely fills a container before blueprints are evaluated, CraftingBlueprints resolves capacity conflicts using a three-tier resolution hierarchy:
 
-```
-                      Is container capacity < Max Slots?
-                                     │
-                    ┌────────────────┴────────────────┐
-                    │ YES                             │ NO
-                    ▼                                 ▼
-         Direct Item Placement          Is replace-trash-if-full: true?
-        (Appends to event loot)                       │
-                                             ┌────────┴────────┐
-                                             │ YES             │ NO
-                                             ▼                 ▼
-                                    Scan Container Loot   Drop item naturally
-                                    for trash-materials   at container coords
-                                             │
-                                    ┌────────┴────────┐
-                                    │ Found           │ Not Found
-                                    ▼                 ▼
-                              Replace trash      Drop naturally
-                             with blueprint      in world
+```mermaid
+flowchart TD
+    CapCheck{"Is container capacity<br/>&lt; Max Slots?"}
+    Direct["<b>Direct Item Placement</b><br/>Appends to event loot"]
+    TrashCheck{"Is <code>replace-trash-if-full: true</code>?"}
+    Scan["<b>Scan Container Loot</b><br/>Look for <code>trash-materials</code>"]
+    DropWorld["<b>Drop Item Naturally</b><br/>Spawns at container coordinates"]
+    FoundCheck{"Trash Found?"}
+    Replace["<b>Replace Trash</b><br/>Substitutes trash item with blueprint"]
+
+    CapCheck -->|Yes| Direct
+    CapCheck -->|No| TrashCheck
+    TrashCheck -->|Yes| Scan
+    TrashCheck -->|No| DropWorld
+    Scan --> FoundCheck
+    FoundCheck -->|Yes| Replace
+    FoundCheck -->|No| DropWorld
 ```
 
 1. **Direct Placement**: If the container has vacant slots remaining, the blueprint item is directly appended to the container's generated loot list.
@@ -345,14 +325,14 @@ The engine samples the specified pool using CDF random selection and places the 
 ### Troubleshooting Checklist
 
 1. **Blueprints Never Appear in Containers**:
-   - Check `/cb loot test <table_key>`: If the simulation reports $0$ blueprints generated, ensure the table key pattern matches the target container.
-   - Verify that `loot.enabled: true` is set in `plugins/CraftingBlueprints/loot.yml`.
-   - Run `/cb loot reload` and verify that the console outputs `Configuración de loot recargada con éxito`.
+    - Check `/cb loot test <table_key>`: If the simulation reports $0$ blueprints generated, ensure the table key pattern matches the target container.
+    - Verify that `loot.enabled: true` is set in `plugins/CraftingBlueprints/loot.yml`.
+    - Run `/cb loot reload` and verify that the console outputs `Configuración de loot recargada con éxito`.
 2. **"Unknown Blueprint ID" Warnings in Console**:
-   - Verify that the `blueprint:` ID in `loot.yml` exactly matches a registered blueprint ID in `blueprints/` or `ItemDB`.
-   - Check casing: blueprint IDs in CraftingBlueprints are lowercase.
+    - Verify that the `blueprint:` ID in `loot.yml` exactly matches a registered blueprint ID in `blueprints/` or `ItemDB`.
+    - Check casing: blueprint IDs in CraftingBlueprints are lowercase.
 3. **Containers Losing Items**:
-   - Ensure `replace-trash-if-full: true` only contains disposable items (`ROTTEN_FLESH`, `BONE`, `GRAVEL`) in `trash-materials`. Never add diamonds, enchanted books, or armor templates to `trash-materials`.
+    - Ensure `replace-trash-if-full: true` only contains disposable items (`ROTTEN_FLESH`, `BONE`, `GRAVEL`) in `trash-materials`. Never add diamonds, enchanted books, or armor templates to `trash-materials`.
 
 ---
 

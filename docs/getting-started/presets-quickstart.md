@@ -104,7 +104,7 @@ To deploy `rpg_tiers` with 50% higher economy prices, double craft uses, and a c
 
 A core design principle of CraftingBlueprints is **clean configuration isolation**:
 
-```
+```	ext
 plugins/CraftingBlueprints/
 ├── config.yml                         # 100% UNTOUCHED (Server global settings)
 ├── blueprints/

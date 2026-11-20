@@ -33,16 +33,16 @@ Opens the primary interactive blueprint catalog (`PlayerInfoMenu`), categorizing
 /cb menu
 ```
 
-```
-┌──────────────────────────────────────────────────────────┐
-│                  CraftingBlueprints Catalog              │
-├──────────────────────────────────────────────────────────┤
-│  [⚔ Weapons]    [🛡 Armor]    [⛏ Tools]    [⚗ Potions]    │
-│  [✨ Enchants]  [🧱 Building] [⚡ Redstone] [📦 Packages]  │
-│                                                          │
-│  Page 1/4                [Prev]        [Next]    [Close] │
-└──────────────────────────────────────────────────────────┘
-```
+| Category Filter | Category Icon | Typical Gated Blueprints |
+| :--- | :---: | :--- |
+| **Weapons** | ⚔ | Swords, bows, tridents, custom katanas |
+| **Armor** | 🛡 | Netherite armor sets, turtle helmets, elytra |
+| **Tools** | ⛏ | Pickaxes, axes, shovels, hoes |
+| **Potions** | ⚗ | Strength II, Speed II, Invisibility brews |
+| **Enchants** | ✨ | Mending, Sharpness V, Unbreaking III books |
+| **Building** | 🧱 | Stonecutter blocks, bricks, copper variants |
+| **Redstone** | ⚡ | Crafter block recipes, target blocks |
+| **Packages** | 📦 | Bundled masterwork blueprints |
 
 #### Menu Capabilities:
 
@@ -92,26 +92,20 @@ The `/cb cani` ("Can I?") command verifies whether you have the necessary bluepr
 #### How It Works:
 Hold the target item (or blueprint voucher) in your main hand and execute `/cb cani`. The engine checks your player data against the restriction rules and outputs one of five explicit statuses:
 
-```
-                                  Execute /cb cani (held item)
-                                                │
-                                    Is item recipe restricted?
-                                                │
-                               ┌────────────────┴────────────────┐
-                               │ NO                              │ YES
-                               ▼                                 ▼
-                    Status 1: UNRESTRICTED           Does player own blueprint?
-                    "Recipe is unrestricted.                     │
-                     Craft freely!"                 ┌────────────┴────────────┐
-                                                    │ YES                     │ NO
-                                                    ▼                         ▼
-                                         What durability type?       Status 5: NOT ACQUIRED
-                                                    │                "You do not possess the
-                             ┌──────────────────────┼────────────────┐required blueprint."
-                             ▼                      ▼                ▼
-                    Status 2: PERMANENT    Status 3: TIMED    Status 4: USES
-                    "You have permanently  "Valid for: 2h 15m" "Remaining: 4 crafts"
-                     unlocked this recipe."
+```mermaid
+flowchart TD
+    Exec["<b>Execute /cb cani (held item)</b>"]
+    Check{"Is item recipe restricted?"}
+    Free["<b>Display Unrestricted</b><br/>Item is free to craft for everyone"]
+    BPCheck{"Has Unlocked Blueprint<br/>or Active Group?"}
+    CanCraft["<b>Display Unlocked</b><br/>Remaining uses / expiration time"]
+    Locked["<b>Display Locked</b><br/>Shows required blueprint or rank"]
+
+    Exec --> Check
+    Check -->|No| Free
+    Check -->|Yes| BPCheck
+    BPCheck -->|Yes| CanCraft
+    BPCheck -->|No| Locked
 ```
 
 #### Status Feedback Examples:
@@ -172,13 +166,13 @@ Allows players to purchase blueprint access or physical blueprint items directly
 #### Purchase Modes:
 
 1. **Direct Unlock (Default)**:
-   - Deducts the configured `price:` from your Vault economy balance.
-   - Immediately binds the recipe knowledge to your account in the database.
-   - You can start crafting at workstations instantly without carrying any physical voucher items.
+    - Deducts the configured `price:` from your Vault economy balance.
+    - Immediately binds the recipe knowledge to your account in the database.
+    - You can start crafting at workstations instantly without carrying any physical voucher items.
 2. **Physical Item Voucher (`--item`)**:
-   - Deducts the configured `price:` from your balance.
-   - Generates a physical blueprint item into your inventory.
-   - Physical vouchers can be traded with other players, sold on auction houses, placed in display item frames, or stored in storage chests.
+    - Deducts the configured `price:` from your balance.
+    - Generates a physical blueprint item into your inventory.
+    - Physical vouchers can be traded with other players, sold on auction houses, placed in display item frames, or stored in storage chests.
 
 !!! warning
     If your inventory is completely full when purchasing with `--item`, the engine safely drops the item at your feet via `world.dropItem(...)` to prevent silent item loss.
@@ -198,8 +192,8 @@ Players can liquidate physical blueprints found in world dungeons, trial chamber
 1. Hold the physical blueprint item in your **main hand**.
 2. Run `/cb sell`.
 3. The engine verifies that:
-   - The item is a valid CraftingBlueprints item (stamped with `ItemPDT`).
-   - The blueprint has a configured `sell_price > 0.0`.
+    - The item is a valid CraftingBlueprints item (stamped with `ItemPDT`).
+    - The blueprint has a configured `sell_price > 0.0`.
 4. The blueprint item is consumed from your hand, and the funds are credited to your Vault balance with a transaction sound effect (`ENTITY_EXPERIENCE_ORB_PICKUP`).
 
 ```

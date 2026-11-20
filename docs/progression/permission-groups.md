@@ -63,18 +63,14 @@ groups:
 
 CraftingBlueprints models group hierarchies as a **Directed Acyclic Graph (DAG)**. When a group inherits from another, an edge is formed from child to parent:
 
-```
-        ┌──────────────┐
-        │   default    │  (Novice: Wood, Stone, Iron)
-        └──────▲───────┘
-               │
-        ┌──────┴───────┐
-        │     vip      │  (Adventurer: Diamond Weapons, Speed Potions)
-        └──────▲───────┘
-               │
-        ┌──────┴───────┐
-        │     pro      │  (Master: Netherite, Strength, Mending)
-        └──────────────┘
+```mermaid
+flowchart BT
+    pro["<b>pro</b><br/>Master: Netherite, Strength, Mending"]
+    vip["<b>vip</b><br/>Adventurer: Diamond Weapons, Speed Potions"]
+    default["<b>default</b><br/>Novice: Wood, Stone, Iron"]
+
+    pro -->|inherits| vip
+    vip -->|inherits| default
 ```
 
 ### Mathematical Set Union
@@ -90,13 +86,19 @@ This guarantees:
 ### 3-Color Cycle Detection & Safe Pruning
 If a server administrator accidentally configures a circular inheritance loop (for example, `default` inherits from `vip`, which inherits from `pro`, which inherits back from `default`):
 
-```
-       ┌─────────┐
-       │ default │ ──── inherits ────► ┌─────┐
-       └────▲────┘                     │ vip │
-            │                          └──┬──┘
-            │                             │
-            └─────── inherits ──────── pro ◄
+```mermaid
+flowchart LR
+    default["default"]
+    vip["vip"]
+    pro["pro"]
+
+    default -->|inherits| vip
+    vip -->|inherits| pro
+    pro -.->|cyclic loop detected| default
+
+    style default stroke:#ff4444,stroke-width:2px
+    style vip stroke:#ff4444,stroke-width:2px
+    style pro stroke:#ff4444,stroke-width:2px
 ```
 
 The engine employs a **Depth-First Search (DFS) with 3-Color State Tracking** (Unvisited, Visiting, Visited):
@@ -106,6 +108,7 @@ The engine employs a **Depth-First Search (DFS) with 3-Color State Tracking** (U
    ```text
    [CraftingBlueprints] Cyclic group inheritance detected: default -> vip -> pro -> default. Pruning cycle.
    ```
+
 3. The circular branch is safely terminated and pruned in memory. **The server will never freeze, hang, or suffer a `StackOverflowError`.**
 
 ---
@@ -121,13 +124,13 @@ craftingblueprints.group.<id>
 ### Default vs. Progression Groups
 
 * **The `default` Group**:
-  * Permission: `craftingblueprints.group.default`
-  * Default State: `PermissionDefault.TRUE`
-  * Every player (including guests and newly joined players) automatically possesses this permission.
+    * **Permission**: `craftingblueprints.group.default`
+    * **Default State**: `PermissionDefault.TRUE`
+    * Every player (including guests and newly joined players) automatically possesses this permission.
 * **Progression Groups (`vip`, `pro`, `alchemist`, `smith`, etc.)**:
-  * Permission: `craftingblueprints.group.<id>`
-  * Default State: `PermissionDefault.FALSE`
-  * Granted explicitly through your permissions plugin (such as LuckPerms) as players rank up or purchase licenses.
+    * **Permission**: `craftingblueprints.group.<id>`
+    * **Default State**: `PermissionDefault.FALSE`
+    * Granted explicitly through your permissions plugin (such as LuckPerms) as players rank up or purchase licenses.
 
 ---
 
@@ -174,11 +177,12 @@ To audit exactly which recipes each permission group unlocks:
    ```text
    /cb export groups
    ```
+
 2. Open `plugins/CraftingBlueprints/exports/groups_recipes.txt`.
 3. The report outputs a structured breakdown:
-   * Direct patterns matched.
-   * Inherited recipes inherited from each ancestor.
-   * Total resolved recipes available to members of that group.
+    * Direct patterns matched.
+    * Inherited recipes inherited from each ancestor.
+    * Total resolved recipes available to members of that group.
 
 ---
 

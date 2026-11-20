@@ -8,17 +8,20 @@ The **Recipe Restriction Engine** is the core progression gateway of CraftingBlu
 
 Unlike restrictive whitelist-only plugins that lock down every single recipe on startup, CraftingBlueprints is **permissive by default**:
 
-```
-                                Player Attempts Craft
-                                          │
-                                          ▼
-                       Does recipe match restricted-items?
-                                   /             \
-                             YES  /               \  NO
-                                 /                 \
-                                ▼                   ▼
-                       Blueprint Required?     Craft Allowed!
-                       (Check unlocks/group)   (Permitted for everyone)
+```mermaid
+flowchart TD
+    Attempt["<b>Player Attempts Craft</b>"]
+    Check{"Does recipe match<br/><code>restricted-items</code>?"}
+    Vanilla["<b>Allow Craft Instantly</b><br/>Unrestricted vanilla recipe"]
+    BPCheck{"Player Has Unlocked Blueprint<br/>&amp; Sufficient Uses?"}
+    Allow["<b>Allow Craft</b><br/>Deduct 1 Craft Use"]
+    Block["<b>Block Craft</b><br/>Ghost item lock / Action bar warning"]
+
+    Attempt --> Check
+    Check -->|No| Vanilla
+    Check -->|Yes| BPCheck
+    BPCheck -->|Yes| Allow
+    BPCheck -->|No| Block
 ```
 
 1. **Unrestricted Recipes**: If an item does *not* match any pattern defined in `restrictions.restricted-items`, players can craft, smelt, brew, or stonecut it freely without needing a blueprint or permission node. Basic materials (sticks, torches, wooden planks, stone tools, furnaces) remain naturally accessible.
@@ -76,6 +79,7 @@ Matches the canonical lowercased Bukkit material name:
 - "trident"
 - "conduit"
 ```
+
 * Matches only `minecraft:beacon`, `minecraft:trident`, etc.
 * Does not match partial occurrences (e.g. `beacon` does not match `beacon_block`).
 
@@ -86,6 +90,7 @@ Standard shell-style wildcards for intuitive administrative configuration:
 - "*_sword"      # Matches wooden_sword, iron_sword, diamond_sword, netherite_sword
 - "*chestplate"  # Matches iron_chestplate, netherite_chestplate, etc.
 ```
+
 * The engine automatically translates `*` wildcards into equivalent regular expressions without performance penalties.
 
 ### 3. Regular Expressions (`.*`)

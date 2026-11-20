@@ -11,10 +11,10 @@ When a player places ingredients into a 3×3 Crafting Table or a 2×2 inventory 
 1. **Recipe Detection**: As ingredients are placed, the engine identifies the resulting item output.
 2. **Restriction Check**: If the item does not match any entry in `restrictions.restricted-items`, the craft executes normally with zero overhead.
 3. **Blueprint Validation**: If the recipe is restricted (e.g., `diamond_pickaxe`, `netherite_chestplate`, `beacon`), the engine checks the player's active unlocks:
-   * **Permanent Blueprint**: Crafting is allowed indefinitely.
-   * **Timed Blueprint**: Crafting is allowed as long as the expiration timestamp has not elapsed.
-   * **Finite Uses Blueprint**: Crafting is allowed if the player has at least 1 remaining use.
-   * **Locked / 0 Uses**: The craft is cancelled immediately, and the player receives an informative notification.
+    * **Permanent Blueprint**: Crafting is allowed indefinitely.
+    * **Timed Blueprint**: Crafting is allowed as long as the expiration timestamp has not elapsed.
+    * **Finite Uses Blueprint**: Crafting is allowed if the player has at least 1 remaining use.
+    * **Locked / 0 Uses**: The craft is cancelled immediately, and the player receives an informative notification.
 
 ---
 
@@ -26,24 +26,18 @@ On servers with finite-use blueprints (e.g. an RPG scroll granting 3 crafts of a
 
 To solve this, CraftingBlueprints implements an exact mathematical capacity model (`ShiftCraftCalculator`) that evaluates **three independent bounds** before executing a shift-craft transaction:
 
-```
-                  ┌──────────────────────────────────────────────┐
-                  │          Shift-Craft Attempt Initiated       │
-                  └──────────────────────┬───────────────────────┘
-                                         │
-                 ┌───────────────────────┼───────────────────────┐
-                 ▼                       ▼                       ▼
-    ┌─────────────────────────┐ ┌─────────────────┐ ┌─────────────────────────┐
-    │ 1. Grid Matrix Bound    │ │ 2. Space Bound  │ │ 3. Blueprint Use Bound  │
-    │  N_matrix = min(stacks) │ │   N_fits        │ │   N_uses = U (finite)   │
-    └────────────┬────────────┘ └────────┬────────┘ └────────────┬────────────┘
-                 │                       │                       │
-                 └───────────────────────┼───────────────────────┘
-                                         ▼
-                     N_craft = min(N_matrix, N_fits, N_uses)
-                                         │
-                                         ▼
-                     Deduct N_craft uses & produce N_craft items
+```mermaid
+flowchart TD
+    Init["<b>Shift-Craft Attempt Initiated</b>"]
+    B1["<b>1. Grid Matrix Bound</b><br/><code>N_matrix = min(stacks)</code>"]
+    B2["<b>2. Space Bound</b><br/><code>N_fits</code>"]
+    B3["<b>3. Blueprint Use Bound</b><br/><code>N_uses = U (finite)</code>"]
+    Calc["<b>Calculated Craft Yield</b><br/><code>N_craft = min(N_matrix, N_fits, N_uses)</code>"]
+    Exec["<b>Atomic Transaction Execution</b><br/>Deduct <code>N_craft</code> uses &amp; produce <code>N_craft</code> items"]
+
+    Init --> B1 & B2 & B3
+    B1 & B2 & B3 --> Calc
+    Calc --> Exec
 ```
 
 ### 1. Grid Matrix Bound ($N_{\text{matrix}}$)
@@ -97,17 +91,16 @@ The capacity model guarantees two non-negotiable player experience invariants:
 
 The **Smithing Table** (`SmithItemEvent` and `PrepareSmithingEvent`) is unified under the `SmithingRulePipeline`, which shares identical bypass permissions and capacity calculations.
 
-```
-┌─────────────────────────┐   ┌─────────────────────────┐   ┌─────────────────────────┐
-│     Template Slot       │ + │        Base Slot        │ + │      Addition Slot      │
-│ netherite_upgrade_...   │   │   diamond_chestplate    │   │     netherite_ingot     │
-└─────────────────────────┘   └─────────────────────────┘   └─────────────────────────┘
-                                           │
-                                           ▼
-                              ┌─────────────────────────┐
-                              │       Result Slot       │
-                              │   netherite_chestplate  │
-                              └─────────────────────────┘
+```mermaid
+flowchart LR
+    subgraph Input["1.20+ Smithing Inputs"]
+        T["<b>Template Slot</b><br/><code>netherite_upgrade_...</code>"]
+        B["<b>Base Slot</b><br/><code>diamond_chestplate</code>"]
+        A["<b>Addition Slot</b><br/><code>netherite_ingot</code>"]
+    end
+    Res["<b>Result Slot</b><br/><code>netherite_chestplate</code><br/><i>(Gated by Blueprint)</i>"]
+
+    Input --> Res
 ```
 
 ### Slot Evaluation (Minecraft 1.20+)
@@ -126,9 +119,10 @@ Smithing tables support shift-click operations:
 
 1. **Input Slot Bound**:
    $$N_{\text{smith\_inputs}} = \min \{ \text{stack.amount} \mid \text{stack} \in \text{InputSlots}, \text{stack.type} \neq \text{AIR} \}$$
+
 2. **Net Smith Iterations**:
-   * **Regular Click**: $N_{\text{smith}} = 1$.
-   * **Shift-Click**: $N_{\text{smith}} = \max(1, \min(N_{\text{smith\_inputs}}, N_{\text{fits}}, N_{\text{uses}}))$.
+    * **Regular Click**: $N_{\text{smith}} = 1$.
+    * **Shift-Click**: $N_{\text{smith}} = \max(1, \min(N_{\text{smith\_inputs}}, N_{\text{fits}}, N_{\text{uses}}))$.
 3. **Transaction Deduction**: Deducts $N_{\text{smith}}$ uses from the corresponding smithing blueprint. If remaining uses are insufficient, the transaction is cancelled and ingredients remain intact.
 
 ---
@@ -182,6 +176,7 @@ Administrators and players can verify whether an item can be crafted:
   Required Blueprint: diamond_armor_pack
   Unlocked: YES (Remaining Uses: 4)
   ```
+
 * **Locked Output**:
   ```text
   Item: Diamond Chestplate

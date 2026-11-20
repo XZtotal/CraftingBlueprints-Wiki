@@ -120,21 +120,17 @@ Displays comprehensive runtime telemetry, database health, memory utilization, a
 
 #### Health Metrics Inspected:
 
-```
-┌────────────────────────────────────────────────────────┐
-│             CraftingBlueprints System Status           │
-├────────────────────────────────────────────────────────┤
-│ Server ID:      9e7f4c21-b32a-49e0-811d-25a80f83ec10   │
-│ Role:           Master (is-master: true)               │
-│ Database:       MySQL (Ping: 4ms | Pool: 2/10)         │
-│ File Watcher:   Active (blueprints/ | 1500ms debounce) │
-│ Cached Items:   142 total (138 file-managed, 4 manual) │
-│ Storage Exporter: Active (exports/manual_blueprints.yml)│
-│ Map Buffers:    12 cached / 128 max (192 KB RAM)       │
-│ Network Nodes:  3 online (Hub-01, Survival-01, Sky-01) │
-│ Cluster Health: OK (No split-brain master conflicts)   │
-└────────────────────────────────────────────────────────┘
-```
+| Component / Metric | Status / Value | Operational Notes |
+| :--- | :--- | :--- |
+| **Server ID** | `9e7f4c21-b32a-49e0-811d-25a80f83ec10` | Unique node cluster instance |
+| **Role** | `Master` (`is-master: true`) | Primary file watcher &amp; signal coordinator |
+| **Database** | `MySQL` (Ping: 4ms \| Pool: 2/10) | Active persistent cluster pool |
+| **File Watcher** | `Active` (`blueprints/` \| 1500ms debounce) | Automatic hot-reload pipeline |
+| **Cached Items** | `142 total` (138 file-managed, 4 manual) | Fast $\mathcal{O}(1)$ in-memory index |
+| **Storage Exporter** | `Active` (`exports/manual_blueprints.yml`) | Automated YAML synchronization |
+| **Map Buffers** | `12 cached / 128 max` (192 KB RAM) | Flyweight palette LRU memory |
+| **Network Nodes** | `3 online` (`Hub-01`, `Survival-01`, `Sky-01`)| Synchronized cluster workers |
+| **Cluster Health** | `OK` | No split-brain master conflicts detected |
 
 - **Database Ping Latency**: Measures live query latency (`SELECT 1`) to the central database.
 - **Node Role Verification**: Confirms whether the instance is acting as an authoritative **Master** or read-only **Worker**.

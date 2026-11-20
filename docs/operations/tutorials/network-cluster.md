@@ -6,32 +6,18 @@ Running independent, isolated blueprint files on each sub-server creates severe 
 
 This tutorial guides you through configuring a **zero-NFS, high-performance Master-Worker network cluster** using shared MySQL and the **Cluster File Distribution Bus** (`cb_cluster_files`).
 
-```
-                              ┌──────────────────────────────────┐
-                              │       Velocity / BungeeCord      │
-                              │           Network Proxy          │
-                              └─────────────────┬────────────────┘
-                                                │
-         ┌──────────────────────────────────────┼──────────────────────────────────────┐
-         ▼                                      ▼                                      ▼
-┌──────────────────┐                  ┌──────────────────┐                   ┌──────────────────┐
-│   HUB SERVER     │                  │ SURVIVAL SERVER  │                   │ SKYBLOCK SERVER  │
-│  (Master Node)   │                  │  (Worker Node)   │                   │  (Worker Node)   │
-│                  │                  │                  │                   │                  │
-│  is-master: true │                  │ is-master: false │                   │ is-master: false │
-│  cluster-file-   │                  │ cluster-file-    │                   │ cluster-file-    │
-│    sync: true    │                  │   sync: true     │                   │   sync: true     │
-└────────┬─────────┘                  └────────┬─────────┘                   └────────┬─────────┘
-         │                                     │                                      │
-         │ Push YAML, Images, Presets          │ Heartbeat Poll / Delta Stream Sync   │ Heartbeat Poll / Delta Stream Sync
-         ▼                                     ▼                                      ▼
-┌───────────────────────────────────────────────────────────────────────────────────────────────┐
-│                                   SHARED MYSQL / MARIADB                                      │
-│                                                                                               │
-│  - cb_player_data: Cross-server synchronized player unlocks and usage balances                │
-│  - cb_cluster_files: Central binary asset storage (blueprints, images, presets, configs)       │
-│  - cb_sync_signals: Zero-latency heartbeat notification bus (CLUSTER_FILES_SYNC)             │
-└───────────────────────────────────────────────────────────────────────────────────────────────┘
+```mermaid
+flowchart TD
+    Proxy["<b>Velocity / BungeeCord Network Proxy</b>"]
+    Hub["<b>Hub-01 (Master)</b><br/>• Writes blueprints to MySQL<br/>• Broadcasts reload signals"]
+    Surv["<b>Survival-01 (Worker)</b><br/>• Reads blueprints from MySQL<br/>• In-memory local ItemDB"]
+    Sky["<b>Skyblock-01 (Worker)</b><br/>• Reads blueprints from MySQL<br/>• In-memory local ItemDB"]
+    DB[("<b>Shared MySQL Database Cluster</b><br/><code>craftingblueprints</code>")]
+
+    Proxy --> Hub & Surv & Sky
+    Hub -->|Writes Signals| DB
+    DB -->|Polls Signals| Surv
+    DB -->|Polls Signals| Sky
 ```
 
 ---
@@ -40,9 +26,9 @@ This tutorial guides you through configuring a **zero-NFS, high-performance Mast
 
 1. A centralized MySQL (5.7+) or MariaDB (10.4+) database accessible from all server instances.
 2. Three Paper/Purpur instances:
-   - `Hub` (designated as the single Master node).
-   - `Survival` (designated as Worker node 1).
-   - `Skyblock` (designated as Worker node 2).
+    - `Hub` (designated as the single Master node).
+    - `Survival` (designated as Worker node 1).
+    - `Skyblock` (designated as Worker node 2).
 3. CraftingBlueprints installed in `plugins/` on all three servers.
 
 ---
@@ -206,6 +192,7 @@ Pending Deltas: 0 files
    ```bash
    /cb give Steve rpg_t1_apprentice_sword
    ```
+
 2. Have Steve right-click to study the blueprint on the Hub.
 3. Steve switches servers to **Survival** via `/server survival`.
 4. On Survival, Steve opens a Crafting Table: the `rpg_t1_apprentice_sword` recipe is immediately unlocked and craftable!

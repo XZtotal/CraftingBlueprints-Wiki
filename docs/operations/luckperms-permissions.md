@@ -175,22 +175,24 @@ op-bypass: false
 3. **Preventing Misleading Test Results**:  
    If an operator joins a server with `op-bypass: false`, they cannot craft restricted recipes like Netherite Armor or Mending unless they have specifically learned the blueprint in-game or have been assigned the explicit permission node. Commands like `/cb cani` will accurately report that the recipe is locked!
 
-```
-                  Player attempts to craft restricted item
-                                    │
-                         Is player a Server Operator?
-                                    │
-                   ┌────────────────┴────────────────┐
-                   │ YES                             │ NO
-                   ▼                                 ▼
-         Is op-bypass: true?             Does player have blueprint
-                   │                     or permission group?
-          ┌────────┴────────┐                        │
-          │ YES             │ NO            ┌────────┴────────┐
-          ▼                 ▼               │ YES             │ NO
-        ALLOW         Check explicit        ▼                 ▼
-       (Bypass)         permission        ALLOW             BLOCK
-                      (No OP auto-win)   (Crafts)          (Denied)
+```mermaid
+flowchart TD
+    Attempt["<b>Player Attempts to Craft Restricted Item</b>"]
+    OpCheck{"Is player a<br/>Server Operator?"}
+    OpAllow["<b>Bypass Allowed</b><br/>Standard op bypass"]
+    PermCheck{"Has <code>craftingblueprints.bypass</code><br/>or wildcard node?"}
+    PermAllow["<b>Bypass Allowed</b><br/>Zero uses deducted"]
+    GroupCheck{"Has permission node for<br/>granting Group or Blueprint?"}
+    CraftAllow["<b>Allow Craft</b><br/>Deduct 1 Craft Use"]
+    Deny["<b>DENY CRAFT</b><br/>Cancel interaction &amp; display lock"]
+
+    Attempt --> OpCheck
+    OpCheck -->|Yes| OpAllow
+    OpCheck -->|No| PermCheck
+    PermCheck -->|Yes| PermAllow
+    PermCheck -->|No| GroupCheck
+    GroupCheck -->|Yes| CraftAllow
+    GroupCheck -->|No| Deny
 ```
 
 ---

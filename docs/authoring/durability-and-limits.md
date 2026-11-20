@@ -8,20 +8,15 @@ Whether you run an SMP economy that requires consumable crafting licenses, an RP
 
 ## The Four Durability Modalities
 
-```
-                    ┌──────────────────────────────────────────────┐
-                    │               Blueprint Lifecycle            │
-                    └──────────────────────┬───────────────────────┘
-                                           │
-         ┌──────────────────┬──────────────┴─────┬──────────────────┐
-         ▼                  ▼                    ▼                  ▼
-┌─────────────────┐┌─────────────────┐┌──────────────────┐┌─────────────────┐
-│ 1. Permanent    ││ 2. Usage-Limited││ 3. Timed Duration││ 4. Hybrid Limit │
-│ permanent: true ││ permanent: false││ permanent: false ││ permanent: false│
-│ uses: 0         ││ uses: 5         ││ time: 7d         ││ uses: 3         │
-│ time: 0         ││ time: 0         ││ uses: 0          ││ time: 24h       │
-└─────────────────┘└─────────────────┘└──────────────────┘└─────────────────┘
- (Lifetime access)  (Charges per craft) (Real-world timer) (Whichever first)
+```mermaid
+flowchart TD
+    Root["<b>Blueprint Lifecycle Modalities</b>"]
+    P["<b>Permanent Blueprint</b><br/>• <code>permanent: true</code><br/>• Infinite crafts<br/>• Never expires"]
+    T["<b>Timed Blueprint</b><br/>• <code>duration: 7d</code><br/>• Real-time countdown<br/>• Locks at timestamp"]
+    F["<b>Finite Uses Blueprint</b><br/>• <code>uses: 10</code><br/>• Decrements on craft<br/>• Locks at 0 uses"]
+    H["<b>Hybrid Blueprint</b><br/>• <code>duration: 3d</code> + <code>uses: 5</code><br/>• Locks on first condition reached"]
+
+    Root --> P & T & F & H
 ```
 
 ---
@@ -215,28 +210,25 @@ Allows players to quickly test whether they have permission and active charges t
 
 When a blueprint expires (whether through charge depletion or timer expiration), CraftingBlueprints executes an atomic three-step lifecycle revocation:
 
-```
-┌────────────────────────────────────────────────────────┐
-│               Blueprint Expiration Event               │
-└──────────────────────────┬─────────────────────────────┘
-                           │
-       ┌───────────────────┼───────────────────┐
-       ▼                   ▼                   ▼
-┌──────────────┐    ┌──────────────┐    ┌──────────────┐
-│  Step 1: DB  │    │ Step 2: NMS  │    │ Step 3: Chat │
-│ Cache Revoke │    │ Recipe Book  │    │ Notification │
-│ & State Save │    │ Packet Diff  │    │ to Player    │
-└──────────────┘    └──────────────┘    └──────────────┘
+```mermaid
+flowchart TD
+    Event["<b>Blueprint Expiration Event</b>"]
+    E1["<b>1. Memory Invalidation</b><br/>Marked expired in <code>PlayerDB.cache</code> in $\mathcal{O}(1)$"]
+    E2["<b>2. Async Storage Write</b><br/>Persists updated state to SQLite / MySQL"]
+    E3["<b>3. Recipe Book Packet</b><br/>Dispatches recipe undiscovery packet to client"]
+    E4["<b>4. Player Notification</b><br/>MiniMessage expiration sound and message"]
+
+    Event --> E1 & E2 & E3 & E4
 ```
 
 1. **In-Memory Cache & Storage Update**:
-   - The blueprint is marked expired in `PlayerDB.cache` in $\mathcal{O}(1)$.
-   - Storage synchronization persists the updated state asynchronously.
+    - The blueprint is marked expired in `PlayerDB.cache` in $\mathcal{O}(1)$.
+    - Storage synchronization persists the updated state asynchronously.
 2. **Vanilla Recipe Book Packet Diff**:
-   - The server dispatches a `ClientboundUpdateRecipesPacket` / recipe removal packet to the client.
-   - The recipe is visibly locked or removed from the player's vanilla recipe book without requiring a relog.
+    - The server dispatches a `ClientboundUpdateRecipesPacket` / recipe removal packet to the client.
+    - The recipe is visibly locked or removed from the player's vanilla recipe book without requiring a relog.
 3. **Player Notification Message**:
-   - A configurable MiniMessage notification is dispatched to the player (configured in `messages.yml`):
+    - A configurable MiniMessage notification is dispatched to the player (configured in `messages.yml`):
      ```
      <prefix><red>Your blueprint license for <white>Diamond Pickaxe</white> has expired!</red>
      ```

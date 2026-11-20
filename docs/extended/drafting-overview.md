@@ -11,16 +11,27 @@ Rather than displaying static, generic paper icons, players hold tactile, custom
 
 ## The Visual Transformation
 
-```
-Standard Edition Physical Item                 Extended Edition Map Drafting
-┌──────────────────────────────┐              ┌──────────────────────────────┐
-│  Material: PAPER             │              │  Material: FILLED_MAP (128x128)
-│  Name: Netherite Chestplate  │              │  - 25 Procedural Textures    │
-│  Lore: Crafting Schematic    │    ====>     │  - Isometric Drafting Grid   │
-│  (Standard inventory sprite) │              │  - Guilloché Security Frame  │
-│                              │              │  - Wax Seal / Status Stamp   │
-└──────────────────────────────┘              │  - Bayer Dithered Typography │
-                                              └──────────────────────────────┘
+```mermaid
+flowchart LR
+    subgraph Standard["Standard Edition (Physical Item)"]
+        direction TB
+        S1["<b>Material:</b> <code>PAPER</code>"]
+        S2["<b>Name:</b> Netherite Chestplate"]
+        S3["<b>Lore:</b> Crafting Schematic"]
+        S4["<i>Standard inventory sprite</i>"]
+    end
+
+    subgraph Extended["Extended Edition (Map Drafting)"]
+        direction TB
+        E1["<b>Material:</b> <code>FILLED_MAP</code> (128×128)"]
+        E2["• 25 Procedural Textures"]
+        E3["• Isometric Drafting Grid"]
+        E4["• Guilloché Security Frame"]
+        E5["• Wax Seal / Status Stamp"]
+        E6["• Bayer Dithered Typography"]
+    end
+
+    Standard ==>|Upgrades To| Extended
 ```
 
 When held in a player's hand, placed in an Item Frame on a workshop wall, or inspected in a chest, Extended blueprints render custom $128\times128$ pixel art with zero client-side resource packs required.
@@ -57,12 +68,17 @@ On an active server with hundreds of players crafting or trading blueprints:
 ### The Flyweight Solution
 CraftingBlueprints Extended solves this with the **Flyweight Map Registry**:
 
-```
-VisualKey = hash(domain, content_id, variant, theme, frame, badge, watermark)
+```mermaid
+flowchart LR
+    P1["Player 1<br/><i>(Diamond Sword BP)</i>"]
+    P2["Player 2<br/><i>(Diamond Sword BP)</i>"]
+    P3["Player 3<br/><i>(Diamond Sword BP)</i>"]
 
-Player 1 (Diamond Sword BP) ──┐
-Player 2 (Diamond Sword BP) ──┼───► VisualKey: cb_map:single:diamond_sword:... ───► Single MapView #104
-Player 3 (Diamond Sword BP) ──┘                                                    (1 file in world/data/)
+    VK["<b>Canonical VisualKey</b><br/><code>cb_map:single:diamond_sword:...</code>"]
+    MV["<b>Single MapView #104</b><br/><i>(Exactly 1 data file in world/data/)</i>"]
+
+    P1 & P2 & P3 --> VK
+    VK --> MV
 ```
 
 1. **Deterministic Visual Signature (`VisualKey`)**:
@@ -87,21 +103,12 @@ Standard Bukkit `canvas.drawImage(...)` calculates Euclidean color distance on e
 
 ### The 3-State Non-Blocking Pipeline:
 
-```
-┌────────────────────────────────────────────────────────┐
-│ Worker Thread Pool (Async Compositor)                  │
-│ - Renders 7 modular visual layers                      │
-│ - Precomputes color quantization & Floyd-Steinberg     │
-│ - Output: Native byte[16384] palette buffer            │
-└──────────────────────────┬─────────────────────────────┘
-                           │ Cached in LRU Memory (~8 MB)
-                           ▼
-┌────────────────────────────────────────────────────────┐
-│ Main Server Thread (FlyweightPaletteRenderer)          │
-│ - Blits precomputed byte[16384] directly to canvas     │
-│ - Execution time: < 0.02 milliseconds per tick         │
-│ - ZERO CPU lag spikes or tick stutter                  │
-└────────────────────────────────────────────────────────┘
+```mermaid
+flowchart TD
+    Worker["<b>Worker Thread Pool (Async Compositor)</b><br/>• Renders 7 modular visual layers<br/>• Precomputes color quantization & Floyd-Steinberg<br/>• Output: Native <code>byte[16384]</code> palette buffer"]
+    Main["<b>Main Server Thread (FlyweightPaletteRenderer)</b><br/>• Blits precomputed <code>byte[16384]</code> directly to canvas<br/>• Execution time: <b>&lt; 0.02 ms</b> per tick<br/>• ZERO CPU lag spikes or tick stutter"]
+
+    Worker -->|Cached in LRU Memory (~8 MB)| Main
 ```
 
 - **Non-Blocking Guarantee**: All image loading, layer blending, procedural geometry, and color dithering execute strictly on asynchronous background worker threads.

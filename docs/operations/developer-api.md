@@ -56,32 +56,24 @@ To compile against the CraftingBlueprints public event suite, add `crafting-blue
     }
     ```
 
-!!! note
-    `crafting-blueprints-api` contains zero runtime bytecode or heavy engine classes. It defines only public Bukkit events, domain interfaces, and enums, making it exceptionally lightweight and safe to declare as `compileOnly` / `provided`.
-
 ---
 
-## Public Bukkit Lifecycle Events Suite
+## Event Architecture & Lifecycle
 
-All lifecycle events reside in the package `me.xztotal.plugins.craftingblueprints.api.event` and extend `org.bukkit.event.Event`.
+Every blueprint interaction fires synchronous, strongly-typed Bukkit events extending `org.bukkit.event.Event`:
 
-```
-                          ┌───────────────────────────┐
-                          │    org.bukkit.event.Event │
-                          └─────────────┬─────────────┘
-                                        │
-           ┌────────────────────────────┼────────────────────────────┐
-           ▼                            ▼                            ▼
-┌──────────────────────┐    ┌──────────────────────┐    ┌──────────────────────┐
-│ BlueprintUnlockEvent │    │  BlueprintUseEvent   │    │ BlueprintExpireEvent │
-│     (Cancellable)    │    │     (Cancellable)    │    │                      │
-└──────────────────────┘    └──────────────────────┘    └──────────────────────┘
-           │                            │
-           ▼                            ▼
-┌──────────────────────┐    ┌──────────────────────┐
-│  BlueprintBuyEvent   │    │  BlueprintSellEvent  │
-│     (Cancellable)    │    │     (Cancellable)    │
-└──────────────────────┘    └──────────────────────┘
+```mermaid
+flowchart TD
+    Event["<b>org.bukkit.event.Event</b>"]
+    Unlock["<b>BlueprintUnlockEvent</b><br/><i>(Cancellable)</i>"]
+    Use["<b>BlueprintUseEvent</b><br/><i>(Cancellable)</i>"]
+    Expire["<b>BlueprintExpireEvent</b><br/><i>(Non-cancellable)</i>"]
+    Buy["<b>BlueprintBuyEvent</b><br/><i>(Cancellable)</i>"]
+    Sell["<b>BlueprintSellEvent</b><br/><i>(Cancellable)</i>"]
+
+    Event --> Unlock & Use & Expire
+    Unlock --> Buy
+    Use --> Sell
 ```
 
 ---

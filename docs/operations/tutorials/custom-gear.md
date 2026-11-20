@@ -6,26 +6,19 @@ In naive progression systems, gating a custom ruby sword unintentionally locks *
 
 CraftingBlueprints solves this through the **`ItemIdentifierProvider` Service Provider Interface (SPI)**, providing clean, collision-free blueprint gating for custom gear.
 
-```
-                      Craft Matrix Produces Output Item
-                                      │
-                      Inspect via ItemIdentifierProvider SPI
-                                      │
-     ┌────────────────────────────────┼────────────────────────────────┐
-     ▼                                ▼                                ▼
-[ItemsAdder Hook]                [Nexo Hook]                     [Oraxen Hook]
-  ia:weapons:excalibur             nexo:mythril_axe                oraxen:titan_bow
-     │                                │                                │
-     └────────────────────────────────┼────────────────────────────────┘
-                                      │
-                                      ▼
-                        Candidate Identifier Resolved
-                                      │
-              ┌───────────────────────┴───────────────────────┐
-              │                                               │
-              ▼ Match                                         ▼ No Match
-   Requires Custom Blueprint                      Fall Back to Vanilla Material
-   (Vanilla Swords Unaffected)                    (Standard progression rules)
+```mermaid
+flowchart TD
+    Craft["<b>Craft Matrix Produces Output Item</b>"]
+    SPI["<b>Inspect via ItemIdentifierProvider SPI</b>"]
+    IA["<b>ItemsAdder</b><br/><code>ia:namespace:id</code>"]
+    Nexo["<b>Nexo</b><br/><code>nexo:id</code>"]
+    Oraxen["<b>Oraxen</b><br/><code>oraxen:id</code>"]
+    MMO["<b>MMOItems</b><br/><code>mmoitems:type:id</code>"]
+    Check["<b>Match Against Gated Blueprint</b>"]
+
+    Craft --> SPI
+    SPI --> IA & Nexo & Oraxen & MMO
+    IA & Nexo & Oraxen & MMO --> Check
 ```
 
 ---
@@ -34,9 +27,9 @@ CraftingBlueprints solves this through the **`ItemIdentifierProvider` Service Pr
 
 1. Paper 1.18.2 – 1.21.x server with CraftingBlueprints installed.
 2. At least one supported custom item engine active:
-   - **ItemsAdder** (v3.5.0+)
-   - **Nexo** (v0.4.0+)
-   - **Oraxen** (v1.160.0+)
+    - **ItemsAdder** (v3.5.0+)
+    - **Nexo** (v0.4.0+)
+    - **Oraxen** (v1.160.0+)
 3. Custom items and their corresponding crafting recipes already configured in your custom item plugin.
 
 ---
@@ -170,6 +163,7 @@ Verify that custom items are gated without affecting base vanilla items.
    ```
    Locked Recipe: Requires Blueprint: Excalibur
    ```
+
 3. Attempting to click the output item is rejected, and ingredients remain in the grid.
 
 ### 3. Grant & Study Custom Blueprint
@@ -178,5 +172,6 @@ Verify that custom items are gated without affecting base vanilla items.
    ```bash
    /cb give Steve excalibur_blueprint
    ```
+
 2. Right-click the scroll to unlock `ia:rpgweapons:excalibur`.
 3. Return to the Crafting Table: Excalibur is now craftable, while other custom weapons (e.g. `ia:rpgweapons:ruby_dagger`) remain locked until their specific blueprints are acquired.

@@ -17,6 +17,7 @@ Every incident scenario follows Site Reliability Engineering (SRE) standard form
   Conflicting Remote Node: [Survival-01] (Master)
   To prevent data corruption, set 'is-master: false' on secondary nodes immediately!
   ```
+
 * Blueprint items or recipes frequently revert or change unexpectedly.
 * File records in `cb_cluster_files` alternate between different versions.
 
@@ -37,6 +38,7 @@ On every secondary server reporting the conflict (e.g., `Survival-01`, `Skyblock
    # Change on ALL secondary servers:
    is-master: false
    ```
+
 3. Save the file.
 
 #### Step 3: Reload Secondary Nodes
@@ -71,6 +73,7 @@ Run `/cb status` on the Master and several Worker nodes:
   ```text
   [CraftingBlueprints] Unable to load custom background image: images/backgrounds/forge.png (File not found on disk)
   ```
+
 * Recipe book previews or menu icons on Worker servers show outdated recipes.
 
 ### Root Cause Analysis
@@ -130,6 +133,7 @@ The pull routine automatically triggers `LazyImageLoader.clear()` and refreshes 
   CalculatedHash (e3b0c442...) != RemoteManifest.sha256 (a8f94c11...)
   Corrupted download discarded. Local file retained.
   ```
+
 * The file is not updated on disk, and the mirror remains in a divergent state.
 
 ### Root Cause Analysis
@@ -175,6 +179,7 @@ Local Mirror State: IN SYNC (142/142 matching)
   Packet for query is too large (18,452,109 > 16,777,216).
   You can change this value on the server by setting the 'max_allowed_packet' variable.
   ```
+
 * High-resolution custom PNG textures or large blueprint bundles fail to save to the database.
 
 ### Root Cause Analysis
@@ -243,6 +248,7 @@ Select an existing Worker node (e.g., `Survival-01`) to become the new temporary
    ```yaml
    is-master: true
    ```
+
 3. Save the file and reload:
    ```text
    /cb reload

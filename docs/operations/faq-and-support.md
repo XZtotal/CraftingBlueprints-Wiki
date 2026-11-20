@@ -124,6 +124,7 @@ Temporarily activate verbose logging to capture the exact event sequence:
    ```yaml
    debug: true
    ```
+
 2. Reload via `/cb reload`.
 3. Reproduce the bug in-game.
 4. Copy the relevant console snippet (from `logs/latest.log`) and wrap it in a code block.

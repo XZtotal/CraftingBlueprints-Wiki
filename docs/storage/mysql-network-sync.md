@@ -8,35 +8,18 @@ CraftingBlueprints provides enterprise-grade multi-server synchronization for Mi
 
 In a distributed network topology, backend server instances are categorized into two distinct operational roles: **Master Node** and **Worker Nodes**.
 
-```
-                       ┌───────────────────────────────┐
-                       │     Velocity / BungeeCord     │
-                       │         Proxy Gateway         │
-                       └──────────────┬────────────────┘
-                                      │
-               ┌──────────────────────┼──────────────────────┐
-               ▼                      ▼                      ▼
-      ┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-      │   MASTER NODE   │    │  WORKER NODE 1  │    │  WORKER NODE 2  │
-      │  (Hub / Admin)  │    │   (Survival)    │    │   (Skyblock)    │
-      │ is-master: true │    │is-master: false │    │is-master: false │
-      └────────┬────────┘    └────────┬────────┘    └────────┬────────┘
-               │                      │                      │
-               │ Compiles YAMLs       │ Read-Only Queries    │ Read-Only Queries
-               │ Runs Migrations V1-V5│ Polls Signals        │ Polls Signals
-               │ Emits Signals        │ Fast Join Cache      │ Fast Join Cache
-               │                      │                      │
-               └──────────────────────┼──────────────────────┘
-                                      ▼
-                      ┌───────────────────────────────┐
-                      │    CENTRAL DATABASE (MySQL)   │
-                      │ ├── cb_player_data            │
-                      │ ├── ITEM_BLUEPRINTS           │
-                      │ ├── cb_sync_signals           │
-                      │ ├── cb_reservations           │
-                      │ ├── cb_requests               │
-                      │ └── cb_cluster_files          │
-                      └───────────────────────────────┘
+```mermaid
+flowchart TD
+    Proxy["<b>Velocity / BungeeCord Proxy Gateway</b>"]
+    Hub["<b>Master Node (Hub-01)</b><br/><code>is-master: true</code><br/>File Watcher Active"]
+    Surv["<b>Worker Node 1 (Survival-01)</b><br/><code>is-master: false</code>"]
+    Sky["<b>Worker Node 2 (Skyblock-01)</b><br/><code>is-master: false</code>"]
+    DB[("<b>Shared MySQL Cluster</b><br/><code>craftingblueprints</code>")]
+
+    Proxy --> Hub & Surv & Sky
+    Hub -->|Writes Blueprints &amp; Signals| DB
+    Surv -->|Reads Profiles &amp; Signals| DB
+    Sky -->|Reads Profiles &amp; Signals| DB
 ```
 
 ---
@@ -110,27 +93,24 @@ CREATE TABLE IF NOT EXISTS cb_sync_signals (
 
 ### Signal Propagation Workflow
 
-```
-1. Administrator executes /cb reload on Master (Hub-01)
-   │
-   ▼
-2. Master recompiles YAML files and UPSERTs records in ITEM_BLUEPRINTS
-   │
-   ▼
-3. Master writes reload heartbeat signal to cb_sync_signals:
-   signal_id   = 'BLUEPRINT_RELOAD'
-   signal_type = 'RELOAD'
-   payload     = '{"timestamp": 1732041600000, "count": 142}'
-   │
-   ▼
-4. Worker daemons poll cb_sync_signals every 1-2 seconds
-   │
-   ▼
-5. Worker detects new timestamp:
-   - Invalidates local ItemDB in-memory cache
-   - Fetches updated blueprint definitions from ITEM_BLUEPRINTS
-   - Rebinds active workstation recipe filters
-   - Console logs: "[CraftingBlueprints] Received reload signal from Master (Hub-01). Synced 142 items."
+```mermaid
+sequenceDiagram
+    autonumber
+    actor Admin as Administrator
+    participant Master as Master Node (Hub-01)
+    participant DB as MySQL Database
+    participant Worker as Worker Node (Survival-01)
+
+    Admin->>Master: /cb reload
+    Master->>Master: Recompile YAML blueprints in memory
+    Master->>DB: UPSERT blueprint records in ITEM_BLUEPRINTS
+    Master->>DB: Write sync heartbeat to cb_sync_signals
+    Worker->>DB: Polling Task checks cb_sync_signals (every 1s)
+    DB-->>Worker: New timestamp detected!
+    Worker->>Worker: Invalidate in-memory ItemDB cache
+    Worker->>DB: Fetch updated blueprint definitions
+    Worker->>Worker: Rebind active workstation filters
+    Note over Worker: Console: Synced N items from Master
 ```
 
 !!! note "Zero External Broker Dependency"
@@ -185,16 +165,16 @@ Without strict concurrency controls, this creates two catastrophic race conditio
 
 CraftingBlueprints eliminates cross-server desynchronization using an atomic player lifecycle state machine coordinated between `WaitingManager` and `PlayerDB`:
 
-```
- ┌──────────────┐   Player Join    ┌──────────────┐   Load Worker   ┌──────────────┐
- │ UNREGISTERED ├─────────────────►│   LOADING    ├────────────────►│    LOADED    │
- └──────────────┘                  └──────┬───────┘                 └──────┬───────┘
-        ▲                                 │                                │
-        │ Evicted                         │ Player Quit                    │ Player Quit
- ┌──────┴───────┐   Re-Join Event  ┌──────────────┐   Push Worker   ┌──────────────┐
- │   REMOVED    │◄─────────────────┤  REJOINING   │◄────────────────┤  QUEUED_FOR_ │
- └──────────────┘  (Cancel Evict)  └──────────────┘                 │    REMOVE    │
-                                                                    └──────────────┘
+```mermaid
+stateDiagram-v2
+    [*] --> UNREGISTERED
+    UNREGISTERED --> LOADING: Player Join
+    LOADING --> LOADED: Load Worker
+    LOADED --> QUEUED_FOR_REMOVE: Player Quit
+    QUEUED_FOR_REMOVE --> REJOINING: Push Worker
+    REJOINING --> LOADED: Re-Join Event (Cancel Evict)
+    QUEUED_FOR_REMOVE --> REMOVED: Evicted
+    REMOVED --> UNREGISTERED
 ```
 
 ### 1. `SOFT` Eviction vs. `IMMINENT` Eviction

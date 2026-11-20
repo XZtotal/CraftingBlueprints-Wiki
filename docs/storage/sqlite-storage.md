@@ -53,21 +53,20 @@ The primary limitation of traditional SQLite implementations in Minecraft plugin
 
 CraftingBlueprints completely eliminates this limitation by configuring SQLite in **Write-Ahead Logging (WAL)** mode backed by high-performance PRAGMAs:
 
-```
-  Traditional Rollback Journal (Blocking):
-  ┌────────────────┐     Blocks Entire File     ┌────────────────┐
-  │  Write Worker  ├───────────────────────────►│  Database File │ ◄── [READ BLOCKED!]
-  └────────────────┘                            └────────────────┘
+```mermaid
+flowchart TD
+    subgraph Trad["Traditional Rollback Journal (Blocking)"]
+        direction LR
+        W1["Write Worker"] -->|Blocks Entire File| DB1["Database File"]
+        R1["Readers"] -.->|READ BLOCKED!| DB1
+    end
 
-  CraftingBlueprints WAL Architecture (Non-Blocking Concurrency):
-  ┌────────────────┐       Appends Writes       ┌────────────────┐
-  │  Write Worker  ├───────────────────────────►│   .db-wal Log  │
-  └────────────────┘                            └───────┬────────┘
-                                                        │ Background Checkpoint
-  ┌────────────────┐     Reads Point-in-Time    ┌───────▼────────┐
-  │ 100+ Readers   ├───────────────────────────►│ craftingblueprints.db
-  │ (Joins/Clicks) │     (via .db-shm index)    │  (Never Locked)│
-  └────────────────┘                            └────────────────┘
+    subgraph WAL["CraftingBlueprints WAL Architecture (Non-Blocking Concurrency)"]
+        direction TD
+        W2["Write Worker"] -->|Appends Writes| WALFile[".db-wal Log"]
+        WALFile -->|Background Checkpoint| DB2["craftingblueprints.db<br/><i>(Never Locked)</i>"]
+        Readers["100+ Concurrent Readers<br/><i>(Player Joins / GUI Clicks)</i>"] -->|Point-in-Time Snapshot via .db-shm| DB2
+    end
 ```
 
 ### Automated PRAGMA Settings
@@ -109,15 +108,11 @@ CraftingBlueprints solves this by serializing player blueprints into an ultra-co
 
 $$\text{BlueprintPayload} = [ \text{Index}_0, \text{Index}_1, \text{Index}_2 ] = [ \text{isPermanent}, \text{finishDate}, \text{uses} ]$$
 
-```
-   Index 0 (Boolean)         Index 1 (Long)            Index 2 (Int)
-┌──────────────────────┐  ┌──────────────────────┐  ┌──────────────────────┐
-│     isPermanent      │  │      finishDate      │  │         uses         │
-├──────────────────────┤  ├──────────────────────┤  ├──────────────────────┤
-│ true: Indefinite     │  │ Epoch milliseconds   │  │ Remaining crafts     │
-│ false: Timed/Limited │  │ (0 if unlimited)     │  │ (0 if unlimited)     │
-└──────────────────────┘  └──────────────────────┘  └──────────────────────┘
-```
+| Index | Field Name | Java / SQL Type | Description & Semantics |
+| :---: | :--- | :--- | :--- |
+| **0** | `isPermanent` | `Boolean` | `true`: Infinite lifetime. `false`: Gated by time or remaining uses. |
+| **1** | `finishDate` | `Long` (Epoch ms) | Expiration timestamp in epoch milliseconds (`0` if unlimited). |
+| **2** | `uses` | `Integer` | Remaining crafting iterations allowed (`0` if unlimited or exhausted). |
 
 ### Verbose Anti-Pattern vs. Positional Array
 
@@ -219,6 +214,7 @@ To create a consistent live backup without stopping the server:
    cp craftingblueprints.db-wal /backup/location/ 2>/dev/null || true
    cp craftingblueprints.db-shm /backup/location/ 2>/dev/null || true
    ```
+
 2. **SQLite CLI Backup Tool (Recommended)**:
    ```bash
    sqlite3 plugins/CraftingBlueprints/craftingblueprints.db ".backup 'backups/backup_$(date +%Y%m%d_%H%M%S).db'"
@@ -233,10 +229,12 @@ To create a consistent live backup without stopping the server:
    ```text
    /stop
    ```
+
 2. Navigate to `plugins/CraftingBlueprints/` and remove any lingering journal files:
    ```bash
    rm -f craftingblueprints.db-wal craftingblueprints.db-shm
    ```
+
 3. Replace `craftingblueprints.db` with your verified backup `.db` file.
 4. Start the server. CraftingBlueprints will verify schema integrity on boot and resume operations immediately.
 

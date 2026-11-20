@@ -4,26 +4,28 @@ In RPG, MMORPG, and faction servers, blueprints can serve as **consumable crafti
 
 This tutorial demonstrates how to use **Reusable Templates (Mixins)** to create 3-use glowing parchment scrolls for elemental RPG weapons, and how usage depletion enforces progression balance.
 
-```
-┌─────────────────────────────────┐       ┌─────────────────────────────────┐
-│   blueprints/templates/         │       │     blueprints/weapons.yml      │
-│   scroll_template.yml           │       │                                 │
-│                                 │       │  singles:                       │
-│  - uses: 3 (Finite durability)  │ ────► │    infernal_blade:              │
-│  - permanent: false             │       │      templates: [scroll_temp]   │
-│  - item: PAPER (CMD: 2001)      │       │      blueprint: diamond_sword   │
-│  - dynamic lore: {uses}         │       │                                 │
-└─────────────────────────────────┘       └────────────────┬────────────────┘
-                                                           │
-                                                           ▼
-                                          ┌─────────────────────────────────┐
-                                          │   In-Game Usage Depletion       │
-                                          │                                 │
-                                          │  Craft 1/3: 2 uses remaining    │
-                                          │  Craft 2/3: 1 use remaining     │
-                                          │  Craft 3/3: 0 uses (Consumed!)  │
-                                          │  Craft 4/X: ❌ Access Denied     │
-                                          └─────────────────────────────────┘
+```mermaid
+flowchart LR
+    subgraph Template["blueprints/templates/scroll_template.yml"]
+        T1["• <code>uses: 3</code> (Finite durability)"]
+        T2["• <code>permanent: false</code>"]
+        T3["• <code>station: [CRAFTING_TABLE, ANVIL]</code>"]
+    end
+
+    subgraph Blueprint["blueprints/weapons.yml"]
+        B1["<code>singles:</code>"]
+        B2["  <code>infernal_blade:</code>"]
+        B3["    <code>templates: [rpg_scroll]</code>"]
+        B4["    <code>blueprint: NETHERITE_SWORD</code>"]
+    end
+
+    subgraph Item["In-Game Physical Scroll"]
+        I1["Hold scroll in main hand"]
+        I2["Right-click to redeem"]
+        I3["Grants 3 craft uses of Infernal Blade"]
+    end
+
+    Template --> Blueprint --> Item
 ```
 
 ---
@@ -177,5 +179,6 @@ The info panel confirms that `infernal_blade` is known with `3` uses remaining.
    ```
    Locked Recipe: Requires Scroll of the Infernal Blade!
    ```
+
 3. Clicking the output slot rejects extraction, preserving all diamonds safely in the grid.
 4. Execute `/cb cani diamond_sword`: the system confirms you are no longer authorized to craft this item until you obtain another scroll.

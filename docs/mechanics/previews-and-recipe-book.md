@@ -12,23 +12,17 @@ When a player places ingredients into a Crafting Table (`PrepareItemCraftEvent`)
 
 If the player has not unlocked the recipe or has exhausted their craft uses, the result slot dynamically updates to reflect the locked state:
 
-```
-                  Player Arranges Ingredients in Workstation
-                                      │
-                                      ▼
-                        PreparePreviewService Intercepts
-                                      │
-                     ┌────────────────┴────────────────┐
-                     │ Has player unlocked recipe &    │
-                     │ has remaining craft uses?       │
-                     └────────┬───────────────┬────────┘
-                              │ YES           │ NO
-                              ▼               ▼
-                   ┌──────────────────┐ ┌─────────────────────────┐
-                   │ Standard Result  │ │ Display Locked Preview  │
-                   │ (Normal craft)   │ │ According to            │
-                   └──────────────────┘ │ ux.prepare-preview.mode │
-                                        └─────────────────────────┘
+```mermaid
+flowchart TD
+    Arr["<b>Player Arranges Ingredients in Workstation</b>"]
+    Serv["<b>PreparePreviewService Intercepts</b>"]
+    Check{"Has Blueprint for Result Item?"}
+    Show["<b>Display Output</b><br/>Vanilla result item ready to craft"]
+    Ghost["<b>Show Ghost / Barrier Slot</b><br/>Item visible with lock lore &amp; red cross"]
+
+    Arr --> Serv --> Check
+    Check -->|Yes| Show
+    Check -->|No| Ghost
 ```
 
 ### Preview Modes
@@ -67,17 +61,18 @@ CraftingBlueprints implements an absolute **Anti-Extraction Security Guard**:
    ```text
    ItemPDT(ItemManager.LOCKED_PREVIEW_TYPE, blueprintId)
    ```
+
 2. **Absolute Cancellation at `EventPriority.LOWEST`**:
-   * Any click, drag, or shift-click targeting a `LOCKED_PREVIEW_TYPE` item in a crafting table, smithing table, or anvil is instantly cancelled at the lowest listener priority before any item transfer can occur.
-   * The player receives an immediate notification: `warning.blueprint.not_enough_uses`.
+    * Any click, drag, or shift-click targeting a `LOCKED_PREVIEW_TYPE` item in a crafting table, smithing table, or anvil is instantly cancelled at the lowest listener priority before any item transfer can occur.
+    * The player receives an immediate notification: `warning.blueprint.not_enough_uses`.
 3. **Stray Item Purge Engine**:
-   * If a modified client somehow glitched a preview item onto their cursor or into their inventory, the engine's purge listener detects the `LOCKED_PREVIEW_TYPE` tag across all Bukkit lifecycle events:
-     * Cursor pickups and hotbar key swaps
-     * Offhand swaps (`F` key)
-     * Inventory drags and drops (`PlayerDropItemEvent`)
-     * Container placements (chests, shulker boxes, item frames)
-     * Player death drops and entity pickups
-   * Detected items are immediately cancelled, zeroed out (`amount = 0`), and purged from existence.
+    * If a modified client somehow glitched a preview item onto their cursor or into their inventory, the engine's purge listener detects the `LOCKED_PREVIEW_TYPE` tag across all Bukkit lifecycle events:
+        * Cursor pickups and hotbar key swaps
+        * Offhand swaps (`F` key)
+        * Inventory drags and drops (`PlayerDropItemEvent`)
+        * Container placements (chests, shulker boxes, item frames)
+        * Player death drops and entity pickups
+    * Detected items are immediately cancelled, zeroed out (`amount = 0`), and purged from existence.
 
 ---
 
@@ -87,17 +82,13 @@ Minecraft's client-side recipe book (the green knowledge book icon in crafting t
 
 CraftingBlueprints provides **Incremental Diff-Based Recipe Book Synchronization**:
 
-```
-                       Blueprint Unlock / Rank Change
-                                      │
-                                      ▼
-                        Calculate Incremental Diff
-                          (gained vs lost recipes)
-                                      │
-                     ┌────────────────┴────────────────┐
-                     ▼                                 ▼
-         player.discoverRecipes(...)       player.undiscoverRecipes(...)
-          (New recipes added to book)       (Locked recipes removed)
+```mermaid
+flowchart TD
+    Event["<b>Blueprint Unlock / Rank Change</b>"]
+    Diff["<b>Calculate Incremental Diff</b><br/><code>gained = new - old</code><br/><code>lost = old - new</code>"]
+    Packet["<b>Dispatch Single Batched Packet</b><br/><code>ClientboundUpdateRecipesPacket</code><br/><i>Zero network flood / Zero client relog</i>"]
+
+    Event --> Diff --> Packet
 ```
 
 ### Incremental Diffs (Zero Per-Tick Lag)
@@ -107,8 +98,8 @@ Unlike naive synchronization plugins that re-index hundreds of recipes every sec
 * **On Server Startup**: The engine builds an $O(1)$ bidirectional index of all server crafting recipes (`Bukkit.recipeIterator()`).
 * **On Player Login**: As soon as the player's profile finishes loading, the engine compares their unlocked blueprints against their active recipe book and dispatches a single batched synchronization packet.
 * **On Blueprint Lifecycle Events**:
-  * Unlocking a blueprint (`BlueprintUnlockEvent`) immediately calls `player.discoverRecipes(...)` for the target recipe keys.
-  * Expiring a blueprint (`BlueprintExpireEvent`) calls `player.undiscoverRecipes(...)` if no other group or permission still grants access.
+    * Unlocking a blueprint (`BlueprintUnlockEvent`) immediately calls `player.discoverRecipes(...)` for the target recipe keys.
+    * Expiring a blueprint (`BlueprintExpireEvent`) calls `player.undiscoverRecipes(...)` if no other group or permission still grants access.
 * **On Permission Group Changes**: The background `CyclicTask` monitors rank promotions (e.g. LuckPerms group changes). If groups change, it computes:
   $$\text{gained} = \text{newGroupBlueprints} - \text{oldGroupBlueprints}$$
   $$\text{lost} = \text{oldGroupBlueprints} - \text{newGroupBlueprints}$$

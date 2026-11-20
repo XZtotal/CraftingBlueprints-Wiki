@@ -30,29 +30,16 @@ You can target custom items directly in the `blueprint:` field or in recipe rest
 
 When a player places items into a workstation, CraftingBlueprints resolves potential candidate identifiers in descending order of specificity:
 
-```
-┌────────────────────────────────────────────────────────┐
-│ Tier 1: Plugin Exact Hooks (Priority: 100 - 90)        │
-│ ItemsAdder, Nexo, Oraxen, MMOItems, EcoItems, Mythic   │
-└──────────────────────────┬─────────────────────────────┘
-                           │ If not matched
-                           ▼
-┌────────────────────────────────────────────────────────┐
-│ Tier 2: Recipe Key Provider (Priority: 80)             │
-│ Bukkit Keyed Recipes (Datapacks & Custom Crafting)     │
-└──────────────────────────┬─────────────────────────────┘
-                           │ If not matched
-                           ▼
-┌────────────────────────────────────────────────────────┐
-│ Tier 3: Model Data & Generic PDC (Priority: 50 - 40)   │
-│ CustomModelData integers and custom PDC namespaces     │
-└──────────────────────────┬─────────────────────────────┘
-                           │ If not matched
-                           ▼
-┌────────────────────────────────────────────────────────┐
-│ Tier 4: Vanilla Material Fallback (Priority: 10)       │
-│ Base Bukkit Material (diamond_sword, netherite_axe...) │
-└────────────────────────────────────────────────────────┘
+```mermaid
+flowchart TD
+    T1["<b>Tier 1: Plugin Exact Hooks</b> (Priority: 100–90)<br/>ItemsAdder, Nexo, Oraxen, MMOItems, EcoItems, Mythic"]
+    T2["<b>Tier 2: Recipe Key Provider</b> (Priority: 80)<br/>Bukkit Keyed Recipes (Datapacks &amp; Custom Crafting)"]
+    T3["<b>Tier 3: CustomModelData &amp; Material Tag Matcher</b> (Priority: 70)<br/>Matches <code>material:custom_model_data</code>"]
+    T4["<b>Tier 4: Vanilla Namespaced Fallback</b> (Priority: 10)<br/>Standard Minecraft Items (<code>minecraft:diamond_sword</code>)"]
+
+    T1 -->|If not matched| T2
+    T2 -->|If not matched| T3
+    T3 -->|If not matched| T4
 ```
 
 ---

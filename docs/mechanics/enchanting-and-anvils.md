@@ -13,29 +13,21 @@ CraftingBlueprints intercepts both stations using dedicated rule pipelines, intr
 
 When a player places a tool or armor piece into an Enchanting Table with lapis lazuli, the table presents three randomized enchantment offerings.
 
-```
-       [ Enchanting Table GUI ] ──► Player Selects Offering #3
-                                              │
-                                              ▼
-                                 EnchantTableRulePipeline
-                                              │
-                        ┌─────────────────────┴─────────────────────┐
-                        │ Do any offered enchants require blueprint?│
-                        └─────────────┬─────────────────┬───────────┘
-                                      │ NO              │ YES
-                                      ▼                 ▼
-                         ┌───────────────────┐ ┌─────────────────────────┐
-                         │ Enchant Allowed   │ │ Player Has Blueprint?   │
-                         │ (Vanilla exp/lapis│ └────────────┬────────────┘
-                         │  consumed)        │              │
-                         └───────────────────┘       ┌──────┴──────┐
-                                                     │ YES         │ NO
-                                                     ▼             ▼
-                                           ┌───────────────┐ ┌───────────────┐
-                                           │ Apply Enchant │ │ Cancel Event! │
-                                           │ Deduct 1 Use  │ │ ZERO XP lost! │
-                                           └───────────────┘ │ ZERO Lapis!   │
-                                                             └───────────────┘
+```mermaid
+flowchart TD
+    GUI["<b>Enchanting Table GUI</b><br/>Player Selects Offering #3"]
+    Pipeline["<b>EnchantTableRulePipeline</b>"]
+    Check{"Do any offered enchants<br/>require blueprint?"}
+    Vanilla["<b>Enchant Allowed</b><br/>Vanilla EXP &amp; Lapis consumed"]
+    BPCheck{"Player Has Blueprint?"}
+    Apply["<b>Apply Enchant</b><br/>Deduct 1 Blueprint Use"]
+    Cancel["<b>Cancel Event!</b><br/>• ZERO XP lost<br/>• ZERO Lapis consumed"]
+
+    GUI --> Pipeline --> Check
+    Check -->|No| Vanilla
+    Check -->|Yes| BPCheck
+    BPCheck -->|Yes| Apply
+    BPCheck -->|No| Cancel
 ```
 
 ### Safe Cancellation Guarantee
@@ -82,20 +74,11 @@ CraftingBlueprints evaluates enchantments **differentially**:
 
 $$L_{\text{result}} > L_{\text{first}}$$
 
-```
-Scenario A: Upgrading an Enchantment
-Base Item: Diamond Sword (Sharpness IV)  [L_first = 4]
-Sacrifice: Enchanted Book (Sharpness IV)
-Result:    Diamond Sword (Sharpness V)   [L_result = 5]
-Evaluation: 5 > 4 ──► Requires 'sharpness_5' blueprint! Consumes 1 use.
-
-Scenario B: Maintaining an Existing Enchantment
-Base Item: Diamond Sword (Sharpness IV, Unbreaking II)
-Sacrifice: Enchanted Book (Sharpness III, Unbreaking III)
-Result:    Diamond Sword (Sharpness IV, Unbreaking III)
-Evaluation for Sharpness:  4 > 4 is FALSE ──► NO Sharpness blueprint needed! 0 uses consumed.
-Evaluation for Unbreaking: 3 > 2 is TRUE  ──► Requires 'unbreaking_3' blueprint! Consumes 1 use.
-```
+| Scenario | Base Item ($L_{\text{first}}$) | Sacrifice Item | Result Item ($L_{\text{result}}$) | Evaluation ($L_{\text{result}} > L_{\text{first}}$) | Blueprint Gating & Uses |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **A: Upgrading** | Diamond Sword (Sharpness IV) [$L=4$] | Enchanted Book (Sharpness IV) | Diamond Sword (Sharpness V) [$L=5$] | $5 > 4$ (TRUE) | Requires `sharpness_5` blueprint. Consumes 1 use. |
+| **B: Maintaining** | Diamond Sword (Sharpness IV) [$L=4$] | Enchanted Book (Sharpness III) | Diamond Sword (Sharpness IV) [$L=4$] | $4 > 4$ (FALSE) | NO blueprint required. 0 uses consumed. |
+| **C: Combining** | Diamond Sword (Unbreaking II) [$L=2$] | Enchanted Book (Unbreaking III) | Diamond Sword (Unbreaking III) [$L=3$] | $3 > 2$ (TRUE) | Requires `unbreaking_3` blueprint. Consumes 1 use. |
 
 ### Pure Repairs and Renames Are Never Blocked
 
@@ -111,13 +94,13 @@ A frequent exploit in custom anvil plugins is "use phantom deduction": if a plug
 CraftingBlueprints implements **three pre-deduction transaction guards** before any blueprint uses are deducted:
 
 1. **Experience Affordability Guard**:
-   * Evaluates `player.level >= anvilInventory.repairCost`.
-   * Evaluates `anvilInventory.repairCost < 40` (the vanilla "Too Expensive!" limit), unless the player is in Creative Mode.
-   * If the player cannot afford the anvil repair cost, **no blueprint uses are deducted**, and the click is safely cancelled.
+    * Evaluates `player.level >= anvilInventory.repairCost`.
+    * Evaluates `anvilInventory.repairCost < 40` (the vanilla "Too Expensive!" limit), unless the player is in Creative Mode.
+    * If the player cannot afford the anvil repair cost, **no blueprint uses are deducted**, and the click is safely cancelled.
 2. **Creative Mode Awareness**:
-   * Players in Creative Mode bypass experience costs natively; the engine validates blueprint access without checking XP levels.
+    * Players in Creative Mode bypass experience costs natively; the engine validates blueprint access without checking XP levels.
 3. **Bottom Inventory Space Guard**:
-   * During shift-clicks, the engine verifies that the player's inventory has sufficient space to receive the combined item before executing use deductions.
+    * During shift-clicks, the engine verifies that the player's inventory has sufficient space to receive the combined item before executing use deductions.
 
 ---
 
@@ -197,6 +180,7 @@ To inspect enchantment restrictions and player access:
   Required Blueprint: sharpness_v_scroll
   Unlocked: YES (Remaining Uses: 3)
   ```
+
 * **Locked Player**:
   ```text
   Enchantment: Sharpness V (Anvil)

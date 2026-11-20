@@ -12,34 +12,22 @@ In vanilla Minecraft, the `BrewEvent` fires when a 20-second brewing cycle finis
 
 Unlike player inventory clicks, `BrewEvent` is an automated block cycle that does not provide a player reference. To evaluate player blueprints accurately, CraftingBlueprints employs a persistent metadata tracking engine:
 
-```
-    [ Ingredient Placed in Slot 3 ] ──► BrewingStandTracker records player UUID
-                                        (craftingblueprints:brewing_owner)
-                                                │
-                                                ▼
-                                    20-Second Brewing Cycle
-                                    (brewingTime > 0: ACTIVE LOCK)
-                                                │
-                                                ▼
-                                        BrewEvent Fires
-                                                │
-                          ┌─────────────────────┴─────────────────────┐
-                          │ Do output bottles match restricted-items? │
-                          └─────────────┬─────────────────┬───────────┘
-                                        │ NO              │ YES
-                                        ▼                 ▼
-                           ┌───────────────────┐ ┌─────────────────────────┐
-                           │ Allow Brew Cycle  │ │ Owner Has Blueprint?    │
-                           │ (Bottles convert) │ └────────────┬────────────┘
-                           └───────────────────┘              │
-                                                       ┌──────┴──────┐
-                                                       │ YES         │ NO
-                                                       ▼             ▼
-                                             ┌───────────────┐ ┌─────────────────┐
-                                             │ Convert Bottle│ │ CANCEL BREW!    │
-                                             │ Deduct Uses   │ │ - Refund Top Item│
-                                             └───────────────┘ │ - Bottles Safe  │
-                                                               └─────────────────┘
+```mermaid
+flowchart TD
+    Ing["<b>Ingredient Placed in Slot 3</b><br/><code>BrewingStandTracker</code> records player UUID<br/><code>craftingblueprints:brewing_owner</code>"]
+    Cycle["<b>20-Second Brewing Cycle</b><br/>(<code>brewingTime &gt; 0</code>: ACTIVE LOCK)"]
+    Event["<b>BrewEvent Fires</b>"]
+    Check{"Do output bottles match<br/><code>restricted-items</code>?"}
+    Allow["<b>Allow Brew Cycle</b><br/>Bottles convert normally"]
+    OwnerCheck{"Owner Has Blueprint?"}
+    Convert["<b>Convert Bottle</b><br/>Deduct uses from profile"]
+    Cancel["<b>CANCEL BREW!</b><br/>• Refund top ingredient item<br/>• Base potion bottles safe"]
+
+    Ing --> Cycle --> Event --> Check
+    Check -->|No| Allow
+    Check -->|Yes| OwnerCheck
+    OwnerCheck -->|Yes| Convert
+    OwnerCheck -->|No| Cancel
 ```
 
 1. **Station Type**: Classified internally as `POTION_TYPE` (Type ID `2`).
@@ -155,6 +143,7 @@ To inspect potion restrictions and verify player access:
   Required Blueprint: strength_alchemist
   Unlocked: YES (Remaining Uses: 10 bottles)
   ```
+
 * **Locked Player**:
   ```text
   Potion: Strength II (Brewing Stand)

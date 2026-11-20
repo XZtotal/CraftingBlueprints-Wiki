@@ -4,25 +4,14 @@ In standard vanilla Minecraft, players often rush Netherite gear within the firs
 
 This tutorial walks you through setting up a complete end-game progression loop: **locking all Netherite equipment** so that crafting or upgrading it at a Smithing Table strictly requires finding ancient blueprint scrolls hidden within Nether Bastion Remnant chests.
 
-```
-┌─────────────────────────────────┐       ┌─────────────────────────────────┐
-│     Vanilla Bastion Chest       │       │    Player Inventory / Hand      │
-│  (minecraft:chests/bastion_*)   │       │                                 │
-│                                 │       │  [📜 Netherite Plate Blueprint] │
-│  - 45% chance to roll pool      │ ────► │                                 │
-│  - Weighted CDF entry selection │       │  Right-Click to study scroll:   │
-│  - Replaces low-value trash     │       │  "Knowledge permanently added"  │
-└─────────────────────────────────┘       └────────────────┬────────────────┘
-                                                           │
-                                                           ▼
-                                          ┌─────────────────────────────────┐
-                                          │     1.20+ Smithing Table        │
-                                          │                                 │
-                                          │  - Diamond Gear + Ingot         │
-                                          │  - Check: Is blueprint known?   │
-                                          │    ✔ ALLOW: Upgrades gear       │
-                                          │    ❌ DENY: Displays locked GUI  │
-                                          └─────────────────────────────────┘
+```mermaid
+flowchart LR
+    Chest["<b>Vanilla Bastion Chest</b><br/><code>minecraft:chests/bastion_*</code><br/>• 45% pool roll chance<br/>• Weighted CDF entry selection"]
+    Scroll["<b>Player Inventory</b><br/>📜 Netherite Plate Blueprint<br/>• Right-click to study scroll"]
+    Smith["<b>1.20+ Smithing Table</b><br/>• Diamond Chestplate + Netherite Ingot<br/>• Gated by blueprint knowledge"]
+
+    Chest -->|Loot Injection| Scroll
+    Scroll -->|Unlock| Smith
 ```
 
 ---
@@ -246,9 +235,11 @@ Review the console or chat output. You should observe roughly 45 chests containi
    ```bash
    /cb give Steve smp_netherite_chestplate
    ```
+
 2. Hold the scroll in your main hand and right-click.
 3. You will hear the level-up chime and receive the message:
    ```
    You have unlocked the blueprint: Ancient Cuirass Blueprint!
    ```
+
 4. Return to the Smithing Table: the recipe is now completely unlocked! Upgrade the chestplate normally.

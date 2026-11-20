@@ -10,12 +10,9 @@ Because Crafters operate autonomously without a human player clicking an invento
 
 In standard Minecraft servers, players interact with crafting tables through client clicks (`CraftItemEvent`). However, Crafter blocks are triggered exclusively by environmental redstone signals:
 
-```
-    [ Redstone Clock / Lever ] ──► [ Crafter Block ] ──► [ Output Container ]
-                                           │
-                                  No Human Player Session!
-                                  No Unlocked Blueprints!
-                                  No Permission Nodes!
+```mermaid
+flowchart LR
+    Clock["Redstone Clock / Lever"] --> Crafter["<b>Crafter Block</b><br/><i>No Human Player Session!<br/>No Unlocked Blueprints!<br/>No Permission Nodes!</i>"] --> Output["Output Container"]
 ```
 
 If an automated Crafter is permitted to craft restricted recipes without blueprint verification:
@@ -30,33 +27,21 @@ If an automated Crafter is permitted to craft restricted recipes without bluepri
 
 CraftingBlueprints intercepts automated Crafters before any items are produced using the `CrafterRulePipeline`:
 
-```
-                       Redstone Pulse Triggers Crafter
-                                      │
-                                      ▼
-                      ┌───────────────────────────────┐
-                      │    Crafter Interception       │
-                      │    (Inspect output item)      │
-                      └───────────────┬───────────────┘
-                                      │
-                      ┌───────────────┴───────────────┐
-                      │ Is item in restricted-items?  │
-                      └───────┬───────────────┬───────┘
-                              │ NO            │ YES
-                              ▼               ▼
-                   ┌──────────────────┐ ┌───────────────────────────┐
-                   │ Allow Craft      │ │ Check config:             │
-                   │ (Vanilla speed)  │ │ crafter.block-restricted  │
-                   └──────────────────┘ └─────────────┬─────────────┘
-                                                      │
-                                   ┌──────────────────┴──────────────────┐
-                                   ▼ true                                ▼ false
-                      ┌───────────────────────────────┐     ┌───────────────────────┐
-                      │ Cancel Craft!                 │     │ Allow Autonomous Craft│
-                      │ - Keep ingredients in grid    │     │ (Bypass blueprints)   │
-                      │ - Play dispenser fail click   │     └───────────────────────┘
-                      │ - Emit smoke particles        │
-                      └───────────────────────────────┘
+```mermaid
+flowchart TD
+    Pulse["<b>Redstone Pulse Triggers Crafter</b>"]
+    Intercept["<b>Crafter Interception</b><br/>Inspect output item"]
+    Check{"Is item in<br/><code>restricted-items</code>?"}
+    Allow["<b>Allow Craft</b><br/>Vanilla craft &amp; dispense speed"]
+    Config{"Check config:<br/><code>crafter.block-restricted</code>"}
+    Block["<b>DENY CRAFT</b><br/>• Cancel craft event<br/>• Play fail particles &amp; sound<br/>• Retain ingredients in matrix"]
+    Pass["<b>PASS CRAFT</b><br/>Allow redstone autonomous operation"]
+
+    Pulse --> Intercept --> Check
+    Check -->|No| Allow
+    Check -->|Yes| Config
+    Config -->|true (Default)| Block
+    Config -->|false| Pass
 ```
 
 ### Version Abstraction Layer (VAL)
