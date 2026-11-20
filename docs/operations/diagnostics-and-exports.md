@@ -64,8 +64,8 @@ Before deploying changes or following a configuration reload, `/cb validate` sca
 4. **Visual Linting & Typo Suggestions**:
    Uses Levenshtein edit-distance algorithms to suggest corrections for misspelled frame styles, badge types, or background themes (e.g. suggesting `rosette` for `roseta`).
 
-> [!NOTE]
-> `/cb validate` runs strictly in-memory. It makes **zero modifications to your database** and does not alter loaded blueprints.
+!!! note
+    `/cb validate` runs strictly in-memory. It makes **zero modifications to your database** and does not alter loaded blueprints.
 
 ---
 

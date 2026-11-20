@@ -15,9 +15,8 @@ CraftingBlueprints solves this through the `/cb preset` subsystem:
 4. **Zero `config.yml` Mutation**: Presets deploy modular files into `blueprints/presets/` and `configs/presets/`, leaving your core `config.yml` pristine and untouched.
 5. **Instant Clean Removal**: You can uninstall any active preset at any time with `/cb preset remove <id>`, leaving zero residual data or orphan keys in memory.
 
-> [!NOTE]
-> **Master Node Requirement**  
-> On multi-server networks with MySQL synchronization, preset deployment (`/cb preset apply`), uninstallation (`/cb preset remove`), and downloading (`/cb preset download`) must be executed on the designated **Master Node** (`is-master: true`). Worker nodes reject these commands to prevent database desynchronization.
+!!! note "Master Node Requirement"
+    On multi-server networks with MySQL synchronization, preset deployment (`/cb preset apply`), uninstallation (`/cb preset remove`), and downloading (`/cb preset download`) must be executed on the designated **Master Node** (`is-master: true`). Worker nodes reject these commands to prevent database desynchronization.
 
 ---
 

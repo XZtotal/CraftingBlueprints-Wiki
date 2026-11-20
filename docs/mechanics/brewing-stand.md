@@ -89,9 +89,8 @@ When a brewing cycle is cancelled because the owner lacks the required blueprint
 * **Bottles Preserved**: The three bottom potion bottles remain in their original state (e.g. Awkward Potions or Water Bottles).
 * **Blaze Powder Fuel**: Fuel progress is preserved without phantom consumption.
 
-> [!IMPORTANT]
-> **Exploit-Proof Alchemy**  
-> Because cancelled brews preserve both ingredients and base bottles, players cannot duplicate items or consume server resources by triggering infinite blocked brew cycles.
+!!! important "Exploit-Proof Alchemy"
+    Because cancelled brews preserve both ingredients and base bottles, players cannot duplicate items or consume server resources by triggering infinite blocked brew cycles.
 
 ---
 

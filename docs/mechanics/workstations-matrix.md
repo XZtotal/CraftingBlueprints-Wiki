@@ -74,9 +74,8 @@ This guarantees seamless, zero-configuration interoperability with land claim an
 * **Lands** (area restrictions)
 * **Residence** (container/table flags)
 
-> [!IMPORTANT]
-> **Zero Resource Loss on Claim Denials**  
-> If a player attempts to craft, smelt, or enchant in an area protected by a region management plugin where they lack build or interaction trust, the claim plugin cancels the Bukkit event. Because CraftingBlueprints listens at `HIGHEST` with `ignoreCancelled = true`, it immediately ignores the cancelled event. **No blueprint uses are consumed, and no error messages are dispatched.**
+!!! important "Zero Resource Loss on Claim Denials"
+    If a player attempts to craft, smelt, or enchant in an area protected by a region management plugin where they lack build or interaction trust, the claim plugin cancels the Bukkit event. Because CraftingBlueprints listens at `HIGHEST` with `ignoreCancelled = true`, it immediately ignores the cancelled event. **No blueprint uses are consumed, and no error messages are dispatched.**
 
 ### Double-Barrier Extraction Guards
 
@@ -101,9 +100,8 @@ To eliminate race conditions where a player connects and immediately interacts w
    ```
 4. As soon as the asynchronous database handshake completes (typically within 10–50 milliseconds), full workstation access is automatically restored.
 
-> [!TIP]
-> **No Crafting Duplication or Bypasses**  
-> The asynchronous join safeguard guarantees that players can never craft restricted recipes for free during network lag spikes or slow database responses.
+!!! tip "No Crafting Duplication or Bypasses"
+    The asynchronous join safeguard guarantees that players can never craft restricted recipes for free during network lag spikes or slow database responses.
 
 ---
 

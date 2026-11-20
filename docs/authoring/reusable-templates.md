@@ -253,6 +253,5 @@ If a template defines fields that do not apply to the target domain model, Craft
 | `item`, `price`, `sell_price`, `extra` | Applied | Applied | Applied |
 | `name`, `lore` | Applied | Applied | Applied |
 
-> [!TIP]
-> **Shared Visual and Economic Tiers**  
-> Because templates sanitize domain-specific fields, you can author universal tier templates (such as `tier_legendary`) that define `price`, `sell_price`, `item.custom_model_data`, and `extra.tier`. You can then apply `tier_legendary` across single swords, bundled package kits, and randomized mystery scrolls interchangeably.
+!!! tip "Shared Visual and Economic Tiers"
+    Because templates sanitize domain-specific fields, you can author universal tier templates (such as `tier_legendary`) that define `price`, `sell_price`, `item.custom_model_data`, and `extra.tier`. You can then apply `tier_legendary` across single swords, bundled package kits, and randomized mystery scrolls interchangeably.

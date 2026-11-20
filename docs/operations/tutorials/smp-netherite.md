@@ -53,8 +53,8 @@ restrictions:
     - "netherite_.*"
 ```
 
-> [!NOTE]
-> The pattern `netherite_.*` uses regular expressions to match any item key beginning with `netherite_`, including `netherite_helmet`, `netherite_chestplate`, `netherite_leggings`, `netherite_boots`, `netherite_sword`, `netherite_pickaxe`, `netherite_axe`, `netherite_shovel`, and `netherite_hoe`. Vanilla items not matching this pattern (such as Iron and Diamond) remain completely unrestricted.
+!!! note
+    The pattern `netherite_.*` uses regular expressions to match any item key beginning with `netherite_`, including `netherite_helmet`, `netherite_chestplate`, `netherite_leggings`, `netherite_boots`, `netherite_sword`, `netherite_pickaxe`, `netherite_axe`, `netherite_shovel`, and `netherite_hoe`. Vanilla items not matching this pattern (such as Iron and Diamond) remain completely unrestricted.
 
 ---
 

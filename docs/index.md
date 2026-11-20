@@ -39,9 +39,8 @@ CraftingBlueprints is architected into two editions sharing the identical high-p
 | **Bayer 4x4 Dithered Typography & Procedural Item Contours** | :x: | :white_check_mark: Included |
 | **Custom 128x128 RGBA PNG Background Rendering** | :x: | :white_check_mark: Included |
 
-> [!NOTE]
-> **Transparent Preset Compatibility**  
-> All pre-built presets and scaffolded blueprint files include pre-calibrated `map:` visual blocks. On **Standard Edition**, these visual blocks are safely and transparently ignored by the loader—blueprints function 100% identically in game balance and mechanics as standard physical items.
+!!! note "Transparent Preset Compatibility"
+    All pre-built presets and scaffolded blueprint files include pre-calibrated `map:` visual blocks. On **Standard Edition**, these visual blocks are safely and transparently ignored by the loader—blueprints function 100% identically in game balance and mechanics as standard physical items.
 
 ---
 

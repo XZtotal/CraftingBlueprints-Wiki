@@ -90,15 +90,14 @@ Example Scenario:
     -> Recipe locks immediately. No resources are lost or duplicated.
 ```
 
-> [!IMPORTANT]
-> **Anti-Exploit Station Tracking**  
-> Usage charges are deducted across all production workstations:
-> - **Crafting Table & 2x2 Player Inventory**: Deducted per crafted output item.
-> - **1.21 Crafter Block**: Deducted when the redstone pulse successfully dispatches the finished item.
-> - **Furnaces, Blast Furnaces & Smokers**: Deducted upon extraction of the smelted item.
-> - **Stonecutters**: Deducted upon selecting and extracting the cut block.
-> - **Brewing Stands**: Deducted when the brewing cycle finishes and bottles are extracted.
-> - **Anvils**: Deducted when the anvil combination completes and the repaired/named item is taken.
+!!! important "Anti-Exploit Station Tracking"
+    Usage charges are deducted across all production workstations:
+    - **Crafting Table & 2x2 Player Inventory**: Deducted per crafted output item.
+    - **1.21 Crafter Block**: Deducted when the redstone pulse successfully dispatches the finished item.
+    - **Furnaces, Blast Furnaces & Smokers**: Deducted upon extraction of the smelted item.
+    - **Stonecutters**: Deducted upon selecting and extracting the cut block.
+    - **Brewing Stands**: Deducted when the brewing cycle finishes and bottles are extracted.
+    - **Anvils**: Deducted when the anvil combination completes and the repaired/named item is taken.
 
 ---
 
@@ -241,6 +240,5 @@ When a blueprint expires (whether through charge depletion or timer expiration),
      <prefix><red>Your blueprint license for <white>Diamond Pickaxe</white> has expired!</red>
      ```
 
-> [!TIP]
-> **Stacking Blueprints & Renewals**  
-> If a player already possesses an active usage-limited blueprint and unlocks an additional identical blueprint item, CraftingBlueprints automatically increments their existing charge balance (`uses = current_uses + new_uses`) rather than overwriting or discarding charges.
+!!! tip "Stacking Blueprints & Renewals"
+    If a player already possesses an active usage-limited blueprint and unlocks an additional identical blueprint item, CraftingBlueprints automatically increments their existing charge balance (`uses = current_uses + new_uses`) rather than overwriting or discarding charges.

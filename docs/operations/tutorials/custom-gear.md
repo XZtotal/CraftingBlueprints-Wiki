@@ -53,8 +53,8 @@ CraftingBlueprints uses standardized namespaced prefixes to resolve custom items
 | **MMOItems** | `mmoitems:` | `mmoitems:SWORD:EXCALIBUR` | `NBTItem.get(item).getType()` + ID |
 | **EcoItems** | `ecoitems:` | `ecoitems:blood_scythe` | Paper PDC `ecoitems:item` |
 
-> [!NOTE]
-> **Priority Hierarchy**: The SPI evaluates Tier 1 exact plugin hooks first (Priority 100). If an item is recognized as an ItemsAdder or Nexo custom item, the engine binds immediately to the custom ID, bypassing the lower-tier vanilla material fallback (`DIAMOND_SWORD`).
+!!! note "Priority Hierarchy"
+    The SPI evaluates Tier 1 exact plugin hooks first (Priority 100). If an item is recognized as an ItemsAdder or Nexo custom item, the engine binds immediately to the custom ID, bypassing the lower-tier vanilla material fallback (`DIAMOND_SWORD`).
 
 ---
 

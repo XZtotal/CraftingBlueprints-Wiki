@@ -83,8 +83,8 @@ storage:
       characterEncoding: "utf8mb4"
 ```
 
-> [!IMPORTANT]
-> Ensure all three servers specify identical `database:` names and credentials so they share the `cb_player_data`, `cb_cluster_files`, and `cb_sync_signals` tables.
+!!! important
+    Ensure all three servers specify identical `database:` names and credentials so they share the `cb_player_data`, `cb_cluster_files`, and `cb_sync_signals` tables.
 
 ---
 
@@ -110,9 +110,8 @@ cluster-file-sync:
   heartbeat-interval: 5
 ```
 
-> [!CAUTION]
-> **Strict Single-Master Invariant**:  
-> Never configure `is-master: true` on more than one server connected to the same database. Multiple active Masters can trigger split-brain conflicts, overwriting database files and causing hash divergence.
+!!! caution "Strict Single-Master Invariant"
+    Never configure `is-master: true` on more than one server connected to the same database. Multiple active Masters can trigger split-brain conflicts, overwriting database files and causing hash divergence.
 
 ---
 

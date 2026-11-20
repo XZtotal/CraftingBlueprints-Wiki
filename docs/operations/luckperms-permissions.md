@@ -143,8 +143,8 @@ In certain administrative or creative workflows, staff members may need to craft
 | **`craftingblueprints.raw-item.auto-converting.bypass`** | Prevents raw blueprint items from auto-converting to normal blueprints in inventory. |
 | **`craftingblueprints.item.auto-assign-owner.bypass`** | Prevents ownerless blueprints from auto-binding to the administrator when picked up. |
 
-> [!CAUTION]
-> Never grant `craftingblueprints.bypass` or wildcard permissions (`*`) to regular players, as it completely deactivates the blueprint progression system for their account.
+!!! caution
+    Never grant `craftingblueprints.bypass` or wildcard permissions (`*`) to regular players, as it completely deactivates the blueprint progression system for their account.
 
 ---
 

@@ -62,9 +62,8 @@ singles:
 | `permanent: true` | `true` | When unlocked, knowledge is permanent. It never expires over time or runs out of uses. |
 | `item:` | `material: PAPER` | The physical representation of the blueprint item in player inventories. |
 
-> [!NOTE]
-> **Standard vs. Extended Edition Item Representation**  
-> In **CraftingBlueprints Standard Edition**, physical blueprints are rendered as standard Minecraft items (`PAPER`, `BOOK`, or custom models via `custom_model_data`). If running **CraftingBlueprints Extended Edition**, you can additionally declare a `map:` block to render photorealistic 128x128 technical drawings with procedural textures and Guilloché frames.
+!!! note "Standard vs. Extended Edition Item Representation"
+    In **CraftingBlueprints Standard Edition**, physical blueprints are rendered as standard Minecraft items (`PAPER`, `BOOK`, or custom models via `custom_model_data`). If running **CraftingBlueprints Extended Edition**, you can additionally declare a `map:` block to render photorealistic 128x128 technical drawings with procedural textures and Guilloché frames.
 
 ---
 

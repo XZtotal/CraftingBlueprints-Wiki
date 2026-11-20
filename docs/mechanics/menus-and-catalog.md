@@ -69,9 +69,8 @@ When a player or administrator executes `/cb return`:
 2. **If no inventory is currently open** (e.g. after pressing `ESC`): The engine restores `lastClosedMenu`, immediately reopening the exact page and browsing position the player was viewing.
 3. **Fallback**: If `lastClosedMenu` has already been restored, the engine pops the next ancestor menu from `navigationStack`.
 
-> [!TIP]
-> **Convenient Editing Workflows**  
-> Administrators editing multi-tiered package blueprints or mystery scroll reward pools can freely exit to chat to check coordinates or copy item names, then execute `/cb return` to jump directly back to their editing session.
+!!! tip "Convenient Editing Workflows"
+    Administrators editing multi-tiered package blueprints or mystery scroll reward pools can freely exit to chat to check coordinates or copy item names, then execute `/cb return` to jump directly back to their editing session.
 
 ---
 

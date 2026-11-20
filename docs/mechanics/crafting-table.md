@@ -87,9 +87,8 @@ The capacity model guarantees two non-negotiable player experience invariants:
 2. **Zero Inventory Overflow or Voiding**:  
    If a player's inventory can only accommodate 12 arrows before reaching full capacity, shift-clicking a recipe that produces 4 arrows per craft will execute exactly $N_{\text{fits}} = \lfloor 12 / 4 \rfloor = 3$ crafts (12 arrows total). Surplus ingredients remain in the grid, preventing items from spilling onto the floor or being voided.
 
-> [!WARNING]
-> **Exploit Prevention in High-Speed Networks**  
-> In vanilla Bukkit, modified or fast-clicking clients can attempt to fire multiple shift-clicks within a single server tick. CraftingBlueprints locks the player transaction synchronously, guaranteeing that uses are decremented before the inventory state is updated.
+!!! warning "Exploit Prevention in High-Speed Networks"
+    In vanilla Bukkit, modified or fast-clicking clients can attempt to fire multiple shift-clicks within a single server tick. CraftingBlueprints locks the player transaction synchronously, guaranteeing that uses are decremented before the inventory state is updated.
 
 ---
 

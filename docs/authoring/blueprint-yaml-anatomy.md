@@ -100,9 +100,8 @@ Every entry under `singles:` supports the following configuration properties:
 | `template` / `templates` | String / List | `null` | Mixin template reference(s) inherited from `templates/` or parent folders. |
 | `extra` | Map<String, Any> | `{}` | Extensible sandbox dictionary for custom metadata (PAPI placeholders, PDC tags, and dynamic lore variables). |
 
-> [!NOTE]
-> **Station Constraints vs. Output Matching**  
-> If an item can be produced at multiple stations (such as smelting iron ore in a standard Furnace or a Blast Furnace), setting `station: BLAST_FURNACE` will strictly restrict the recipe to Blast Furnaces while allowing standard furnace operations to remain untouched or governed by separate rules.
+!!! note "Station Constraints vs. Output Matching"
+    If an item can be produced at multiple stations (such as smelting iron ore in a standard Furnace or a Blast Furnace), setting `station: BLAST_FURNACE` will strictly restrict the recipe to Blast Furnaces while allowing standard furnace operations to remain untouched or governed by separate rules.
 
 ---
 
@@ -175,9 +174,8 @@ If the `item:` block or `item.material` is omitted:
 └────────────────────────────────────────────────────────┘
 ```
 
-> [!TIP]
-> **Custom Resource Packs & ItemsAdder / Nexo**  
-> By setting `material: PAPER` (or any utility material) and combining it with `custom_model_data`, you can assign custom 2D textures, 3D scroll models, or antique parchment sprites from your server's resource pack.
+!!! tip "Custom Resource Packs & ItemsAdder / Nexo"
+    By setting `material: PAPER` (or any utility material) and combining it with `custom_model_data`, you can assign custom 2D textures, 3D scroll models, or antique parchment sprites from your server's resource pack.
 
 ---
 
@@ -246,11 +244,10 @@ file_default:
 
 ## Looking for Visual Map Graphics?
 
-> [!NOTE]
-> **Extended Edition Technical Drafting Engine**  
-> If you are running **CraftingBlueprints Extended**, blueprints can render directly on in-game maps (`Material.FILLED_MAP`) with procedural Guilloché security frames, 25 background textures, status seals, and dithered gradient typography.
-> 
-> See the [Technical Drafting Engine Overview](../extended/drafting-overview.md) to explore map rendering capabilities.
+!!! note "Extended Edition Technical Drafting Engine"
+    If you are running **CraftingBlueprints Extended**, blueprints can render directly on in-game maps (`Material.FILLED_MAP`) with procedural Guilloché security frames, 25 background textures, status seals, and dithered gradient typography.
+
+    See the [Technical Drafting Engine Overview](../extended/drafting-overview.md) to explore map rendering capabilities.
 
 ---
 

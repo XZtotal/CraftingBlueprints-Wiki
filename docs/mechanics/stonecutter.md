@@ -55,9 +55,8 @@ restrictions:
     - "stonecut:purpur_.*"
 ```
 
-> [!NOTE]
-> **Station Specificity**  
-> If you configure `craft:stone_bricks`, players cannot craft stone bricks in a 3×3 crafting table, but they could still cut them in a stonecutter unless `stonecut:stone_bricks` (or the unqualified pattern `stone_bricks`) is also specified.
+!!! note "Station Specificity"
+    If you configure `craft:stone_bricks`, players cannot craft stone bricks in a 3×3 crafting table, but they could still cut them in a stonecutter unless `stonecut:stone_bricks` (or the unqualified pattern `stone_bricks`) is also specified.
 
 ---
 

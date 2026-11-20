@@ -119,9 +119,8 @@ By default, an unqualified pattern like `iron_sword` applies to crafting. To tar
 | `stonecut:<pattern>`<br>`stonecutter:<pattern>` | **Stonecutters** | Restricts specific stone slicing recipes from the Stonecutter grid. |
 | `enchant_table:<pattern>` | **Enchanting Tables** | Restricts enchanting options offered at the Enchanting Table. |
 
-> [!TIP]
-> **Namespace Preservation**  
-> Vanilla `minecraft:` prefixes are stripped automatically (`minecraft:diamond_sword` normalizes to `diamond_sword`). However, custom item namespaces (`ia:`, `nexo:`, `oraxen:`, `mmoitems:`) are strictly preserved, allowing you to restrict custom items like `ia:mithril_sword`.
+!!! tip "Namespace Preservation"
+    Vanilla `minecraft:` prefixes are stripped automatically (`minecraft:diamond_sword` normalizes to `diamond_sword`). However, custom item namespaces (`ia:`, `nexo:`, `oraxen:`, `mmoitems:`) are strictly preserved, allowing you to restrict custom items like `ia:mithril_sword`.
 
 ---
 

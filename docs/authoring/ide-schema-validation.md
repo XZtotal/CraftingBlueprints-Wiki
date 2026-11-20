@@ -113,6 +113,5 @@ If you accidentally misspell a key (such as `proce: 500` instead of `price: 500`
 ### 3. In-Editor Documentation Tooltips
 Hovering your mouse over any YAML key displays its official description, unit formats (such as `1h`, `7d`, `30m`), default values, and example snippets directly inside your editor.
 
-> [!TIP]
-> **Combine Schema with `/cb validate`**  
-> While JSON Schema provides real-time linting in your IDE, running `/cb validate` in-game or from console performs the final server-side check—verifying that materials exist on your specific Minecraft version and that ID collisions do not exist across your server's database.
+!!! tip "Combine Schema with `/cb validate`"
+    While JSON Schema provides real-time linting in your IDE, running `/cb validate` in-game or from console performs the final server-side check—verifying that materials exist on your specific Minecraft version and that ID collisions do not exist across your server's database.

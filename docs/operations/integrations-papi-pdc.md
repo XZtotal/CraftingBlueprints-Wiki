@@ -54,8 +54,8 @@ singles:
 - **`price`** (*Double*): Cost to purchase blueprint access or a physical voucher. If set to `0.0` or omitted, the blueprint cannot be purchased.
 - **`sell_price`** (*Double*): Currency awarded when a player sells the physical blueprint item held in hand. If set to `0.0` or omitted, the blueprint cannot be sold.
 
-> [!TIP]
-> Both `price` and `sell_price` support global scaling during preset deployment via `--price-scale <factor>` and `--sell-ratio <ratio>`. See [Admin Operations](admin-commands.md).
+!!! tip
+    Both `price` and `sell_price` support global scaling during preset deployment via `--price-scale <factor>` and `--sell-ratio <ratio>`. See [Admin Operations](admin-commands.md).
 
 ---
 
@@ -105,11 +105,10 @@ Players can liquidate physical blueprint scrolls or vouchers for server currency
 
 A common administrator question is why CraftingBlueprints does not feature a built-in `/cb shop` GUI.
 
-> [!NOTE]
-> **Modularity & Ecosystem Freedom**:  
-> In production networks, server owners already maintain dedicated shop infrastructures—such as **DeluxeMenus**, **TrMenu**, **ShopGUI+**, **ChestCommands**, or NPC dialogue engines (Citizens).  
-> 
-> A hardcoded built-in shop menu forces rigid layouts, limited pagination, and restrictive permission mechanics. Instead, CraftingBlueprints exposes atomic, command-driven endpoints (`/cb buy <id> --item` and `/cb sell`) alongside PlaceholderAPI identifiers. This allows administrators to embed blueprint purchases into **any** existing GUI plugin with complete aesthetic and structural freedom.
+!!! note "Modularity & Ecosystem Freedom"
+    In production networks, server owners already maintain dedicated shop infrastructures—such as **DeluxeMenus**, **TrMenu**, **ShopGUI+**, **ChestCommands**, or NPC dialogue engines (Citizens).  
+
+    A hardcoded built-in shop menu forces rigid layouts, limited pagination, and restrictive permission mechanics. Instead, CraftingBlueprints exposes atomic, command-driven endpoints (`/cb buy <id> --item` and `/cb sell`) alongside PlaceholderAPI identifiers. This allows administrators to embed blueprint purchases into **any** existing GUI plugin with complete aesthetic and structural freedom.
 
 #### Example: DeluxeMenus Blueprint Shop Integration
 ```yaml

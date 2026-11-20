@@ -135,9 +135,8 @@ A frequent issue in Minecraft server administration is that server operators (`i
 
 CraftingBlueprints solves this through the **Operator Isolation Rule**:
 
-> [!IMPORTANT]
-> **Operator Group Isolation**  
-> Server operators (`player.isOp`) and administrators with wildcard permissions (`*` or LuckPerms `ops-have-all-permissions: true`) **do NOT automatically inherit progression groups** merely by being OP.
+!!! important "Operator Group Isolation"
+    Server operators (`player.isOp`) and administrators with wildcard permissions (`*` or LuckPerms `ops-have-all-permissions: true`) **do NOT automatically inherit progression groups** merely by being OP.
 
 ### How It Works:
 1. **Explicit Permission Registration**: Non-default progression groups are registered with `PermissionDefault.FALSE`.

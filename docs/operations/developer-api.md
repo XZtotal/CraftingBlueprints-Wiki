@@ -56,8 +56,8 @@ To compile against the CraftingBlueprints public event suite, add `crafting-blue
     }
     ```
 
-> [!NOTE]
-> `crafting-blueprints-api` contains zero runtime bytecode or heavy engine classes. It defines only public Bukkit events, domain interfaces, and enums, making it exceptionally lightweight and safe to declare as `compileOnly` / `provided`.
+!!! note
+    `crafting-blueprints-api` contains zero runtime bytecode or heavy engine classes. It defines only public Bukkit events, domain interfaces, and enums, making it exceptionally lightweight and safe to declare as `compileOnly` / `provided`.
 
 ---
 

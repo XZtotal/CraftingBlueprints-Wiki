@@ -118,9 +118,8 @@ pool:
     station: CRAFTING_TABLE
 ```
 
-> [!NOTE]
-> **Packages Inside Mystery Rolls**  
-> If a mystery roll lands on a referenced package item (such as `blacksmith_master_pack` above), the player unlocks all blueprints bundled within that package simultaneously!
+!!! note "Packages Inside Mystery Rolls"
+    If a mystery roll lands on a referenced package item (such as `blacksmith_master_pack` above), the player unlocks all blueprints bundled within that package simultaneously!
 
 ---
 
@@ -190,6 +189,5 @@ To give a mystery scroll to a player via console, quest reward script, or crate 
 
 Steve receives two physical `Ancient Bastion Mystery Scroll` items, which stack cleanly up to 64 in his inventory.
 
-> [!TIP]
-> **World Loot & Dungeon Injection**  
-> Mystery scrolls can be injected directly into natural dungeon chests, Nether Fortress corridors, and 1.21 Trial Chamber vaults using the World Loot Table engine (`plugins/CraftingBlueprints/loot.yml`).
+!!! tip "World Loot & Dungeon Injection"
+    Mystery scrolls can be injected directly into natural dungeon chests, Nether Fortress corridors, and 1.21 Trial Chamber vaults using the World Loot Table engine (`plugins/CraftingBlueprints/loot.yml`).

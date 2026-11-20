@@ -117,10 +117,9 @@ crafter:
   fail-effect: true
 ```
 
-> [!TIP]
-> **Choosing the Right Policy**  
-> * Keep `block-restricted: true` on RPG, SMP, and Economy networks where high-tier weapons, armors, and tools should require personal player effort and progression.  
-> * Set `block-restricted: false` only on pure technical anarchy or creative automation servers where fully automated factory production of all items is explicitly intended.
+!!! tip "Choosing the Right Policy"
+    * Keep `block-restricted: true` on RPG, SMP, and Economy networks where high-tier weapons, armors, and tools should require personal player effort and progression.  
+    * Set `block-restricted: false` only on pure technical anarchy or creative automation servers where fully automated factory production of all items is explicitly intended.
 
 ---
 

@@ -24,9 +24,8 @@ While CraftingBlueprints functions completely standalone, it seamlessly integrat
 * **[PlaceholderAPI](https://www.spigotmc.org/resources/placeholderapi.6245/)**: Exposes remaining blueprint uses, active unlock counts, and expiration timers for scoreboards, tablists, and custom chat formats.
 * **Custom Item Plugins**: Out-of-the-box support for custom gear and textures from **ItemsAdder**, **Nexo**, **Oraxen**, **MMOItems**, and **EcoItems**.
 
-> [!NOTE]
-> **Dynamic Version Adapters**  
-> You do not need to download version-specific JAR files. CraftingBlueprints automatically binds modern Paper capabilities (such as Minecraft 1.21 redstone Crafter block interception, 3-slot Smithing Tables, and Adventure component titles) on compatible versions, while maintaining clean backward compatibility on earlier Paper releases.
+!!! note "Dynamic Version Adapters"
+    You do not need to download version-specific JAR files. CraftingBlueprints automatically binds modern Paper capabilities (such as Minecraft 1.21 redstone Crafter block interception, 3-slot Smithing Tables, and Adventure component titles) on compatible versions, while maintaining clean backward compatibility on earlier Paper releases.
 
 ---
 
@@ -46,9 +45,8 @@ your-server/
 ### Step 2: Start the Server
 Start your server executable. During initial boot, CraftingBlueprints automatically generates the primary configuration files, directory hierarchy, and default blueprint templates.
 
-> [!WARNING]
-> **Never Use `/reload` During Installation**  
-> Do not use the Bukkit `/reload` or `/reload confirm` command when installing or upgrading plugins. Doing so can cause memory leaks, corrupt database connection pools, and break event listeners. Always perform a clean server reboot or use the dedicated `/cb reload` command for plugin configuration updates.
+!!! warning "Never Use `/reload` During Installation"
+    Do not use the Bukkit `/reload` or `/reload confirm` command when installing or upgrading plugins. Doing so can cause memory leaks, corrupt database connection pools, and break event listeners. Always perform a clean server reboot or use the dedicated `/cb reload` command for plugin configuration updates.
 
 ### Step 3: Verify the Console Startup Banner
 Review your server console log to verify that CraftingBlueprints initialized successfully. You should see a clean startup banner similar to:

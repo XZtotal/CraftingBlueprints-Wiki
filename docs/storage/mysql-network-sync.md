@@ -45,9 +45,8 @@ In a distributed network topology, backend server instances are categorized into
 
 To prevent split-brain database divergence, race conditions, and corrupted recipe states, CraftingBlueprints enforces strict role separation across the cluster.
 
-> [!IMPORTANT]
-> **The Golden Rule of Network Clusters**  
-> **Exactly ONE server** in your entire network must be designated as the Master node (`is-master: true`). Every other backend server (Hubs, Survival, Skyblock, Factions, Prison) must be configured with `is-master: false`.
+!!! important "The Golden Rule of Network Clusters"
+    **Exactly ONE server** in your entire network must be designated as the Master node (`is-master: true`). Every other backend server (Hubs, Survival, Skyblock, Factions, Prison) must be configured with `is-master: false`.
 
 ### Role Comparison Matrix
 
@@ -134,9 +133,8 @@ CREATE TABLE IF NOT EXISTS cb_sync_signals (
    - Console logs: "[CraftingBlueprints] Received reload signal from Master (Hub-01). Synced 142 items."
 ```
 
-> [!NOTE]
-> **Zero External Broker Dependency**  
-> This heartbeat bus functions entirely through standard SQL queries. You do not need to install, configure, or maintain external message brokers such as Redis, RabbitMQ, or Kafka.
+!!! note "Zero External Broker Dependency"
+    This heartbeat bus functions entirely through standard SQL queries. You do not need to install, configure, or maintain external message brokers such as Redis, RabbitMQ, or Kafka.
 
 ---
 

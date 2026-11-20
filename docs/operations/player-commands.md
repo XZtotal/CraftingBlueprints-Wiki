@@ -18,8 +18,8 @@ All player subcommands are executed using the root `/cb` or `/craftingblueprints
 | **`/cb sell`** | None | `craftingblueprints.sell` | `true` | Sells the physical blueprint item held in your main hand for Vault currency. |
 | **`/cb owner`** | None | `craftingblueprints.owner` | `true` | Displays the original author, creator, or bound owner of the blueprint item held in hand. |
 
-> [!NOTE]
-> All player commands adapt to the server's configured localization language (`lang: en` or `lang: es` in `config.yml`) and render via Kyori Adventure MiniMessage typography.
+!!! note
+    All player commands adapt to the server's configured localization language (`lang: en` or `lang: es` in `config.yml`) and render via Kyori Adventure MiniMessage typography.
 
 ---
 
@@ -75,8 +75,8 @@ CraftingBlueprints maintains an in-memory Last-In, First-Out (LIFO) navigation s
 2. **ESC Session Preservation**: If you accidentally press the `ESC` key while browsing a menu, Minecraft normally closes the window and loses your place. CraftingBlueprints captures the close event in `MenuSession.lastClosedMenu`. Executing `/cb return` immediately restores the exact menu and page you were viewing!
 3. **Safety Purge**: Menu items are protected by internal anti-steal tags (`MENU_TYPE`). You can never accidentally extract GUI icons when reopening menus via `/cb return`.
 
-> [!TIP]
-> Server owners often grant `craftingblueprints.return` to VIP or donor ranks as a quality-of-life navigation perk. See [LuckPerms Guide](luckperms-permissions.md) for configuration snippets.
+!!! tip
+    Server owners often grant `craftingblueprints.return` to VIP or donor ranks as a quality-of-life navigation perk. See [LuckPerms Guide](luckperms-permissions.md) for configuration snippets.
 
 ---
 
@@ -172,8 +172,8 @@ Allows players to purchase blueprint access or physical blueprint items directly
    - Generates a physical blueprint item into your inventory.
    - Physical vouchers can be traded with other players, sold on auction houses, placed in display item frames, or stored in storage chests.
 
-> [!WARNING]
-> If your inventory is completely full when purchasing with `--item`, the engine safely drops the item at your feet via `world.dropItem(...)` to prevent silent item loss.
+!!! warning
+    If your inventory is completely full when purchasing with `--item`, the engine safely drops the item at your feet via `world.dropItem(...)` to prevent silent item loss.
 
 ---
 

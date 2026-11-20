@@ -60,8 +60,8 @@ CraftingBlueprints supports every loot table registered in Vanilla Minecraft, cu
 | **Fishing Treasures** | `minecraft:gameplay/fishing/treasure` | `heart_of_the_sea`, `trident`, `fishing_rod` |
 | **Boss & Mob Drops** | `minecraft:entities/wither_skeleton`<br>`minecraft:entities/warden`<br>`minecraft:entities/ender_dragon` | `netherite_sword`, `enchantment:soul_speed`, rare trophies |
 
-> [!NOTE]
-> Wildcard patterns like `minecraft:chests/bastion_*` automatically match all Bastion Remnant loot tables, including `bastion_treasure`, `bastion_other`, `bastion_bridge`, and `bastion_hoglin_stable`.
+!!! note
+    Wildcard patterns like `minecraft:chests/bastion_*` automatically match all Bastion Remnant loot tables, including `bastion_treasure`, `bastion_other`, `bastion_bridge`, and `bastion_hoglin_stable`.
 
 ---
 
@@ -288,9 +288,8 @@ Minecraft containers possess finite slot capacities (e.g. single chest: 27 slots
 2. **Trash Replacement**: If the container is completely full and `replace-trash-if-full: true`, the engine scans existing items in `event.getLoot()`. The first matching material from `trash-materials` (such as `ROTTEN_FLESH` or `BONE`) is replaced by the generated blueprint.
 3. **World Drop Fallback**: If the container is completely full and contains no trash materials, the blueprint item is safely spawned in the world at the container's location using `location.world.dropItemNaturally(...)`, guaranteeing zero blueprint deletion.
 
-> [!IMPORTANT]
-> **Unbound Ownership Guarantee**  
-> All blueprints generated in loot containers, vaults, or archaeology sites are instantiated with **unbound ownership** (`uuid: null`). Any player who loots the chest can pick up, trade, inspect, or redeem the blueprint item without permission or ownership restrictions.
+!!! important "Unbound Ownership Guarantee"
+    All blueprints generated in loot containers, vaults, or archaeology sites are instantiated with **unbound ownership** (`uuid: null`). Any player who loots the chest can pick up, trade, inspect, or redeem the blueprint item without permission or ownership restrictions.
 
 ---
 
@@ -326,8 +325,8 @@ Distribución de planos obtenidos:
   • mace: 1940 veces (3.88% de los cofres)
 ```
 
-> [!TIP]
-> Use `/cb loot test` with different luck values (e.g. `/cb loot test <table_key> 10000 3.0`) to verify how donor perks, Luck potions, or beacon effects influence blueprint drops.
+!!! tip
+    Use `/cb loot test` with different luck values (e.g. `/cb loot test <table_key> 10000 3.0`) to verify how donor perks, Luck potions, or beacon effects influence blueprint drops.
 
 ### Manual Pool Sampling (`/cb loot roll`)
 

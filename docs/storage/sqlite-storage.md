@@ -42,9 +42,8 @@ database-name: craftingblueprints
 is-master: false
 ```
 
-> [!NOTE]
-> **Automatic Schema Provisioning**  
-> On the first startup, CraftingBlueprints automatically applies all initial database migrations ($V_1 \dots V_5$), generating player data tables (`cb_player_data`), blueprint registries (`ITEM_BLUEPRINTS`), and version ledgers (`cb_schema_version`). No manual `.sql` script execution is ever needed.
+!!! note "Automatic Schema Provisioning"
+    On the first startup, CraftingBlueprints automatically applies all initial database migrations ($V_1 \dots V_5$), generating player data tables (`cb_player_data`), blueprint registries (`ITEM_BLUEPRINTS`), and version ledgers (`cb_schema_version`). No manual `.sql` script execution is ever needed.
 
 ---
 
@@ -94,9 +93,8 @@ PRAGMA busy_timeout = 5000;
 * **Mechanics**: If a transaction encounters a transient lock contention during a WAL checkpoint, SQLite will not immediately throw a `database is locked` exception.
 * **Resolution**: The connection handler pauses and retries automatically for up to **5,000 milliseconds (5 seconds)**. In practice, internal write tasks complete within 1–3 milliseconds, ensuring zero interrupted user transactions.
 
-> [!TIP]
-> **HikariCP Connection Pool Baseline**  
-> Even with SQLite, CraftingBlueprints utilizes a pooled `HikariDataSource` with `maximumPoolSize: 10` and `minimumIdle: 2`. This pool services asynchronous background tasks simultaneously without thread starvation while keeping disk locks fully isolated.
+!!! tip "HikariCP Connection Pool Baseline"
+    Even with SQLite, CraftingBlueprints utilizes a pooled `HikariDataSource` with `maximumPoolSize: 10` and `minimumIdle: 2`. This pool services asynchronous background tasks simultaneously without thread starvation while keeping disk locks fully isolated.
 
 ---
 
@@ -166,9 +164,8 @@ Rather than adding numeric flags or nested station objects to the array, all wor
 1. **Origin Namespace**: Identifies vanilla or third-party items (`diamond_sword`, `ia:weapons:excalibur`, `nexo:ruby_blade`, `mmoitems:SWORD:TITAN`).
 2. **Station Constraint Prefix**: Enforces specific workstation routing (`furnace:cooked_beef`, `smoker:cooked_beef`, `blast_furnace:iron_ingot`, `stonecutter:stone_bricks`, `enchant_table:sharpness`). Universal blueprints omit the station prefix.
 
-> [!NOTE]
-> **In-Memory $O(1)$ Hash Map Lookups**  
-> When a player clicks an item in a Crafting Table or Smoker, the engine queries `PlayerDB.cache` using an exact key lookup ($O(1)$ complexity). No array scanning, JSON traversal, or regex evaluation occurs on the main server thread.
+!!! note "In-Memory $O(1)$ Hash Map Lookups"
+    When a player clicks an item in a Crafting Table or Smoker, the engine queries `PlayerDB.cache` using an exact key lookup ($O(1)$ complexity). No array scanning, JSON traversal, or regex evaluation occurs on the main server thread.
 
 ---
 
@@ -223,9 +220,8 @@ To create a consistent live backup without stopping the server:
    sqlite3 plugins/CraftingBlueprints/craftingblueprints.db ".backup 'backups/backup_$(date +%Y%m%d_%H%M%S).db'"
    ```
 
-> [!WARNING]
-> **Never Copy Only the `.db` File When `.db-wal` Exists!**  
-> If `.db-wal` is present on disk, active uncommitted transactions reside in the WAL log. Copying only `craftingblueprints.db` without `craftingblueprints.db-wal` will result in an incomplete or outdated database backup.
+!!! warning "Never Copy Only the `.db` File When `.db-wal` Exists!"
+    If `.db-wal` is present on disk, active uncommitted transactions reside in the WAL log. Copying only `craftingblueprints.db` without `craftingblueprints.db-wal` will result in an incomplete or outdated database backup.
 
 ### Restoring from Backup
 

@@ -1,6 +1,5 @@
-> [!IMPORTANT]
-> **CraftingBlueprints Extended Exclusive Feature**  
-> The technical drafting engine, procedural Guilloché frames, custom background textures, status stamps, and gradient typography described on this page require **CraftingBlueprints Extended**. On the Standard Edition, blueprints function as standard physical items without custom map graphics.
+!!! important "CraftingBlueprints Extended Exclusive Feature"
+    The technical drafting engine, procedural Guilloché frames, custom background textures, status stamps, and gradient typography described on this page require **CraftingBlueprints Extended**. On the Standard Edition, blueprints function as standard physical items without custom map graphics.
 
 # Technical Drafting Engine Overview
 
