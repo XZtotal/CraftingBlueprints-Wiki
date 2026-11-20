@@ -29,13 +29,20 @@ CraftingBlueprints intercepts automated Crafters before any items are produced u
 
 ```mermaid
 flowchart TD
-    Pulse["<b>1. Redstone Pulse</b> — Triggers Crafter block cycle"]
-    --> Intercept["<b>2. Craft Interception</b> — Inspects recipe target item"]
-    --> Check{"Restricted<br/>Recipe?"}
-    Check -->|No| Allow["<b>Allow Craft</b><br/>Vanilla craft & dispense"]
-    Check -->|Yes| Config{"crafter.<br/>block-restricted?"}
-    Config -->|"true (Default)"| Block["<b>DENY CRAFT</b><br/>Cancel craft event & retain items"]
-    Config -->|false| Pass["<b>PASS CRAFT</b><br/>Autonomous craft allowed"]
+    Pulse["<b>1. Redstone Pulse</b><br/>Triggers Crafter block cycle"]
+    Intercept["<b>2. Craft Interception</b><br/>Inspects recipe target item"]
+    Check{"Restricted<br/>Recipe?"}
+    Allow["<b>Allow Craft</b><br/>Vanilla craft &amp; dispense"]
+    Config{"crafter.<br/>block-restricted?"}
+    Block["<b>DENY CRAFT</b><br/>Cancel craft event &amp; retain items"]
+    Pass["<b>PASS CRAFT</b><br/>Autonomous craft allowed"]
+
+    Pulse --> Intercept
+    Intercept --> Check
+    Check -->|No| Allow
+    Check -->|Yes| Config
+    Config -->|"true (Default)"| Block
+    Config -->|false| Pass
 ```
 
 ### Version Abstraction Layer (VAL)

@@ -211,10 +211,15 @@ When a blueprint expires (whether through charge depletion or timer expiration),
 ```mermaid
 flowchart TD
     Event["<b>Blueprint Expiration Event Triggered</b>"]
-    --> E1["<b>1. Memory Invalidation</b> — Marked expired in <code>PlayerDB</code> cache in $\mathcal{O}(1)$"]
-    --> E2["<b>2. Async Storage Write</b> — Persists updated expiration state to SQLite / MySQL"]
-    --> E3["<b>3. Recipe Book Packet</b> — Dispatches client recipe undiscovery packet"]
-    --> E4["<b>4. Notification</b> — Plays MiniMessage expiration sound and chat warning"]
+    E1["<b>1. Memory Invalidation</b><br/>Marked expired in <code>PlayerDB</code> cache in $\mathcal{O}(1)$"]
+    E2["<b>2. Async Storage Write</b><br/>Persists updated state to SQLite / MySQL"]
+    E3["<b>3. Recipe Book Packet</b><br/>Dispatches client recipe undiscovery packet"]
+    E4["<b>4. Notification</b><br/>Plays MiniMessage sound &amp; chat warning"]
+
+    Event --> E1
+    E1 --> E2
+    E2 --> E3
+    E3 --> E4
 ```
 
 1. **In-Memory Cache & Storage Update**:

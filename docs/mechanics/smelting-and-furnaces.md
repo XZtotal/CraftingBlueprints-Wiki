@@ -73,12 +73,18 @@ CraftingBlueprints tracks container ownership using **Persistent Data Containers
 
 ```mermaid
 flowchart TD
-    Interact["<b>1. Player Interaction</b> — Places ore or fuel into furnace"]
-    --> Write["<b>2. Tile PDC Tagging</b> — Stamped with <code>craftingblueprints:furnace_owner</code>"]
-    --> Eval["<b>3. Smelt Lifecycle Evaluation</b> — Evaluated against stored furnace owner profile"]
-    --> Check{"Unlocked Blueprint<br/>& Valid Uses?"}
-    Check -->|Yes| Complete["<b>Complete Smelt</b><br/>Deduct 1 blueprint use & dispense output"]
-    Check -->|No| Pause["<b>Pause at 100%</b><br/>Preserve input ore & fuel without burning"]
+    Interact["<b>1. Player Interaction</b><br/>Places ore or fuel in furnace"]
+    Write["<b>2. Tile PDC Tagging</b><br/>Stamped with furnace owner UUID"]
+    Eval["<b>3. Smelt Evaluation</b><br/>Evaluated against owner profile"]
+    Check{"Unlocked Blueprint<br/>&amp; Valid Uses?"}
+    Complete["<b>Complete Smelt</b><br/>Deduct 1 use &amp; dispense output"]
+    Pause["<b>Pause at 100%</b><br/>Preserve input ore &amp; fuel safely"]
+
+    Interact --> Write
+    Write --> Eval
+    Eval --> Check
+    Check -->|Yes| Complete
+    Check -->|No| Pause
 ```
 
 ### Ownership Synchronization Points
@@ -99,11 +105,16 @@ To eliminate this vulnerability, CraftingBlueprints implements **Hopper Ownershi
 
 ```mermaid
 flowchart TD
-    Step1["<b>1. Hopper Placed</b> — Unranked player places hopper (tagged with UUID in PDC)"]
-    --> Step2["<b>2. Locked Ore Fed</b> — Hopper feeds restricted ore into furnace"]
-    --> Step3["<b>3. Ownership Inherited</b> — Furnace tile inherits hopper owner's UUID"]
-    --> Step4["<b>4. Profile Evaluated</b> — Smelt attempt evaluated against unranked player permissions"]
-    --> Step5["<b>5. Smelt Blocked</b> — Smelting pauses at 100%, zero output or XP dispensed (exploit mitigated)"]
+    Step1["<b>1. Hopper Placed</b><br/>Unranked player places hopper (tagged in PDC)"]
+    Step2["<b>2. Locked Ore Fed</b><br/>Hopper feeds restricted ore into furnace"]
+    Step3["<b>3. Ownership Inherited</b><br/>Furnace tile inherits hopper owner's UUID"]
+    Step4["<b>4. Profile Evaluated</b><br/>Smelt evaluated against unranked permissions"]
+    Step5["<b>5. Smelt Blocked</b><br/>Pauses at 100% (zero output or XP dispensed)"]
+
+    Step1 --> Step2
+    Step2 --> Step3
+    Step3 --> Step4
+    Step4 --> Step5
 ```
 
 ### Hopper Protection Rules

@@ -159,11 +159,16 @@ $$\text{Folder Defaults} \;\longrightarrow\; \text{File Defaults} \;\longrightar
 
 ```mermaid
 flowchart TD
-    F["<b>1. Folder Defaults</b> — <code>default:</code> block cascaded from root directory"]
-    --> File["<b>2. File Defaults</b> — <code>file_default:</code> block declared in active YAML"]
-    --> T["<b>3. Template Mixins</b> — <code>templates: [T1..TN]</code> cascading left-to-right"]
-    --> L["<b>4. Local Definition</b> — Explicit properties declared directly on blueprint"]
-    --> Mem["<b>5. Compiled Blueprint</b> — Final in-memory state bound to active workstations"]
+    F["<b>1. Folder Defaults</b><br/><code>default:</code> block cascaded from root"]
+    File["<b>2. File Defaults</b><br/><code>file_default:</code> block in active YAML"]
+    T["<b>3. Template Mixins</b><br/><code>templates: [T1..TN]</code> cascade"]
+    L["<b>4. Local Definition</b><br/>Explicit properties on blueprint"]
+    Mem["<b>5. Compiled Blueprint</b><br/>Final in-memory state bound to workstations"]
+
+    F --> File
+    File --> T
+    T --> L
+    L --> Mem
 ```
 
 ### Field-Specific Merge Rules

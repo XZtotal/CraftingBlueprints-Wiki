@@ -15,13 +15,20 @@ When a player places a tool or armor piece into an Enchanting Table with lapis l
 
 ```mermaid
 flowchart TD
-    GUI["<b>1. Enchanting Table GUI</b> — Player selects offering #3"]
-    --> Pipeline["<b>2. EnchantTableRulePipeline Intercepts</b>"]
-    --> Check{"Requires<br/>Blueprint?"}
-    Check -->|No| Vanilla["<b>Enchant Allowed</b><br/>Vanilla EXP & Lapis consumed"]
-    Check -->|Yes| BPCheck{"Player Has<br/>Blueprint?"}
-    BPCheck -->|Yes| Apply["<b>Apply Enchant</b><br/>Deduct 1 blueprint use"]
-    BPCheck -->|No| Cancel["<b>Cancel Event</b><br/>Zero XP & Lapis consumed"]
+    GUI["<b>1. Enchanting Table GUI</b><br/>Player selects offering #3"]
+    Pipeline["<b>2. Pipeline Intercepts</b><br/>EnchantTableRulePipeline"]
+    Check{"Requires<br/>Blueprint?"}
+    Vanilla["<b>Enchant Allowed</b><br/>Vanilla EXP &amp; Lapis consumed"]
+    BPCheck{"Player Has<br/>Blueprint?"}
+    Apply["<b>Apply Enchant</b><br/>Deduct 1 blueprint use"]
+    Cancel["<b>Cancel Event</b><br/>Zero XP &amp; Lapis consumed"]
+
+    GUI --> Pipeline
+    Pipeline --> Check
+    Check -->|No| Vanilla
+    Check -->|Yes| BPCheck
+    BPCheck -->|Yes| Apply
+    BPCheck -->|No| Cancel
 ```
 
 ### Safe Cancellation Guarantee

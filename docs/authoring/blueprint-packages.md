@@ -105,8 +105,10 @@ Packages feature two distinct tiers of properties:
 
 ```mermaid
 flowchart TD
-    Container["<b>Container-Level Properties</b><br/><code>name</code>, <code>lore</code>, <code>item</code> (BOOK/BUNDLE), <code>price</code>, <code>sell_price</code><br/><i>Governs physical package item held in hand or sold in shop</i>"]
-    -->|Right-Click to Redeem| SubItems["<b>Sub-Item Properties (<code>blueprints:</code>)</b><br/><code>blueprint</code>, <code>permanent</code>, <code>uses</code>, <code>time</code>, <code>station</code><br/><i>Governs individual crafting knowledge unlocked upon redemption</i>"]
+    Container["<b>Container-Level Properties</b><br/><code>name</code>, <code>lore</code>, <code>item</code>, <code>price</code>, <code>sell_price</code><br/><i>Governs physical package item held in hand</i>"]
+    SubItems["<b>Sub-Item Properties (<code>blueprints:</code>)</b><br/><code>blueprint</code>, <code>permanent</code>, <code>uses</code>, <code>time</code>, <code>station</code><br/><i>Governs crafting knowledge unlocked</i>"]
+
+    Container -->|Right-Click to Redeem| SubItems
 ```
 
 1. **Container-Level Properties**:

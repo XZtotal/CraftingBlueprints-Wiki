@@ -10,11 +10,18 @@ Unlike restrictive whitelist-only plugins that lock down every single recipe on 
 
 ```mermaid
 flowchart TD
-    Attempt["<b>Player Attempts Craft</b>"] --> Check{"Matches<br/><code>restricted-items</code>?"}
-    Check -->|No| Vanilla["<b>Allow Craft Instantly</b><br/>Unrestricted vanilla recipe"]
-    Check -->|Yes| BPCheck{"Unlocked Blueprint<br/>& Sufficient Uses?"}
-    BPCheck -->|Yes| Allow["<b>Allow Craft</b><br/>Deduct 1 Craft Use"]
-    BPCheck -->|No| Block["<b>Block Craft</b><br/>Ghost slot & lock warning"]
+    Attempt["<b>Player Attempts Craft</b>"]
+    Check{"Matches<br/><code>restricted-items</code>?"}
+    Vanilla["<b>Allow Craft Instantly</b><br/>Unrestricted vanilla recipe"]
+    BPCheck{"Unlocked Blueprint<br/>&amp; Sufficient Uses?"}
+    Allow["<b>Allow Craft</b><br/>Deduct 1 Craft Use"]
+    Block["<b>Block Craft</b><br/>Ghost slot &amp; lock warning"]
+
+    Attempt --> Check
+    Check -->|No| Vanilla
+    Check -->|Yes| BPCheck
+    BPCheck -->|Yes| Allow
+    BPCheck -->|No| Block
 ```
 
 1. **Unrestricted Recipes**: If an item does *not* match any pattern defined in `restrictions.restricted-items`, players can craft, smelt, brew, or stonecut it freely without needing a blueprint or permission node. Basic materials (sticks, torches, wooden planks, stone tools, furnaces) remain naturally accessible.

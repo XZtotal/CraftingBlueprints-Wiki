@@ -94,11 +94,16 @@ CraftingBlueprints Extended solves this with the **`ItemOutlineRenderer` Euclide
 
 ```mermaid
 flowchart TD
-    S1["<b>1. Alpha Scan</b> — Identifies non-transparent boundary pixels (α &gt; 30)"]
-    --> S2["<b>2. Circular Dilation</b> — Computes Euclidean neighborhood radius <code>R = T + 0.45</code>"]
-    --> S3["<b>3. Outline Render</b> — Generates continuous anti-aliased outer contour"]
-    --> S4["<b>4. Distance Falloff</b> — Computes radial opacity gradient falloff"]
-    --> S5["<b>5. Sprite Blit</b> — Blits original sprite crisp and untouched on top"]
+    S1["<b>1. Alpha Scan</b><br/>Identifies non-transparent pixels (α &gt; 30)"]
+    S2["<b>2. Circular Dilation</b><br/>Computes Euclidean radius <code>R = T + 0.45</code>"]
+    S3["<b>3. Outline Render</b><br/>Generates continuous outer contour"]
+    S4["<b>4. Distance Falloff</b><br/>Computes radial opacity gradient falloff"]
+    S5["<b>5. Sprite Blit</b><br/>Blits original sprite crisp on top"]
+
+    S1 --> S2
+    S2 --> S3
+    S3 --> S4
+    S4 --> S5
 ```
 
 ### Outline Configuration Block

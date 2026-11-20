@@ -42,10 +42,14 @@ CraftingBlueprints introduces **Stack-Based Navigation** and **ESC Restoration**
 
 ```mermaid
 flowchart TD
-    Cmd["<b>1. Command Executed</b> — Player runs <code>/cb menu</code>"]
-    --> Cat["<b>2. Category Selection</b> — Navigates to category grid view"]
-    --> Detail["<b>3. Recipe Detail View</b> — Inspects blueprint requirements"]
-    -->|Accidental ESC Key Pressed| Restore["<b>4. ESC Restoration</b> — <code>/cb return</code> restores exact previous GUI without desync"]
+    Cmd["<b>1. Command Executed</b><br/>Player runs <code>/cb menu</code>"]
+    Cat["<b>2. Category Selection</b><br/>Navigates to category grid view"]
+    Detail["<b>3. Recipe Detail View</b><br/>Inspects blueprint requirements"]
+    Restore["<b>4. ESC Restoration</b><br/>Restores GUI via <code>/cb return</code>"]
+
+    Cmd --> Cat
+    Cat --> Detail
+    Detail -->|Accidental ESC Key Pressed| Restore
 ```
 
 ## Admin Blueprint Catalog (`/cb item list`)

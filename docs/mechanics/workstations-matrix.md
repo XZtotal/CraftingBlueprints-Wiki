@@ -26,19 +26,31 @@ All workstation interactions are processed through modular **Event Rule Pipeline
 
 ```mermaid
 flowchart TD
-    Start["<b>Interaction Triggered</b> (Player or Redstone)"]
-    --> R1["<b>1. UserLoaded Check</b> — Profile cached in RAM?"]
-    --> R2["<b>2. Claims Check</b> — WorldGuard / GriefPrevention allowed?"]
-    --> R3["<b>3. Bypass Check</b> — Has administrator bypass permission?"]
-    --> R4["<b>4. Restriction Check</b> — Is target item restricted?"]
-    --> R5["<b>5. Blueprint Validation</b> — Player owns valid blueprint with charges?"]
-    --> R6["<b>6. Atomic Execution</b> — Deduct craft use & dispense item"]
+    Start["<b>Interaction Triggered</b><br/>Player or Redstone"]
+    R1["<b>1. UserLoaded Check</b><br/>Profile cached in RAM?"]
+    R2["<b>2. Claims Check</b><br/>WorldGuard / GP allowed?"]
+    R3["<b>3. Bypass Check</b><br/>Has bypass permission?"]
+    R4["<b>4. Restriction Check</b><br/>Is target item restricted?"]
+    R5["<b>5. Blueprint Validation</b><br/>Has blueprint with charges?"]
+    R6["<b>6. Atomic Execution</b><br/>Deduct use &amp; dispense item"]
 
-    R1 -.->|Not Loaded| Warn["Block & Warn"]
-    R2 -.->|Protected| Abort["Silent Abort"]
-    R3 -.->|Has Bypass| Pass["Allow Craft"]
+    Warn["Block &amp; Warn"]
+    Abort["Silent Abort"]
+    Pass["Allow Craft"]
+    Deny["Cancel Event"]
+
+    Start --> R1
+    R1 --> R2
+    R2 --> R3
+    R3 --> R4
+    R4 --> R5
+    R5 --> R6
+
+    R1 -.->|Not Loaded| Warn
+    R2 -.->|Protected| Abort
+    R3 -.->|Has Bypass| Pass
     R4 -.->|Unrestricted| Pass
-    R5 -.->|Missing/0 Uses| Deny["Cancel Event"]
+    R5 -.->|Missing/0 Uses| Deny
 ```
 
 ### Event Priority & Protection Plugin Interoperability

@@ -14,11 +14,16 @@ If the player has not unlocked the recipe or has exhausted their craft uses, the
 
 ```mermaid
 flowchart TD
-    Arr["<b>1. Arrange Ingredients</b> — Player places materials in workstation grid"]
-    --> Serv["<b>2. Preview Interception</b> — PreparePreviewService evaluates recipe in real time"]
-    --> Check{"Has Blueprint<br/>for Output?"}
-    Check -->|Yes| Show["<b>Display Output</b><br/>Vanilla result item ready to craft"]
-    Check -->|No| Ghost["<b>Show Ghost / Barrier Slot</b><br/>Item locked with warning lore"]
+    Arr["<b>1. Arrange Ingredients</b><br/>Player places materials in grid"]
+    Serv["<b>2. Preview Interception</b><br/>Evaluates recipe in real time"]
+    Check{"Has Blueprint<br/>for Output?"}
+    Show["<b>Display Output</b><br/>Vanilla result ready to craft"]
+    Ghost["<b>Show Ghost Slot</b><br/>Item locked with warning lore"]
+
+    Arr --> Serv
+    Serv --> Check
+    Check -->|Yes| Show
+    Check -->|No| Ghost
 ```
 
 ### Preview Modes
@@ -81,8 +86,11 @@ CraftingBlueprints provides **Incremental Diff-Based Recipe Book Synchronization
 ```mermaid
 flowchart TD
     Event["<b>Blueprint Unlock / Rank Change</b>"]
-    --> Diff["<b>Calculate Incremental Diff</b><br/><code>gained = new - old</code> | <code>lost = old - new</code>"]
-    --> Packet["<b>Dispatch Single Batched Packet</b><br/><code>ClientboundUpdateRecipesPacket</code> (zero network flood)"]
+    Diff["<b>Calculate Incremental Diff</b><br/><code>gained = new - old</code> | <code>lost = old - new</code>"]
+    Packet["<b>Dispatch Single Batched Packet</b><br/><code>ClientboundUpdateRecipesPacket</code> (zero flood)"]
+
+    Event --> Diff
+    Diff --> Packet
 ```
 
 ### Incremental Diffs (Zero Per-Tick Lag)

@@ -178,13 +178,21 @@ op-bypass: false
 ```mermaid
 flowchart TD
     Attempt["<b>Player Attempts Workstation Action</b>"]
-    --> OpCheck{"Is Server<br/>Operator?"}
-    OpCheck -->|Yes| OpAllow["<b>Bypass Allowed</b><br/>Operator bypass rule"]
-    OpCheck -->|No| PermCheck{"Has Bypass<br/>Permission?"}
-    PermCheck -->|Yes| PermAllow["<b>Bypass Allowed</b><br/>Zero uses deducted"]
-    PermCheck -->|No| GroupCheck{"Has Group or<br/>Blueprint Node?"}
-    GroupCheck -->|Yes| CraftAllow["<b>Allow Craft</b><br/>Deduct 1 craft use"]
-    GroupCheck -->|No| Deny["<b>DENY CRAFT</b><br/>Cancel event & show lock message"]
+    OpCheck{"Is Server<br/>Operator?"}
+    OpAllow["<b>Bypass Allowed</b><br/>Operator bypass rule"]
+    PermCheck{"Has Bypass<br/>Permission?"}
+    PermAllow["<b>Bypass Allowed</b><br/>Zero uses deducted"]
+    GroupCheck{"Has Group or<br/>Blueprint Node?"}
+    CraftAllow["<b>Allow Craft</b><br/>Deduct 1 craft use"]
+    Deny["<b>DENY CRAFT</b><br/>Cancel event &amp; show lock"]
+
+    Attempt --> OpCheck
+    OpCheck -->|Yes| OpAllow
+    OpCheck -->|No| PermCheck
+    PermCheck -->|Yes| PermAllow
+    PermCheck -->|No| GroupCheck
+    GroupCheck -->|Yes| CraftAllow
+    GroupCheck -->|No| Deny
 ```
 
 ---

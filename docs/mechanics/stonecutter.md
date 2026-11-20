@@ -14,14 +14,22 @@ When a player opens a Stonecutter and places an input block into slot 0:
 
 ```mermaid
 flowchart TD
-    Step1["<b>1. Input Slot</b> — Player places stone block in slot 0"]
-    --> Step2["<b>2. Select Recipe</b> — Selects slab, stairs, or cut variant"]
-    --> Pipeline["<b>3. StonecutterPipeline Intercepts</b>"]
-    --> Check{"Requires<br/>Blueprint?"}
-    Check -->|No| Allow["<b>Allow Slicing Instantly</b><br/>Unrestricted vanilla recipe"]
-    Check -->|Yes| BPCheck{"Player Has<br/>Blueprint & Uses?"}
-    BPCheck -->|Yes| Produce["<b>Produce Item</b><br/>Deduct 1 craft use"]
-    BPCheck -->|No| Deny["<b>Cancel Click</b><br/>Display locked notification"]
+    Step1["<b>1. Input Slot</b><br/>Player places stone block in slot 0"]
+    Step2["<b>2. Select Recipe</b><br/>Selects slab, stairs, or cut variant"]
+    Pipeline["<b>3. Pipeline Intercepts</b><br/>StonecutterRulePipeline"]
+    Check{"Requires<br/>Blueprint?"}
+    Allow["<b>Allow Slicing Instantly</b><br/>Unrestricted vanilla recipe"]
+    BPCheck{"Player Has<br/>Blueprint &amp; Uses?"}
+    Produce["<b>Produce Item</b><br/>Deduct 1 craft use"]
+    Deny["<b>Cancel Click</b><br/>Display locked notification"]
+
+    Step1 --> Step2
+    Step2 --> Pipeline
+    Pipeline --> Check
+    Check -->|No| Allow
+    Check -->|Yes| BPCheck
+    BPCheck -->|Yes| Produce
+    BPCheck -->|No| Deny
 ```
 
 1. **Station Type**: Classified internally as `STONECUT_TYPE` (Type ID `4`).

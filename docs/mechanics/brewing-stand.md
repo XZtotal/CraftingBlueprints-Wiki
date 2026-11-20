@@ -14,14 +14,22 @@ Unlike player inventory clicks, `BrewEvent` is an automated block cycle that doe
 
 ```mermaid
 flowchart TD
-    Ing["<b>1. Ingredient Placed</b> — Top slot 3 stamped with player PDC owner tag"]
-    --> Cycle["<b>2. 20-Second Brew Cycle</b> — Active lock maintained in RAM"]
-    --> Event["<b>3. BrewEvent Fires</b>"]
-    --> Check{"Restricted<br/>Potion?"}
-    Check -->|No| Allow["<b>Allow Brew</b><br/>Bottles convert normally"]
-    Check -->|Yes| OwnerCheck{"Owner Has<br/>Blueprint?"}
-    OwnerCheck -->|Yes| Convert["<b>Convert Bottle</b><br/>Deduct uses from profile"]
-    OwnerCheck -->|No| Cancel["<b>CANCEL BREW!</b><br/>Refund top ingredient, base bottles safe"]
+    Ing["<b>1. Ingredient Placed</b><br/>Top slot 3 stamped with player PDC tag"]
+    Cycle["<b>2. 20s Brew Cycle</b><br/>Active lock maintained in RAM"]
+    Event["<b>3. BrewEvent Fires</b>"]
+    Check{"Restricted<br/>Potion?"}
+    Allow["<b>Allow Brew</b><br/>Bottles convert normally"]
+    OwnerCheck{"Owner Has<br/>Blueprint?"}
+    Convert["<b>Convert Bottle</b><br/>Deduct uses from profile"]
+    Cancel["<b>CANCEL BREW!</b><br/>Refund ingredient, base bottles safe"]
+
+    Ing --> Cycle
+    Cycle --> Event
+    Event --> Check
+    Check -->|No| Allow
+    Check -->|Yes| OwnerCheck
+    OwnerCheck -->|Yes| Convert
+    OwnerCheck -->|No| Cancel
 ```
 
 1. **Station Type**: Classified internally as `POTION_TYPE` (Type ID `2`).

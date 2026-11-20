@@ -94,12 +94,18 @@ Hold the target item (or blueprint voucher) in your main hand and execute `/cb c
 
 ```mermaid
 flowchart TD
-    Exec["<b>Player Executes /cb cani</b><br/>(Held item in hand)"]
-    --> Check{"Recipe<br/>Restricted?"}
-    Check -->|No| Free["<b>Display Unrestricted</b><br/>Free to craft for all players"]
-    Check -->|Yes| BPCheck{"Has Blueprint<br/>or Group?"}
-    BPCheck -->|Yes| CanCraft["<b>Display Unlocked</b><br/>Shows remaining uses & duration"]
-    BPCheck -->|No| Locked["<b>Display Locked</b><br/>Shows required blueprint or permission node"]
+    Exec["<b>Player Executes /cb cani</b><br/>Held item in hand"]
+    Check{"Recipe<br/>Restricted?"}
+    Free["<b>Display Unrestricted</b><br/>Free to craft for all players"]
+    BPCheck{"Has Blueprint<br/>or Group?"}
+    CanCraft["<b>Display Unlocked</b><br/>Shows remaining uses &amp; duration"]
+    Locked["<b>Display Locked</b><br/>Shows required blueprint or group"]
+
+    Exec --> Check
+    Check -->|No| Free
+    Check -->|Yes| BPCheck
+    BPCheck -->|Yes| CanCraft
+    BPCheck -->|No| Locked
 ```
 
 #### Status Feedback Examples:

@@ -25,9 +25,8 @@
           }
           svg {
             display: block !important;
-            margin: 0 auto !important;
-            max-width: 100% !important;
-            height: auto !important;
+            margin-left: auto !important;
+            margin-right: auto !important;
           }
         `;
         shadowRoot.appendChild(style);

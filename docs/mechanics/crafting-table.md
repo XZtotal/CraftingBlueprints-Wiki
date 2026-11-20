@@ -29,9 +29,13 @@ To solve this, CraftingBlueprints implements an exact mathematical capacity mode
 ```mermaid
 flowchart TD
     Init["<b>Player Shift-Clicks Crafting Result</b>"]
-    --> Bounds["<b>1. Capacity Bounds Evaluation</b><br/>• <code>N_matrix</code> = minimum ingredient stacks in 3×3 grid<br/>• <code>N_fits</code> = available inventory space<br/>• <code>N_uses</code> = finite blueprint uses remaining"]
-    --> Calc["<b>2. Yield Calculation</b><br/><code>N_craft = min(N_matrix, N_fits, N_uses)</code>"]
-    --> Exec["<b>3. Atomic Transaction</b><br/>Deducts <code>N_craft</code> uses and delivers <code>N_craft</code> crafted items"]
+    Bounds["<b>1. Capacity Bounds Evaluation</b><br/>• <code>N_matrix</code> = minimum stacks in 3×3 grid<br/>• <code>N_fits</code> = available inventory space<br/>• <code>N_uses</code> = finite blueprint uses remaining"]
+    Calc["<b>2. Yield Calculation</b><br/><code>N_craft = min(N_matrix, N_fits, N_uses)</code>"]
+    Exec["<b>3. Atomic Transaction</b><br/>Deducts <code>N_craft</code> uses &amp; delivers items"]
+
+    Init --> Bounds
+    Bounds --> Calc
+    Calc --> Exec
 ```
 
 ### 1. Grid Matrix Bound ($N_{\text{matrix}}$)

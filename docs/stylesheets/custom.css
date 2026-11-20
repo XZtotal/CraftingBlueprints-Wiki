@@ -30,8 +30,6 @@ div.mermaid > svg {
     display: block !important;
     margin-left: auto !important;
     margin-right: auto !important;
-    max-width: 100% !important;
-    height: auto !important;
 }
 
 /* Rounded node borders for modern aesthetic */

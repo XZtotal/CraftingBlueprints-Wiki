@@ -14,10 +14,14 @@ Traditional loot injection plugins often scan world chunks on generation or run 
 
 ```mermaid
 flowchart TD
-    Player["<b>1. Container Interaction</b> — Player opens dungeon chest, vault, or archaeology block"]
-    --> Event["<b>2. Loot Event Fires</b> — Bukkit <code>LootGenerateEvent</code> dispatched"]
-    --> Pipeline["<b>3. LootRulePipeline Intercepts</b> — Evaluates CDF roll, chance rules, and item factories"]
-    --> Loot["<b>4. Chest Loot Populated</b> — Container opens containing generated blueprint scroll"]
+    Player["<b>1. Container Interaction</b><br/>Opens dungeon chest, vault, or archaeology"]
+    Event["<b>2. Loot Event Fires</b><br/>Bukkit <code>LootGenerateEvent</code> dispatched"]
+    Pipeline["<b>3. Pipeline Intercepts</b><br/>Evaluates CDF roll &amp; item factories"]
+    Loot["<b>4. Chest Loot Populated</b><br/>Container opens containing blueprint"]
+
+    Player --> Event
+    Event --> Pipeline
+    Pipeline --> Loot
 ```
 
 ---
@@ -246,12 +250,19 @@ Minecraft containers possess finite slot capacities (e.g. single chest: 27 slots
 ```mermaid
 flowchart TD
     CapCheck{"Chest Slots<br/>Available?"}
-    CapCheck -->|Yes| Direct["<b>Direct Placement</b><br/>Appends to container loot"]
-    CapCheck -->|No| TrashCheck{"replace-trash-if-full:<br/>true?"}
-    TrashCheck -->|No| DropWorld["<b>Drop Naturally</b><br/>Spawns at container coordinates"]
-    TrashCheck -->|Yes| Scan["<b>Scan Container</b><br/>Search for <code>trash-materials</code>"]
-    Scan --> Found{"Trash<br/>Found?"}
-    Found -->|Yes| Replace["<b>Replace Trash</b><br/>Substitutes trash item with blueprint"]
+    Direct["<b>Direct Placement</b><br/>Appends to container loot"]
+    TrashCheck{"replace-trash-if-full:<br/>true?"}
+    DropWorld["<b>Drop Naturally</b><br/>Spawns at container coords"]
+    Scan["<b>Scan Container</b><br/>Search for <code>trash-materials</code>"]
+    Found{"Trash<br/>Found?"}
+    Replace["<b>Replace Trash</b><br/>Substitutes trash item with blueprint"]
+
+    CapCheck -->|Yes| Direct
+    CapCheck -->|No| TrashCheck
+    TrashCheck -->|No| DropWorld
+    TrashCheck -->|Yes| Scan
+    Scan --> Found
+    Found -->|Yes| Replace
     Found -->|No| DropWorld
 ```
 

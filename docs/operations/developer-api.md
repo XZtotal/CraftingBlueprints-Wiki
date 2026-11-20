@@ -65,11 +65,17 @@ Every blueprint interaction fires synchronous, strongly-typed Bukkit events exte
 ```mermaid
 flowchart TD
     Event["<b>org.bukkit.event.Event</b>"]
-    Event --> Unlock["<b>BlueprintUnlockEvent</b> (Cancellable)"]
-    Event --> Use["<b>BlueprintUseEvent</b> (Cancellable)"]
-    Event --> Buy["<b>BlueprintBuyEvent</b> (Cancellable)"]
-    Event --> Sell["<b>BlueprintSellEvent</b> (Cancellable)"]
-    Event --> Expire["<b>BlueprintExpireEvent</b> (Non-cancellable)"]
+    Unlock["<b>BlueprintUnlockEvent</b> (Cancellable)"]
+    Use["<b>BlueprintUseEvent</b> (Cancellable)"]
+    Buy["<b>BlueprintBuyEvent</b> (Cancellable)"]
+    Sell["<b>BlueprintSellEvent</b> (Cancellable)"]
+    Expire["<b>BlueprintExpireEvent</b> (Non-cancellable)"]
+
+    Event --> Unlock
+    Event --> Use
+    Event --> Buy
+    Event --> Sell
+    Event --> Expire
 ```
 
 ---
